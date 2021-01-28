@@ -78,13 +78,12 @@ export default function SignInPage() {
         user,
         farm
       });
-      history.push("/");
 
-      // if (farm) {
-      //   router.push("/farm/[id]", `/farm/${farm.id}`);
-      // } else {
-      //   router.push("/create-farm");
-      // }
+      if (farm) {
+        history.push(`/farm/${farm.objectId}`);
+      } else {
+        history.push("/create-farm");
+      }
     } catch (error) {
       history.push("/error");
     }

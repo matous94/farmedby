@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 function parseQuery(query) {
   if (!query) return "";
   return Object.entries(query)
@@ -16,14 +15,13 @@ export default function sendRequest(
   const queryString = parseQuery(query);
   console.log("sendRequest queryString", queryString);
 
-  let token = localStorage.getItem(
+  const token = localStorage.getItem(
     process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY
   );
-  console.log("sendRequest session token", token);
 
   const headers = {
     "content-type": "application/json",
-    "X-Parse-Application-Id": process.env.REACT_APP_APP_ID,
+    "X-Parse-Application-Id": process.env.REACT_APP_APP_ID
   };
   if (token) {
     headers["X-Parse-Session-Token"] = token;
@@ -33,8 +31,8 @@ export default function sendRequest(
     ...customConfig,
     headers: {
       ...headers,
-      ...customConfig.headers,
-    },
+      ...customConfig.headers
+    }
   };
   if (body) {
     config.body = JSON.stringify(body);
@@ -43,15 +41,14 @@ export default function sendRequest(
     `${process.env.REACT_APP_SERVER_URL}/${endpoint}?${queryString}`,
     config
   ).then(async (response) => {
-    // if (response.status === 401) {
-    // or other Parse unauthorized/unauthenticated responses
-    // clear cookie
-    // clear state
-    // refresh page or state change causes GUI/redirect update
-    // window.location.assign(window.location);
-    // throw new Error("Unauthorized request. Response status is 401.");
-    // }
     const data = await response.json();
+
+    // invalid session token
+    if (!response.ok && data.code === 209) {
+      localStorage.removeItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
+      window.location = "/sign-in";
+    }
+
     if (response.ok) {
       return data;
     }

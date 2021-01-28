@@ -2,7 +2,8 @@
   "root": true,
   "parser": "babel-eslint",
   "extends": [
-    "react-app",
+    "airbnb",
+    "airbnb/hooks",
     "prettier",
     "prettier/react"
   ],
@@ -20,9 +21,6 @@
       }
     }
   },
-  "plugins": ["react-hooks"],
   "rules": {
   }
 }
-
-// based on https://medium.com/@melih193/next-js-eslint-setup-tutorial-for-airbnb-config-c2b04183a92a

@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function AppBar({ onMenuClick, onlyLogo = false }) {
+export default function AppBar({ onMenuClick, onlyLogo }) {
   const user = useStoreState((state) => state.user);
   const usersFarm = useStoreState((state) => state.usersFarm);
   const signOut = useStoreActions((actions) => actions.signOut);
@@ -139,8 +139,10 @@ export default function AppBar({ onMenuClick, onlyLogo = false }) {
 }
 
 AppBar.propTypes = {
-  onMenuClick: PropTypes.func
+  onMenuClick: PropTypes.func,
+  onlyLogo: PropTypes.bool
 };
 AppBar.defaultProps = {
-  onMenuClick: undefined
+  onMenuClick: undefined,
+  onlyLogo: false
 };

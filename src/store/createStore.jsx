@@ -1,7 +1,14 @@
 import { createStore } from "easy-peasy";
 import storeModel from "./store-model";
 
-const createEasyPeasyStore = (initialState) =>
-  createStore({ ...storeModel, ...initialState });
+let store;
+
+const createEasyPeasyStore = (initialState) => {
+  store = createStore({ ...storeModel, ...initialState });
+  return store;
+};
 
 export default createEasyPeasyStore;
+export function getStore() {
+  return store;
+}

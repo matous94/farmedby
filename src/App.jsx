@@ -53,7 +53,7 @@ function App() {
       </Route>
 
       <Route path="/sign-in">
-        <PublicPage Page={SignInPage}></PublicPage>
+        <PublicPage Page={SignInPage} />
       </Route>
 
       <Route path="/farm/:id">

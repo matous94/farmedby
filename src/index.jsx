@@ -5,8 +5,9 @@ import { StoreProvider } from "easy-peasy";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 
-import theme from "./theme";
 import { createStore } from "src/store";
+
+import theme from "./theme";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 

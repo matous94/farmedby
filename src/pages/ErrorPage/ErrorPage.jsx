@@ -17,7 +17,7 @@ export default function ErrorPage() {
   return (
     <Box p="32px">
       <h1>Něco se porouchalo. Zkuste akci opakovat později.</h1>
-      <Link href="/">Zpět do aplikace</Link>
+      <Link to="/">Zpět do aplikace</Link>
     </Box>
   );
 }
