@@ -1,16 +1,16 @@
-import sendRequest from "src/packages/api-client/sendRequest";
+import { sendParseRequest } from "src/packages/api-client/requester";
 
 function subscribe(email) {
-  return sendRequest("classes/Newsletter", {
+  return sendParseRequest("classes/Newsletter", {
     body: {
       email,
-      objectId: email,
-    },
+      objectId: email
+    }
   });
 }
 
 const NewsletterApiClient = {
-  subscribe,
+  subscribe
 };
 
 export default NewsletterApiClient;

@@ -1,3 +1,5 @@
+import logger from "src/packages/logger";
+
 function parseQuery(query) {
   if (!query) return "";
   return Object.entries(query)
@@ -8,12 +10,17 @@ function parseQuery(query) {
     .join("&");
 }
 
-export default function sendRequest(
+export function sendParseRequest(
   endpoint,
   { body, query = "", ...customConfig } = {}
 ) {
   const queryString = parseQuery(query);
-  console.log("sendRequest queryString", queryString);
+  logger.apiClient(
+    `sendParseRequest called => 
+    endpoint=${endpoint}
+    queryString=${queryString}
+    body=${body}`
+  );
 
   const token = localStorage.getItem(
     process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY
