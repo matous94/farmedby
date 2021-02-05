@@ -33,8 +33,19 @@ export default function Dialog({
         )}
       </DialogContent>
       <DialogActions>
-        {secondaryButton && <Button {...secondaryButton} color="secondary" />}
-        <Button {...primaryButton} color="primary" autoFocus />
+        {secondaryButton && (
+          <Button
+            onClick={secondaryButton.onClick}
+            disabled={secondaryButton.disabled ?? false}
+            color="secondary"
+          />
+        )}
+        <Button
+          onClick={primaryButton.onClick}
+          disabled={primaryButton.disabled ?? false}
+          color="primary"
+          autoFocus
+        />
       </DialogActions>
     </MUiDialog>
   );
@@ -42,8 +53,16 @@ export default function Dialog({
 Dialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  primaryButton: PropTypes.shape({}).isRequired,
-  secondaryButton: PropTypes.shape({}),
+  primaryButton: PropTypes.shape({
+    children: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
+  }).isRequired,
+  secondaryButton: PropTypes.shape({
+    children: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
+  }),
   title: PropTypes.string,
   text: PropTypes.string
 };

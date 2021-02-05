@@ -9,7 +9,6 @@ import Box from "@material-ui/core/Box";
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
 import FarmView from "src/packages/farm/components/FarmView";
-import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import AboutTab from "./AboutTab";
 import CsaTab from "./CsaTab";
