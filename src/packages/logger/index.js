@@ -6,10 +6,10 @@ const domains = {
 const logger = Object.entries(domains).reduce(
   (accu, [domainName, isActive]) => ({
     ...accu,
-    [domainName]: (message) => {
+    [domainName]: (...messages) => {
       if (!isActive || process.env.NODE_ENV === "production") return;
       // eslint-disable-next-line no-console
-      console.log(message);
+      console.log(`${domainName} logger:`, ...messages);
     }
   }),
   {}

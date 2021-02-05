@@ -38,14 +38,18 @@ export default function Dialog({
             onClick={secondaryButton.onClick}
             disabled={secondaryButton.disabled ?? false}
             color="secondary"
-          />
+          >
+            {secondaryButton.children}
+          </Button>
         )}
         <Button
           onClick={primaryButton.onClick}
           disabled={primaryButton.disabled ?? false}
           color="primary"
           autoFocus
-        />
+        >
+          {primaryButton.children}
+        </Button>
       </DialogActions>
     </MUiDialog>
   );

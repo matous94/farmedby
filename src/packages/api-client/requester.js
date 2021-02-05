@@ -16,10 +16,10 @@ export function sendParseRequest(
 ) {
   const queryString = parseQuery(query);
   logger.apiClient(
-    `sendParseRequest called => 
-    endpoint=${endpoint}
-    queryString=${queryString}
-    body=${body}`
+    `sendParseRequest called ->`,
+    `endpoint=${endpoint}`,
+    `queryString=${queryString}`,
+    `body=${body}`
   );
 
   const token = localStorage.getItem(

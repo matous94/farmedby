@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import ApiClient from "src/packages/api-client";
+import logger from "src/packages/logger";
 import AppBar from "src/components/AppBar";
 import Dialog from "src/components/Dialog";
 
@@ -57,14 +58,10 @@ export default function SignInPage() {
     try {
       user = await ApiClient.User.signIn({ email, password });
     } catch (error) {
-      console.log("submitHandler -> error", error);
+      logger.user("signIn handler -> error", error);
       setIsLoading(false);
-      if (error.code === "auth/invalid-email") {
-        setErrorMessage("Neplatný email.");
-      } else if (error.code === "auth/user-not-found") {
-        setErrorMessage("Účet pro zadanou emailovou adresu neexistuje.");
-      } else if (error.code === "auth/wrong-password") {
-        setErrorMessage("Špatné heslo.");
+      if (error.code === 101) {
+        setErrorMessage("Neplatné přihlašovací údaje.");
       } else {
         setErrorMessage("Něco se porouchalo. Zkuste opakovat akci později.");
       }
@@ -73,7 +70,6 @@ export default function SignInPage() {
 
     try {
       const farm = await ApiClient.Farm.getFarmForUserId(user.objectId);
-
       signIn({
         user,
         farm
@@ -85,7 +81,9 @@ export default function SignInPage() {
         history.push("/create-farm");
       }
     } catch (error) {
-      history.push("/error");
+      logger.user("Failed to fetch user's farm. Gonna sign him out.");
+      await ApiClient.User.signOut();
+      setErrorMessage("Něco se porouchalo. Zkuste opakovat akci později.");
     }
   }
 

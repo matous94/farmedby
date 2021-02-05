@@ -6,7 +6,7 @@ import ProductCTA from "./components/CallToAction";
 
 // based on https://material-ui.com/store/items/onepirate/
 
-export default function Index() {
+export default function LandingPage() {
   return (
     <>
       <AppBar />

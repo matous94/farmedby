@@ -1,4 +1,5 @@
 import { sendParseRequest } from "src/packages/api-client/requester";
+import logger from "src/packages/logger";
 
 export async function signUp({ email, password }) {
   const response = await sendParseRequest("users", {
@@ -41,8 +42,8 @@ export function signOut() {
   try {
     sendParseRequest("/logout", { method: "POST" });
   } catch (error) {
-    console.log("logout failed", error);
+    logger.user("SignOut failure silently ignored.", error);
   }
   localStorage.removeItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
-  console.log("Cookie after signOut");
+  logger.user("Removed session token from local storage.");
 }
