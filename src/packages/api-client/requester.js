@@ -19,7 +19,8 @@ export function sendParseRequest(
     `sendParseRequest called ->`,
     `endpoint=${endpoint}`,
     `queryString=${queryString}`,
-    `body=${body}`
+    `body=`,
+    body
   );
 
   const token = localStorage.getItem(

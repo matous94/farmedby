@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useForm } from "react-hook-form";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import Container from "@material-ui/core/Container";
 
+import logger from "src/packages/logger";
 import ApiClient from "src/packages/api-client";
 
 import Typography from "../Typography";
@@ -16,30 +18,30 @@ const styles = (theme) => ({
   root: {
     marginTop: theme.spacing(10),
     marginBottom: "64px",
-    display: "flex",
+    display: "flex"
   },
   cardWrapper: {
-    zIndex: 1,
+    zIndex: 1
   },
   card: {
     display: "flex",
     justifyContent: "center",
     backgroundColor: theme.palette.warning.main,
-    padding: theme.spacing(8, 3),
+    padding: theme.spacing(8, 3)
   },
   cardContent: {
-    maxWidth: 500,
+    maxWidth: 500
   },
   textField: {
     width: "100%",
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   },
   button: {
-    width: "100%",
+    width: "100%"
   },
   imagesWrapper: {
-    position: "relative",
+    position: "relative"
   },
   image: {
     position: "absolute",
@@ -48,22 +50,20 @@ const styles = (theme) => ({
     right: 0,
     bottom: 0,
     width: "100%",
-    maxWidth: 600,
-  },
+    maxWidth: 600
+  }
 });
 
 function ProductCTA(props) {
   const { classes } = props;
+  const { register, handleSubmit, reset } = useForm();
 
-  const [email, setEmail] = React.useState("");
-
-  const submitHandler = async (event) => {
-    event.preventDefault();
-    setEmail("");
+  const submitHandler = async (data) => {
     try {
-      await ApiClient.Newsletter.subscribe(email);
+      reset();
+      await ApiClient.Newsletter.subscribe(data.email);
     } catch (error) {
-      console.error(error.message);
+      logger.app("Newsletter.subscribe failed silently", error);
     }
   };
 
@@ -72,7 +72,10 @@ function ProductCTA(props) {
       <Grid container>
         <Grid item xs={12} md={6} className={classes.cardWrapper}>
           <div className={classes.card}>
-            <form onSubmit={submitHandler} className={classes.cardContent}>
+            <form
+              onSubmit={handleSubmit(submitHandler)}
+              className={classes.cardContent}
+            >
               <Typography variant="h2" component="h2" gutterBottom>
                 Na stránce se pracuje
               </Typography>
@@ -80,10 +83,10 @@ function ProductCTA(props) {
                 budeme vás informovat co je nového.
               </Typography>
               <TextField
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                inputRef={register}
                 required
                 type="email"
-                value={email}
                 noBorder
                 className={classes.textField}
                 placeholder="Váš Email"
@@ -122,8 +125,8 @@ ProductCTA.propTypes = {
     textField: PropTypes.string,
     button: PropTypes.string,
     imagesWrapper: PropTypes.string,
-    image: PropTypes.string,
-  }).isRequired,
+    image: PropTypes.string
+  }).isRequired
 };
 
 export default withStyles(styles)(ProductCTA);
