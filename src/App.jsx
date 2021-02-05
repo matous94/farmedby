@@ -3,6 +3,7 @@ import { Switch, Route, Link, Redirect } from "react-router-dom";
 import { useStoreActions } from "easy-peasy";
 
 import ApiClient from "src/packages/api-client";
+import logger from "src/packages/logger";
 import LoadingScreen from "src/components/LoadingScreen";
 import PublicPage from "src/components/PublicPage/PublicPage";
 
@@ -27,7 +28,7 @@ function App() {
         signIn({ user, farm });
         setIsLoading(false);
       } catch (error) {
-        console.log("authentication failed");
+        logger.user("Authentication failed");
         localStorage.removeItem(
           process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY
         );
