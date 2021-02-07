@@ -1,12 +1,14 @@
 import { sendParseRequest } from "src/packages/api-client/requester";
 import logger from "src/packages/logger";
 
-export async function signUp({ email, password }) {
+export async function signUp({ email, password, firstName, lastName }) {
   const response = await sendParseRequest("users", {
     body: {
       email,
       username: email,
-      password
+      password,
+      firstName,
+      lastName
     }
   });
   localStorage.setItem(

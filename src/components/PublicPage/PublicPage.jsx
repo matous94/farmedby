@@ -16,6 +16,7 @@ export default function PublicPage({ Page, ...rest }) {
     return <Redirect to="/create-farm" />;
   }
 
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <Page {...rest} />;
 }
 

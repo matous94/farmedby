@@ -1,13 +1,17 @@
 import React, { useState, useCallback } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useStoreActions } from "easy-peasy";
+import { useHistory } from "react-router-dom";
+
+import logger from "src/packages/logger";
+import ApiClient from "src/packages/api-client";
 import AppBar from "src/components/AppBar";
 import Dialog from "src/components/Dialog";
 
 import SignUpView from "./SignUpView";
 
 export default function SignUpPage() {
-  // const router = useRouter();
+  const history = useHistory();
   const signUp = useStoreActions((actions) => actions.signUp);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -17,27 +21,36 @@ export default function SignUpPage() {
   }
 
   const submitHandler = useCallback(
-    async ({ email, password, name, didSubscribeToNewsletter }) => {
-      let user;
+    async ({
+      email,
+      password,
+      firstName,
+      lastName,
+      didSubscribeToNewsletter
+    }) => {
       try {
         setIsLoading(true);
-        // const userCredential = await auth.createUserWithEmailAndPassword(
-        //   email,
-        //   password
-        // );
-        // user = userCredential.user;
-
-        // signUp({ name, email, uid: user.uid });
-        // router.push("/create-farm");
+        if (password.length < 5) {
+          setErrorMessage("Minimální délka hesla je 5 znaků.");
+          setIsLoading(false);
+          return;
+        }
+        const user = await ApiClient.User.signUp({
+          email,
+          password,
+          firstName,
+          lastName
+        });
+        logger.user("User signed up", user);
+        signUp(user);
+        history.push("/create-farm");
       } catch (error) {
-        console.log("SignUpPage -> error", error);
+        logger.user("SignUpPage -> signUp failed:", error);
         setIsLoading(false);
-        if (error.code === "auth/email-already-in-use") {
+        if (error.code === 202) {
           setErrorMessage("Email je již využíván. Zkuste se přihlásit.");
-        } else if (error.code === "auth/invalid-email") {
+        } else if (error.code === 125) {
           setErrorMessage("Neplatný email.");
-        } else if (error.code === "auth/weak-password") {
-          setErrorMessage("Slabé heslo.");
         } else {
           setErrorMessage("Něco se porouchalo. Zkuste opakovat akci později.");
         }
@@ -45,18 +58,17 @@ export default function SignUpPage() {
       }
 
       try {
-        await user.updateProfile({ displayName: name });
+        if (didSubscribeToNewsletter) {
+          await ApiClient.Newsletter.subscribe(email);
+        }
       } catch (error) {
-        console.log("SignUpPage -> error", error);
-      }
-      try {
-        if (didSubscribeToNewsletter)
-          // await callCloudFunction("subscribeToNewsletter", { email });
-      } catch (error) {
-        console.log("SignUpPage -> error", error);
+        logger.user(
+          "SignUpPage -> Newsletter subscribe failed silently",
+          error
+        );
       }
     },
-    [signUp]
+    [signUp, history]
   );
   return (
     <>

@@ -10,6 +10,7 @@ import PublicPage from "src/components/PublicPage/PublicPage";
 import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
 import SignInPage from "src/pages/SignInPage";
+import SignUpPage from "src/pages/SignUpPage";
 
 function getSessionToken() {
   return localStorage.getItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
@@ -54,7 +55,16 @@ function App() {
       </Route>
 
       <Route path="/sign-in">
-        <PublicPage Page={SignInPage} />
+        <PublicPage key="sign-in" Page={SignInPage} />
+      </Route>
+
+      <Route path="/sign-up">
+        <PublicPage key="sign-up" Page={SignUpPage} />
+      </Route>
+
+      <Route path="/create-farm">
+        <h1>This is create farm page</h1>
+        <Link to="/">Go to landing page</Link>
       </Route>
 
       <Route path="/farm/:id">

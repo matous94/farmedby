@@ -13,18 +13,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        FarmedBy
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import logger from "src/packages/logger";
+
+import Copyright from "./Copyright";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -51,7 +42,8 @@ export default function SignUpView({ onSubmit, isLoading }) {
   const inputRef = useRef();
   const [formData, setFormData] = useState({
     email: "",
-    name: "",
+    firstName: "",
+    lastName: "",
     password: "",
     didSubscribeToNewsletter: false
   });
@@ -68,7 +60,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(formData);
+    logger.user("sign up data:", formData);
     onSubmit(formData);
   };
 
@@ -81,20 +73,33 @@ export default function SignUpView({ onSubmit, isLoading }) {
         <Typography component="h1" variant="h5">
           Registrace
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form className={classes.form} onSubmit={submitHandler}>
           <Grid container justify="center" spacing={2}>
             <Grid item xs={12}>
               <TextField
                 onChange={onChange}
-                value={formData.name}
-                autoComplete="name"
-                name="name"
+                value={formData.firstName}
+                autoComplete="given-name"
+                name="firstName"
                 variant="outlined"
                 required
                 fullWidth
-                id="name"
+                id="firstName"
                 label="Jméno"
                 autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={onChange}
+                value={formData.lastName}
+                autoComplete="family-name"
+                name="lastName"
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Přijmení"
               />
             </Grid>
             <Grid item xs={12}>
@@ -153,7 +158,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/sign-in" variant="body2">
+              <Link to="/sign-in" variant="body2">
                 Už máte účet? Přihlašte se
               </Link>
             </Grid>
