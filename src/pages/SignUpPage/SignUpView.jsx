@@ -128,6 +128,9 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 label="Heslo"
                 type="password"
                 id="password"
+                inputProps={{
+                  minLength: "6"
+                }}
                 autoComplete="current-password"
               />
             </Grid>

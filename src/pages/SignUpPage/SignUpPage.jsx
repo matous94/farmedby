@@ -30,11 +30,7 @@ export default function SignUpPage() {
     }) => {
       try {
         setIsLoading(true);
-        if (password.length < 5) {
-          setErrorMessage("Minimální délka hesla je 5 znaků.");
-          setIsLoading(false);
-          return;
-        }
+
         const user = await ApiClient.User.signUp({
           email,
           password,
