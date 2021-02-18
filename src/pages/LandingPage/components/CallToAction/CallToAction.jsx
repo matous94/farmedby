@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import Container from "@material-ui/core/Container";
+import { useTranslation } from "react-i18next";
 
 import logger from "src/packages/logger";
 import ApiClient from "src/packages/api-client";
@@ -56,6 +57,7 @@ const styles = (theme) => ({
 
 function ProductCTA(props) {
   const { classes } = props;
+  const { t } = useTranslation();
   const { register, handleSubmit, reset } = useForm();
 
   const submitHandler = async (data) => {
@@ -77,10 +79,10 @@ function ProductCTA(props) {
               className={classes.cardContent}
             >
               <Typography variant="h2" component="h2" gutterBottom>
-                Na stránce se pracuje
+                {t("landingPage.workInProgress")}
               </Typography>
               <Typography variant="h5">
-                budeme vás informovat co je nového.
+                {t("landingPage.workInProgress2")}
               </Typography>
               <TextField
                 name="email"
@@ -89,7 +91,7 @@ function ProductCTA(props) {
                 type="email"
                 noBorder
                 className={classes.textField}
-                placeholder="Váš Email"
+                placeholder={t("Email")}
               />
               <Button
                 type="submit"
@@ -97,7 +99,7 @@ function ProductCTA(props) {
                 variant="contained"
                 className={classes.button}
               >
-                Přidej se
+                {t("landingPage.subscribeToNewsletter")}
               </Button>
             </form>
           </div>

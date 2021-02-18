@@ -1,0 +1,32 @@
+{
+  "myFarm": "My farm",
+  "createFarm": "Create farm",
+  "signOut": "Sign out",
+  "signIn": "Sign in",
+  "signUp": "Sign up",
+  "Email": "Email",
+  "Password": "Password",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "Continue": "Pokračovat",
+  "genericFailureMessage": "Something's wrong. Please try again later.",
+  "landingPage": {
+    "heading": "Fruits and vegetables from local farmers",
+    "showExampleFarm": "Show Example Farm",
+    "workInProgress": "Site is under construction",
+    "workInProgress2": "subscribe to be updated what's new.",
+    "subscribeToNewsletter": "Subscribe"
+  },
+  "signInPage": {
+    "heading": "Sign in",
+    "invalidCredentials": "Invalid credentials.",
+    "noAccount": "No account yet? Sign up"
+  },
+  "signUpPage": {
+    "heading": "Sign up",
+    "invalidEmail": "Invalid email",
+    "emailInUse": "Email address is taken. Sign in.",
+    "newsletterCheckbox": "Subscribe to FarmedBy newsletter",
+    "existingAccount": "Already have an account? Sign in"
+  }
+}

@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "src/components/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import Link from "src/components/Link";
 import logger from "src/packages/logger";
 
 import Copyright from "./Copyright";
@@ -38,14 +39,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUpView({ onSubmit, isLoading }) {
+  const { t } = useTranslation();
   const classes = useStyles();
   const inputRef = useRef();
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
     lastName: "",
-    password: "",
-    didSubscribeToNewsletter: false
+    password: ""
+    // didSubscribeToNewsletter: false
   });
   const onChange = (e) => {
     const change = {
@@ -71,7 +73,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Registrace
+          {t("signUpPage.heading")}
         </Typography>
         <form className={classes.form} onSubmit={submitHandler}>
           <Grid container justify="center" spacing={2}>
@@ -85,7 +87,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 id="firstName"
-                label="Jméno"
+                label={t("firstName")}
                 autoFocus
               />
             </Grid>
@@ -99,7 +101,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 id="lastName"
-                label="Přijmení"
+                label={t("lastName")}
               />
             </Grid>
             <Grid item xs={12}>
@@ -111,7 +113,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 id="email"
-                label="Emailová adresa"
+                label={t("Email")}
                 name="email"
                 type="email"
                 autoComplete="email"
@@ -125,7 +127,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 name="password"
-                label="Heslo"
+                label={t("Password")}
                 type="password"
                 id="password"
                 inputProps={{
@@ -134,7 +136,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 autoComplete="current-password"
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -145,9 +147,9 @@ export default function SignUpView({ onSubmit, isLoading }) {
                     color="primary"
                   />
                 }
-                label="Chci dostávat novinky od FarmedBy na email."
+                label={t("signUpPage.newsletterCheckbox")}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             disabled={isLoading}
@@ -157,12 +159,12 @@ export default function SignUpView({ onSubmit, isLoading }) {
             color="primary"
             className={classes.submit}
           >
-            Registrovat
+            {t("signUp")}
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link to="/sign-in" variant="body2">
-                Už máte účet? Přihlašte se
+                {t("signUpPage.existingAccount")}
               </Link>
             </Grid>
           </Grid>

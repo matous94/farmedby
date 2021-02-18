@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useStoreState, useStoreActions } from "easy-peasy";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import MuiAppBar from "@material-ui/core/AppBar";
 import MuiLink from "@material-ui/core/Link";
@@ -13,6 +14,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import Link from "src/components/Link";
 import ApiClient from "src/packages/api-client";
+
+import CountrySelector from "./CountrySelector";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -50,6 +53,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AppBar({ onMenuClick, onlyLogo }) {
+  const { t } = useTranslation();
+
   const user = useStoreState((state) => state.user);
   const usersFarm = useStoreState((state) => state.usersFarm);
   const signOut = useStoreActions((actions) => actions.signOut);
@@ -85,6 +90,13 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
           <Link to="/" variant={logoVariant} color="secondary" underline="none">
             FarmedBy
           </Link>
+          <Box
+            ml={["8px", "12px", "16px"]}
+            width={["24px", "32px", "40px"]}
+            height={["24px", "32px", "40px"]}
+          >
+            <CountrySelector />
+          </Box>
         </Box>
 
         {!onlyLogo && (
@@ -97,7 +109,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
                   className={classes.rightLink}
                   to={`/farm/${usersFarm.objectId}`}
                 >
-                  Moje Farma
+                  {t("myFarm")}
                 </Link>
               )}
               {!usersFarm && (
@@ -107,7 +119,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
                   className={clsx(classes.rightLink)}
                   to="/sign-up"
                 >
-                  Založit farmu
+                  {t("createFarm")}
                 </Link>
               )}
               {user ? (
@@ -118,7 +130,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
                   className={clsx(classes.rightLink, classes.linkSecondary)}
                   onClick={signOutHandler}
                 >
-                  Odhlásit se
+                  {t("signOut")}
                 </MuiLink>
               ) : (
                 <Link
@@ -127,7 +139,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
                   className={clsx(classes.rightLink, classes.linkSecondary)}
                   to="/sign-in"
                 >
-                  Přihlásit se
+                  {t("signIn")}
                 </Link>
               )}
             </>

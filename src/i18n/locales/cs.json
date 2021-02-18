@@ -1,0 +1,32 @@
+{
+  "myFarm": "Moje farma",
+  "createFarm": "Založit farmu",
+  "signOut": "Odhlásit se",
+  "signIn": "Přihlásit se",
+  "signUp": "Registrovat se",
+  "Email": "Email",
+  "Password": "Heslo",
+  "firstName": "Jméno",
+  "lastName": "Příjmení",
+  "Continue": "Pokračovat",
+  "genericFailureMessage": "Něco se porouchalo. Zkuste opakovat akci později.",
+  "landingPage": {
+    "heading": "Ovoce a zelenina přímo od pěstitele",
+    "showExampleFarm": "Zobraz Ukázku Farmy",
+    "workInProgress": "Na stránce se pracuje",
+    "workInProgress2": "budeme vás informovat co je nového.",
+    "subscribeToNewsletter": "Přidej se"
+  },
+  "signInPage": {
+    "heading": "Přihlášení",
+    "invalidCredentials": "Neplatné přihlašovací údaje.",
+    "noAccount": "Nemáte účet? Registrujte se"
+  },
+  "signUpPage": {
+    "heading": "Registrace",
+    "invalidEmail": "Neplatný email.",
+    "emailInUse": "Email je již využíván. Zkuste se přihlásit.",
+    "newsletterCheckbox": "Chci novinky od FarmedBy na email.",
+    "existingAccount": "Už máte účet? Přihlašte se"
+  }
+}

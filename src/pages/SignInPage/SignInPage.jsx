@@ -11,6 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useTranslation } from "react-i18next";
 
 import ApiClient from "src/packages/api-client";
 import logger from "src/packages/logger";
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInPage() {
   const classes = useStyles();
+  const { t } = useTranslation();
   const history = useHistory();
   const signIn = useStoreActions((actions) => actions.signIn);
 
@@ -61,9 +63,9 @@ export default function SignInPage() {
       logger.user("signIn handler -> error", error);
       setIsLoading(false);
       if (error.code === 101) {
-        setErrorMessage("Neplatné přihlašovací údaje.");
+        setErrorMessage(t("signInPage.invalidCredentials"));
       } else {
-        setErrorMessage("Něco se porouchalo. Zkuste opakovat akci později.");
+        setErrorMessage(t("genericFailureMessage"));
       }
       return;
     }
@@ -83,7 +85,7 @@ export default function SignInPage() {
     } catch (error) {
       logger.user("Failed to fetch user's farm. Gonna sign him out.");
       await ApiClient.User.signOut();
-      setErrorMessage("Něco se porouchalo. Zkuste opakovat akci později.");
+      setErrorMessage("");
     }
   }
 
@@ -93,7 +95,7 @@ export default function SignInPage() {
         open={Boolean(errorMessage)}
         onClose={closeDialog}
         text={errorMessage}
-        primaryButton={{ children: "Pokračovat", onClick: closeDialog }}
+        primaryButton={{ children: t("Continue"), onClick: closeDialog }}
       />
       <AppBar />
       <Toolbar />
@@ -103,7 +105,7 @@ export default function SignInPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Přihlášení
+            {t("signInPage.heading")}
           </Typography>
           <form className={classes.form} onSubmit={submitHandler}>
             <Grid container justify="center" spacing={2}>
@@ -116,7 +118,7 @@ export default function SignInPage() {
                   required
                   fullWidth
                   id="email"
-                  label="Emailová adresa"
+                  label={t("Email")}
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -130,7 +132,7 @@ export default function SignInPage() {
                   required
                   fullWidth
                   name="password"
-                  label="Heslo"
+                  label={t("Password")}
                   type="password"
                   id="password"
                   autoComplete="current-password"
@@ -145,12 +147,12 @@ export default function SignInPage() {
               color="primary"
               className={classes.submit}
             >
-              Přihlásit se
+              {t("signIn")}
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
                 <Link to="/sign-up" variant="body2">
-                  Nemáte účet? Registrujte se
+                  {t("signInPage.noAccount")}
                 </Link>
               </Grid>
             </Grid>

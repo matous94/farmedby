@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useStoreActions } from "easy-peasy";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import logger from "src/packages/logger";
 import ApiClient from "src/packages/api-client";
@@ -11,6 +12,7 @@ import Dialog from "src/components/Dialog";
 import SignUpView from "./SignUpView";
 
 export default function SignUpPage() {
+  const { t } = useTranslation();
   const history = useHistory();
   const signUp = useStoreActions((actions) => actions.signUp);
   const [errorMessage, setErrorMessage] = useState("");
@@ -25,8 +27,8 @@ export default function SignUpPage() {
       email,
       password,
       firstName,
-      lastName,
-      didSubscribeToNewsletter
+      lastName
+      // didSubscribeToNewsletter
     }) => {
       try {
         setIsLoading(true);
@@ -44,27 +46,27 @@ export default function SignUpPage() {
         logger.user("SignUpPage -> signUp failed:", error);
         setIsLoading(false);
         if (error.code === 202) {
-          setErrorMessage("Email je již využíván. Zkuste se přihlásit.");
+          setErrorMessage(t("signUpPage.emailInUse"));
         } else if (error.code === 125) {
-          setErrorMessage("Neplatný email.");
+          setErrorMessage(t("signUpPage.invalidEmail"));
         } else {
-          setErrorMessage("Něco se porouchalo. Zkuste opakovat akci později.");
+          setErrorMessage(t("genericFailureMessage"));
         }
-        return;
+        // return;
       }
 
-      try {
-        if (didSubscribeToNewsletter) {
-          await ApiClient.Newsletter.subscribe(email);
-        }
-      } catch (error) {
-        logger.user(
-          "SignUpPage -> Newsletter subscribe failed silently",
-          error
-        );
-      }
+      // try {
+      //   if (didSubscribeToNewsletter) {
+      //     await ApiClient.Newsletter.subscribe(email);
+      //   }
+      // } catch (error) {
+      //   logger.user(
+      //     "SignUpPage -> Newsletter subscribe failed silently",
+      //     error
+      //   );
+      // }
     },
-    [signUp, history]
+    [signUp, history, t]
   );
   return (
     <>
@@ -72,7 +74,7 @@ export default function SignUpPage() {
         open={Boolean(errorMessage)}
         onClose={closeDialog}
         text={errorMessage}
-        primaryButton={{ children: "Pokračovat", onClick: closeDialog }}
+        primaryButton={{ children: t("Continue"), onClick: closeDialog }}
       />
       <AppBar />
       <Toolbar />
