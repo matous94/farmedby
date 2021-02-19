@@ -1,7 +1,8 @@
 const domains = {
   user: true,
   apiClient: true,
-  app: true
+  app: true,
+  farm: true
 };
 
 const logger = Object.entries(domains).reduce(
