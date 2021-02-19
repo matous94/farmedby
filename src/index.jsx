@@ -5,18 +5,18 @@ import { StoreProvider } from "easy-peasy";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 
-import { setupI18n } from "src/i18n";
+import { setupI18n, getCurrentCountryCode } from "src/i18n";
 import { createStore } from "src/store";
 
 import theme from "./theme";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+// import reportWebVitals from "./reportWebVitals";
+
+const store = createStore();
+window.getState = store.getState;
 
 async function renderReactApp() {
-  await setupI18n();
-
-  const store = createStore();
-  window.getState = store.getState;
+  await setupI18n({ onCountryChange: () => renderReactApp() });
 
   ReactDOM.render(
     <React.StrictMode>
@@ -24,17 +24,17 @@ async function renderReactApp() {
         <StoreProvider store={store}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <App />
+            <App key={getCurrentCountryCode()} />
           </ThemeProvider>
         </StoreProvider>
       </Router>
     </React.StrictMode>,
     document.getElementById("root")
   );
-  reportWebVitals();
 }
 renderReactApp();
 
+// reportWebVitals();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

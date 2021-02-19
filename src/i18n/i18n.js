@@ -5,38 +5,51 @@ import enLocales from "./locales/en.json";
 import csFlagSrc from "./flags/cs.png";
 import enFlagSrc from "./flags/en.png";
 
-export const supportedLanguages = {
-  cs: {
+let currentCountryCode;
+export const supportedCountries = {
+  CZ: {
     translation: csLocales,
     flagSrc: csFlagSrc,
-    countryName: "Česká republika"
+    countryName: "Česká republika",
+    countryCode: "CZ",
+    languageCode: "cs"
   },
-  en: {
+  GB: {
     translation: enLocales,
     flagSrc: enFlagSrc,
-    countryName: "United Kingdom"
+    countryName: "United Kingdom",
+    countryCode: "GB",
+    languageCode: "en"
   }
 };
 
-export function getCurrentLanguage() {
-  return i18n.language;
+function languageToCountryCode(lng) {
+  const byLanguage = { cs: "CZ", sk: "CZ", en: "GB" };
+  return byLanguage[lng] || byLanguage.en;
+}
+
+function getCurrentCountry() {
+  return supportedCountries[currentCountryCode];
+}
+
+export function getCurrentCountryCode() {
+  return currentCountryCode;
 }
 
 export function getCurrentFlagSrc() {
-  return supportedLanguages[getCurrentLanguage()].flagSrc;
+  return supportedCountries[currentCountryCode].flagSrc;
 }
 
-export function changeLanguage(languageCode) {
-  i18n.changeLanguage(languageCode);
+export function changeCountry(countryCode) {
+  currentCountryCode = countryCode;
+  i18n.changeLanguage(supportedCountries[countryCode].languageCode);
 }
 
-export async function setupI18n() {
-  let language = window.navigator?.language?.split("-")[0] || "en";
-  if (language === "sk") language = "cs";
-  if (!supportedLanguages[language]) language = "en";
+export async function setupI18n({ onCountryChange }) {
+  if (currentCountryCode) return;
 
-  // TODO:
-  // setup dates library and its localization
+  const usersLanguage = window.navigator?.language?.split("-")[0];
+  currentCountryCode = languageToCountryCode(usersLanguage);
 
   // i18next setup
   await i18n
@@ -44,13 +57,13 @@ export async function setupI18n() {
     .init({
       resources: {
         en: {
-          translation: supportedLanguages.en.translation
+          translation: supportedCountries.GB.translation
         },
         cs: {
-          translation: supportedLanguages.cs.translation
+          translation: supportedCountries.CZ.translation
         }
       },
-      lng: language,
+      lng: getCurrentCountry().languageCode,
       // lng: "cs",
       fallbackLng: false,
       debug: process.env.NODE_ENV === "development",
@@ -58,4 +71,6 @@ export async function setupI18n() {
         escapeValue: false
       }
     });
+
+  i18n.on("languageChanged", onCountryChange);
 }

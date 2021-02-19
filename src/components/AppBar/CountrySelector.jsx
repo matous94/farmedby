@@ -7,15 +7,15 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import {
-  supportedLanguages,
-  getCurrentLanguage,
-  changeLanguage
+  supportedCountries,
+  getCurrentCountryCode,
+  changeCountry
 } from "src/i18n";
 
 export default function CountrySelector() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedLanguage, setSelectedLanguage] = React.useState(
-    getCurrentLanguage()
+  const [selectedCountry, setSelectedCountry] = React.useState(
+    getCurrentCountryCode()
   );
 
   const handleOpen = (event) => {
@@ -26,9 +26,10 @@ export default function CountrySelector() {
     setAnchorEl(null);
   };
 
-  const handleChange = (languageCode) => {
-    setSelectedLanguage(languageCode);
-    changeLanguage(languageCode);
+  const handleChange = (countryCode) => {
+    setSelectedCountry(countryCode);
+    changeCountry(countryCode);
+    handleClose();
   };
 
   return (
@@ -37,8 +38,8 @@ export default function CountrySelector() {
         width="100%"
         height="100%"
         component="img"
-        alt={supportedLanguages[selectedLanguage].countryName}
-        src={supportedLanguages[selectedLanguage].flagSrc}
+        alt={supportedCountries[selectedCountry].countryName}
+        src={supportedCountries[selectedCountry].flagSrc}
         onClick={handleOpen}
         style={{ cursor: "pointer" }}
       />
@@ -59,11 +60,11 @@ export default function CountrySelector() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {Object.entries(supportedLanguages).map(([lng, resources]) => (
+        {Object.entries(supportedCountries).map(([countryCode, resources]) => (
           <MenuItem
-            key={lng}
-            onClick={() => handleChange(lng)}
-            selected={lng === selectedLanguage}
+            key={countryCode}
+            onClick={() => handleChange(countryCode)}
+            selected={countryCode === selectedCountry}
           >
             <ListItemAvatar>
               <Avatar alt={resources.countryName} src={resources.flagSrc} />
