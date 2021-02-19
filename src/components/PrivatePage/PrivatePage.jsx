@@ -10,6 +10,7 @@ export default function PrivatePage({ Page, ...rest }) {
     return <Redirect to="/sign-in" />;
   }
 
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <Page {...rest} />;
 }
 
