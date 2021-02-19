@@ -6,16 +6,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import {
-  supportedCountries,
-  getCurrentCountryCode,
-  changeCountry
-} from "src/i18n";
+import { supportedCountries, getCountryCode, changeCountry } from "src/i18n";
 
 export default function CountrySelector() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedCountry, setSelectedCountry] = React.useState(
-    getCurrentCountryCode()
+    getCountryCode()
   );
 
   const handleOpen = (event) => {

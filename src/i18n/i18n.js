@@ -5,7 +5,7 @@ import enLocales from "./locales/en.json";
 import csFlagSrc from "./flags/cs.png";
 import enFlagSrc from "./flags/en.png";
 
-let currentCountryCode;
+let countryCode;
 export const supportedCountries = {
   CZ: {
     translation: csLocales,
@@ -28,28 +28,24 @@ function languageToCountryCode(lng) {
   return byLanguage[lng] || byLanguage.en;
 }
 
-function getCurrentCountry() {
-  return supportedCountries[currentCountryCode];
+function getCountry() {
+  return supportedCountries[countryCode];
 }
 
-export function getCurrentCountryCode() {
-  return currentCountryCode;
+export function getCountryCode() {
+  return countryCode;
 }
 
-export function getCurrentFlagSrc() {
-  return supportedCountries[currentCountryCode].flagSrc;
-}
-
-export function changeCountry(countryCode) {
-  currentCountryCode = countryCode;
+export function changeCountry(code) {
+  countryCode = code;
   i18n.changeLanguage(supportedCountries[countryCode].languageCode);
 }
 
 export async function setupI18n({ onCountryChange }) {
-  if (currentCountryCode) return;
+  if (countryCode) return;
 
   const usersLanguage = window.navigator?.language?.split("-")[0];
-  currentCountryCode = languageToCountryCode(usersLanguage);
+  countryCode = languageToCountryCode(usersLanguage);
 
   // i18next setup
   await i18n
@@ -63,7 +59,7 @@ export async function setupI18n({ onCountryChange }) {
           translation: supportedCountries.CZ.translation
         }
       },
-      lng: getCurrentCountry().languageCode,
+      lng: getCountry().languageCode,
       // lng: "cs",
       fallbackLng: false,
       debug: process.env.NODE_ENV === "development",
