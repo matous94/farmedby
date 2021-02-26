@@ -95,7 +95,7 @@ export default function SignInPage() {
         open={Boolean(errorMessage)}
         onClose={closeDialog}
         text={errorMessage}
-        primaryButton={{ children: t("Continue"), onClick: closeDialog }}
+        primaryButton={{ children: t("continue"), onClick: closeDialog }}
       />
       <AppBar />
       <Toolbar />
@@ -118,7 +118,7 @@ export default function SignInPage() {
                   required
                   fullWidth
                   id="email"
-                  label={t("Email")}
+                  label={t("email")}
                   name="email"
                   type="email"
                   autoComplete="email"

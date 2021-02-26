@@ -74,7 +74,7 @@ export default function SignUpPage() {
         open={Boolean(errorMessage)}
         onClose={closeDialog}
         text={errorMessage}
-        primaryButton={{ children: t("Continue"), onClick: closeDialog }}
+        primaryButton={{ children: t("continue"), onClick: closeDialog }}
       />
       <AppBar />
       <Toolbar />

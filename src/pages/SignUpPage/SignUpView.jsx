@@ -113,7 +113,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 id="email"
-                label={t("Email")}
+                label={t("email")}
                 name="email"
                 type="email"
                 autoComplete="email"

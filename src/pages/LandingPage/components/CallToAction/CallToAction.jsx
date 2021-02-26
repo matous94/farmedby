@@ -91,7 +91,7 @@ function ProductCTA(props) {
                 type="email"
                 noBorder
                 className={classes.textField}
-                placeholder={t("Email")}
+                placeholder={t("email")}
               />
               <Button
                 type="submit"

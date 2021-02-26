@@ -5,7 +5,7 @@ import { StoreProvider } from "easy-peasy";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 
-import { setupI18n, getCurrentCountryCode } from "src/i18n";
+import { setupI18n, getCountryCode } from "src/i18n";
 import { createStore } from "src/store";
 
 import theme from "./theme";
@@ -24,7 +24,7 @@ async function renderReactApp() {
         <StoreProvider store={store}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <App key={getCurrentCountryCode()} />
+            <App key={getCountryCode()} />
           </ThemeProvider>
         </StoreProvider>
       </Router>
