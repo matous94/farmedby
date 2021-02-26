@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { FarmPropTypes } from "src/packages/farm/farm-prop-types";
+import { FarmPropTypes } from "src/packages/farm/farm-types";
 
 export default function CsaTab({ farm }) {
   const { aboutCsa, boxes } = farm;

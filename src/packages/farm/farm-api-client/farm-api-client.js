@@ -14,3 +14,10 @@ export async function getFarmForUserId(userId) {
   });
   return results[0];
 }
+
+export async function createFarm(farmData) {
+  const { result } = await sendParseRequest("functions/createFarm", {
+    body: { farmData }
+  });
+  return result;
+}

@@ -1,3 +1,4 @@
+import * as React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@material-ui/core/Box";
 
@@ -6,7 +7,7 @@ import AppBar from "src/components/AppBar";
 export default function LoadingScreen() {
   return (
     <>
-      <AppBar onlyLogo={true} />
+      <AppBar onlyLogo />
       <Box
         position="absolute"
         width="100vw"

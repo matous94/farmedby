@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { FarmPropTypes } from "src/packages/farm/farm-prop-types";
+import { FarmPropTypes } from "src/packages/farm/farm-types";
 
 function Contact({ label, value, ...rest }) {
   if (value == null) return null;

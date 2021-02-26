@@ -15,6 +15,12 @@
   "HN": "Č.P.",
   "city": "Město",
   "postcode": "PSČ",
+  "vegetables": "Zelenina",
+  "fruits": "Ovoce",
+  "dairy": "Mléčné výrobky",
+  "eggs": "Vejce",
+  "meat": "Maso",
+  "producing": "Produkujeme",
   "landingPage": {
     "heading": "Ovoce a zelenina přímo od pěstitele",
     "showExampleFarm": "Zobraz Ukázku Farmy",

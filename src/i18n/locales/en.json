@@ -14,6 +14,12 @@
   "HN": "HN",
   "city": "City",
   "postcode": "Postcode",
+  "vegetables": "Vegetables",
+  "fruits": "Fruits",
+  "dairy": "Dairy",
+  "eggs": "Eggs",
+  "meat": "Meat",
+  "producing": "Producing",
   "genericFailureMessage": "Something's wrong. Please try again later.",
   "landingPage": {
     "heading": "Fruits and vegetables from local farmers",

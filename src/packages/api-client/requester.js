@@ -46,7 +46,7 @@ export function sendParseRequest(
     config.body = JSON.stringify(body);
   }
   return fetch(
-    `${process.env.REACT_APP_SERVER_URL}/${endpoint}?${queryString}`,
+    `${process.env.REACT_APP_SERVER_URL}/parse/${endpoint}?${queryString}`,
     config
   ).then(async (response) => {
     const data = await response.json();

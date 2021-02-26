@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import FarmIcon from "src/icons/FarmIcon";
+import { useTranslation } from "react-i18next";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+import { ProductTypes } from "src/packages/farm/farm-types";
+import FarmIcon from "src/icons/FarmIcon";
+import Select from "src/components/Select/Select";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,13 +35,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateFarmPage({ onSubmit, isLoading }) {
   const classes = useStyles();
+  const { t } = useTranslation();
+
+  const productOptions = React.useMemo(
+    () =>
+      Object.values(ProductTypes).reduce((options, productId) => {
+        // eslint-disable-next-line no-param-reassign
+        options[productId] = { id: productId, label: t(productId) };
+        return options;
+      }, {}),
+    [t]
+  );
+
   const [formData, setFormData] = useState({
-    name: "",
     city: "",
-    street: "",
     houseNumber: "",
-    postalCode: "",
-    country: "Czech Republic"
+    name: "",
+    postcode: "",
+    street: "",
+    productTypes: []
   });
 
   const submitHandler = (e) => {
@@ -56,9 +72,9 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
           <FarmIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Moje Farma
+          {t("myFarm")}
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form className={classes.form} onSubmit={submitHandler}>
           <Grid container justify="center" spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -68,9 +84,19 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 name="name"
-                label="Jméno Farmy"
+                label={t("farmName")}
                 type="text"
                 id="name"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Select
+                onChange={onChange}
+                selected={formData.productTypes}
+                label={t("producing")}
+                options={productOptions}
+                multiple
+                name="productTypes"
               />
             </Grid>
             <Grid item xs={9}>
@@ -82,7 +108,7 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 fullWidth
                 type="text"
                 name="street"
-                label="Ulice"
+                label={t("street")}
                 id="street"
                 autoComplete="address-line1"
               />
@@ -96,7 +122,7 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 id="houseNumber"
-                label="Č.P."
+                label={t("HN")}
                 type="text"
               />
             </Grid>
@@ -108,7 +134,7 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 name="city"
-                label="Město"
+                label={t("city")}
                 type="text"
                 id="city"
                 autoComplete="address-level2"
@@ -117,26 +143,13 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
             <Grid item xs={12}>
               <TextField
                 onChange={onChange}
-                value={formData.postalCode}
+                value={formData.postcode}
                 variant="outlined"
                 required
                 fullWidth
-                id="postalCode"
-                label="PSČ"
-                name="postalCode"
-                type="text"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                onChange={onChange}
-                value={formData.country}
-                variant="outlined"
-                required
-                fullWidth
-                id="country"
-                label="Země"
-                name="country"
+                id="postcode"
+                label={t("postcode")}
+                name="postcode"
                 type="text"
               />
             </Grid>
@@ -149,7 +162,7 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
             color="primary"
             className={classes.submit}
           >
-            Založit farmu
+            {t("createFarm")}
           </Button>
         </form>
       </div>

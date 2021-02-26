@@ -1,18 +1,24 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { useRouter } from "next/router";
+
+import ApiClient from "src/packages/api-client";
+import { selectors } from "src/store";
 import AppBar from "src/components/AppBar";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
+import logger from "src/packages/logger";
+import { getCountryCode } from "src/i18n";
 
 import CreateFarmView from "./CreateFarmView";
 
 export default function CreateFarmPage() {
-  const router = useRouter();
-  const user = useStoreState((state) => state.user);
-  const usersFarm = useStoreState((state) => state.farm);
+  const history = useHistory();
 
+  const user = useStoreState(selectors.getUser);
+  const usersFarm = useStoreState(selectors.getUsersFarm);
   const farmCreated = useStoreActions((actions) => actions.farmCreated);
+
   const [isFailureDialogOpened, setIsFailureDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,33 +29,36 @@ export default function CreateFarmPage() {
 
   useEffect(() => {
     if (usersFarm) {
-      router.push("/farm/[farmId]", `/farm/${usersFarm.id}`);
+      history.push(`/farm/${usersFarm.objectId}`);
     }
-  }, [router, usersFarm]);
+  }, [history, usersFarm]);
 
   const submitHandler = useCallback(
     async (farmData) => {
       try {
         setIsLoading(true);
-        const farm = {
+
+        const farm = await ApiClient.Farm.createFarm({
           ...farmData,
-          email: user.email
-        };
-        const { data: createdFarm } = await callCloudFunction(
-          "createFarm",
-          farm
-        );
+          about: "",
+          countryCode: getCountryCode(),
+          email: user.email,
+          isPickUpPoint: true,
+          phoneNumber: "",
+          public: false,
+          webUrl: ""
+        });
 
-        console.log("CreateFarmPage -> createdFarm", createdFarm);
-        farmCreated(createdFarm);
+        logger.farm("CreateFarmPage -> createdFarm", farm);
+        farmCreated(farm);
 
-        router.push("/farm/[farmId]", `/farm/${createdFarm.id}`);
+        history.push(`/farm/${farm.objectId}`);
       } catch (error) {
         setIsLoading(false);
         setIsFailureDialogOpened(true);
       }
     },
-    [router, farmCreated, user]
+    [history, farmCreated, user]
   );
   return (
     <>

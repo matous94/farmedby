@@ -132,7 +132,7 @@ export default function SignInPage() {
                   required
                   fullWidth
                   name="password"
-                  label={t("Password")}
+                  label={t("password")}
                   type="password"
                   id="password"
                   autoComplete="current-password"

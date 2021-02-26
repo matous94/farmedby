@@ -5,7 +5,9 @@ import { useStoreActions } from "easy-peasy";
 import ApiClient from "src/packages/api-client";
 import logger from "src/packages/logger";
 import LoadingScreen from "src/components/LoadingScreen";
-import PublicPage from "src/components/PublicPage/PublicPage";
+import PublicPage from "src/components/PublicPage";
+import PrivatePage from "src/components/PrivatePage";
+import CreateFarmPage from "src/packages/farm/CreateFarmPage";
 
 import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
@@ -63,8 +65,7 @@ function App() {
       </Route>
 
       <Route path="/create-farm">
-        <h1>This is create farm page</h1>
-        <Link to="/">Go to landing page</Link>
+        <PrivatePage key="create-farm" Page={CreateFarmPage} />
       </Route>
 
       <Route path="/farm/:id">
