@@ -76,6 +76,7 @@ export default function SignUpPage() {
         text={errorMessage}
         primaryButton={{ children: t("continue"), onClick: closeDialog }}
       />
+      <Dialog loading={isLoading} />
       <AppBar />
       <Toolbar />
       <SignUpView isLoading={isLoading} onSubmit={submitHandler} />
