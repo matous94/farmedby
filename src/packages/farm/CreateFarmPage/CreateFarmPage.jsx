@@ -9,6 +9,7 @@ import AppBar from "src/components/AppBar";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import logger from "src/packages/logger";
 import { getCountryCode } from "src/i18n";
+import Dialog from "src/components/Dialog";
 
 import CreateFarmView from "./CreateFarmView";
 
@@ -46,7 +47,9 @@ export default function CreateFarmPage() {
           isPickUpPoint: true,
           phoneNumber: "",
           public: false,
-          webUrl: ""
+          webUrl: "",
+          boxes: [],
+          pickUpPoints: []
         });
 
         logger.farm("CreateFarmPage -> createdFarm", farm);
@@ -66,6 +69,7 @@ export default function CreateFarmPage() {
         open={isFailureDialogOpened}
         onClose={closeFailureDialog}
       />
+      <Dialog loading={isLoading} />
       <AppBar />
       <Toolbar />
       <CreateFarmView isLoading={isLoading} onSubmit={submitHandler} />

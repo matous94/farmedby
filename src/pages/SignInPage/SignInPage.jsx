@@ -69,7 +69,6 @@ export default function SignInPage() {
       }
       return;
     }
-
     try {
       const farm = await ApiClient.Farm.getFarmForUserId(user.objectId);
       signIn({
@@ -97,6 +96,7 @@ export default function SignInPage() {
         text={errorMessage}
         primaryButton={{ children: t("continue"), onClick: closeDialog }}
       />
+      <Dialog loading={isLoading} />
       <AppBar />
       <Toolbar />
       <Container component="main" maxWidth="xs">
