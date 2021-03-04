@@ -64,8 +64,8 @@ function TextField(props) {
     classes,
     InputProps = {},
     InputLabelProps,
-    noBorder = false,
-    size = "medium",
+    noBorder,
+    size,
     SelectProps,
     ...other
   } = props;
@@ -113,12 +113,27 @@ function TextField(props) {
 }
 
 TextField.propTypes = {
-  classes: PropTypes.object.isRequired,
-  InputLabelProps: PropTypes.object,
-  InputProps: PropTypes.object,
+  classes: PropTypes.shape({
+    root: PropTypes.string,
+    input: PropTypes.string,
+    inputBorder: PropTypes.string,
+    disabled: PropTypes.string,
+    formLabel: PropTypes.string,
+    select: PropTypes.string,
+    selectIcon: PropTypes.string
+  }).isRequired,
+  InputLabelProps: PropTypes.shape({}),
+  InputProps: PropTypes.shape({}),
+  SelectProps: PropTypes.shape({}),
   noBorder: PropTypes.bool,
-  SelectProps: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large", "xlarge"])
+};
+TextField.defaultProps = {
+  InputLabelProps: undefined,
+  InputProps: undefined,
+  SelectProps: undefined,
+  noBorder: false,
+  size: "medium"
 };
 
 export default withStyles(styles)(TextField);
