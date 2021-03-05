@@ -5,15 +5,15 @@
   "dairy": "Mléčné výrobky",
   "eggs": "Vejce",
   "email": "Email",
-  "farmName": "Jméno Farmy",
+  "farmName": "Jméno farmy",
   "firstName": "Jméno",
   "fruits": "Ovoce",
   "genericFailureMessage": "Něco se porouchalo. Zkuste opakovat akci později.",
-  "HN": "Č.P.",
   "lastName": "Příjmení",
   "meat": "Maso",
   "myFarm": "Moje Farma",
   "password": "Heslo",
+  "phoneNumber": "Telefonní číslo",
   "postcode": "PSČ",
   "producing": "Produkujeme",
   "signOut": "Odhlásit se",
@@ -23,6 +23,7 @@
   "street": "Ulice",
   "tryItLater": "Zkuste akci opakovat později.",
   "vegetables": "Zelenina",
+  "webUrl": "Webová adresa",
   "landingPage": {
     "heading": "Ovoce a zelenina přímo od pěstitele",
     "showExampleFarm": "Zobraz Ukázku Farmy",
@@ -41,5 +42,8 @@
     "emailInUse": "Email je již využíván. Zkuste se přihlásit.",
     "newsletterCheckbox": "Chci novinky od FarmedBy na email.",
     "existingAccount": "Už máte účet? Přihlašte se"
+  },
+  "farmForm": {
+    "makeFarmPublic": "Zveřejnit farmu"
   }
 }

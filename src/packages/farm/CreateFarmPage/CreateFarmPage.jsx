@@ -43,11 +43,7 @@ export default function CreateFarmPage() {
           ...farmData,
           about: "",
           countryCode: getCountryCode(),
-          email: user.email,
           isPickUpPoint: true,
-          phoneNumber: "",
-          public: false,
-          webUrl: "",
           boxes: [],
           pickUpPoints: []
         });
@@ -61,7 +57,7 @@ export default function CreateFarmPage() {
         setIsFailureDialogOpened(true);
       }
     },
-    [history, farmCreated, user]
+    [history, farmCreated]
   );
   return (
     <>
@@ -72,7 +68,11 @@ export default function CreateFarmPage() {
       <Dialog loading={isLoading} />
       <AppBar />
       <Toolbar />
-      <CreateFarmView isLoading={isLoading} onSubmit={submitHandler} />
+      <CreateFarmView
+        knownData={{ email: user.email }}
+        isLoading={isLoading}
+        onSubmit={submitHandler}
+      />
     </>
   );
 }

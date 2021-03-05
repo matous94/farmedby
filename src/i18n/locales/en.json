@@ -5,7 +5,7 @@
   "dairy": "Dairy",
   "eggs": "Eggs",
   "email": "Email",
-  "farmName": "Farm Name",
+  "farmName": "Farm name",
   "firstName": "First name",
   "fruits": "Fruits",
   "genericFailureMessage": "Something's wrong. Please try again later.",
@@ -14,6 +14,7 @@
   "meat": "Meat",
   "myFarm": "My Farm",
   "password": "Password",
+  "phoneNumber": "Phone number",
   "postcode": "Postcode",
   "producing": "Producing",
   "signIn": "Sign in",
@@ -23,6 +24,7 @@
   "street": "Street",
   "tryItLater": "Try it again later.",
   "vegetables": "Vegetables",
+  "webUrl": "Web address",
   "landingPage": {
     "heading": "Fruits and vegetables from local farmers",
     "showExampleFarm": "Show Example Farm",
@@ -41,5 +43,8 @@
     "emailInUse": "Email address is taken. Sign in.",
     "newsletterCheckbox": "Subscribe to FarmedBy newsletter",
     "existingAccount": "Already have an account? Sign in"
+  },
+  "farmForm": {
+    "makeFarmPublic": "Make farm public"
   }
 }

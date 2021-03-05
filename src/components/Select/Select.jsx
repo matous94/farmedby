@@ -24,7 +24,8 @@ export default function Select({
   options,
   multiple,
   label,
-  name
+  name,
+  required
 }) {
   const isChecked = (id) => {
     if (multiple) {
@@ -34,7 +35,7 @@ export default function Select({
   };
 
   return (
-    <FormControl variant="outlined" fullWidth>
+    <FormControl variant="outlined" fullWidth required={required}>
       <InputLabel>{label}</InputLabel>
       <MuiSelect
         name={name}
@@ -59,19 +60,21 @@ export default function Select({
 }
 
 Select.propTypes = {
+  label: PropTypes.string.isRequired,
+  multiple: PropTypes.bool,
+  name: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
   options: PropTypes.objectOf(
     PropTypes.shape({
       id: PropTypes.string,
       label: PropTypes.string
     })
   ).isRequired,
-  multiple: PropTypes.bool,
-  label: PropTypes.string.isRequired,
-  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-  onChange: PropTypes.func.isRequired,
-  name: PropTypes.string
+  required: PropTypes.bool,
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired
 };
 Select.defaultProps = {
   multiple: false,
-  name: undefined
+  name: undefined,
+  required: false
 };

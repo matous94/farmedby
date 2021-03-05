@@ -8,6 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import { ProductTypes } from "src/packages/farm/farm-types";
 import FarmIcon from "src/icons/FarmIcon";
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CreateFarmPage({ onSubmit, isLoading }) {
+export default function CreateFarmPage({ onSubmit, isLoading, knownData }) {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -49,11 +51,15 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
 
   const [formData, setFormData] = useState({
     city: "",
-    houseNumber: "",
+    email: "",
     name: "",
+    phoneNumber: "",
     postcode: "",
+    published: true,
     street: "",
-    productTypes: []
+    productTypes: [],
+    webUrl: "",
+    ...knownData
   });
 
   const submitHandler = (e) => {
@@ -61,7 +67,10 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
     onSubmit(formData);
   };
   const onChange = (e) => {
-    const change = { [e.target.name]: e.target.value };
+    const change = {
+      [e.target.name]:
+        e.target.type === "checkbox" ? e.target.checked : e.target.value
+    };
     setFormData((currentData) => ({ ...currentData, ...change }));
   };
 
@@ -76,6 +85,19 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
         </Typography>
         <form className={classes.form} onSubmit={submitHandler}>
           <Grid container justify="center" spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                onChange={onChange}
+                value={formData.email}
+                variant="outlined"
+                required
+                fullWidth
+                name="email"
+                label={t("email")}
+                type="email"
+                id="email"
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 onChange={onChange}
@@ -97,9 +119,10 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 options={productOptions}
                 multiple
                 name="productTypes"
+                required
               />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={12}>
               <TextField
                 onChange={onChange}
                 value={formData.street}
@@ -110,23 +133,11 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 name="street"
                 label={t("street")}
                 id="street"
-                autoComplete="address-line1"
+                autoComplete="street-address"
               />
             </Grid>
-            <Grid item xs={3}>
-              <TextField
-                onChange={onChange}
-                value={formData.houseNumber}
-                name="houseNumber"
-                variant="outlined"
-                required
-                fullWidth
-                id="houseNumber"
-                label={t("HN")}
-                type="text"
-              />
-            </Grid>
-            <Grid item xs={12}>
+
+            <Grid item xs={8}>
               <TextField
                 onChange={onChange}
                 value={formData.city}
@@ -140,7 +151,7 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 autoComplete="address-level2"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={4}>
               <TextField
                 onChange={onChange}
                 value={formData.postcode}
@@ -151,6 +162,42 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
                 label={t("postcode")}
                 name="postcode"
                 type="text"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={onChange}
+                value={formData.phoneNumber}
+                variant="outlined"
+                fullWidth
+                name="phoneNumber"
+                label={t("phoneNumber")}
+                type="tel"
+                id="phoneNumber"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={onChange}
+                value={formData.webUrl}
+                variant="outlined"
+                fullWidth
+                name="webUrl"
+                label={t("webUrl")}
+                type="url"
+                id="webUrl"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.published}
+                    onChange={onChange}
+                    name="published"
+                  />
+                }
+                label={t("farmForm.makeFarmPublic")}
               />
             </Grid>
           </Grid>
@@ -171,5 +218,9 @@ export default function CreateFarmPage({ onSubmit, isLoading }) {
 }
 CreateFarmPage.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  knownData: PropTypes.shape({ email: PropTypes.string })
+};
+CreateFarmPage.defaultProps = {
+  knownData: undefined
 };

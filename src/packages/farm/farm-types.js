@@ -36,15 +36,14 @@ export const FarmPropTypes = PropTypes.shape({
   city: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  houseNumber: PropTypes.string.isRequired,
   isPickUpPoint: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired,
+  owner: PropTypes.shape({ objectId: PropTypes.string.isRequired }),
   phoneNumber: PropTypes.string,
   pickUpPoints: PropTypes.arrayOf(PickUpPointPropTypes),
   postcode: PropTypes.string.isRequired,
   productTypes: PropTypes.arrayOf(Object.values(ProductTypes)).isRequired,
-  public: PropTypes.bool.isRequired,
+  published: PropTypes.bool.isRequired,
   street: PropTypes.string.isRequired,
   webUrl: PropTypes.string
 });
