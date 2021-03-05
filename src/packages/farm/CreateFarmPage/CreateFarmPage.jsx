@@ -17,7 +17,7 @@ export default function CreateFarmPage() {
   const history = useHistory();
 
   const user = useStoreState(selectors.getUser);
-  const usersFarm = useStoreState(selectors.getUsersFarm);
+  const existingFarm = useStoreState(selectors.getFarm);
   const farmCreated = useStoreActions((actions) => actions.farmCreated);
 
   const [isFailureDialogOpened, setIsFailureDialogOpened] = useState(false);
@@ -29,10 +29,10 @@ export default function CreateFarmPage() {
   );
 
   useEffect(() => {
-    if (usersFarm) {
-      history.push(`/farm/${usersFarm.objectId}`);
+    if (existingFarm) {
+      history.push(`/farm/${existingFarm.objectId}`);
     }
-  }, [history, usersFarm]);
+  }, [history, existingFarm]);
 
   const submitHandler = useCallback(
     async (farmData) => {

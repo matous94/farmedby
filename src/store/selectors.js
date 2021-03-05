@@ -1,5 +1,5 @@
-export function getUsersFarm(state) {
-  return state.usersFarm;
+export function getFarm(state) {
+  return state.farm;
 }
 
 export function getUser(state) {

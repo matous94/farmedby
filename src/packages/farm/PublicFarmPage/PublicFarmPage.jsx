@@ -24,11 +24,11 @@ export default function PublicFarmPage() {
   const classes = useStyles();
   const router = useRouter();
   const requestedFarmId = router.query.farmId;
-  const usersFarm = useStoreState((state) => state.farm);
-  const isUserFarmOwner = usersFarm?.id === requestedFarmId;
-  const [farm, setFarm] = useState(
-    usersFarm && isUserFarmOwner ? usersFarm : null
-  );
+  const farm = useStoreState((state) => state.farm);
+  const isUserFarmOwner = farm?.id === requestedFarmId;
+  // const [farm, setFarm] = useState(
+  //   usersFarm && isUserFarmOwner ? usersFarm : null
+  // );
   const [isLoading, setIsLoading] = useState(farm == null);
   const [doesFarmExist, setFarmDoesExist] = useState(true);
   const [isError, setIsError] = useState(false);

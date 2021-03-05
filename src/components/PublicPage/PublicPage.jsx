@@ -6,10 +6,10 @@ import { useStoreState } from "easy-peasy";
 
 export default function PublicPage({ Page, ...rest }) {
   const user = useStoreState((state) => state.user);
-  const usersFarm = useStoreState((state) => state.usersFarm);
+  const farm = useStoreState((state) => state.farm);
 
-  if (user && usersFarm) {
-    return <Redirect to={`/farm/${usersFarm.objectId}`} />;
+  if (user && farm) {
+    return <Redirect to={`/farm/${farm.objectId}`} />;
   }
 
   if (user) {

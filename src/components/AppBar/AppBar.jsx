@@ -56,7 +56,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
   const { t } = useTranslation();
 
   const user = useStoreState((state) => state.user);
-  const usersFarm = useStoreState((state) => state.usersFarm);
+  const farm = useStoreState((state) => state.farm);
   const signOut = useStoreActions((actions) => actions.signOut);
 
   const classes = useStyles();
@@ -102,17 +102,17 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
         {!onlyLogo && (
           <div className={classes.right}>
             <>
-              {user && usersFarm && (
+              {user && farm && (
                 <Link
                   underline="none"
                   variant="h6"
                   className={classes.rightLink}
-                  to={`/farm/${usersFarm.objectId}`}
+                  to={`/farm/${farm.objectId}`}
                 >
                   {t("myFarm")}
                 </Link>
               )}
-              {!usersFarm && (
+              {!farm && (
                 <Link
                   variant="h6"
                   underline="none"
