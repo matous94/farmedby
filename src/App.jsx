@@ -13,6 +13,7 @@ import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
 import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
+import FarmRouter from "src/packages/farm/FarmRouter";
 
 function getSessionToken() {
   return localStorage.getItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
@@ -68,8 +69,16 @@ function App() {
         <PrivatePage key="create-farm" Page={CreateFarmPage} />
       </Route>
 
+      <Route exact path="/farm">
+        <Redirect to="/farms" />
+      </Route>
+
       <Route path="/farm/:id">
-        <h1>This is farm page</h1>
+        <FarmRouter />
+      </Route>
+
+      <Route path="/farms">
+        <h1>This is nearby farms page</h1>
         <Link to="/">Go to landing page</Link>
       </Route>
 

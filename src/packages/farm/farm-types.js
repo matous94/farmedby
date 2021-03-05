@@ -16,7 +16,7 @@ export const BoxPropTypes = PropTypes.shape({
   unitPrice: PropTypes.number.isRequired
 });
 
-export const PickUpPointPropTypes = PropTypes.shape({
+export const PickupPointPropTypes = PropTypes.shape({
   city: PropTypes.string.isRequired,
   houseNumber: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
@@ -36,11 +36,11 @@ export const FarmPropTypes = PropTypes.shape({
   city: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  isPickUpPoint: PropTypes.bool.isRequired,
+  isPickupPoint: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   owner: PropTypes.shape({ objectId: PropTypes.string.isRequired }),
   phoneNumber: PropTypes.string,
-  pickUpPoints: PropTypes.arrayOf(PickUpPointPropTypes),
+  pickupPoints: PropTypes.arrayOf(PickupPointPropTypes),
   postcode: PropTypes.string.isRequired,
   productTypes: PropTypes.arrayOf(Object.values(ProductTypes)).isRequired,
   published: PropTypes.bool.isRequired,

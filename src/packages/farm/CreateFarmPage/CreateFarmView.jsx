@@ -52,6 +52,7 @@ export default function CreateFarmPage({ onSubmit, isLoading, knownData }) {
   const [formData, setFormData] = useState({
     city: "",
     email: "",
+    isPickupPoint: true,
     name: "",
     phoneNumber: "",
     postcode: "",
@@ -198,6 +199,18 @@ export default function CreateFarmPage({ onSubmit, isLoading, knownData }) {
                   />
                 }
                 label={t("farmForm.makeFarmPublic")}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.isPickupPoint}
+                    onChange={onChange}
+                    name="isPickupPoint"
+                  />
+                }
+                label={t("farmForm.isPickupPoint")}
               />
             </Grid>
           </Grid>

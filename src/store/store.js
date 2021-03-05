@@ -1,6 +1,8 @@
 import { createStore as createEasyPeasyStore } from "easy-peasy";
 import storeModel from "./store-model";
 
+export * as selectors from "./selectors";
+
 let store;
 
 export function createStore(initialState) {

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useHistory, useRouteMatch, matchPath } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
@@ -8,7 +9,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
-import { useRouter } from "next/router";
+
+import pages from "../pages";
 
 const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
@@ -18,23 +20,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ResponsiveDrawer({ width, isOpened, onClose, selectedTab, tabs }) {
-  const router = useRouter();
+function ResponsiveDrawer({ open, onClose, farmId, width }) {
   const classes = useStyles({ width });
-
+  const history = useHistory();
+  const { url, path, ...rest } = useRouteMatch();
+  console.log("url", url);
+  console.log("path", path);
+  console.log(rest);
   const drawerContent = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {Object.values(tabs).map(({ id, label, Icon, url, as }) => (
+        {pages.map(({ id, label, Icon }) => (
           <ListItem
             onClick={() => {
-              router.push(url, as);
-              if (isOpened) onClose();
+              history.push(`/farm/${farmId}/${id}`);
+              if (open) onClose();
             }}
             button
-            selected={id === selectedTab}
+            selected={url === `/farm/${farmId}/${id}`}
             key={id}
           >
             <ListItemIcon>
@@ -52,7 +57,7 @@ function ResponsiveDrawer({ width, isOpened, onClose, selectedTab, tabs }) {
       <Hidden smUp implementation="css">
         <Drawer
           variant="temporary"
-          open={isOpened}
+          open={open}
           onClose={onClose}
           classes={{
             paper: classes.drawerPaper
@@ -80,19 +85,10 @@ function ResponsiveDrawer({ width, isOpened, onClose, selectedTab, tabs }) {
 }
 
 ResponsiveDrawer.propTypes = {
-  width: PropTypes.string.isRequired,
-  isOpened: PropTypes.bool.isRequired,
+  farmId: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  selectedTab: PropTypes.string.isRequired,
-  tabs: PropTypes.objectOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      label: PropTypes.string,
-      Icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-      url: PropTypes.string,
-      as: PropTypes.string
-    })
-  ).isRequired
+  width: PropTypes.string.isRequired
 };
 
 export default ResponsiveDrawer;

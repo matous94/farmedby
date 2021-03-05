@@ -43,10 +43,10 @@ export default function CreateFarmPage() {
           ...farmData,
           about: "",
           countryCode: getCountryCode(),
-          isPickUpPoint: true,
           boxes: [],
-          pickUpPoints: []
+          pickupPoints: []
         });
+        farm.owner = { objectId: user.objectId };
 
         logger.farm("CreateFarmPage -> createdFarm", farm);
         farmCreated(farm);
@@ -57,7 +57,7 @@ export default function CreateFarmPage() {
         setIsFailureDialogOpened(true);
       }
     },
-    [history, farmCreated]
+    [history, farmCreated, user]
   );
   return (
     <>

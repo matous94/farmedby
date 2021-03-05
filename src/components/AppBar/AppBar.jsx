@@ -12,6 +12,7 @@ import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+import { selectors } from "src/store";
 import Link from "src/components/Link";
 import ApiClient from "src/packages/api-client";
 
@@ -55,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
 export default function AppBar({ onMenuClick, onlyLogo }) {
   const { t } = useTranslation();
 
-  const user = useStoreState((state) => state.user);
-  const farm = useStoreState((state) => state.farm);
+  const user = useStoreState(selectors.getUser);
+  const farm = useStoreState(selectors.getFarm);
   const signOut = useStoreActions((actions) => actions.signOut);
 
   const classes = useStyles();

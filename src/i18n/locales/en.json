@@ -45,6 +45,7 @@
     "existingAccount": "Already have an account? Sign in"
   },
   "farmForm": {
-    "makeFarmPublic": "Make farm public"
+    "makeFarmPublic": "Make farm public",
+    "isPickupPoint": "Use farm as pickup point"
   }
 }
