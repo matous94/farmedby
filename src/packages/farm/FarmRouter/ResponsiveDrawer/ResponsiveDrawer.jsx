@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useHistory, useRouteMatch, matchPath } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
@@ -20,27 +20,25 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ResponsiveDrawer({ open, onClose, farmId, width }) {
+function ResponsiveDrawer({ open, onClose, width }) {
   const classes = useStyles({ width });
   const history = useHistory();
-  const { url, path, ...rest } = useRouteMatch();
-  console.log("url", url);
-  console.log("path", path);
-  console.log(rest);
+  const { farmId, pageName } = useParams();
+
   const drawerContent = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {pages.map(({ id, label, Icon }) => (
+        {Object.values(pages).map(({ name, label, Icon }) => (
           <ListItem
             onClick={() => {
-              history.push(`/farm/${farmId}/${id}`);
+              history.push(`/farm/${farmId}/${name}`);
               if (open) onClose();
             }}
             button
-            selected={url === `/farm/${farmId}/${id}`}
-            key={id}
+            selected={pageName === name}
+            key={name}
           >
             <ListItemIcon>
               <Icon />
@@ -85,7 +83,6 @@ function ResponsiveDrawer({ open, onClose, farmId, width }) {
 }
 
 ResponsiveDrawer.propTypes = {
-  farmId: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   width: PropTypes.string.isRequired

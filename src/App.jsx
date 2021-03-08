@@ -69,11 +69,7 @@ function App() {
         <PrivatePage key="create-farm" Page={CreateFarmPage} />
       </Route>
 
-      <Route exact path="/farm">
-        <Redirect to="/farms" />
-      </Route>
-
-      <Route path="/farm/:id">
+      <Route path="/farm">
         <FarmRouter />
       </Route>
 

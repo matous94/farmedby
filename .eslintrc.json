@@ -24,6 +24,7 @@
   "rules": {
     "no-unused-vars": "warn",
     "import/prefer-default-export": "off",
-    "no-unreachable": "warn"
+    "no-unreachable": "warn",
+    "arrow-body-style": "off"
   }
 }
