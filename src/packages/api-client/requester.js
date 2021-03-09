@@ -2,12 +2,13 @@ import logger from "src/packages/logger";
 
 function parseQuery(query) {
   if (!query) return "";
-  return Object.entries(query)
+  const queryString = Object.entries(query)
     .map(
       ([key, value]) =>
         `${key}=${typeof value === "string" ? value : JSON.stringify(value)}`
     )
     .join("&");
+  return `?${queryString}`;
 }
 
 export function sendParseRequest(
@@ -46,7 +47,7 @@ export function sendParseRequest(
     config.body = JSON.stringify(body);
   }
   return fetch(
-    `${process.env.REACT_APP_SERVER_URL}/parse/${endpoint}?${queryString}`,
+    `${process.env.REACT_APP_SERVER_URL}/parse/${endpoint}${queryString}`,
     config
   ).then(async (response) => {
     const data = await response.json();

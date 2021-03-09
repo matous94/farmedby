@@ -28,7 +28,7 @@ function App() {
     async function authenticateUser() {
       try {
         const user = await ApiClient.User.getBySessionToken(getSessionToken());
-        const farm = await ApiClient.Farm.getFarmForUserId(user.objectId);
+        const farm = await ApiClient.Farm.getMyFarm();
         signIn({ user, farm });
         setIsLoading(false);
       } catch (error) {

@@ -70,7 +70,7 @@ export default function SignInPage() {
       return;
     }
     try {
-      const farm = await ApiClient.Farm.getFarmForUserId(user.objectId);
+      const farm = await ApiClient.Farm.getMyFarm();
       signIn({
         user,
         farm
@@ -84,7 +84,8 @@ export default function SignInPage() {
     } catch (error) {
       logger.user("Failed to fetch user's farm. Gonna sign him out.");
       await ApiClient.User.signOut();
-      setErrorMessage("");
+      setIsLoading(false);
+      setErrorMessage(t("genericFailureMessage"));
     }
   }
 

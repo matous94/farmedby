@@ -1,18 +1,17 @@
 import { sendParseRequest } from "src/packages/api-client/requester";
 
-export async function getFarmById(id) {
-  return sendParseRequest(`classes/Farm/${id}`);
+export async function getFarmById(farmId) {
+  const { result } = await sendParseRequest(`functions/getFarmById`, {
+    body: { farmId }
+  });
+  return result;
 }
 
-export async function getFarmForUserId(userId) {
-  const { results } = await sendParseRequest(`classes/Farm`, {
-    query: {
-      where: {
-        owner: { objectId: userId, __type: "Pointer", className: "_User" }
-      }
-    }
+export async function getMyFarm() {
+  const { result } = await sendParseRequest("functions/getMyFarm", {
+    method: "POST"
   });
-  return results[0];
+  return result;
 }
 
 export async function createFarm(farmData) {
