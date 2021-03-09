@@ -53,6 +53,7 @@
   },
   "farmPage": {
     "farmIsNotPublishedAlert": "Your farm is not publicly available. You can change it in farm settings.",
+    "accommodation": "Accommodation",
     "photoGallery": "Photo gallery",
     "reviews": "They say about us",
     "volunteers": "Volunteers"

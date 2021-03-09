@@ -4,6 +4,7 @@ import MyLocationIcon from "@material-ui/icons/MyLocation";
 import WcIcon from "@material-ui/icons/Wc";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import PhotoIcon from "@material-ui/icons/Photo";
+import HotelIcon from "@material-ui/icons/Hotel";
 
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
@@ -54,21 +55,6 @@ export default {
       );
     }
   },
-  volunteers: {
-    name: "volunteers",
-    translationKey: "farmPage.volunteers",
-    Icon: WcIcon,
-    disabled: true,
-    PageContent: ({ farm }) => {
-      return (
-        <>
-          Help page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
-      );
-    }
-  },
   reviews: {
     name: "reviews",
     translationKey: "farmPage.reviews",
@@ -93,6 +79,36 @@ export default {
       return (
         <>
           Photo gallery page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  volunteers: {
+    name: "volunteers",
+    translationKey: "farmPage.volunteers",
+    Icon: WcIcon,
+    disabled: true,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Help page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  accommodation: {
+    name: "accommodation",
+    translationKey: "farmPage.accommodation",
+    Icon: HotelIcon,
+    disabled: true,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Accomodation page
           <br />
           <pre>{JSON.stringify(farm, null, 2)}</pre>
         </>
