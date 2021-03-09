@@ -75,7 +75,7 @@ function ProductHero(props) {
         size="large"
         className={classes.button}
         component={Link}
-        to="/farm/4nAUMbys6tN369Up8HFO"
+        to="/farm/qHgur81fHZ"
       >
         {t("landingPage.showExampleFarm")}
       </Button>

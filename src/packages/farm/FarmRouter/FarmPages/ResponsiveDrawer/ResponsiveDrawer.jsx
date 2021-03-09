@@ -11,7 +11,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 
-import pages from "../pages";
+import pages, { landingPage } from "../../pages";
 
 const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
@@ -27,11 +27,26 @@ function ResponsiveDrawer({ open, onClose, width }) {
   const { t } = useTranslation();
   const { farmId, pageName } = useParams();
 
+  const LandingPageIcon = landingPage.Icon;
   const drawerContent = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
+        <ListItem
+          key={landingPage.name}
+          onClick={() => {
+            history.push(`/farm/${farmId}`);
+            if (open) onClose();
+          }}
+          button
+          selected={pageName == null}
+        >
+          <ListItemIcon>
+            <LandingPageIcon />
+          </ListItemIcon>
+          <ListItemText primary={t(landingPage.translationKey)} />
+        </ListItem>
         {Object.values(pages).map(
           ({ name, translationKey, Icon, disabled }) => (
             <ListItem

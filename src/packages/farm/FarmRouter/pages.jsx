@@ -9,31 +9,31 @@ import HotelIcon from "@material-ui/icons/Hotel";
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
 
+export const landingPage = {
+  name: "landing",
+  translationKey: "farm",
+  Icon: FarmIcon,
+  PageContent: ({ farm }) => {
+    return (
+      <>
+        Landing page
+        <br />
+        <pre>{JSON.stringify(farm, null, 2)}</pre>
+      </>
+    );
+  }
+};
+
 export default {
-  about: {
-    name: "about",
-    translationKey: "farm",
-    Icon: FarmIcon,
-    disabled: false,
-    PageContent: ({ farm }) => {
-      return (
-        <>
-          About page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
-      );
-    }
-  },
-  boxes: {
-    name: "boxes",
-    translationKey: "boxes",
+  products: {
+    name: "products",
+    translationKey: "farmPage.products",
     Icon: ProductsIcon,
     disabled: false,
     PageContent: ({ farm }) => {
       return (
         <>
-          Boxes page
+          Products page
           <br />
           <pre>{JSON.stringify(farm, null, 2)}</pre>
         </>

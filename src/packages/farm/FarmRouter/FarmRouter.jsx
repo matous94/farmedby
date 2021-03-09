@@ -1,17 +1,18 @@
 import * as React from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
-import FarmPage from "./FarmPage";
+import FarmPages from "./FarmPages";
 import pages from "./pages";
 
 function FarmPageRouter() {
   const { params } = useRouteMatch();
+  const { farmId, pageName } = params;
 
-  if (pages[params.pageName] && !pages[params.pageName].disabled) {
-    return <FarmPage />;
+  if (pageName == null || (pages[pageName] && !pages[pageName].disabled)) {
+    return <FarmPages />;
   }
 
-  return <Redirect to={`/farm/${params.farmId}/${pages.about.name}`} />;
+  return <Redirect to={`/farm/${farmId}`} />;
 }
 
 export default function FarmRouter() {
@@ -25,9 +26,12 @@ export default function FarmRouter() {
       <Route exact path={`${url}/:farmId/:pageName`}>
         <FarmPageRouter />
       </Route>
+      <Route exact path={`${url}/:farmId`}>
+        <FarmPageRouter />;
+      </Route>
       <Route path={`${url}/:farmId`}>
         {({ match }) => {
-          return <Redirect to={`${match.url}/${pages.about.name}`} />;
+          return <Redirect to={`${match.url}`} />;
         }}
       </Route>
     </Switch>

@@ -6,7 +6,7 @@
   "dairy": "Dairy",
   "eggs": "Eggs",
   "email": "Email",
-  "farm": "Farma",
+  "farm": "Farm",
   "farmName": "Farm name",
   "firstName": "First name",
   "fruits": "Fruits",
@@ -55,6 +55,7 @@
     "farmIsNotPublishedAlert": "Your farm is not publicly available. You can change it in farm settings.",
     "accommodation": "Accommodation",
     "photoGallery": "Photo gallery",
+    "products": "Products",
     "reviews": "They say about us",
     "volunteers": "Volunteers"
   }
