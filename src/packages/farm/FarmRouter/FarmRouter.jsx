@@ -1,15 +1,14 @@
-import { CallMerge } from "@material-ui/icons";
 import * as React from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
-import FarmLayout from "./FarmLayout";
+import FarmPage from "./FarmPage";
 import pages from "./pages";
 
 function FarmPageRouter() {
   const { params } = useRouteMatch();
 
-  if (pages[params.pageName]) {
-    return <FarmLayout />;
+  if (pages[params.pageName] && !pages[params.pageName].disabled) {
+    return <FarmPage />;
   }
 
   return <Redirect to={`/farm/${params.farmId}/${pages.about.name}`} />;

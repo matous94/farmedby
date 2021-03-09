@@ -1,13 +1,19 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
+import WcIcon from "@material-ui/icons/Wc";
+import RateReviewIcon from "@material-ui/icons/RateReview";
+import PhotoIcon from "@material-ui/icons/Photo";
+
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
 
 export default {
   about: {
     name: "about",
-    label: "Farma",
+    translationKey: "farm",
     Icon: FarmIcon,
+    disabled: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -20,8 +26,9 @@ export default {
   },
   boxes: {
     name: "boxes",
-    label: "Bedýnky",
+    translationKey: "boxes",
     Icon: ProductsIcon,
+    disabled: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -34,12 +41,58 @@ export default {
   },
   "pickup-points": {
     name: "pickup-points",
-    label: "Odběrová místa",
+    translationKey: "pickupPoints",
     Icon: MyLocationIcon,
+    disabled: false,
     PageContent: ({ farm }) => {
       return (
         <>
           Pickup points page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  volunteers: {
+    name: "volunteers",
+    translationKey: "farmPage.volunteers",
+    Icon: WcIcon,
+    disabled: true,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Help page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  reviews: {
+    name: "reviews",
+    translationKey: "farmPage.reviews",
+    Icon: RateReviewIcon,
+    disabled: true,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Reviews page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  "photo-gallery": {
+    name: "photo-gallery",
+    translationKey: "farmPage.photoGallery",
+    Icon: PhotoIcon,
+    disabled: true,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Photo gallery page
           <br />
           <pre>{JSON.stringify(farm, null, 2)}</pre>
         </>

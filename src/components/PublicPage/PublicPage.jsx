@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-
 import { useStoreState } from "easy-peasy";
+
+import { selectors } from "src/store";
 
 export default function PublicPage({ Page, ...rest }) {
   const user = useStoreState((state) => state.user);
-  const farm = useStoreState((state) => state.farm);
+  const myFarm = useStoreState(selectors.getMyFarm);
 
-  if (user && farm) {
-    return <Redirect to={`/farm/${farm.objectId}`} />;
+  if (user && myFarm) {
+    return <Redirect to={`/farm/${myFarm.objectId}`} />;
   }
 
   if (user) {

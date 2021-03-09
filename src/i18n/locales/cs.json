@@ -1,10 +1,12 @@
 {
+  "boxes": "Bedýnky",
   "continue": "Pokračovat",
   "city": "Město",
   "createFarm": "Založit farmu",
   "dairy": "Mléčné výrobky",
   "eggs": "Vejce",
   "email": "Email",
+  "farm": "Farma",
   "farmName": "Jméno farmy",
   "firstName": "Jméno",
   "fruits": "Ovoce",
@@ -13,6 +15,7 @@
   "meat": "Maso",
   "myFarm": "Moje Farma",
   "password": "Heslo",
+  "pickupPoints": "Odběrová místa",
   "phoneNumber": "Telefonní číslo",
   "postcode": "PSČ",
   "producing": "Produkujeme",
@@ -46,5 +49,11 @@
   "farmForm": {
     "makeFarmPublic": "Zveřejnit farmu",
     "isPickupPoint": "Odběry ze dvora"
+  },
+  "farmPage": {
+    "farmIsNotPublishedAlert": "Vaše farma není veřejně dostupná. Změnu lze provést v nastavení farmy.",
+    "photoGallery": "Fotogalerie",
+    "reviews": "Říkají o nás",
+    "volunteers": "Dobrovolníci"
   }
 }

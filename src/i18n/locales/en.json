@@ -1,10 +1,12 @@
 {
+  "boxes": "Boxes",
   "city": "City",
   "continue": "Pokračovat",
   "createFarm": "Create farm",
   "dairy": "Dairy",
   "eggs": "Eggs",
   "email": "Email",
+  "farm": "Farma",
   "farmName": "Farm name",
   "firstName": "First name",
   "fruits": "Fruits",
@@ -14,6 +16,7 @@
   "meat": "Meat",
   "myFarm": "My Farm",
   "password": "Password",
+  "pickupPoints": "Pickup points",
   "phoneNumber": "Phone number",
   "postcode": "Postcode",
   "producing": "Producing",
@@ -47,5 +50,11 @@
   "farmForm": {
     "makeFarmPublic": "Make farm public",
     "isPickupPoint": "Use farm as pickup point"
+  },
+  "farmPage": {
+    "farmIsNotPublishedAlert": "Your farm is not publicly available. You can change it in farm settings.",
+    "photoGallery": "Photo gallery",
+    "reviews": "They say about us",
+    "volunteers": "Volunteers"
   }
 }

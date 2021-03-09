@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { useHistory, useParams } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 function ResponsiveDrawer({ open, onClose, width }) {
   const classes = useStyles({ width });
   const history = useHistory();
+  const { t } = useTranslation();
   const { farmId, pageName } = useParams();
 
   const drawerContent = (
@@ -30,22 +32,25 @@ function ResponsiveDrawer({ open, onClose, width }) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {Object.values(pages).map(({ name, label, Icon }) => (
-          <ListItem
-            onClick={() => {
-              history.push(`/farm/${farmId}/${name}`);
-              if (open) onClose();
-            }}
-            button
-            selected={pageName === name}
-            key={name}
-          >
-            <ListItemIcon>
-              <Icon />
-            </ListItemIcon>
-            <ListItemText primary={label} />
-          </ListItem>
-        ))}
+        {Object.values(pages).map(
+          ({ name, translationKey, Icon, disabled }) => (
+            <ListItem
+              onClick={() => {
+                history.push(`/farm/${farmId}/${name}`);
+                if (open) onClose();
+              }}
+              button
+              disabled={disabled}
+              selected={pageName === name}
+              key={name}
+            >
+              <ListItemIcon>
+                <Icon />
+              </ListItemIcon>
+              <ListItemText primary={t(translationKey)} />
+            </ListItem>
+          )
+        )}
       </List>
     </div>
   );

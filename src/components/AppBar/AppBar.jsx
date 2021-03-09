@@ -57,7 +57,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
   const { t } = useTranslation();
 
   const user = useStoreState(selectors.getUser);
-  const farm = useStoreState(selectors.getFarm);
+  const myFarm = useStoreState(selectors.getMyFarm);
   const signOut = useStoreActions((actions) => actions.signOut);
 
   const classes = useStyles();
@@ -71,6 +71,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
   function signOutHandler() {
     ApiClient.User.signOut();
     signOut();
+    window.location.reload();
   }
 
   return (
@@ -103,17 +104,17 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
         {!onlyLogo && (
           <div className={classes.right}>
             <>
-              {user && farm && (
+              {user && myFarm && (
                 <Link
                   underline="none"
                   variant="h6"
                   className={classes.rightLink}
-                  to={`/farm/${farm.objectId}`}
+                  to={`/farm/${myFarm.objectId}`}
                 >
                   {t("myFarm")}
                 </Link>
               )}
-              {!farm && (
+              {!myFarm && (
                 <Link
                   variant="h6"
                   underline="none"
