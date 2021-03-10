@@ -18,3 +18,11 @@ export function isFarmOwner(state, farmId) {
 
   return user.objectId === myFarm.owner.objectId;
 }
+
+export function useEditMode(farmId) {
+  return (state) => {
+    const isOwner = isFarmOwner(state, farmId);
+    if (isOwner) return state.farmPages.editMode;
+    return false;
+  };
+}

@@ -1,13 +1,16 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
+import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 
+import { selectors } from "src/store";
 import AppBar from "src/components/AppBar";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 
@@ -45,12 +48,14 @@ function useDrawer() {
 }
 
 export default function FarmPages() {
-  const { pageName } = useParams();
+  const { pageName, farmId } = useParams();
   const classes = useStyles();
   const { t } = useTranslation();
 
   const drawer = useDrawer();
   const { status, farm, isFarmOwner } = useGetFarm();
+  const toggleEditMode = useStoreActions((actions) => actions.toggleEditMode);
+  const useEditMode = useStoreState(selectors.useEditMode(farmId));
 
   const { PageContent } = pageName ? pages[pageName] : landingPage;
   return (
@@ -102,13 +107,24 @@ export default function FarmPages() {
                   {farm.name}
                 </Typography>
               </Box>
-              <Box
-                display="flex"
-                flexDirection="column"
-                width={["100%", "100%", "700px", "1000px"]}
-              >
+              <Box width={["100%", "100%", "700px", "1000px"]}>
                 <PageContent farm={farm} />
               </Box>
+              {isFarmOwner && (
+                <Box position="fixed" bottom="24px" right="24px">
+                  <Fab
+                    onClick={toggleEditMode}
+                    style={{ minWidth: "80px" }}
+                    size="medium"
+                    variant="extended"
+                    color="secondary"
+                  >
+                    {useEditMode
+                      ? t("farmPage.switchToViewMode")
+                      : t("farmPage.switchToEditMode")}
+                  </Fab>
+                </Box>
+              )}
             </>
           )}
         </Box>

@@ -4,6 +4,9 @@ import { action } from "easy-peasy";
 const storeModel = {
   user: null,
   myFarm: null,
+  farmPages: {
+    editMode: true
+  },
   farmCreated: action((state, farm) => {
     state.myFarm = farm;
   }),
@@ -20,6 +23,9 @@ const storeModel = {
   }),
   signUp: action((state, user) => {
     state.user = user;
+  }),
+  toggleEditMode: action((state) => {
+    state.farmPages.editMode = !state.farmPages.editMode;
   })
 };
 

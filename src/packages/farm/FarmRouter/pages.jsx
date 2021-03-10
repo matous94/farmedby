@@ -5,6 +5,8 @@ import WcIcon from "@material-ui/icons/Wc";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import PhotoIcon from "@material-ui/icons/Photo";
 import HotelIcon from "@material-ui/icons/Hotel";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import CreateIcon from "@material-ui/icons/Create";
 
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
@@ -25,15 +27,15 @@ export const landingPage = {
 };
 
 export default {
-  products: {
-    name: "products",
-    translationKey: "farmPage.products",
+  csa: {
+    name: "csa",
+    translationKey: "farmPage.csa",
     Icon: ProductsIcon,
     disabled: false,
     PageContent: ({ farm }) => {
       return (
         <>
-          Products page
+          CSA page
           <br />
           <pre>{JSON.stringify(farm, null, 2)}</pre>
         </>
@@ -49,6 +51,36 @@ export default {
       return (
         <>
           Pickup points page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  eshop: {
+    name: "eshop",
+    translationKey: "farmPage.eshop",
+    Icon: ShoppingCartIcon,
+    disabled: true,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Eshop page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  blog: {
+    name: "blog",
+    translationKey: "farmPage.blog",
+    Icon: CreateIcon,
+    disabled: true,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Blog page
           <br />
           <pre>{JSON.stringify(farm, null, 2)}</pre>
         </>

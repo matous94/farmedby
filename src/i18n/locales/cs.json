@@ -51,10 +51,14 @@
     "isPickupPoint": "Odběry ze dvora"
   },
   "farmPage": {
-    "farmIsNotPublishedAlert": "Vaše farma není veřejně dostupná. Změnu lze provést v nastavení farmy.",
     "accommodation": "Ubytování",
+    "blog": "Blog",
+    "csa": "KPZ - Bedýnky",
+    "eshop": "Eshop",
+    "switchToEditMode": "Editovat",
+    "switchToViewMode": "Náhled", 
+    "farmIsNotPublishedAlert": "Vaše farma není veřejně dostupná. Změnu lze provést v nastavení farmy.",
     "photoGallery": "Fotogalerie",
-    "products": "Bedýnky",
     "reviews": "Říkají o nás",
     "volunteers": "Dobrovolníci"
   }

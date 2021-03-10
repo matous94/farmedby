@@ -52,10 +52,14 @@
     "isPickupPoint": "Use farm as pickup point"
   },
   "farmPage": {
-    "farmIsNotPublishedAlert": "Your farm is not publicly available. You can change it in farm settings.",
     "accommodation": "Accommodation",
+    "blog": "Blog",
+    "csa": "CSA - Boxes",
+    "eshop": "Eshop",
+    "switchToEditMode": "Edit",
+    "switchToViewMode": "View", 
+    "farmIsNotPublishedAlert": "Your farm is not publicly available. You can change it in farm settings.",
     "photoGallery": "Photo gallery",
-    "products": "Products",
     "reviews": "They say about us",
     "volunteers": "Volunteers"
   }
