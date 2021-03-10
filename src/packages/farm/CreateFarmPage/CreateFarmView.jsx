@@ -184,7 +184,7 @@ export default function CreateFarmPage({ onSubmit, isLoading, knownData }) {
                 variant="outlined"
                 fullWidth
                 name="webUrl"
-                label={t("webUrl")}
+                label={t("webAddress")}
                 type="url"
                 id="webUrl"
               />

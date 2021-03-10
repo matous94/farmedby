@@ -11,19 +11,13 @@ import CreateIcon from "@material-ui/icons/Create";
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
 
+import FarmLandingPage from "src/packages/farm/FarmLandingPage";
+
 export const landingPage = {
   name: "landing",
   translationKey: "farm",
   Icon: FarmIcon,
-  PageContent: ({ farm }) => {
-    return (
-      <>
-        Landing page
-        <br />
-        <pre>{JSON.stringify(farm, null, 2)}</pre>
-      </>
-    );
-  }
+  PageContent: FarmLandingPage
 };
 
 export default {

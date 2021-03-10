@@ -55,7 +55,7 @@ export default function FarmPages() {
   const drawer = useDrawer();
   const { status, farm, isFarmOwner } = useGetFarm();
   const toggleEditMode = useStoreActions((actions) => actions.toggleEditMode);
-  const useEditMode = useStoreState(selectors.useEditMode(farmId));
+  const isEditMode = useStoreState(selectors.isEditMode(farmId));
 
   const { PageContent } = pageName ? pages[pageName] : landingPage;
   return (
@@ -108,7 +108,11 @@ export default function FarmPages() {
                 </Typography>
               </Box>
               <Box width={["100%", "100%", "700px", "1000px"]}>
-                <PageContent farm={farm} />
+                <PageContent
+                  farm={farm}
+                  isEditMode={isEditMode}
+                  isFarmOwner={isFarmOwner}
+                />
               </Box>
               {isFarmOwner && (
                 <Box position="fixed" bottom="24px" right="24px">
@@ -119,7 +123,7 @@ export default function FarmPages() {
                     variant="extended"
                     color="secondary"
                   >
-                    {useEditMode
+                    {isEditMode
                       ? t("farmPage.switchToViewMode")
                       : t("farmPage.switchToEditMode")}
                   </Fab>

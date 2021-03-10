@@ -18,7 +18,6 @@ export const BoxPropTypes = PropTypes.shape({
 
 export const PickupPointPropTypes = PropTypes.shape({
   city: PropTypes.string.isRequired,
-  houseNumber: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
   deliveryDay: PropTypes.string.isRequired, // eg Biweekly, on Wednesday, from 10am to 5pm
   email: PropTypes.string,
@@ -42,7 +41,8 @@ export const FarmPropTypes = PropTypes.shape({
   phoneNumber: PropTypes.string,
   pickupPoints: PropTypes.arrayOf(PickupPointPropTypes),
   postcode: PropTypes.string.isRequired,
-  productTypes: PropTypes.arrayOf(Object.values(ProductTypes)).isRequired,
+  productTypes: PropTypes.arrayOf(PropTypes.oneOf(Object.values(ProductTypes)))
+    .isRequired,
   published: PropTypes.bool.isRequired,
   street: PropTypes.string.isRequired,
   webUrl: PropTypes.string

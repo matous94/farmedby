@@ -28,8 +28,8 @@ function languageToCountryCode(lng) {
   return byLanguage[lng] || byLanguage.en;
 }
 
-function getCountry() {
-  return supportedCountries[countryCode];
+export function getCountry(code = countryCode) {
+  return supportedCountries[code];
 }
 
 export function getCountryCode() {
@@ -62,6 +62,7 @@ export async function setupI18n({ onCountryChange }) {
       lng: getCountry().languageCode,
       // lng: "cs",
       fallbackLng: false,
+      keySeparator: false,
       debug: process.env.NODE_ENV === "development",
       interpolation: {
         escapeValue: false
