@@ -35,7 +35,7 @@ export default function FarmLandingPage({ farm, isEditMode, toggleEditMode }) {
 
   return (
     <>
-      <Box mb="8px" mt="16px" width="100%">
+      <Box mb="8px" width="100%">
         <Typography align="center" color="secondary" variant="h4">
           {farm.name}
         </Typography>

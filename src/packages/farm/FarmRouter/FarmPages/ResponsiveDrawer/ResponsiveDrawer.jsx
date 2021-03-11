@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   }
 });
 
-function ResponsiveDrawer({ open, onClose, width, farmName }) {
+function ResponsiveDrawer({ open, onClose, width, farmName, isFarmOwner }) {
   const classes = useStyles({ width });
   const history = useHistory();
   const { t } = useTranslation();
@@ -62,8 +62,9 @@ function ResponsiveDrawer({ open, onClose, width, farmName }) {
           </ListItemIcon>
           <ListItemText primary={`${t(landingPage.translationKey)}`} />
         </ListItem>
-        {Object.values(pages).map(
-          ({ name, translationKey, Icon, disabled }) => (
+        {Object.values(pages)
+          .filter((page) => !page.private || isFarmOwner)
+          .map(({ name, translationKey, Icon, disabled }) => (
             <ListItem
               onClick={() => {
                 history.push(`/farm/${farmId}/${name}`);
@@ -79,8 +80,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName }) {
               </ListItemIcon>
               <ListItemText primary={t(translationKey)} />
             </ListItem>
-          )
-        )}
+          ))}
       </List>
     </div>
   );
@@ -119,6 +119,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName }) {
 
 ResponsiveDrawer.propTypes = {
   farmName: PropTypes.string,
+  isFarmOwner: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   width: PropTypes.string.isRequired

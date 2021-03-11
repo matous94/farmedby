@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
+import { useStoreState } from "easy-peasy";
+import { selectors } from "src/store";
 
 import FarmPages from "./FarmPages";
 import pages from "./pages";
@@ -7,8 +9,16 @@ import pages from "./pages";
 function FarmPageRouter() {
   const { params } = useRouteMatch();
   const { farmId, pageName } = params;
+  const isFarmOwner = useStoreState((state) =>
+    selectors.isFarmOwner(state, farmId)
+  );
 
-  if (pageName == null || (pages[pageName] && !pages[pageName].disabled)) {
+  const isLandingPage = pageName == null && farmId;
+  if (isLandingPage) return <FarmPages />;
+
+  const isAuthorized = !pages[pageName].private || isFarmOwner;
+  const isEnabledPage = pages[pageName] && !pages[pageName].disabled;
+  if (isAuthorized && isEnabledPage) {
     return <FarmPages />;
   }
 

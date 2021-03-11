@@ -7,6 +7,7 @@ import PhotoIcon from "@material-ui/icons/Photo";
 import HotelIcon from "@material-ui/icons/Hotel";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CreateIcon from "@material-ui/icons/Create";
+import PaymentIcon from "@material-ui/icons/Payment";
 
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
@@ -17,6 +18,8 @@ export const landingPage = {
   name: "landing",
   translationKey: "farm",
   Icon: FarmIcon,
+  disabled: false,
+  private: false,
   PageContent: FarmLandingPage
 };
 
@@ -26,6 +29,7 @@ export default {
     translationKey: "farmPage.csa",
     Icon: ProductsIcon,
     disabled: false,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -41,10 +45,27 @@ export default {
     translationKey: "pickupPoints",
     Icon: MyLocationIcon,
     disabled: false,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>
           Pickup points page
+          <br />
+          <pre>{JSON.stringify(farm, null, 2)}</pre>
+        </>
+      );
+    }
+  },
+  orders: {
+    name: "orders",
+    translationKey: "orders",
+    Icon: PaymentIcon,
+    disabled: false,
+    private: false,
+    PageContent: ({ farm }) => {
+      return (
+        <>
+          Orders page
           <br />
           <pre>{JSON.stringify(farm, null, 2)}</pre>
         </>
@@ -56,6 +77,7 @@ export default {
     translationKey: "farmPage.eshop",
     Icon: ShoppingCartIcon,
     disabled: true,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -71,6 +93,7 @@ export default {
     translationKey: "farmPage.blog",
     Icon: CreateIcon,
     disabled: true,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -86,6 +109,7 @@ export default {
     translationKey: "farmPage.reviews",
     Icon: RateReviewIcon,
     disabled: true,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -101,6 +125,7 @@ export default {
     translationKey: "farmPage.photoGallery",
     Icon: PhotoIcon,
     disabled: true,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -116,6 +141,7 @@ export default {
     translationKey: "farmPage.volunteers",
     Icon: WcIcon,
     disabled: true,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>
@@ -131,6 +157,7 @@ export default {
     translationKey: "farmPage.accommodation",
     Icon: HotelIcon,
     disabled: true,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <>

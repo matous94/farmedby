@@ -7,7 +7,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 
 import { selectors } from "src/store";
@@ -74,6 +73,7 @@ export default function FarmPages() {
             onClose={drawer.close}
             width={drawerWidth}
             farmName={farm?.name}
+            isFarmOwner={isFarmOwner}
           />
         </nav>
         <Box component="main" position="relative" flexGrow="1">
@@ -91,6 +91,7 @@ export default function FarmPages() {
                 </Alert>
               )}
               <Box
+                pt="16px"
                 pb="32px"
                 pl={["16px", "24px"]}
                 pr={["16px", "24px", "64px", drawerWidth]}
