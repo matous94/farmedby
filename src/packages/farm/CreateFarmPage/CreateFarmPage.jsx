@@ -6,12 +6,9 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import ApiClient from "src/packages/api-client";
 import { selectors } from "src/store";
 import AppBar from "src/components/AppBar";
-import GenericFailureDialog from "src/components/GenericFailureDialog";
 import logger from "src/packages/logger";
 import { getCountryCode } from "src/i18n";
-import Dialog from "src/components/Dialog";
-
-import CreateFarmView from "./CreateFarmView";
+import FarmEditor from "src/packages/farm/components/FarmEditor";
 
 export default function CreateFarmPage() {
   const history = useHistory();
@@ -20,13 +17,10 @@ export default function CreateFarmPage() {
   const myFarm = useStoreState(selectors.getMyFarm);
   const farmCreated = useStoreActions((actions) => actions.farmCreated);
 
-  const [isFailureDialogOpened, setIsFailureDialogOpened] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const closeFailureDialog = useCallback(
-    () => setIsFailureDialogOpened(false),
-    []
-  );
+  const onErrorDissmiss = useCallback(() => setHasError(false), []);
 
   useEffect(() => {
     if (myFarm) {
@@ -41,7 +35,6 @@ export default function CreateFarmPage() {
 
         const farm = await ApiClient.Farm.createFarm({
           ...farmData,
-          about: "",
           countryCode: getCountryCode(),
           boxes: [],
           pickupPoints: []
@@ -54,24 +47,22 @@ export default function CreateFarmPage() {
         history.push(`/farm/${farm.objectId}`);
       } catch (error) {
         setIsLoading(false);
-        setIsFailureDialogOpened(true);
+        setHasError(true);
       }
     },
     [history, farmCreated, user]
   );
   return (
     <>
-      <GenericFailureDialog
-        open={isFailureDialogOpened}
-        onClose={closeFailureDialog}
-      />
-      <Dialog loading={isLoading} />
       <AppBar />
       <Toolbar />
-      <CreateFarmView
-        knownData={{ email: user.email }}
+      <FarmEditor
+        farm={{ email: user.email }}
         isLoading={isLoading}
         onSubmit={submitHandler}
+        onErrorDissmiss={onErrorDissmiss}
+        hasError={hasError}
+        mode="create"
       />
     </>
   );

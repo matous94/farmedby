@@ -64,3 +64,11 @@ export function sendParseRequest(
     return Promise.reject(data);
   });
 }
+
+export async function callCloudFunction(functionName, params) {
+  const { result } = await sendParseRequest(`functions/${functionName}`, {
+    body: params,
+    method: "POST"
+  });
+  return result;
+}

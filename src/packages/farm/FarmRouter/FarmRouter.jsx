@@ -27,7 +27,7 @@ export default function FarmRouter() {
         <FarmPageRouter />
       </Route>
       <Route exact path={`${url}/:farmId`}>
-        <FarmPageRouter />;
+        <FarmPageRouter />
       </Route>
       <Route path={`${url}/:farmId`}>
         {({ match }) => {

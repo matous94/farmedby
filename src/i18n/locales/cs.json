@@ -1,4 +1,5 @@
 {
+  "save": "Uložit",
   "address": "Adresa",
   "boxes": "Bedýnky",
   "city": "Město",
@@ -11,7 +12,7 @@
   "farm": "Farma",
   "farmForm.isPickupPoint": "Odběry ze dvora",
   "farmForm.makeFarmPublic": "Zveřejnit farmu",
-  "farmLandingPage.aboutFarm": "O Farmě",
+  "aboutFarm": "O Farmě",
   "farmName": "Jméno farmy",
   "farmPage.accommodation": "Ubytování",
   "farmPage.blog": "Blog",
@@ -41,7 +42,6 @@
   "producing": "Produkujeme",
   "signIn": "Přihlásit se",
   "signInPage.heading": "Přihlášení",
-  "landingPage.farmWebPage": "Otevřít webovou stránku farmy",
   "signInPage.invalidCredentials": "Neplatné přihlašovací údaje.",
   "signInPage.noAccount": "Nemáte účet? Registrujte se",
   "signOut": "Odhlásit se",

@@ -1,80 +1,62 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { useStoreActions } from "easy-peasy";
 import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 
-import { getCountry } from "src/i18n";
+import ApiClient from "src/packages/api-client";
 import { FarmPropTypes } from "src/packages/farm/farm-types";
+import FarmEditor from "src/packages/farm/components/FarmEditor";
 
-function FarmData({ label, value, url }) {
-  const { t } = useTranslation();
-  if (!value && !url) return null;
-  return (
-    <div>
-      <Typography style={{ marginRight: "6px" }} variant="overline">
-        {label}:
-      </Typography>
-      {value ? (
-        <Typography component="span" variant="subtitle2">
-          {value}
-        </Typography>
-      ) : (
-        <Link href={url}>{t("landingPage.farmWebPage")}</Link>
-      )}
-    </div>
+import FarmView from "./FarmView";
+
+export default function FarmLandingPage({ farm, isEditMode, toggleEditMode }) {
+  const updateMyFarm = useStoreActions((actions) => actions.updateMyFarm);
+
+  const [hasError, setHasError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const onErrorDissmiss = React.useCallback(() => setHasError(false), []);
+
+  const submitHandler = React.useCallback(
+    async (farmData) => {
+      try {
+        setIsLoading(true);
+        await ApiClient.Farm.updateFarm(farmData);
+        updateMyFarm(farmData);
+        setIsLoading(false);
+        toggleEditMode();
+      } catch (error) {
+        setIsLoading(false);
+        setHasError(true);
+      }
+    },
+    [updateMyFarm, toggleEditMode]
   );
-}
-FarmData.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  url: PropTypes.string
-};
-FarmData.defaultProps = {
-  value: null,
-  url: null
-};
-
-export default function FarmLandingPage({ farm }) {
-  const {
-    about,
-    city,
-    countryCode,
-    email,
-    phoneNumber,
-    street,
-    postcode,
-    productTypes,
-    webUrl
-  } = farm;
-  const { t } = useTranslation();
-  const country = getCountry(countryCode).countryName;
-
-  const producing = productTypes.map((type) => t(type)).join(", ");
 
   return (
-    <Box width="100%" display="flex" flexDirection="column">
-      <Typography variant="h5">{t("contacts")}</Typography>
-      <FarmData label={t("email")} value={email} />
-      <FarmData label={t("phoneNumber")} value={phoneNumber} />
-      <FarmData label={t("webAddress")} url={webUrl} />
-      <Box mb="16px">
-        <FarmData
-          label={t("address")}
-          value={`${street}, ${city} ${postcode}, ${country}`}
+    <>
+      <Box mb="8px" mt="16px" width="100%">
+        <Typography align="center" color="secondary" variant="h4">
+          {farm.name}
+        </Typography>
+      </Box>
+      {isEditMode ? (
+        <FarmEditor
+          mode="edit"
+          farm={farm}
+          onSubmit={submitHandler}
+          hasError={hasError}
+          isLoading={isLoading}
+          onErrorDissmiss={onErrorDissmiss}
         />
-      </Box>
-      <Typography variant="h5">{t("farmLandingPage.aboutFarm")}</Typography>
-      <Box mb="16px">
-        <FarmData label={t("producing")} value={producing} />
-      </Box>
-      <Typography variant="body1">{about}</Typography>
-    </Box>
+      ) : (
+        <FarmView farm={farm} />
+      )}
+    </>
   );
 }
 FarmLandingPage.propTypes = {
-  farm: FarmPropTypes.isRequired
-  // isEditMode: PropTypes.bool.isRequired,
-  // isFarmOwner: PropTypes.bool.isRequired
+  farm: FarmPropTypes.isRequired,
+  isEditMode: PropTypes.bool.isRequired,
+  toggleEditMode: PropTypes.func.isRequired
 };

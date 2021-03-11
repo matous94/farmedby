@@ -5,13 +5,16 @@ const storeModel = {
   user: null,
   myFarm: null,
   farmPages: {
-    editMode: true
+    editMode: false
   },
   farmCreated: action((state, farm) => {
     state.myFarm = farm;
   }),
   refreshMyFarm: action((state, farm) => {
     state.myFarm = farm;
+  }),
+  updateMyFarm: action((state, farm) => {
+    state.myFarm = { ...state.myFarm, ...farm };
   }),
   signIn: action((state, payload) => {
     state.user = payload.user;

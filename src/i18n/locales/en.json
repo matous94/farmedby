@@ -1,4 +1,5 @@
 {
+  "save": "Save",
   "address": "Address",
   "boxes": "Boxes",
   "city": "City",
@@ -11,7 +12,7 @@
   "farm": "Farm",
   "farmForm.isPickupPoint": "Use farm as pickup point",
   "farmForm.makeFarmPublic": "Make farm public",
-  "farmLandingPage.aboutFarm": "About Farm",
+  "aboutFarm": "About Farm",
   "farmName": "Farm name",
   "farmPage.accommodation": "Accommodation",
   "farmPage.blog": "Blog",
@@ -28,7 +29,6 @@
   "genericFailureMessage": "Something's wrong. Please try again later.",
   "HN": "HN",
   "landingPage.heading": "Fruits and vegetables from local farmers",
-  "landingPage.farmWebPage": "Open farm web page",
   "landingPage.showExampleFarm": "Show Example Farm",
   "landingPage.subscribeToNewsletter": "Subscribe",
   "landingPage.workInProgress": "Site is under construction",

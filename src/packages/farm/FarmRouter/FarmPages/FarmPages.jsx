@@ -60,6 +60,12 @@ export default function FarmPages() {
   const { PageContent } = pageName ? pages[pageName] : landingPage;
   return (
     <>
+      <GenericFailureDialog
+        open={status === "error"}
+        onClose={() => {
+          window.location = "/";
+        }}
+      />
       <AppBar onMenuClick={drawer.open} />
       <Box display="flex">
         <nav className={classes.drawer} aria-label="mailbox folders">
@@ -67,24 +73,11 @@ export default function FarmPages() {
             open={drawer.isOpen}
             onClose={drawer.close}
             width={drawerWidth}
+            farmName={farm?.name}
           />
         </nav>
-        <Box
-          component="main"
-          position="relative"
-          flexGrow="1"
-          p="0 24px 24px 24px"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
+        <Box component="main" position="relative" flexGrow="1">
           <Toolbar />
-          <GenericFailureDialog
-            open={status === "error"}
-            onClose={() => {
-              window.location = "/";
-            }}
-          />
           {status === "loading" && (
             <Box position="absolute" top="100px" left="calc(50% - 20px)">
               <CircularProgress />
@@ -97,25 +90,20 @@ export default function FarmPages() {
                   {t("farmPage.farmIsNotPublishedAlert")}
                 </Alert>
               )}
-              <Box my={2} width="100%">
-                <Typography
-                  align="center"
-                  color="secondary"
-                  className={classes.farmName}
-                  variant="h4"
-                >
-                  {farm.name}
-                </Typography>
-              </Box>
-              <Box width={["100%", "100%", "700px", "1000px"]}>
+              <Box
+                pb="32px"
+                pl={["16px", "24px"]}
+                pr={["16px", "24px", "64px", drawerWidth]}
+              >
                 <PageContent
                   farm={farm}
                   isEditMode={isEditMode}
                   isFarmOwner={isFarmOwner}
+                  toggleEditMode={toggleEditMode}
                 />
               </Box>
               {isFarmOwner && (
-                <Box position="fixed" bottom="24px" right="24px">
+                <Box position="fixed" bottom="16px" right="24px">
                   <Fab
                     onClick={toggleEditMode}
                     style={{ minWidth: "80px" }}

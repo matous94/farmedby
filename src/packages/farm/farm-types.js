@@ -32,18 +32,17 @@ export const PickupPointPropTypes = PropTypes.shape({
 export const FarmPropTypes = PropTypes.shape({
   about: PropTypes.string,
   boxes: PropTypes.arrayOf(BoxPropTypes),
-  city: PropTypes.string.isRequired,
-  countryCode: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  isPickupPoint: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
-  owner: PropTypes.shape({ objectId: PropTypes.string.isRequired }),
+  city: PropTypes.string,
+  countryCode: PropTypes.string,
+  email: PropTypes.string,
+  isPickupPoint: PropTypes.bool,
+  name: PropTypes.string,
+  owner: PropTypes.shape({ objectId: PropTypes.string }),
   phoneNumber: PropTypes.string,
   pickupPoints: PropTypes.arrayOf(PickupPointPropTypes),
-  postcode: PropTypes.string.isRequired,
-  productTypes: PropTypes.arrayOf(PropTypes.oneOf(Object.values(ProductTypes)))
-    .isRequired,
-  published: PropTypes.bool.isRequired,
-  street: PropTypes.string.isRequired,
+  postcode: PropTypes.string,
+  productTypes: PropTypes.arrayOf(PropTypes.oneOf(Object.values(ProductTypes))),
+  published: PropTypes.bool,
+  street: PropTypes.string,
   webUrl: PropTypes.string
 });

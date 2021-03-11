@@ -10,9 +10,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { selectors } from "src/store";
+import Logo from "src/components/Logo";
 import Link from "src/components/Link";
 import ApiClient from "src/packages/api-client";
 
@@ -61,12 +61,6 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
   const signOut = useStoreActions((actions) => actions.signOut);
 
   const classes = useStyles();
-  const isBelowXs = useMediaQuery((theme) => theme.breakpoints.down("xs"));
-  const isBelowSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-
-  let logoVariant = "h4";
-  if (isBelowSm) logoVariant = "h5";
-  if (isBelowXs) logoVariant = "h6";
 
   function signOutHandler() {
     ApiClient.User.signOut();
@@ -89,9 +83,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
               <MenuIcon />
             </IconButton>
           )}
-          <Link to="/" variant={logoVariant} color="secondary" underline="none">
-            FarmedBy
-          </Link>
+          <Logo />
           <Box
             ml={["8px", "12px", "16px"]}
             width={["24px", "32px", "40px"]}
