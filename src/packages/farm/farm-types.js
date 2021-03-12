@@ -9,23 +9,23 @@ export const ProductTypes = Object.freeze({
 });
 
 export const BoxPropTypes = PropTypes.shape({
-  content: PropTypes.string.isRequired,
-  discountPerBox: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  objectId: PropTypes.string.isRequired,
-  unitPrice: PropTypes.number.isRequired
+  content: PropTypes.string,
+  discountPerBox: PropTypes.number,
+  name: PropTypes.string,
+  objectId: PropTypes.string,
+  unitPrice: PropTypes.number
 });
 
 export const PickupPointPropTypes = PropTypes.shape({
-  city: PropTypes.string.isRequired,
-  countryCode: PropTypes.string.isRequired,
-  deliveryDay: PropTypes.string.isRequired, // eg Biweekly, on Wednesday, from 10am to 5pm
+  city: PropTypes.string,
+  countryCode: PropTypes.string,
+  pickupDay: PropTypes.string, // eg Biweekly, on Wednesday, from 10am to 5pm
   email: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  objectId: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  objectId: PropTypes.string,
   phoneNumber: PropTypes.string,
-  postcode: PropTypes.string.isRequired,
-  street: PropTypes.string.isRequired,
+  postcode: PropTypes.string,
+  street: PropTypes.string,
   webUrl: PropTypes.string
 });
 
@@ -37,6 +37,7 @@ export const FarmPropTypes = PropTypes.shape({
   email: PropTypes.string,
   isPickupPoint: PropTypes.bool,
   name: PropTypes.string,
+  objectId: PropTypes.string,
   owner: PropTypes.shape({ objectId: PropTypes.string }),
   phoneNumber: PropTypes.string,
   pickupPoints: PropTypes.arrayOf(PickupPointPropTypes),

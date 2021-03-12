@@ -13,6 +13,7 @@ import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
 
 import FarmLandingPage from "src/packages/farm/components/FarmLandingPage";
+import PickupPointsPage from "src/packages/farm/components/PickupPointsPage";
 
 export const landingPage = {
   name: "landing",
@@ -44,13 +45,7 @@ export default {
     Icon: MyLocationIcon,
     disabled: false,
     private: false,
-    PageContent: ({ farm }) => {
-      return (
-        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
-          {JSON.stringify(farm, null, 2)}
-        </pre>
-      );
-    }
+    PageContent: PickupPointsPage
   },
   orders: {
     name: "orders",

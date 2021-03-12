@@ -1,4 +1,8 @@
 {
+  "pickupPointsPage.editDelete": "Edit/Delete",
+  "pickupPointsPage.pickupDayPlaceholder": "Negotiable",
+  "pickupPointsPage.pickupDay": "Pickup day",
+  "name": "Name",
   "orders": "Orders",
   "save": "Save",
   "address": "Address",
@@ -22,7 +26,7 @@
   "farmPage.farmIsNotPublishedAlert": "Your farm is not publicly available. You can change it in farm settings.",
   "farmPage.photoGallery": "Photo Gallery",
   "farmPage.reviews": "They say about us",
-  "farmPage.switchToAdminMode": "Farmer",
+  "farmPage.switchToAdminMode": "Edit",
   "farmPage.switchToViewMode": "View", 
   "farmPage.volunteers": "Volunteers",
   "firstName": "First name",

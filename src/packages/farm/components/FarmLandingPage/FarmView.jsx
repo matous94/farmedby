@@ -5,8 +5,8 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 
-import { getCountry } from "src/i18n";
 import { FarmPropTypes } from "src/packages/farm/farm-types";
+import { createAddress } from "src/packages/utils";
 
 function FarmData({ label, value, url }) {
   if (!value && !url) return null;
@@ -52,7 +52,6 @@ export default function FarmView({ farm }) {
     webUrl
   } = farm;
   const { t } = useTranslation();
-  const country = getCountry(countryCode).countryName;
   const producing = productTypes.map((type) => t(type)).join(", ");
 
   const aboutAsParagraphs = about.split("\n");
@@ -65,7 +64,7 @@ export default function FarmView({ farm }) {
       <Box mb="16px">
         <FarmData
           label={t("address")}
-          value={`${street}, ${city} ${postcode}, ${country}`}
+          value={createAddress({ city, countryCode, street, postcode }).full}
         />
       </Box>
       <Typography style={{ marginBottom: "8px" }} variant="h5">

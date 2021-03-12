@@ -80,7 +80,12 @@ export default function FarmPages() {
             isAdminMode={isAdminMode}
           />
         </nav>
-        <Box component="main" position="relative" flexGrow="1">
+        <Box
+          component="main"
+          position="relative"
+          flexGrow="1"
+          overflow="hidden"
+        >
           <Toolbar />
           {status === "loading" && (
             <Box position="absolute" top="100px" left="calc(50% - 20px)">
