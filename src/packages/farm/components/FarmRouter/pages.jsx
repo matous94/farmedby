@@ -12,7 +12,7 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
 
-import FarmLandingPage from "src/packages/farm/FarmLandingPage";
+import FarmLandingPage from "src/packages/farm/components/FarmLandingPage";
 
 export const landingPage = {
   name: "landing",

@@ -7,13 +7,13 @@ import logger from "src/packages/logger";
 import LoadingScreen from "src/components/LoadingScreen";
 import PublicPage from "src/components/PublicPage";
 import PrivatePage from "src/components/PrivatePage";
-import CreateFarmPage from "src/packages/farm/CreateFarmPage";
+import CreateFarmPage from "src/packages/farm/components/CreateFarmPage";
 
 import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
 import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
-import FarmRouter from "src/packages/farm/FarmRouter";
+import FarmRouter from "src/packages/farm/components/FarmRouter";
 
 function getSessionToken() {
   return localStorage.getItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
