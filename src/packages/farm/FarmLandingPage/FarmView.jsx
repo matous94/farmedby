@@ -71,8 +71,10 @@ export default function FarmView({ farm }) {
       <Typography style={{ marginBottom: "8px" }} variant="h5">
         {t("aboutFarm")}
       </Typography>
-      {aboutAsParagraphs.map((paragraph) => (
+      {aboutAsParagraphs.map((paragraph, index) => (
         <Typography
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
           style={{ paddingTop: paragraph === "" ? "24px" : 0 }}
           variant="body1"
         >

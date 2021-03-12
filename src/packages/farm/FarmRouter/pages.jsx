@@ -32,11 +32,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          CSA page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -48,11 +46,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Pickup points page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -61,14 +57,12 @@ export default {
     translationKey: "orders",
     Icon: PaymentIcon,
     disabled: false,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Orders page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -80,11 +74,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Eshop page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -96,11 +88,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Blog page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -112,11 +102,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Reviews page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -128,11 +116,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Photo gallery page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -144,11 +130,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Help page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   },
@@ -160,11 +144,9 @@ export default {
     private: false,
     PageContent: ({ farm }) => {
       return (
-        <>
-          Accomodation page
-          <br />
-          <pre>{JSON.stringify(farm, null, 2)}</pre>
-        </>
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
       );
     }
   }

@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   }
 });
 
-function ResponsiveDrawer({ open, onClose, width, farmName, isFarmOwner }) {
+function ResponsiveDrawer({ open, onClose, width, farmName, isAdminMode }) {
   const classes = useStyles({ width });
   const history = useHistory();
   const { t } = useTranslation();
@@ -63,7 +63,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName, isFarmOwner }) {
           <ListItemText primary={`${t(landingPage.translationKey)}`} />
         </ListItem>
         {Object.values(pages)
-          .filter((page) => !page.private || isFarmOwner)
+          .filter((page) => !page.private || isAdminMode)
           .map(({ name, translationKey, Icon, disabled }) => (
             <ListItem
               onClick={() => {
@@ -119,7 +119,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName, isFarmOwner }) {
 
 ResponsiveDrawer.propTypes = {
   farmName: PropTypes.string,
-  isFarmOwner: PropTypes.bool.isRequired,
+  isAdminMode: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   width: PropTypes.string.isRequired

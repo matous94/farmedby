@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Alert from "@material-ui/lab/Alert";
+import Typography from "@material-ui/core/Typography";
 
 import { selectors } from "src/store";
 import AppBar from "src/components/AppBar";
@@ -53,10 +54,13 @@ export default function FarmPages() {
 
   const drawer = useDrawer();
   const { status, farm, isFarmOwner } = useGetFarm();
-  const toggleEditMode = useStoreActions((actions) => actions.toggleEditMode);
-  const isEditMode = useStoreState(selectors.isEditMode(farmId));
+  const toggleAdminMode = useStoreActions((actions) => actions.toggleAdminMode);
+  const isAdminMode = useStoreState(selectors.isAdminMode(farmId));
 
-  const { PageContent } = pageName ? pages[pageName] : landingPage;
+  const { PageContent, translationKey } = pageName
+    ? pages[pageName]
+    : landingPage;
+  const pageHeading = pageName ? t(translationKey) : farm?.name;
   return (
     <>
       <GenericFailureDialog
@@ -73,7 +77,7 @@ export default function FarmPages() {
             onClose={drawer.close}
             width={drawerWidth}
             farmName={farm?.name}
-            isFarmOwner={isFarmOwner}
+            isAdminMode={isAdminMode}
           />
         </nav>
         <Box component="main" position="relative" flexGrow="1">
@@ -90,31 +94,31 @@ export default function FarmPages() {
                   {t("farmPage.farmIsNotPublishedAlert")}
                 </Alert>
               )}
-              <Box
-                pt="16px"
-                pb="32px"
-                pl={["16px", "24px"]}
-                pr={["16px", "24px", "64px", drawerWidth]}
-              >
+              <Box pt="16px" pb="32px" px={["16px", "24px", "32px", "64px"]}>
+                <Box mb="8px">
+                  <Typography align="center" color="secondary" variant="h4">
+                    {pageHeading}
+                  </Typography>
+                </Box>
                 <PageContent
                   farm={farm}
-                  isEditMode={isEditMode}
+                  isAdminMode={isAdminMode}
                   isFarmOwner={isFarmOwner}
-                  toggleEditMode={toggleEditMode}
+                  toggleAdminMode={toggleAdminMode}
                 />
               </Box>
               {isFarmOwner && (
                 <Box position="fixed" bottom="16px" right="24px">
                   <Fab
-                    onClick={toggleEditMode}
+                    onClick={toggleAdminMode}
                     style={{ minWidth: "80px" }}
                     size="medium"
                     variant="extended"
                     color="secondary"
                   >
-                    {isEditMode
+                    {isAdminMode
                       ? t("farmPage.switchToViewMode")
-                      : t("farmPage.switchToEditMode")}
+                      : t("farmPage.switchToAdminMode")}
                   </Fab>
                 </Box>
               )}

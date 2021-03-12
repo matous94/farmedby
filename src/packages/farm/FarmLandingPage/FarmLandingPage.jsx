@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useStoreActions } from "easy-peasy";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 
 import ApiClient from "src/packages/api-client";
 import { FarmPropTypes } from "src/packages/farm/farm-types";
@@ -10,7 +8,11 @@ import FarmEditor from "src/packages/farm/components/FarmEditor";
 
 import FarmView from "./FarmView";
 
-export default function FarmLandingPage({ farm, isEditMode, toggleEditMode }) {
+export default function FarmLandingPage({
+  farm,
+  isAdminMode,
+  toggleAdminMode
+}) {
   const updateMyFarm = useStoreActions((actions) => actions.updateMyFarm);
 
   const [hasError, setHasError] = React.useState(false);
@@ -24,23 +26,18 @@ export default function FarmLandingPage({ farm, isEditMode, toggleEditMode }) {
         await ApiClient.Farm.updateFarm(farmData);
         updateMyFarm(farmData);
         setIsLoading(false);
-        toggleEditMode();
+        toggleAdminMode();
       } catch (error) {
         setIsLoading(false);
         setHasError(true);
       }
     },
-    [updateMyFarm, toggleEditMode]
+    [updateMyFarm, toggleAdminMode]
   );
 
   return (
     <>
-      <Box mb="8px" width="100%">
-        <Typography align="center" color="secondary" variant="h4">
-          {farm.name}
-        </Typography>
-      </Box>
-      {isEditMode ? (
+      {isAdminMode ? (
         <FarmEditor
           mode="edit"
           farm={farm}
@@ -57,6 +54,6 @@ export default function FarmLandingPage({ farm, isEditMode, toggleEditMode }) {
 }
 FarmLandingPage.propTypes = {
   farm: FarmPropTypes.isRequired,
-  isEditMode: PropTypes.bool.isRequired,
-  toggleEditMode: PropTypes.func.isRequired
+  isAdminMode: PropTypes.bool.isRequired,
+  toggleAdminMode: PropTypes.func.isRequired
 };
