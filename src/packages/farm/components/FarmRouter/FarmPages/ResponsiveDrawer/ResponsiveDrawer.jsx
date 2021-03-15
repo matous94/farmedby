@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useHistory, useParams } from "react-router-dom";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
@@ -29,6 +30,9 @@ function ResponsiveDrawer({ open, onClose, width, farmName, isAdminMode }) {
   const history = useHistory();
   const { t } = useTranslation();
   const { farmId, pageName } = useParams();
+
+  const isUpSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+  if (isUpSm && open) onClose();
 
   const LandingPageIcon = landingPage.Icon;
   const drawerContent = (
