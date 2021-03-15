@@ -50,7 +50,9 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
         display="flex"
         flexDirection="column"
       >
-        <DialogTitle>{t("pickupPointEditor.heading")}</DialogTitle>
+        <DialogTitle style={{ paddingBottom: 0 }}>
+          {t("pickupPointEditor.heading")}
+        </DialogTitle>
         <DialogContent>
           <TextField name="name" label={t("name")} type="text" />
           <TextField name="street" label={t("street")} type="text" />
@@ -68,6 +70,14 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
               style={{ width: "35%" }}
             />
           </Box>
+          <TextField
+            name="pickupDay"
+            label={t("pickupPointsPage.pickupDay")}
+            placeholder={t("pickupPointsPage.pickupDayPlaceholder")}
+            InputLabelProps={{ shrink: true }}
+            type="text"
+            multiline
+          />
           <TextField
             name="email"
             label={t("email")}

@@ -6,6 +6,7 @@ import { useStoreActions } from "easy-peasy";
 import { useSwitch } from "src/packages/hooks";
 import { FarmPropTypes } from "src/types";
 import ApiClient from "src/packages/api-client";
+import logger from "src/packages/logger";
 
 import PickupPointEditor from "./PickupPointEditor";
 import PickupPointsTable from "./PickupPointsTable";
@@ -15,21 +16,33 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
   const pickupPointSaved = useStoreActions(
     (actions) => actions.pickupPointSaved
   );
+  const pickupPointDeleted = useStoreActions(
+    (actions) => actions.pickupPointDeleted
+  );
 
-  const openDeleteDialog = React.useCallback((pointId) => {
-    alert("Open delete point dialog with id:", pointId);
-  }, []);
+  const openDeleteDialog = React.useCallback(
+    async (pointId) => {
+      await ApiClient.Farm.deletePickupPoint(pointId);
+      pickupPointDeleted(pointId);
+    },
+    [pickupPointDeleted]
+  );
 
   const onSubmit = React.useCallback(
     async (pickupPoint) => {
-      const objectId = editorSwitch.state?.objectId;
-      const point = await ApiClient.Farm.savePickupPoint({
-        ...pickupPoint,
-        objectId
-      });
-      pickupPointSaved(point);
+      try {
+        const objectId = editorSwitch.state?.objectId;
+        const point = await ApiClient.Farm.savePickupPoint({
+          ...pickupPoint,
+          objectId
+        });
+        pickupPointSaved(point);
+        editorSwitch.reset();
+      } catch (error) {
+        logger.farm("FarmPickupPointsPage > savePickupPoint failed", error);
+      }
     },
-    [pickupPointSaved, editorSwitch.state]
+    [pickupPointSaved, editorSwitch]
   );
 
   return (
@@ -37,7 +50,7 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
       {editorSwitch.isOn && (
         <PickupPointEditor
           point={editorSwitch.state}
-          onClose={() => editorSwitch.switchOff()}
+          onClose={() => editorSwitch.reset()}
           onSubmit={onSubmit}
         />
       )}

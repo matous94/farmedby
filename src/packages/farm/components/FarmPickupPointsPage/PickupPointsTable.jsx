@@ -69,12 +69,21 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
       </TableCell>
       <TableCell>{pickupDay}</TableCell>
       <TableCell>
-        {email}
-        <br />
-        {phoneNumber}
-        <br />
+        {email && (
+          <>
+            {email}
+            <br />
+          </>
+        )}
+        {phoneNumber && (
+          <>
+            {phoneNumber}
+            <br />
+          </>
+        )}
         {webUrl && (
           <Link
+            target="_blank"
             style={{ wordBreak: "break-word", maxWidth: "150px" }}
             href={webUrl}
           >
@@ -172,7 +181,7 @@ export default function PickupPointsTable({
                 email,
                 name,
                 phoneNumber,
-                pickupDay: t("pickupPointsPage.pickupDayPlaceholder"),
+                pickupDay: t("pickupPointsPage.farmPickupDay"),
                 postcode,
                 street,
                 webUrl

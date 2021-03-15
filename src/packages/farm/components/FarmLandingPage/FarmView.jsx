@@ -23,7 +23,9 @@ function FarmData({ label, value, url }) {
           {value}
         </Typography>
       ) : (
-        <Link href={url}>{url}</Link>
+        <Link target="_blank" href={url}>
+          {url}
+        </Link>
       )}
     </div>
   );
