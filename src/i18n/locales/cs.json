@@ -1,4 +1,8 @@
 {
+  "pickupPointsPage.editDelete": "Editovat/Smazat",
+  "pickupPointsPage.pickupDayPlaceholder": "Dle domluvy",
+  "pickupPointsPage.pickupDay": "Odběrový den",
+  "name": "Jméno",
   "orders": "Objednávky",
   "save": "Uložit",
   "address": "Adresa",

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import { makeStyles, styled } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -13,6 +14,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Link from "@material-ui/core/Link";
 
 import {
@@ -35,7 +37,7 @@ const TableCell = styled(MuiTableCell)({
   paddingRight: "8px"
 });
 
-function PickupPoint({ point, onEdit, onDelete }) {
+function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
   const {
     city,
     pickupDay,
@@ -49,7 +51,19 @@ function PickupPoint({ point, onEdit, onDelete }) {
   const { t } = useTranslation();
   const { line1, line2 } = createAddress({ city, street, postcode });
   return (
-    <TableRow key={name}>
+    <TableRow>
+      {isAdminMode && (
+        <TableCell>
+          <ButtonGroup disableElevation variant="contained" color="primary">
+            <Button onClick={onEdit}>
+              <EditIcon />
+            </Button>
+            <Button onClick={onDelete} disabled={onDelete == null}>
+              <DeleteForeverIcon />
+            </Button>
+          </ButtonGroup>
+        </TableCell>
+      )}
       <TableCell style={{ whiteSpace: "nowrap" }}>{name}</TableCell>
       <TableCell style={{ whiteSpace: "nowrap" }}>
         {line1}
@@ -71,31 +85,53 @@ function PickupPoint({ point, onEdit, onDelete }) {
           </Link>
         )}
       </TableCell>
-      <TableCell>
-        <ButtonGroup disableElevation variant="contained" color="primary">
-          <Button onClick={onEdit}>
-            <EditIcon />
-          </Button>
-          <Button onClick={onDelete}>
-            <DeleteForeverIcon />
-          </Button>
-        </ButtonGroup>
-      </TableCell>
     </TableRow>
   );
 }
 PickupPoint.propTypes = {
   point: PickupPointPropTypes.isRequired,
   onEdit: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  isAdminMode: PropTypes.bool.isRequired
 };
 PickupPoint.defaultProps = {
   onEdit: undefined,
   onDelete: undefined
 };
 
-export default function PickupPointsTable({ farm, onEdit, onDelete }) {
+function AddPointRow({ onAdd }) {
+  return (
+    <TableRow>
+      <TableCell>
+        <ButtonGroup disableElevation variant="contained" color="primary">
+          <Button onClick={onAdd}>
+            <AddCircleIcon />
+          </Button>
+          <Button disabled>
+            <DeleteForeverIcon />
+          </Button>
+        </ButtonGroup>
+      </TableCell>
+      <TableCell />
+      <TableCell />
+      <TableCell />
+      <TableCell />
+    </TableRow>
+  );
+}
+AddPointRow.propTypes = {
+  onAdd: PropTypes.func.isRequired
+};
+
+export default function PickupPointsTable({
+  farm,
+  onEdit,
+  onDelete,
+  onAdd,
+  isAdminMode
+}) {
   const { t } = useTranslation();
+  const history = useHistory();
   const classes = useStyles();
   const {
     city,
@@ -117,20 +153,23 @@ export default function PickupPointsTable({ farm, onEdit, onDelete }) {
       >
         <TableHead>
           <TableRow>
+            {isAdminMode && (
+              <TableCell> {t("pickupPointsPage.editDelete")}</TableCell>
+            )}
             <TableCell>{t("name")}</TableCell>
             <TableCell>{t("address")}</TableCell>
-            <TableCell style={{ minWidth: "160px" }}>
+            <TableCell style={{ whiteSpace: "nowrap" }}>
               {t("pickupPointsPage.pickupDay")}
             </TableCell>
             <TableCell>{t("contacts")}</TableCell>
-            <TableCell style={{ maxWidth: "80px" }}>
-              {onEdit && t("pickupPointsPage.editDelete")}
-            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
+          {isAdminMode && <AddPointRow onAdd={onAdd} />}
           {farm.isPickupPoint && (
             <PickupPoint
+              isAdminMode={isAdminMode}
+              onEdit={() => history.push(`/farm/${farm.objectId}`)}
               point={{
                 city,
                 email,
@@ -145,7 +184,12 @@ export default function PickupPointsTable({ farm, onEdit, onDelete }) {
           )}
           {pickupPoints.map((point) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
-            <PickupPoint point={point} onEdit={onEdit} onDelete={onDelete} />
+            <PickupPoint
+              key={point.objectId}
+              point={point}
+              onEdit={() => onEdit(point)}
+              onDelete={() => onDelete(point.objectId)}
+            />
           ))}
         </TableBody>
       </Table>
@@ -155,10 +199,8 @@ export default function PickupPointsTable({ farm, onEdit, onDelete }) {
 
 PickupPointsTable.propTypes = {
   farm: FarmPropTypes.isRequired,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func
-};
-PickupPointsTable.defaultProps = {
-  onEdit: undefined,
-  onDelete: undefined
+  onAdd: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  isAdminMode: PropTypes.bool.isRequired
 };

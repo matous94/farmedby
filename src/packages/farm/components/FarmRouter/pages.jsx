@@ -13,7 +13,7 @@ import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
 
 import FarmLandingPage from "src/packages/farm/components/FarmLandingPage";
-import PickupPointsPage from "src/packages/farm/components/PickupPointsPage";
+import FarmPickupPointsPage from "src/packages/farm/components/FarmPickupPointsPage";
 
 export const landingPage = {
   name: "landing",
@@ -45,7 +45,7 @@ export default {
     Icon: MyLocationIcon,
     disabled: false,
     private: false,
-    PageContent: PickupPointsPage
+    PageContent: FarmPickupPointsPage
   },
   orders: {
     name: "orders",

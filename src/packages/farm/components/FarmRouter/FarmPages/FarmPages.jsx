@@ -100,7 +100,7 @@ export default function FarmPages() {
                 </Alert>
               )}
               <Box pt="16px" pb="32px" px={["16px", "24px", "32px", "64px"]}>
-                <Box mb="8px">
+                <Box mb="16px">
                   <Typography align="center" color="secondary" variant="h4">
                     {pageHeading}
                   </Typography>
