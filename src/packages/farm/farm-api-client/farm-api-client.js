@@ -1,7 +1,7 @@
 import { callCloudFunction } from "src/packages/api-client/requester";
 
-export async function getFarmById(farmId) {
-  return callCloudFunction(`getFarmById`, { farmId });
+export async function getFarmById(objectId) {
+  return callCloudFunction(`getFarmById`, { objectId });
 }
 
 export async function getMyFarm() {
@@ -14,4 +14,12 @@ export async function createFarm(farmData) {
 
 export async function updateFarm(farmData) {
   return callCloudFunction("updateFarm", { farmData });
+}
+
+export async function savePickupPoint(pickupPointData) {
+  return callCloudFunction("savePickupPoint", { pickupPointData });
+}
+
+export async function deletePickupPoint(objectId) {
+  return callCloudFunction("deletePickupPoint", { objectId });
 }

@@ -1,5 +1,14 @@
 import PropTypes from "prop-types";
 
+export const UserPropTypes = PropTypes.shape({
+  createdAt: PropTypes.string,
+  email: PropTypes.string,
+  objectId: PropTypes.string,
+  sessionToken: PropTypes.string,
+  updatedAt: PropTypes.string,
+  username: PropTypes.string
+});
+
 export const ProductTypes = Object.freeze({
   meat: "meat",
   vegetables: "vegetables",

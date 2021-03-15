@@ -1,4 +1,6 @@
 {
+  "cancel": "Cancel",
+  "pickupPointEditor.heading": "Pickup Point",
   "pickupPointsPage.editDelete": "Edit/Delete",
   "pickupPointsPage.pickupDayPlaceholder": "Negotiable",
   "pickupPointsPage.pickupDay": "Pickup day",

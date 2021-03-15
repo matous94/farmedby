@@ -25,14 +25,14 @@ const useStyles = makeStyles({
   }
 });
 
-function ResponsiveDrawer({ open, onClose, width, farmName, isAdminMode }) {
+function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
   const classes = useStyles({ width });
   const history = useHistory();
   const { t } = useTranslation();
   const { farmId, pageName } = useParams();
 
   const isUpSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
-  if (isUpSm && open) onClose();
+  if (isUpSm && isOpen) onClose();
 
   const LandingPageIcon = landingPage.Icon;
   const drawerContent = (
@@ -56,7 +56,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName, isAdminMode }) {
           key={landingPage.name}
           onClick={() => {
             history.push(`/farm/${farmId}`);
-            if (open) onClose();
+            if (isOpen) onClose();
           }}
           button
           selected={pageName == null}
@@ -72,7 +72,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName, isAdminMode }) {
             <ListItem
               onClick={() => {
                 history.push(`/farm/${farmId}/${name}`);
-                if (open) onClose();
+                if (isOpen) onClose();
               }}
               button
               disabled={disabled}
@@ -94,7 +94,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName, isAdminMode }) {
       <Hidden smUp implementation="css">
         <Drawer
           variant="temporary"
-          open={open}
+          open={isOpen}
           onClose={onClose}
           classes={{
             paper: classes.drawerPaper
@@ -124,7 +124,7 @@ function ResponsiveDrawer({ open, onClose, width, farmName, isAdminMode }) {
 ResponsiveDrawer.propTypes = {
   farmName: PropTypes.string,
   isAdminMode: PropTypes.bool.isRequired,
-  open: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   width: PropTypes.string.isRequired
 };

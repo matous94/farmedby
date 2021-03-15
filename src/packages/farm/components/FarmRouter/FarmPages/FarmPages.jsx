@@ -34,7 +34,7 @@ export default function FarmPages() {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const drawer = useSwitch();
+  const drawer = useSwitch(false);
   const { status, farm, isFarmOwner } = useGetFarm();
   const toggleAdminMode = useStoreActions((actions) => actions.toggleAdminMode);
   const isAdminMode = useStoreState(selectors.isAdminMode(farmId));
@@ -55,7 +55,7 @@ export default function FarmPages() {
       <Box display="flex">
         <nav className={classes.drawer} aria-label="mailbox folders">
           <ResponsiveDrawer
-            open={drawer.isOn}
+            isOpen={drawer.isOn}
             onClose={drawer.switchOff}
             width={drawerWidth}
             farmName={farm?.name}
@@ -65,8 +65,8 @@ export default function FarmPages() {
         <Box
           component="main"
           position="relative"
-          flexGrow="1"
-          overflow="hidden"
+          width={`calc(100vw - ${drawerWidth})`}
+          minHeight="100vh"
         >
           <Toolbar />
           {status === "loading" && (

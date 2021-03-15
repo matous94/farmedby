@@ -17,10 +17,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Link from "@material-ui/core/Link";
 
-import {
-  FarmPropTypes,
-  PickupPointPropTypes
-} from "src/packages/farm/farm-types";
+import { FarmPropTypes, PickupPointPropTypes } from "src/types";
 import { createAddress } from "src/packages/utils";
 
 const useStyles = makeStyles({
@@ -185,6 +182,7 @@ export default function PickupPointsTable({
           {pickupPoints.map((point) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <PickupPoint
+              isAdminMode={isAdminMode}
               key={point.objectId}
               point={point}
               onEdit={() => onEdit(point)}

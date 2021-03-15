@@ -1,29 +1,50 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
+import { useStoreActions } from "easy-peasy";
 
-import { FarmPropTypes } from "src/packages/farm/farm-types";
+import { useSwitch } from "src/packages/hooks";
+import { FarmPropTypes } from "src/types";
+import ApiClient from "src/packages/api-client";
 
+import PickupPointEditor from "./PickupPointEditor";
 import PickupPointsTable from "./PickupPointsTable";
 
 export default function FarmPickupPointsPage({ farm, isAdminMode }) {
-  const openEditor = React.useCallback((pickupPoint) => {
-    console.log("clicked");
-    alert("open pickup point editor", pickupPoint?.name);
-  }, []);
+  const editorSwitch = useSwitch(false);
+  const pickupPointSaved = useStoreActions(
+    (actions) => actions.pickupPointSaved
+  );
+
   const openDeleteDialog = React.useCallback((pointId) => {
     alert("Open delete point dialog with id:", pointId);
   }, []);
-  const onAdd = React.useCallback(() => {
-    alert("Open empty pickup point editor");
-  }, []);
+
+  const onSubmit = React.useCallback(
+    async (pickupPoint) => {
+      const objectId = editorSwitch.state?.objectId;
+      const point = await ApiClient.Farm.savePickupPoint({
+        ...pickupPoint,
+        objectId
+      });
+      pickupPointSaved(point);
+    },
+    [pickupPointSaved, editorSwitch.state]
+  );
 
   return (
     <Box display="flex" justifyContent="center">
+      {editorSwitch.isOn && (
+        <PickupPointEditor
+          point={editorSwitch.state}
+          onClose={() => editorSwitch.switchOff()}
+          onSubmit={onSubmit}
+        />
+      )}
       <PickupPointsTable
         farm={farm}
-        onAdd={onAdd}
-        onEdit={openEditor}
+        onAdd={() => editorSwitch.switchOn()}
+        onEdit={editorSwitch.switchOn}
         onDelete={openDeleteDialog}
         isAdminMode={isAdminMode}
       />

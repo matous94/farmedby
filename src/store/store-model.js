@@ -16,6 +16,14 @@ const storeModel = {
   updateMyFarm: action((state, farm) => {
     state.myFarm = { ...state.myFarm, ...farm };
   }),
+  pickupPointSaved: action((state, newPoint) => {
+    const { pickupPoints } = state.myFarm;
+    const pointIndex = pickupPoints.findIndex(
+      (point) => point.objectId === newPoint.objectId
+    );
+    if (pointIndex === -1) pickupPoints.push(newPoint);
+    else pickupPoints[pointIndex] = newPoint;
+  }),
   signIn: action((state, payload) => {
     state.user = payload.user;
     state.myFarm = payload.farm;

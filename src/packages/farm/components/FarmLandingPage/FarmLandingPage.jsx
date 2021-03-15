@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useStoreActions } from "easy-peasy";
 
 import ApiClient from "src/packages/api-client";
-import { FarmPropTypes } from "src/packages/farm/farm-types";
+import { FarmPropTypes } from "src/types";
 import FarmEditor from "src/packages/farm/components/FarmEditor";
 
 import FarmView from "./FarmView";

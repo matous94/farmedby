@@ -13,6 +13,8 @@ function FarmPageRouter() {
   const isLandingPage = pageName == null && farmId;
   if (isLandingPage) return <FarmPages />;
 
+  if (pages[pageName] == null) return <Redirect to={`/farm/${farmId}`} />;
+
   const isAuthorized = !pages[pageName].private || isAdminMode;
   const isEnabledPage = pages[pageName] && !pages[pageName].disabled;
   if (isAuthorized && isEnabledPage) {

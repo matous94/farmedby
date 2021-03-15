@@ -1,4 +1,6 @@
 {
+  "cancel": "Zrušit",
+  "pickupPointEditor.heading": "Odběrový bod",
   "pickupPointsPage.editDelete": "Editovat/Smazat",
   "pickupPointsPage.pickupDayPlaceholder": "Dle domluvy",
   "pickupPointsPage.pickupDay": "Odběrový den",

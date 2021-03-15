@@ -5,7 +5,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 
-import { FarmPropTypes } from "src/packages/farm/farm-types";
+import { FarmPropTypes } from "src/types";
 import { createAddress } from "src/packages/utils";
 
 function FarmData({ label, value, url }) {
