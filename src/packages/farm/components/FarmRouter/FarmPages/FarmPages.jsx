@@ -10,6 +10,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Alert from "@material-ui/lab/Alert";
 import Typography from "@material-ui/core/Typography";
 
+import { useSwitch } from "src/packages/hooks";
 import { selectors } from "src/store";
 import AppBar from "src/components/AppBar";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
@@ -28,31 +29,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function useDrawer() {
-  const [isOpenDrawer, setIsOpenDrawer] = React.useState(false);
-  const openDrawer = React.useCallback(() => {
-    setIsOpenDrawer(true);
-  }, []);
-  const closeDrawer = React.useCallback(() => {
-    setIsOpenDrawer(false);
-  }, []);
-
-  return React.useMemo(
-    () => ({
-      open: openDrawer,
-      close: closeDrawer,
-      isOpen: isOpenDrawer
-    }),
-    [isOpenDrawer, closeDrawer, openDrawer]
-  );
-}
-
 export default function FarmPages() {
   const { pageName, farmId } = useParams();
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const drawer = useDrawer();
+  const drawer = useSwitch();
   const { status, farm, isFarmOwner } = useGetFarm();
   const toggleAdminMode = useStoreActions((actions) => actions.toggleAdminMode);
   const isAdminMode = useStoreState(selectors.isAdminMode(farmId));
@@ -69,12 +51,12 @@ export default function FarmPages() {
           window.location = "/";
         }}
       />
-      <AppBar onMenuClick={drawer.open} />
+      <AppBar onMenuClick={drawer.switchOn} />
       <Box display="flex">
         <nav className={classes.drawer} aria-label="mailbox folders">
           <ResponsiveDrawer
-            open={drawer.isOpen}
-            onClose={drawer.close}
+            open={drawer.isOn}
+            onClose={drawer.switchOff}
             width={drawerWidth}
             farmName={farm?.name}
             isAdminMode={isAdminMode}
