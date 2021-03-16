@@ -24,9 +24,10 @@ const storeModel = {
     else state.myFarm.pickupPoints[pointIndex] = newPoint;
   }),
   pickupPointDeleted: action((state, pointId) => {
-    state.myFarm.pickupPoints = state.myFarm.pickupPoints.filter(
-      (point) => point.objectId !== pointId
+    const index = state.myFarm.pickupPoints.findIndex(
+      (point) => point.objectId === pointId
     );
+    if (index !== -1) state.myFarm.pickupPoints.splice(index, 1);
   }),
   signIn: action((state, payload) => {
     state.user = payload.user;
