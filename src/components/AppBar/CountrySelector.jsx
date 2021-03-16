@@ -37,10 +37,11 @@ export default function CountrySelector() {
         alt={supportedCountries[selectedCountry].countryName}
         src={supportedCountries[selectedCountry].flagSrc}
         onClick={handleOpen}
-        style={{ cursor: "pointer" }}
+        borderRadius="50%"
+        style={{ cursor: "pointer", objectFit: "cover" }}
       />
       <Menu
-        elevation={0}
+        elevation={1}
         getContentAnchorEl={null}
         anchorOrigin={{
           vertical: "bottom",
@@ -56,18 +57,20 @@ export default function CountrySelector() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {Object.entries(supportedCountries).map(([countryCode, resources]) => (
-          <MenuItem
-            key={countryCode}
-            onClick={() => handleChange(countryCode)}
-            selected={countryCode === selectedCountry}
-          >
-            <ListItemAvatar>
-              <Avatar alt={resources.countryName} src={resources.flagSrc} />
-            </ListItemAvatar>
-            <ListItemText primary={resources.countryName} />
-          </MenuItem>
-        ))}
+        {Object.values(supportedCountries).map(
+          ({ countryCode, countryName, flagSrc }) => (
+            <MenuItem
+              key={countryCode}
+              onClick={() => handleChange(countryCode)}
+              selected={countryCode === selectedCountry}
+            >
+              <ListItemAvatar>
+                <Avatar alt={countryName} src={flagSrc} />
+              </ListItemAvatar>
+              <ListItemText primary={countryName} />
+            </MenuItem>
+          )
+        )}
       </Menu>
     </>
   );
