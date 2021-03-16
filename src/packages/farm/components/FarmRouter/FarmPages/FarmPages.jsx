@@ -9,6 +9,7 @@ import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Alert from "@material-ui/lab/Alert";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useSwitch } from "src/packages/hooks";
 import { selectors } from "src/store";
@@ -38,6 +39,7 @@ export default function FarmPages() {
   const { status, farm, isFarmOwner } = useGetFarm();
   const toggleAdminMode = useStoreActions((actions) => actions.toggleAdminMode);
   const isAdminMode = useStoreState(selectors.isAdminMode(farmId));
+  const isUpSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
 
   const { PageContent, translationKey } = pageName
     ? pages[pageName]
@@ -65,7 +67,7 @@ export default function FarmPages() {
         <Box
           component="main"
           position="relative"
-          width={`calc(100vw - ${drawerWidth})`}
+          width={isUpSm ? `calc(100vw - ${drawerWidth})` : "100vw"}
           minHeight="100vh"
         >
           <Toolbar />
