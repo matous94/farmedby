@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { useStoreActions } from "easy-peasy";
 
 import ApiClient from "src/packages/api-client";
@@ -14,6 +14,7 @@ import LandingPage from "src/pages/LandingPage";
 import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
 import FarmRouter from "src/packages/farm/components/FarmRouter";
+import FarmsPage from "src/packages/farm/components/FarmsPage";
 
 function getSessionToken() {
   return localStorage.getItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
@@ -74,8 +75,7 @@ function App() {
       </Route>
 
       <Route path="/farms">
-        <h1>This is nearby farms page</h1>
-        <Link to="/">Go to landing page</Link>
+        <FarmsPage />
       </Route>
 
       <Route exact path="*">

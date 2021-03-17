@@ -1,4 +1,5 @@
 {
+  "landingPage.showFarms": "Show Farms",
   "exampleFarmAlert": "This farm is not real. It is used for illustrative and development purposes.",
   "delete": "Delete",
   "areYouSure": "Are you sure?",
@@ -38,7 +39,8 @@
   "firstName": "First name",
   "fruits": "Fruits",
   "genericFailureMessage": "Something's wrong. Please try again later.",
-  "landingPage.heading": "Fruits and vegetables from local farmers",
+  "landingPage.heading": "Community Supported Agriculture",
+  "landingPage.subHeading": "Local products from local farmers",
   "landingPage.showExampleFarm": "Show Example Farm",
   "landingPage.subscribeToNewsletter": "Subscribe",
   "landingPage.workInProgress": "Site is under construction",

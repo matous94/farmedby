@@ -1,4 +1,5 @@
 {
+  "landingPage.showFarms": "Zobrazit Farmy",
   "exampleFarmAlert": "Tato farma není skutečná. Slouží pro ilustraci a testování aplikace.",
   "delete": "Smazat",
   "areYouSure": "Jste si jistý?",
@@ -38,7 +39,8 @@
   "firstName": "Jméno",
   "fruits": "Ovoce",
   "genericFailureMessage": "Něco se porouchalo. Zkuste opakovat akci později.",
-  "landingPage.heading": "Ovoce a zelenina přímo od pěstitele",
+  "landingPage.heading": "Komunitou Podporované Zemědělství",
+  "landingPage.subHeading": "Lokální produkty od lokálních farmářů",
   "landingPage.showExampleFarm": "Zobraz Ukázku Farmy",
   "landingPage.subscribeToNewsletter": "Přidej se",
   "landingPage.workInProgress": "Na stránce se pracuje",

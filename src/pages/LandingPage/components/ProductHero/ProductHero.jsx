@@ -20,16 +20,24 @@ const styles = (theme) => ({
   },
   button: {
     minWidth: 200,
-    marginTop: "160px",
+    marginTop: "100px",
+    marginBottom: "80px",
     [theme.breakpoints.down("sm")]: {
-      marginTop: "80px"
+      marginTop: "50px",
+      marginBottom: "40px"
     }
   },
-  h4: {
-    marginBottom: theme.spacing(3),
-    marginTop: theme.spacing(6),
+  csaLetters: {
+    display: "inline-block",
+    "&::first-letter": {
+      color: theme.palette.primary.main,
+      fontWeight: "bold"
+    }
+  },
+  subHeading: {
+    marginTop: "24px",
     [theme.breakpoints.up("sm")]: {
-      marginTop: theme.spacing(10)
+      marginTop: "36px"
     }
   },
   more: {
@@ -42,28 +50,37 @@ function ProductHero(props) {
   const { t } = useTranslation();
   const isBelowXs = useMediaQuery((theme) => theme.breakpoints.down("xs"));
   const isBelowSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-  let headingVariant = "h2";
-  if (isBelowSm) headingVariant = "h3";
-  if (isBelowXs) headingVariant = "h4";
+  let headingVariant = 2;
+  if (isBelowSm) headingVariant = 3;
+  if (isBelowXs) headingVariant = 4;
 
   return (
     <ProductHeroLayout backgroundClassName={classes.background}>
       <Typography
         color="inherit"
         align="center"
-        variant={headingVariant}
+        variant={`h${headingVariant}`}
+        component="h1"
         marked="center"
       >
-        {t("landingPage.heading")}
+        {t("landingPage.heading")
+          .split(" ")
+          .map((word, index, { length }) => (
+            <span className={classes.csaLetters} key="word">
+              {word}
+              {index < length - 1 && <>&nbsp;</>}
+            </span>
+          ))}
       </Typography>
-      {/* <Typography
+      <Typography
         color="inherit"
         align="center"
-        variant="h4"
-        className={classes.h4}
+        variant={`h${headingVariant + 1}`}
+        component="h2"
+        className={classes.subHeading}
       >
-        Najdi lokální produkty
-      </Typography> */}
+        {t("landingPage.subHeading")}
+      </Typography>
       {/* <Input
         style={{ background: "white", padding: "4px 12px", margin: "16px 0" }}
         placeholder="PSČ"
@@ -75,9 +92,9 @@ function ProductHero(props) {
         size="large"
         className={classes.button}
         component={Link}
-        to="/farm/qHgur81fHZ"
+        to="/farms"
       >
-        {t("landingPage.showExampleFarm")}
+        {t("landingPage.showFarms")}
       </Button>
     </ProductHeroLayout>
   );
@@ -86,7 +103,9 @@ function ProductHero(props) {
 ProductHero.propTypes = {
   classes: PropTypes.shape({
     button: PropTypes.string,
-    background: PropTypes.string
+    background: PropTypes.string,
+    subHeading: PropTypes.string,
+    csaLetters: PropTypes.string
   }).isRequired
 };
 

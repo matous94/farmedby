@@ -78,7 +78,7 @@ function ProductCTA(props) {
               onSubmit={handleSubmit(submitHandler)}
               className={classes.cardContent}
             >
-              <Typography variant="h2" component="h2" gutterBottom>
+              <Typography variant="h3" gutterBottom>
                 {t("landingPage.workInProgress")}
               </Typography>
               <Typography variant="h5">

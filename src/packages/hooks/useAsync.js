@@ -68,6 +68,7 @@ export default function useAsync(
       status,
       isLoading: status === StatusEnum.loading,
       hasError: status === StatusEnum.error,
+      isResolved: status === StatusEnum.resolved,
       result,
       StatusEnum,
       execute,
