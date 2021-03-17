@@ -1,6 +1,6 @@
 {
   "landingPage.showFarms": "Zobrazit Farmy",
-  "exampleFarmAlert": "Tato farma není skutečná. Slouží pro ilustraci a testování aplikace.",
+  "exampleFarmAlert": "Tato farma není skutečná. Slouží pouze pro ilustraci při vývoji aplikace.",
   "delete": "Smazat",
   "areYouSure": "Jste si jistý?",
   "cancel": "Zrušit",

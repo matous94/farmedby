@@ -61,6 +61,7 @@ export default function FarmEditor({
   hasError,
   onErrorDissmiss
 }) {
+  console.log(farm);
   const classes = useStyles();
   const { t } = useTranslation();
 
