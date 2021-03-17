@@ -55,7 +55,7 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
         </DialogTitle>
         <DialogContent>
           <TextField name="name" label={t("name")} type="text" />
-          <TextField name="street" label={t("street")} type="text" />
+          <TextField name="street" label={t("addressLine1")} type="text" />
           <Box display="flex" justifyContent="space-between">
             <TextField
               name="city"

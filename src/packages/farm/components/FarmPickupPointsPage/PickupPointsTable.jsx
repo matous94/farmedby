@@ -18,7 +18,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Link from "@material-ui/core/Link";
 
 import { FarmPropTypes, PickupPointPropTypes } from "src/types";
-import { createAddress } from "src/packages/utils";
 
 const useStyles = makeStyles({
   table: {
@@ -46,7 +45,6 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
     webUrl
   } = point;
   const { t } = useTranslation();
-  const { line1, line2 } = createAddress({ city, street, postcode });
   return (
     <TableRow>
       {isAdminMode && (
@@ -63,9 +61,11 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
       )}
       <TableCell style={{ whiteSpace: "nowrap" }}>{name}</TableCell>
       <TableCell style={{ whiteSpace: "nowrap" }}>
-        {line1}
+        {street}
         <br />
-        {line2}
+        {postcode}
+        <br />
+        {city}
       </TableCell>
       <TableCell>{pickupDay}</TableCell>
       <TableCell>
@@ -82,11 +82,7 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
           </>
         )}
         {webUrl && (
-          <Link
-            target="_blank"
-            style={{ wordBreak: "break-word", maxWidth: "150px" }}
-            href={webUrl}
-          >
+          <Link target="_blank" href={webUrl}>
             {t("webAddress")}
           </Link>
         )}
@@ -164,7 +160,7 @@ export default function PickupPointsTable({
             )}
             <TableCell>{t("name")}</TableCell>
             <TableCell>{t("address")}</TableCell>
-            <TableCell style={{ whiteSpace: "nowrap" }}>
+            <TableCell style={{ minWidth: "200px" }}>
               {t("pickupPointsPage.pickupDay")}
             </TableCell>
             <TableCell>{t("contacts")}</TableCell>

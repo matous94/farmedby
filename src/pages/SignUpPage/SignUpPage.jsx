@@ -71,12 +71,12 @@ export default function SignUpPage() {
   return (
     <>
       <Dialog
-        open={Boolean(errorMessage)}
+        isOpen={Boolean(errorMessage)}
         onClose={closeDialog}
         text={errorMessage}
         primaryButton={{ children: t("continue"), onClick: closeDialog }}
       />
-      <Dialog loading={isLoading} />
+      <Dialog isLoading={isLoading} />
       <AppBar />
       <Toolbar />
       <SignUpView isLoading={isLoading} onSubmit={submitHandler} />

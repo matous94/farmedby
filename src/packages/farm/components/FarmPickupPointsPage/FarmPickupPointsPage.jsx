@@ -2,17 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import { useStoreActions } from "easy-peasy";
+import { useTranslation } from "react-i18next";
 
-import { useSwitch } from "src/packages/hooks";
+import { useSwitch, useAsync } from "src/packages/hooks";
 import { FarmPropTypes } from "src/types";
 import ApiClient from "src/packages/api-client";
-import logger from "src/packages/logger";
+import Dialog from "src/components/Dialog";
+import GenericFailureDialog from "src/components/GenericFailureDialog";
 
 import PickupPointEditor from "./PickupPointEditor";
 import PickupPointsTable from "./PickupPointsTable";
 
 export default function FarmPickupPointsPage({ farm, isAdminMode }) {
+  const { t } = useTranslation();
   const editorSwitch = useSwitch(false);
+  const deleteDialogSwitch = useSwitch(false);
+
   const pickupPointSaved = useStoreActions(
     (actions) => actions.pickupPointSaved
   );
@@ -20,48 +25,68 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
     (actions) => actions.pickupPointDeleted
   );
 
-  const openDeleteDialog = React.useCallback(
-    async (pointId) => {
-      await ApiClient.Farm.deletePickupPoint(pointId);
-      pickupPointDeleted(pointId);
-    },
-    [pickupPointDeleted]
-  );
-
   const onSubmit = React.useCallback(
     async (pickupPoint) => {
-      try {
-        const objectId = editorSwitch.state?.objectId;
-        const point = await ApiClient.Farm.savePickupPoint({
-          ...pickupPoint,
-          objectId
-        });
-        pickupPointSaved(point);
-        editorSwitch.reset();
-      } catch (error) {
-        logger.farm("FarmPickupPointsPage > savePickupPoint failed", error);
-      }
+      const objectId = editorSwitch.state?.objectId;
+      const point = await ApiClient.Farm.savePickupPoint({
+        ...pickupPoint,
+        objectId
+      });
+      pickupPointSaved(point);
+      editorSwitch.reset();
     },
     [pickupPointSaved, editorSwitch]
   );
 
+  const onDelete = React.useCallback(
+    async (pointId) => {
+      deleteDialogSwitch.reset();
+      await ApiClient.Farm.deletePickupPoint(pointId);
+      pickupPointDeleted(pointId);
+    },
+    [pickupPointDeleted, deleteDialogSwitch]
+  );
+
+  const submitter = useAsync(onSubmit, { functionName: "onSubmit" });
+  const deletter = useAsync(onDelete, { functionName: "onDelete" });
+
   return (
-    <Box display="flex" justifyContent="center">
-      {editorSwitch.isOn && (
-        <PickupPointEditor
-          point={editorSwitch.state}
-          onClose={() => editorSwitch.reset()}
-          onSubmit={onSubmit}
+    <>
+      <Box display="flex" justifyContent="center">
+        {editorSwitch.isOn && (
+          <PickupPointEditor
+            point={editorSwitch.state}
+            onClose={() => editorSwitch.reset()}
+            onSubmit={submitter.execute}
+          />
+        )}
+        <PickupPointsTable
+          farm={farm}
+          onAdd={() => editorSwitch.switchOn()}
+          onEdit={editorSwitch.switchOn}
+          onDelete={deleteDialogSwitch.switchOn}
+          isAdminMode={isAdminMode}
         />
-      )}
-      <PickupPointsTable
-        farm={farm}
-        onAdd={() => editorSwitch.switchOn()}
-        onEdit={editorSwitch.switchOn}
-        onDelete={openDeleteDialog}
-        isAdminMode={isAdminMode}
+      </Box>
+      <Dialog isLoading={submitter.isLoading} />
+      <GenericFailureDialog
+        isOpen={submitter.hasError || deletter.hasError}
+        onClose={submitter.hasError ? submitter.reset : deletter.reset}
       />
-    </Box>
+      <Dialog
+        isOpen={deleteDialogSwitch.isOn}
+        isLoading={deletter.isLoading}
+        text={t("areYouSure")}
+        primaryButton={{
+          onClick: () => deletter.execute(deleteDialogSwitch.state),
+          children: t("delete")
+        }}
+        secondaryButton={{
+          onClick: () => deleteDialogSwitch.reset(),
+          children: t("cancel")
+        }}
+      />
+    </>
   );
 }
 

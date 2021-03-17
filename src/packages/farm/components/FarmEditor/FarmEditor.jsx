@@ -102,8 +102,8 @@ export default function FarmEditor({
 
   return (
     <>
-      <GenericFailureDialog open={hasError} onClose={onErrorDissmiss} />
-      <Dialog loading={isLoading} />
+      <GenericFailureDialog isOpen={hasError} onClose={onErrorDissmiss} />
+      <Dialog isLoading={isLoading} />
       <Container className={classes.container} component="main" maxWidth="xs">
         {mode === "create" && (
           <>
@@ -152,7 +152,7 @@ export default function FarmEditor({
                 value={formData.street}
                 type="text"
                 name="street"
-                label={t("street")}
+                label={t("addressLine1")}
                 autoComplete="street-address"
               />
             </Grid>

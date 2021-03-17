@@ -1,4 +1,7 @@
 {
+  "exampleFarmAlert": "Tato farma není skutečná. Slouží pro ilustraci a testování aplikace.",
+  "delete": "Smazat",
+  "areYouSure": "Jste si jistý?",
   "cancel": "Zrušit",
   "pickupPointEditor.heading": "Odběrový bod",
   "pickupPointsPage.editDelete": "Editovat/Smazat",
@@ -60,7 +63,7 @@
   "signUpPage.invalidEmail": "Neplatný email.",
   "signUpPage.newsletterCheckbox": "Chci novinky od FarmedBy na email.",
   "somethingWentWrong": "Něco se porouchalo",
-  "street": "Ulice",
+  "addressLine1": "Ulice a číslo popisné",
   "tryItLater": "Zkuste akci opakovat později.",
   "vegetables": "Zelenina",
   "webAddress": "Webová adresa"

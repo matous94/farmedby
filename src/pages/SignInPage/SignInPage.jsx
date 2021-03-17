@@ -92,12 +92,12 @@ export default function SignInPage() {
   return (
     <>
       <Dialog
-        open={Boolean(errorMessage)}
+        isOpen={Boolean(errorMessage)}
         onClose={closeDialog}
         text={errorMessage}
         primaryButton={{ children: t("continue"), onClick: closeDialog }}
       />
-      <Dialog loading={isLoading} />
+      <Dialog isLoading={isLoading} />
       <AppBar />
       <Toolbar />
       <Container component="main" maxWidth="xs">

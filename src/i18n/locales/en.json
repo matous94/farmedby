@@ -1,4 +1,7 @@
 {
+  "exampleFarmAlert": "This farm is not real. It is used for illustrative and development purposes.",
+  "delete": "Delete",
+  "areYouSure": "Are you sure?",
   "cancel": "Cancel",
   "pickupPointEditor.heading": "Pickup Point",
   "pickupPointsPage.editDelete": "Edit/Delete",
@@ -12,7 +15,7 @@
   "boxes": "Boxes",
   "city": "City",
   "contacts": "Contacts",
-  "continue": "Pokračovat",
+  "continue": "Continue",
   "createFarm": "Create farm",
   "dairy": "Dairy",
   "eggs": "Eggs",
@@ -35,7 +38,6 @@
   "firstName": "First name",
   "fruits": "Fruits",
   "genericFailureMessage": "Something's wrong. Please try again later.",
-  "HN": "HN",
   "landingPage.heading": "Fruits and vegetables from local farmers",
   "landingPage.showExampleFarm": "Show Example Farm",
   "landingPage.subscribeToNewsletter": "Subscribe",
@@ -61,7 +63,7 @@
   "signUpPage.invalidEmail": "Invalid email",
   "signUpPage.newsletterCheckbox": "Subscribe to FarmedBy newsletter",
   "somethingWentWrong": "Something went wrong",
-  "street": "Street",
+  "addressLine1": "Street and house number",
   "tryItLater": "Try it again later.",
   "vegetables": "Vegetables",
   "webAddress": "Web address"

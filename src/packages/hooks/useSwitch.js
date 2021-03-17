@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function useSwitch(initialValue = false, initialState) {
+export default function useSwitch(initialValue = false, initialState) {
   const initialValueRef = React.useRef(initialValue);
   const initialStateRef = React.useRef(initialState);
   const [isOn, switchState] = React.useState(initialValue);

@@ -48,7 +48,7 @@ export default function FarmPages() {
   return (
     <>
       <GenericFailureDialog
-        open={status === "error"}
+        isOpen={status === "error"}
         onClose={() => {
           window.location = "/";
         }}
@@ -81,6 +81,11 @@ export default function FarmPages() {
               {!farm.published && isFarmOwner && (
                 <Alert variant="filled" severity="info">
                   {t("farmPage.farmIsNotPublishedAlert")}
+                </Alert>
+              )}
+              {farm.isExampleFarm && (
+                <Alert variant="filled" severity="warning">
+                  {t("exampleFarmAlert")}
                 </Alert>
               )}
               <Box pt="16px" pb="32px" px={["16px", "24px", "32px", "64px"]}>

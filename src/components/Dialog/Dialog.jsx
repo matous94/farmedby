@@ -21,39 +21,39 @@ const useStyles = makeStyles({
 
 export default function Dialog({
   onClose,
-  open,
+  isOpen,
   primaryButton,
-  loading,
+  isLoading,
   loadingText,
   secondaryButton,
-  status,
+  status, // isOpen, loading, close
   title,
   text
 }) {
-  if (open == null && status == null && loading == null) {
-    throw new Error("One of [open, status, loading] props is required.");
+  if (isOpen == null && status == null && isLoading == null) {
+    throw new Error("One of [isOpen, status, isLoading] props is required.");
   }
-  if (typeof loading === "boolean" && status == null) {
+  if (typeof isOpen === "boolean" && status == null) {
     // eslint-disable-next-line no-param-reassign
-    status = loading ? "loading" : "close";
+    status = isOpen ? "isOpen" : "close";
   }
-  if (typeof open === "boolean" && status == null) {
+  if (isLoading) {
     // eslint-disable-next-line no-param-reassign
-    status = open ? "open" : "close";
+    status = "isLoading";
   }
   const classes = useStyles();
 
   return (
     <MUiDialog
-      open={status === "open" || status === "loading"}
+      open={status === "isOpen" || status === "isLoading"}
       onClose={onClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
       maxWidth="xs"
       fullWidth
-      PaperProps={{ className: classes.paper }}
+      PaperProps={{ className: status === "isLoading" ? classes.paper : "" }}
     >
-      {status === "loading" && (
+      {status === "isLoading" && (
         <Box
           display="flex"
           flexDirection="column"
@@ -73,22 +73,22 @@ export default function Dialog({
           )}
         </Box>
       )}
-      {status === "open" && (
+      {status === "isOpen" && (
         <>
           {title && <DialogTitle id="alert-dialog-title">{title}</DialogTitle>}
-          <DialogContent>
-            {text && (
+          {text && (
+            <DialogContent>
               <DialogContentText id="alert-dialog-description">
                 {text}
               </DialogContentText>
-            )}
-          </DialogContent>
+            </DialogContent>
+          )}
           <DialogActions>
             {secondaryButton && (
               <Button
                 onClick={secondaryButton.onClick}
                 disabled={secondaryButton.disabled ?? false}
-                color="secondary"
+                color="primary"
               >
                 {secondaryButton.children}
               </Button>
@@ -109,28 +109,28 @@ export default function Dialog({
 }
 Dialog.propTypes = {
   onClose: PropTypes.func,
-  open: PropTypes.bool,
+  isOpen: PropTypes.bool,
   primaryButton: PropTypes.shape({
     children: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     disabled: PropTypes.bool
   }),
-  loading: PropTypes.bool,
+  isLoading: PropTypes.bool,
   loadingText: PropTypes.string,
   secondaryButton: PropTypes.shape({
     children: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     disabled: PropTypes.bool
   }),
-  status: PropTypes.oneOf(["open", "close", "loading"]),
+  status: PropTypes.oneOf(["isOpen", "close", "isLoading"]),
   title: PropTypes.string,
   text: PropTypes.string
 };
 Dialog.defaultProps = {
   onClose: undefined,
-  open: undefined,
+  isOpen: undefined,
   primaryButton: undefined,
-  loading: undefined,
+  isLoading: undefined,
   loadingText: undefined,
   secondaryButton: undefined,
   status: undefined,

@@ -12,8 +12,18 @@ import theme from "./theme";
 import App from "./App";
 // import reportWebVitals from "./reportWebVitals";
 
+if (process.env.NODE_ENV === "development") {
+  window.sleep = ({ duration = 3000, reject: shouldReject = false } = {}) => {
+    return new Promise((resolve, reject) =>
+      setTimeout(
+        shouldReject ? () => reject(new Error("Test reject")) : resolve,
+        duration
+      )
+    );
+  };
+}
+
 const store = createStore();
-window.getState = store.getState;
 
 async function renderReactApp() {
   await setupI18n({ onCountryChange: () => renderReactApp() });

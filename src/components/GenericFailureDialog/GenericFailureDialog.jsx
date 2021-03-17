@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 
 import Dialog from "src/components/Dialog";
 
-export default function GenericFailureDialog({ onClose, open }) {
+export default function GenericFailureDialog({ onClose, isOpen }) {
   const { t } = useTranslation();
   return (
     <Dialog
-      open={open}
+      isOpen={isOpen}
       onClose={onClose}
       title={t("somethingWentWrong")}
       text={t("tryItLater")}
@@ -21,5 +21,5 @@ export default function GenericFailureDialog({ onClose, open }) {
 }
 GenericFailureDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired
 };
