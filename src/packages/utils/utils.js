@@ -9,7 +9,7 @@ export function createAddress({ city, countryCode, postcode, street }) {
   }
 
   return {
-    full: `${street}, ${city} ${postcode}${country}`,
+    full: `${street}, ${postcode} ${city}${country}`,
     line1: street,
     line2: `${city} ${postcode}`,
     countryName

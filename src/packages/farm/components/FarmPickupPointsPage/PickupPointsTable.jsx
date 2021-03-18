@@ -20,9 +20,6 @@ import Link from "@material-ui/core/Link";
 import { FarmPropTypes, PickupPointPropTypes } from "src/types";
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650
-  },
   paper: {
     maxWidth: 1000
   }
@@ -148,11 +145,7 @@ export default function PickupPointsTable({
 
   return (
     <TableContainer className={classes.paper} component={Paper}>
-      <Table
-        className={classes.table}
-        size="small"
-        aria-label="pickup points table"
-      >
+      <Table size="small" aria-label="pickup points table">
         <TableHead>
           <TableRow>
             {isAdminMode && (

@@ -40,7 +40,7 @@ FarmData.defaultProps = {
   url: null
 };
 
-export default function FarmView({ farm }) {
+export default function FarmView({ farm, isFarmOwner }) {
   window.about = farm.about;
   const {
     about,
@@ -69,22 +69,27 @@ export default function FarmView({ farm }) {
           value={createAddress({ city, countryCode, street, postcode }).full}
         />
       </Box>
-      <Typography style={{ marginBottom: "8px" }} variant="h5">
-        {t("aboutFarm")}
-      </Typography>
-      {aboutAsParagraphs.map((paragraph, index) => (
-        <Typography
-          // eslint-disable-next-line react/no-array-index-key
-          key={index}
-          style={{ paddingTop: paragraph === "" ? "24px" : 0 }}
-          variant="body1"
-        >
-          {paragraph}
-        </Typography>
-      ))}
+      {(about || isFarmOwner) && (
+        <>
+          <Typography style={{ marginBottom: "8px" }} variant="h5">
+            {t("aboutFarm")}
+          </Typography>
+          {aboutAsParagraphs.map((paragraph, index) => (
+            <Typography
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              style={{ paddingTop: paragraph === "" ? "24px" : 0 }}
+              variant="body1"
+            >
+              {paragraph}
+            </Typography>
+          ))}
+        </>
+      )}
     </Box>
   );
 }
 FarmView.propTypes = {
-  farm: FarmPropTypes.isRequired
+  farm: FarmPropTypes.isRequired,
+  isFarmOwner: PropTypes.bool.isRequired
 };

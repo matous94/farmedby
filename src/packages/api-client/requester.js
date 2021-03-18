@@ -1,4 +1,5 @@
 import logger from "src/packages/logger";
+import { localStorageKeys } from "src/packages/local-storage";
 
 function parseQuery(query) {
   if (!query) return "";
@@ -24,9 +25,7 @@ export function sendParseRequest(
     body
   );
 
-  const token = localStorage.getItem(
-    process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY
-  );
+  const token = localStorage.getItem(localStorageKeys.sessionToken);
 
   const headers = {
     "content-type": "application/json",
@@ -54,7 +53,7 @@ export function sendParseRequest(
 
     // invalid session token
     if (!response.ok && data.code === 209) {
-      localStorage.removeItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
+      localStorage.removeItem(localStorageKeys.sessionToken);
       window.location = "/sign-in";
     }
 

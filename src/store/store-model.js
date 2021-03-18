@@ -1,11 +1,14 @@
 /* eslint-disable no-param-reassign,no-underscore-dangle */
 import { action } from "easy-peasy";
+import { localStorageKeys } from "src/packages/local-storage";
+
+const adminMode = localStorage.getItem(localStorageKeys.adminMode);
 
 const storeModel = {
   user: null,
   myFarm: null,
   farmPages: {
-    adminMode: false
+    adminMode: adminMode == null ? false : JSON.parse(adminMode)
   },
   farmCreated: action((state, farm) => {
     state.myFarm = farm;
@@ -41,7 +44,9 @@ const storeModel = {
     state.user = user;
   }),
   toggleAdminMode: action((state) => {
-    state.farmPages.adminMode = !state.farmPages.adminMode;
+    const newValue = !state.farmPages.adminMode;
+    state.farmPages.adminMode = newValue;
+    localStorage.setItem(localStorageKeys.adminMode, newValue);
   })
 };
 

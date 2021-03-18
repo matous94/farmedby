@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useStoreActions } from "easy-peasy";
+import { useTranslation } from "react-i18next";
 
 import ApiClient from "src/packages/api-client";
 import { FarmPropTypes } from "src/types";
@@ -11,9 +12,11 @@ import FarmView from "./FarmView";
 export default function FarmLandingPage({
   farm,
   isAdminMode,
+  isFarmOwner,
   toggleAdminMode
 }) {
   const updateMyFarm = useStoreActions((actions) => actions.updateMyFarm);
+  const { t } = useTranslation();
 
   const [hasError, setHasError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -45,9 +48,10 @@ export default function FarmLandingPage({
           hasError={hasError}
           isLoading={isLoading}
           onErrorDissmiss={onErrorDissmiss}
+          submitButtonText={t("save")}
         />
       ) : (
-        <FarmView farm={farm} />
+        <FarmView farm={farm} isFarmOwner={isFarmOwner} />
       )}
     </>
   );
@@ -55,5 +59,6 @@ export default function FarmLandingPage({
 FarmLandingPage.propTypes = {
   farm: FarmPropTypes.isRequired,
   isAdminMode: PropTypes.bool.isRequired,
+  isFarmOwner: PropTypes.bool.isRequired,
   toggleAdminMode: PropTypes.func.isRequired
 };

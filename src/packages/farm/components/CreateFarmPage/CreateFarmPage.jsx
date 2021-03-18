@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Toolbar from "@material-ui/core/Toolbar";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import { useTranslation } from "react-i18next";
 
 import ApiClient from "src/packages/api-client";
 import { selectors } from "src/store";
@@ -10,8 +11,11 @@ import logger from "src/packages/logger";
 import { getCountryCode } from "src/i18n";
 import FarmEditor from "src/packages/farm/components/FarmEditor";
 
+import Heading from "./Heading";
+
 export default function CreateFarmPage() {
   const history = useHistory();
+  const { t } = useTranslation();
 
   const user = useStoreState(selectors.getUser);
   const myFarm = useStoreState(selectors.getMyFarm);
@@ -56,13 +60,14 @@ export default function CreateFarmPage() {
     <>
       <AppBar />
       <Toolbar />
+      <Heading />
       <FarmEditor
         farm={{ email: user.email }}
         isLoading={isLoading}
         onSubmit={submitHandler}
         onErrorDissmiss={onErrorDissmiss}
         hasError={hasError}
-        mode="create"
+        submitButtonText={t("createFarm")}
       />
     </>
   );

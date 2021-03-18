@@ -8,6 +8,7 @@ import LoadingScreen from "src/components/LoadingScreen";
 import PublicPage from "src/components/PublicPage";
 import PrivatePage from "src/components/PrivatePage";
 import CreateFarmPage from "src/packages/farm/components/CreateFarmPage";
+import { localStorageKeys } from "src/packages/local-storage";
 
 import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
@@ -17,7 +18,7 @@ import FarmRouter from "src/packages/farm/components/FarmRouter";
 import FarmsPage from "src/packages/farm/components/FarmsPage";
 
 function getSessionToken() {
-  return localStorage.getItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
+  return localStorage.getItem(localStorageKeys.sessionToken);
 }
 
 function App() {
@@ -34,9 +35,7 @@ function App() {
         setIsLoading(false);
       } catch (error) {
         logger.user("Authentication failed");
-        localStorage.removeItem(
-          process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY
-        );
+        localStorage.removeItem(localStorageKeys.sessionToken);
         setIsLoading(false);
       }
     }

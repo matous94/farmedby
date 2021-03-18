@@ -1,5 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+
+import { localStorageKeys } from "src/packages/local-storage";
+
 import csLocales from "./locales/cs.json";
 import enLocales from "./locales/en.json";
 // https://github.com/HatScripts/circle-flags/
@@ -48,13 +51,16 @@ export function getCountryCode() {
 export function changeCountry(code) {
   countryCode = code;
   i18n.changeLanguage(supportedCountries[countryCode].languageCode);
+  localStorage.setItem(localStorageKeys.countryCode, code);
 }
 
 export async function setupI18n({ onCountryChange }) {
   if (countryCode) return;
 
   const usersLanguage = window.navigator?.language?.split("-")[0];
-  countryCode = languageToCountryCode(usersLanguage);
+  countryCode =
+    localStorage.getItem(localStorageKeys.countryCode) ||
+    languageToCountryCode(usersLanguage);
 
   const resources = Object.values(supportedCountries).reduce(
     (accu, country) => {

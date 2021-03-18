@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import MuiTextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -16,26 +15,20 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import Dialog from "src/components/Dialog";
 import { ProductTypes, FarmPropTypes } from "src/types";
-import FarmIcon from "src/icons/FarmIcon";
 import Select from "src/components/Select/Select";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%",
     marginTop: theme.spacing(2)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: "24px 0 32px 0"
   }
 }));
 
@@ -57,11 +50,10 @@ export default function FarmEditor({
   onSubmit,
   isLoading,
   farm,
-  mode,
   hasError,
+  submitButtonText,
   onErrorDissmiss
 }) {
-  console.log(farm);
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -106,16 +98,6 @@ export default function FarmEditor({
       <GenericFailureDialog isOpen={hasError} onClose={onErrorDissmiss} />
       <Dialog isLoading={isLoading} />
       <Container className={classes.container} component="main" maxWidth="xs">
-        {mode === "create" && (
-          <>
-            <Avatar className={classes.avatar}>
-              <FarmIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              {t("myFarm")}
-            </Typography>
-          </>
-        )}
         <form className={classes.form} onSubmit={submitHandler}>
           <Grid container justify="center" spacing={2}>
             <Grid item xs={12}>
@@ -222,18 +204,16 @@ export default function FarmEditor({
               />
             </Grid>
           </Grid>
-          {mode === "edit" && (
-            <Box mt="16px">
-              <Typography variant="h5">{t("aboutFarm")}</Typography>
-              <TextareaAutosize
-                name="about"
-                rowsMin={10}
-                style={{ width: "100%" }}
-                value={formData.about}
-                onChange={onChange}
-              />
-            </Box>
-          )}
+          <Box mt="16px">
+            <Typography variant="h5">{t("aboutFarm")}</Typography>
+            <TextareaAutosize
+              name="about"
+              rowsMin={10}
+              style={{ width: "100%" }}
+              value={formData.about}
+              onChange={onChange}
+            />
+          </Box>
           <Button
             type="submit"
             fullWidth
@@ -241,7 +221,7 @@ export default function FarmEditor({
             color="primary"
             className={classes.submit}
           >
-            {mode === "create" ? t("createFarm") : t("save")}
+            {submitButtonText}
           </Button>
         </form>
       </Container>
@@ -252,7 +232,7 @@ FarmEditor.propTypes = {
   hasError: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
   farm: FarmPropTypes,
-  mode: PropTypes.oneOf(["create", "edit"]).isRequired,
+  submitButtonText: PropTypes.string.isRequired,
   onErrorDissmiss: PropTypes.func,
   onSubmit: PropTypes.func.isRequired
 };

@@ -1,5 +1,6 @@
 import { sendParseRequest } from "src/packages/api-client/requester";
 import logger from "src/packages/logger";
+import { localStorageKeys } from "src/packages/local-storage";
 
 export async function signUp({ email, password, firstName, lastName }) {
   const response = await sendParseRequest("users", {
@@ -11,10 +12,7 @@ export async function signUp({ email, password, firstName, lastName }) {
       lastName
     }
   });
-  localStorage.setItem(
-    process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY,
-    response.sessionToken
-  );
+  localStorage.setItem(localStorageKeys.sessionToken, response.sessionToken);
   return response;
 }
 
@@ -25,10 +23,7 @@ export async function signIn({ email, password }) {
       password
     }
   });
-  localStorage.setItem(
-    process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY,
-    response.sessionToken
-  );
+  localStorage.setItem(localStorageKeys.sessionToken, response.sessionToken);
   return response;
 }
 
@@ -46,6 +41,6 @@ export function signOut() {
   } catch (error) {
     logger.user("SignOut failure silently ignored.", error);
   }
-  localStorage.removeItem(process.env.REACT_APP_SESSION_TOKEN_STORAGE_KEY);
+  localStorage.removeItem(localStorageKeys.sessionToken);
   logger.user("Removed session token from local storage.");
 }
