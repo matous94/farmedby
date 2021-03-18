@@ -26,3 +26,7 @@ export function isAdminMode(farmId) {
     return false;
   };
 }
+
+export function getFarms(state) {
+  return state.farms;
+}

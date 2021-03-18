@@ -10,12 +10,16 @@ export const UserPropTypes = PropTypes.shape({
 });
 
 export const ProductTypes = Object.freeze({
-  meat: "meat",
   vegetables: "vegetables",
+  fruits: "fruits",
   eggs: "eggs",
-  dairy: "dairy",
-  fruits: "fruits"
+  meat: "meat",
+  dairy: "dairy"
 });
+
+export const ProductTypesPropTypes = PropTypes.arrayOf(
+  PropTypes.oneOf(Object.values(ProductTypes))
+);
 
 export const BoxPropTypes = PropTypes.shape({
   content: PropTypes.string,
@@ -51,7 +55,7 @@ export const FarmPropTypes = PropTypes.shape({
   phoneNumber: PropTypes.string,
   pickupPoints: PropTypes.arrayOf(PickupPointPropTypes),
   postcode: PropTypes.string,
-  productTypes: PropTypes.arrayOf(PropTypes.oneOf(Object.values(ProductTypes))),
+  productTypes: ProductTypesPropTypes,
   published: PropTypes.bool,
   street: PropTypes.string,
   webUrl: PropTypes.string

@@ -1,36 +1,61 @@
 import * as React from "react";
+import { useStoreState, useStoreActions } from "easy-peasy";
+import { useTranslation } from "react-i18next";
 import Box from "@material-ui/core/Box";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 
+import LoadingOverlay from "src/components/LoadingOverlay";
 import ApiClient from "src/packages/api-client";
 import { useAsync } from "src/packages/hooks";
 import AppBar from "src/components/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Link from "src/components/Link";
+import { selectors } from "src/store";
+import GenericFailureDialog from "src/components/GenericFailureDialog";
+
+import FarmsTable from "./FarmsTable";
 
 export default function FarmsPage() {
+  const { t } = useTranslation();
+  const farms = useStoreState(selectors.getFarms);
+  const farmsResolved = useStoreActions((actions) => actions.farmsResolved);
   const farmGetter = useAsync(
-    () => {
-      return ApiClient.Farm.getFarms();
+    async () => {
+      const refreshedFarms = await ApiClient.Farm.getFarms();
+      farmsResolved(refreshedFarms);
     },
-    { runOnMount: true, functionName: "getFarms" }
+    {
+      runIfEmpty: true,
+      refreshCache: true,
+      cachedResult: farms,
+      functionName: "getFarms"
+    }
   );
-
   return (
     <>
       <AppBar />
       <Toolbar />
-      <Box p="24px" width="700px" mx="auto">
-        {farmGetter.isLoading && <h1>Loading</h1>}
-        {farmGetter.isResolved &&
-          farmGetter.result.map((farm) => (
-            <Box mb="32px" key={farm.objectId}>
-              <Link to={`/farm/${farm.objectId}`}>{farm.name}</Link>
-              <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
-                {JSON.stringify(farm, null, 2)}
-              </pre>
-            </Box>
-          ))}
-      </Box>
+      {farmGetter.isLoading && <LoadingOverlay />}
+      <GenericFailureDialog
+        isOpen={farmGetter.hasError}
+        onClose={farmGetter.reset}
+      />
+      {farmGetter.isResolved && (
+        <Box
+          pt="16px"
+          pb="32px"
+          px={["16px", "24px", "32px", "64px"]}
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
+        >
+          <Box mb="16px">
+            <Typography align="center" color="secondary" variant="h4">
+              {t("farmsPage.heading")}
+            </Typography>
+          </Box>
+          <FarmsTable farms={farms} />
+        </Box>
+      )}
     </>
   );
 }

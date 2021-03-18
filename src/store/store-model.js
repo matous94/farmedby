@@ -7,6 +7,7 @@ const adminMode = localStorage.getItem(localStorageKeys.adminMode);
 const storeModel = {
   user: null,
   myFarm: null,
+  farms: null,
   farmPages: {
     adminMode: adminMode == null ? false : JSON.parse(adminMode)
   },
@@ -31,6 +32,9 @@ const storeModel = {
       (point) => point.objectId === pointId
     );
     if (index !== -1) state.myFarm.pickupPoints.splice(index, 1);
+  }),
+  farmsResolved: action((state, farms) => {
+    state.farms = farms;
   }),
   signIn: action((state, payload) => {
     state.user = payload.user;

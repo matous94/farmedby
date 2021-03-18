@@ -178,7 +178,6 @@ export default function PickupPointsTable({
             />
           )}
           {pickupPoints.map((point) => (
-            // eslint-disable-next-line react/jsx-props-no-spreading
             <PickupPoint
               isAdminMode={isAdminMode}
               key={point.objectId}

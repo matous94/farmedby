@@ -61,7 +61,10 @@ export default function FarmEditor({
     () =>
       Object.values(ProductTypes).reduce((options, productId) => {
         // eslint-disable-next-line no-param-reassign
-        options[productId] = { id: productId, label: t(productId) };
+        options[productId] = {
+          id: productId,
+          label: t(`productTypes.${productId}`)
+        };
         return options;
       }, {}),
     [t]

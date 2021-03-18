@@ -7,29 +7,37 @@ const StatusEnum = Object.freeze({
   resolved: "resolved",
   error: "error"
 });
-function getInitialStatus({ runOnMount, cachedResult }) {
+function getInitialStatus({ runIfEmpty, cachedResult }) {
   let status = StatusEnum.initial;
   if (cachedResult) status = StatusEnum.resolved;
-  if (runOnMount) status = StatusEnum.loading;
+  if (runIfEmpty && cachedResult == null) status = StatusEnum.loading;
   return status;
 }
 
 export default function useAsync(
   asyncFunction,
   {
-    runOnMount = false,
     cachedResult,
+    runIfEmpty = false,
+    refreshCache = false,
+    failOnRefresh = false,
     memorizeFunction = false,
+    ignoreMultipleCalls = true,
     errorLogger = logger.error,
     errorMessage,
     functionName = asyncFunction.name
   } = {}
 ) {
+  const isExecuting = React.useRef(false);
   // initial, loading, resolved, error
   const [status, setStatus] = React.useState(
-    getInitialStatus({ runOnMount, cachedResult })
+    getInitialStatus({ runIfEmpty, cachedResult })
+  );
+  const [isRefreshing, setIsRefreshing] = React.useState(
+    cachedResult && refreshCache
   );
   const [result, setResult] = React.useState(cachedResult);
+
   const memorizedFunction = React.useRef(
     memorizeFunction ? asyncFunction : undefined
   ).current;
@@ -38,6 +46,9 @@ export default function useAsync(
 
   const execute = React.useCallback(
     async (...args) => {
+      if (ignoreMultipleCalls && isExecuting.current)
+        return { result, error: false };
+      isExecuting.current = true;
       try {
         setStatus(StatusEnum.loading);
         const response = await functionToExecute(...args);
@@ -51,14 +62,60 @@ export default function useAsync(
         );
         setStatus(StatusEnum.error);
         return { error: true };
+      } finally {
+        isExecuting.current = false;
       }
     },
-    [errorLogger, errorMessage, functionToExecute, functionName]
+    [
+      errorLogger,
+      errorMessage,
+      functionToExecute,
+      functionName,
+      ignoreMultipleCalls,
+      result
+    ]
+  );
+  const refresh = React.useCallback(
+    async (...args) => {
+      if (ignoreMultipleCalls && isExecuting.current)
+        return { result, error: false };
+      isExecuting.current = true;
+      try {
+        setIsRefreshing(true);
+        const response = await functionToExecute(...args);
+        setResult(response);
+        setIsRefreshing(false);
+        return { result: response, error: false };
+      } catch (error) {
+        errorLogger(
+          errorMessage || `useAsync > refresh > ${functionName} failed`,
+          error
+        );
+        setIsRefreshing(false);
+        if (failOnRefresh) {
+          setStatus(StatusEnum.error);
+        }
+        return { error: true };
+      } finally {
+        isExecuting.current = false;
+      }
+    },
+    [
+      errorLogger,
+      errorMessage,
+      functionToExecute,
+      functionName,
+      failOnRefresh,
+      ignoreMultipleCalls,
+      result
+    ]
   );
 
   React.useEffect(() => {
-    if (runOnMount) {
+    if (runIfEmpty && result == null) {
       execute();
+    } else if (refreshCache && cachedResult !== null) {
+      refresh();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -69,14 +126,16 @@ export default function useAsync(
       isLoading: status === StatusEnum.loading,
       hasError: status === StatusEnum.error,
       isResolved: status === StatusEnum.resolved,
+      isRefreshing,
       result,
       StatusEnum,
       execute,
+      refresh,
       reset: () => {
         setStatus(StatusEnum.initial);
         setResult(undefined);
       }
     }),
-    [status, result, execute]
+    [status, result, execute, refresh, isRefreshing]
   );
 }

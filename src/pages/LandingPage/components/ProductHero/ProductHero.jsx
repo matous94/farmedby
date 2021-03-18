@@ -66,7 +66,7 @@ function ProductHero(props) {
         {t("landingPage.heading")
           .split(" ")
           .map((word, index, { length }) => (
-            <span className={classes.csaLetters} key="word">
+            <span className={classes.csaLetters} key={word}>
               {word}
               {index < length - 1 && <>&nbsp;</>}
             </span>

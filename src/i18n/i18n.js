@@ -50,8 +50,8 @@ export function getCountryCode() {
 
 export function changeCountry(code) {
   countryCode = code;
-  i18n.changeLanguage(supportedCountries[countryCode].languageCode);
   localStorage.setItem(localStorageKeys.countryCode, code);
+  window.location.reload();
 }
 
 export async function setupI18n({ onCountryChange }) {

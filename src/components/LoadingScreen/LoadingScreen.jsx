@@ -1,23 +1,13 @@
 import * as React from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Box from "@material-ui/core/Box";
 
+import LoadingOverlay from "src/components/LoadingOverlay";
 import AppBar from "src/components/AppBar";
 
 export default function LoadingScreen() {
   return (
     <>
       <AppBar onlyLogo />
-      <Box
-        position="absolute"
-        width="100vw"
-        height="100vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <CircularProgress />
-      </Box>
+      <LoadingOverlay />
     </>
   );
 }

@@ -54,7 +54,9 @@ export default function FarmView({ farm, isFarmOwner }) {
     webUrl
   } = farm;
   const { t } = useTranslation();
-  const producing = productTypes.map((type) => t(type)).join(", ");
+  const producing = productTypes
+    .map((type) => t(`productTypes.${type}`))
+    .join(", ");
 
   const aboutAsParagraphs = about.split("\n");
   return (
