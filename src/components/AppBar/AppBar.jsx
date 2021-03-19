@@ -41,15 +41,19 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "end"
     }
   },
-  rightLink: {
-    fontSize: 16,
-    color: theme.palette.common.white,
-    marginLeft: theme.spacing(3)
+  marginLeft: {
+    marginLeft: theme.spacing(3),
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: theme.spacing(0)
+    }
   },
-  linkSecondary: {
-    color: theme.palette.secondary.main,
-    textTransform: "none",
-    padding: 0
+  secondaryLink: {
+    fontSize: "16px",
+    color: theme.palette.secondary.main
+  },
+  primaryLink: {
+    fontSize: "16px",
+    color: theme.palette.common.white
   }
 }));
 
@@ -96,32 +100,12 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
         {!onlyLogo && (
           <div className={classes.right}>
             <>
-              {user && myFarm && (
-                <Link
-                  underline="none"
-                  variant="h6"
-                  className={classes.rightLink}
-                  to={`/farm/${myFarm.objectId}`}
-                >
-                  {t("myFarm")}
-                </Link>
-              )}
-              {!myFarm && (
-                <Link
-                  variant="h6"
-                  underline="none"
-                  className={clsx(classes.rightLink)}
-                  to="/sign-up"
-                >
-                  {t("createFarm")}
-                </Link>
-              )}
               {user ? (
                 <MuiLink
                   underline="none"
                   variant="h6"
                   component="button"
-                  className={clsx(classes.rightLink, classes.linkSecondary)}
+                  className={clsx(classes.secondaryLink)}
                   onClick={signOutHandler}
                 >
                   {t("signOut")}
@@ -130,10 +114,29 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
                 <Link
                   underline="none"
                   variant="h6"
-                  className={clsx(classes.rightLink, classes.linkSecondary)}
+                  className={clsx(classes.secondaryLink)}
                   to="/sign-in"
                 >
                   {t("signIn")}
+                </Link>
+              )}
+              {myFarm ? (
+                <Link
+                  underline="none"
+                  variant="h6"
+                  className={clsx(classes.primaryLink, classes.marginLeft)}
+                  to={`/farm/${myFarm.objectId}`}
+                >
+                  {t("myFarm")}
+                </Link>
+              ) : (
+                <Link
+                  variant="h6"
+                  underline="none"
+                  className={clsx(classes.primaryLink, classes.marginLeft)}
+                  to="/sign-up"
+                >
+                  {t("createFarm")}
                 </Link>
               )}
             </>
