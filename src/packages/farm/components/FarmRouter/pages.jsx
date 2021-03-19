@@ -47,12 +47,12 @@ export default {
     private: false,
     PageContent: FarmPickupPointsPage
   },
-  orders: {
-    name: "orders",
-    translationKey: "orders",
-    Icon: PaymentIcon,
-    disabled: false,
-    private: true,
+  eshop: {
+    name: "eshop",
+    translationKey: "farmPage.eshop",
+    Icon: ShoppingCartIcon,
+    disabled: true,
+    private: false,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -61,12 +61,12 @@ export default {
       );
     }
   },
-  eshop: {
-    name: "eshop",
-    translationKey: "farmPage.eshop",
-    Icon: ShoppingCartIcon,
+  orders: {
+    name: "orders",
+    translationKey: "orders",
+    Icon: PaymentIcon,
     disabled: true,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>

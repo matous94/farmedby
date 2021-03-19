@@ -41,7 +41,11 @@ function languageToCountryCode(lng) {
 }
 
 export function getCountry(code = countryCode) {
-  return supportedCountries[code];
+  return supportedCountries[code] || supportedCountries[countryCode];
+}
+
+export function getLanguageCode(code = countryCode) {
+  return getCountry(code).languageCode;
 }
 
 export function getCountryCode() {
