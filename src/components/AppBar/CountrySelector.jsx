@@ -30,16 +30,29 @@ export default function CountrySelector() {
 
   return (
     <>
-      <Box
-        width="100%"
-        height="100%"
-        component="img"
-        alt={supportedCountries[selectedCountry].countryName}
-        src={supportedCountries[selectedCountry].flagSrc}
-        onClick={handleOpen}
-        borderRadius="50%"
-        style={{ cursor: "pointer", objectFit: "cover" }}
-      />
+      <Box width="100%" height="100%" position="relative" onClick={handleOpen}>
+        <Box
+          borderRadius="50%"
+          position="absolute"
+          border={[
+            "2px solid rgba(0, 0, 0, 0.2)",
+            "3px solid rgba(0, 0, 0, 0.2)",
+            "4px solid rgba(0, 0, 0, 0.2)"
+          ]}
+          width="100%"
+          height="100%"
+          style={{ cursor: "pointer" }}
+        />
+        <Box
+          width="100%"
+          height="100%"
+          component="img"
+          alt={supportedCountries[selectedCountry].countryName}
+          src={supportedCountries[selectedCountry].flagSrc}
+          borderRadius="50%"
+          style={{ cursor: "pointer", objectFit: "cover" }}
+        />
+      </Box>
       <Menu
         elevation={1}
         getContentAnchorEl={null}
