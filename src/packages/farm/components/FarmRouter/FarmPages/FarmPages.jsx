@@ -11,6 +11,7 @@ import Alert from "@material-ui/lab/Alert";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
+import { isIllustrativeFarm } from "src/packages/utils";
 import { useSwitch } from "src/packages/hooks";
 import { selectors } from "src/store";
 import AppBar from "src/components/AppBar";
@@ -85,7 +86,9 @@ export default function FarmPages() {
               )}
               {farm.isExampleFarm && (
                 <Alert variant="filled" severity="warning">
-                  {t("exampleFarmAlert")}
+                  {isIllustrativeFarm(farmId)
+                    ? t("exampleFarmFarmerModeAlert")
+                    : t("exampleFarmAlert")}
                 </Alert>
               )}
               <Box pt="16px" pb="32px" px={["16px", "24px", "32px", "64px"]}>

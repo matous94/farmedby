@@ -9,6 +9,7 @@ import { FarmPropTypes } from "src/types";
 import { createAddress } from "src/packages/utils";
 
 function FarmData({ label, value, url }) {
+  const { t } = useTranslation();
   if (!value && !url) return null;
   return (
     <div>
@@ -24,7 +25,7 @@ function FarmData({ label, value, url }) {
         </Typography>
       ) : (
         <Link target="_blank" href={url}>
-          {url}
+          {t("farmPage.openWebPage")}
         </Link>
       )}
     </div>

@@ -18,7 +18,8 @@ export const supportedCountries = {
     countryName: "Česká republika",
     countryCode: "CZ",
     languageCode: "cs",
-    currency: "kč"
+    currency: "kč",
+    illustrativeFarmId: "qHgur81fHZ"
   },
   GB: {
     translation: enLocales,
@@ -26,7 +27,8 @@ export const supportedCountries = {
     countryName: "United Kingdom",
     countryCode: "GB",
     languageCode: "en",
-    currency: "£"
+    currency: "£",
+    illustrativeFarmId: "Qq3qOsnAqp"
   },
   SK: {
     translation: csLocales,
@@ -34,7 +36,8 @@ export const supportedCountries = {
     countryName: "Slovenská republika",
     countryCode: "SK",
     languageCode: "sk",
-    currency: "€"
+    currency: "€",
+    illustrativeFarmId: "Z0AeJAol2Q"
   }
 };
 

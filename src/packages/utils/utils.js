@@ -1,4 +1,4 @@
-import { getCountry } from "src/i18n";
+import { getCountry, supportedCountries } from "src/i18n";
 
 export function createAddress({ city, countryCode, postcode, street }) {
   let country = "";
@@ -14,4 +14,14 @@ export function createAddress({ city, countryCode, postcode, street }) {
     line2: `${city} ${postcode}`,
     countryName
   };
+}
+
+export function getIllustrativeFarmId() {
+  return getCountry().illustrativeFarmId;
+}
+
+export function isIllustrativeFarm(farmId) {
+  return Object.values(supportedCountries).some(
+    (country) => country.illustrativeFarmId === farmId
+  );
 }

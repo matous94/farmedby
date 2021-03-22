@@ -2,6 +2,7 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useStoreState } from "easy-peasy";
 
+import { isIllustrativeFarm } from "src/packages/utils";
 import logger from "src/packages/logger";
 import { selectors } from "src/store";
 import ApiClient from "src/packages/api-client";
@@ -36,8 +37,8 @@ export default function useGetFarm() {
     () => ({
       status,
       farm: isFarmOwner ? myFarm : visitedFarm,
-      isFarmOwner
+      isFarmOwner: isIllustrativeFarm(farmId) || isFarmOwner
     }),
-    [status, isFarmOwner, myFarm, visitedFarm]
+    [status, isFarmOwner, myFarm, visitedFarm, farmId]
   );
 }

@@ -1,4 +1,5 @@
 {
+  "farmPage.openWebPage": "Open web page",
   "csaPage.about": "Community Supported Agriculute is a concept, which is among other things trying to connect a consumer directly with the producer (farmer). One method to achieve this, is to subscribe to boxes of products (shares). Most common is a weekly subscription with handover on agreed pickup point. In general the more boxes you prepay the lower the price per box.",
   "pc": "pc",
   "csaPage.boxName": "\"Box\" name",
@@ -13,6 +14,7 @@
   "farmsTable.deliversToHeading": "Pickup points in",
   "farmsPage.heading": "Find Farm",
   "exampleFarmAlert": "This farm is for illustrative purposes only.",
+  "exampleFarmFarmerModeAlert": "Illustrative farm from farmer's view. Cannot be edited.",
   "delete": "Delete",
   "areYouSure": "Are you sure?",
   "cancel": "Cancel",
@@ -53,7 +55,9 @@
   "genericFailureMessage": "Something's wrong. Please try again later.",
   "landingPage.heading": "Community Supported Agriculture",
   "landingPage.subHeading": "Local products from local farmers",
+  "landingPage.or": "or",
   "landingPage.showExampleFarm": "Show Example Farm",
+  "landingPage.farmerMode": "(Farmer mode)",
   "landingPage.subscribeToNewsletter": "Subscribe",
   "landingPage.workInProgress": "Site is under construction",
   "landingPage.workInProgress2": "subscribe to be updated what's new.",

@@ -68,6 +68,7 @@ export default function FarmsPage() {
               type="text"
               fullWidth
               variant="outlined"
+              placeholder={t("city")}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

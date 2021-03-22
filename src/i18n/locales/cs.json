@@ -1,4 +1,7 @@
 {
+  "farmPage.openWebPage": "Otevřít stránku",
+  "landingPage.or": "nebo",
+  "landingPage.farmerMode": "(Z pohledu farmáře)",
   "csaPage.about": "Komunitou Podporované Zemědělství je koncept, který se mimo jiné snaží propojit spotřebitele přímo s producentem (farmářem). Jeden ze způsobů, kterým se toho snaží dosáhnout, je tak zvaný \"odběr bedýnek\" (podílů). Bedýnky se nejčastěji odebírají jednou za týden, na předem domluveném odběrovém místě a obecně platí, že čím více bedýnek si předplatíte, tím nižší cena bedýnky.",
   "csaPage.boxName": "Jméno \"bedýnky\"",
   "pc": "ks",
@@ -12,7 +15,8 @@
   "boxEditor.heading": "Bedýnka",
   "farmsTable.deliversToHeading": "Odběrová místa v",
   "farmsPage.heading": "Najdi Farmu",
-  "exampleFarmAlert": "Tato farma je pouze ilustrativní.",
+  "exampleFarmAlert": "Tato farma není skutečná, jedná se o ilustraci.",
+  "exampleFarmFarmerModeAlert": "Ilustrativní farma z pohledu farmáře. Nelze editovat.",
   "delete": "Smazat",
   "areYouSure": "Jste si jistý?",
   "cancel": "Zrušit",
