@@ -15,12 +15,12 @@ export default function useFarmFilter(farms) {
   const runFilter = React.useCallback(
     (toFilter) => {
       const normalizedFilter = normalizeText(toFilter);
+      localStorage.setItem(localStorageKeys.cityFilter, normalizedFilter);
 
-      if (toFilter === "" || !farms) {
+      if (normalizedFilter === "" || !farms) {
         setFilteredFarms(farms);
         return;
       }
-      localStorage.setItem(localStorageKeys.cityFilter, normalizedFilter);
       const result = [];
 
       farms.forEach((farm) => {

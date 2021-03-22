@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import MuiAppBar from "@material-ui/core/AppBar";
@@ -14,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { selectors } from "src/store";
 import Logo from "src/components/Logo";
 import Link from "src/components/Link";
-import ApiClient from "src/packages/api-client";
 
 import CountrySelector from "./CountrySelector";
 
@@ -62,15 +61,8 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
 
   const user = useStoreState(selectors.getUser);
   const myFarm = useStoreState(selectors.getMyFarm);
-  const signOut = useStoreActions((actions) => actions.signOut);
 
   const classes = useStyles();
-
-  function signOutHandler() {
-    ApiClient.User.signOut();
-    signOut();
-    window.location.reload();
-  }
 
   return (
     <MuiAppBar position="fixed" className={classes.appBar}>
@@ -100,31 +92,11 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
         {!onlyLogo && (
           <div className={classes.right}>
             <>
-              {user ? (
-                <MuiLink
-                  underline="none"
-                  variant="h6"
-                  component="button"
-                  className={clsx(classes.secondaryLink)}
-                  onClick={signOutHandler}
-                >
-                  {t("signOut")}
-                </MuiLink>
-              ) : (
-                <Link
-                  underline="none"
-                  variant="h6"
-                  className={clsx(classes.secondaryLink)}
-                  to="/sign-in"
-                >
-                  {t("signIn")}
-                </Link>
-              )}
               {myFarm ? (
                 <Link
                   underline="none"
+                  className={clsx(classes.secondaryLink)}
                   variant="h6"
-                  className={clsx(classes.primaryLink, classes.marginLeft)}
                   to={`/farm/${myFarm.objectId}`}
                 >
                   {t("myFarm")}
@@ -133,12 +105,20 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
                 <Link
                   variant="h6"
                   underline="none"
-                  className={clsx(classes.primaryLink, classes.marginLeft)}
                   to="/sign-up"
+                  className={clsx(classes.secondaryLink)}
                 >
                   {t("createFarm")}
                 </Link>
               )}
+              <Link
+                underline="none"
+                variant="h6"
+                className={clsx(classes.primaryLink, classes.marginLeft)}
+                to="/farms"
+              >
+                {t("farmsPage.heading")}
+              </Link>
             </>
           </div>
         )}

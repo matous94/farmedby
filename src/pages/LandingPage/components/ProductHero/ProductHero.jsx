@@ -94,7 +94,7 @@ function ProductHero(props) {
         component={Link}
         to="/farms"
       >
-        {t("landingPage.showFarms")}
+        {t("farmsPage.heading")}
       </Button>
     </ProductHeroLayout>
   );

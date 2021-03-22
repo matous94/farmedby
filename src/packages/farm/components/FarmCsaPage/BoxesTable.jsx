@@ -29,7 +29,7 @@ const TableCell = styled(MuiTableCell)({
   paddingRight: "8px"
 });
 
-function Box({ box, onEdit, onDelete, isAdminMode }) {
+function Box({ box, onEdit, onDelete, isAdminMode, currency }) {
   const { t } = useTranslation();
   const { name, content, options } = box;
   return (
@@ -57,7 +57,7 @@ function Box({ box, onEdit, onDelete, isAdminMode }) {
               {t("pc")} x{" "}
               <b>
                 {pricePerBox}
-                {getCurrency()}
+                {currency}
               </b>{" "}
               (= {Number(numberOfBoxes) * Number(pricePerBox)})
               {index < length - 1 && <br />}
@@ -69,6 +69,7 @@ function Box({ box, onEdit, onDelete, isAdminMode }) {
 }
 Box.propTypes = {
   box: BoxPropTypes.isRequired,
+  currency: PropTypes.string.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
   isAdminMode: PropTypes.bool.isRequired
@@ -147,6 +148,7 @@ export default function BoxesTable({
                 box={box}
                 onEdit={() => onEdit(box)}
                 onDelete={() => onDelete(box.objectId)}
+                currency={getCurrency(farm.countryCode)}
               />
             ))}
         </TableBody>

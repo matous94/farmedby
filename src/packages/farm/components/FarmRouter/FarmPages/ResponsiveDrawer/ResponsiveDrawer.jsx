@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useStoreActions } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import { useHistory, useParams } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -14,7 +15,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
+import ApiClient from "src/packages/api-client";
 import Logo from "src/components/Logo";
 
 import pages, { landingPage } from "../../pages";
@@ -33,6 +36,13 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
 
   const isUpSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
   if (isUpSm && isOpen) onClose();
+
+  const signOut = useStoreActions((actions) => actions.signOut);
+  function signOutHandler() {
+    ApiClient.User.signOut();
+    signOut();
+    window.location.reload();
+  }
 
   const LandingPageIcon = landingPage.Icon;
   const drawerContent = (
@@ -85,6 +95,14 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
               <ListItemText primary={t(translationKey)} />
             </ListItem>
           ))}
+        {isAdminMode && (
+          <ListItem onClick={signOutHandler} button>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("signOut")} />
+          </ListItem>
+        )}
       </List>
     </div>
   );
