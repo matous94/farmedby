@@ -14,6 +14,7 @@ import FarmIcon from "src/icons/FarmIcon";
 
 import FarmLandingPage from "src/packages/farm/components/FarmLandingPage";
 import FarmPickupPointsPage from "src/packages/farm/components/FarmPickupPointsPage";
+import FarmCsaPage from "src/packages/farm/components/FarmCsaPage";
 
 export const landingPage = {
   name: "landing",
@@ -31,13 +32,7 @@ export default {
     Icon: ProductsIcon,
     disabled: false,
     private: false,
-    PageContent: ({ farm }) => {
-      return (
-        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
-          {JSON.stringify(farm, null, 2)}
-        </pre>
-      );
-    }
+    PageContent: FarmCsaPage
   },
   "pickup-points": {
     name: "pickup-points",

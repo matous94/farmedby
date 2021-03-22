@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
 import { makeStyles, styled } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -15,13 +14,13 @@ import Paper from "@material-ui/core/Paper";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Link from "@material-ui/core/Link";
 
-import { FarmPropTypes, PickupPointPropTypes } from "src/types";
+import { FarmPropTypes, BoxPropTypes } from "src/types";
+import { getCurrency } from "src/i18n";
 
 const useStyles = makeStyles({
   paper: {
-    maxWidth: (props) => (props.isAdminMode ? "1000px" : "800px")
+    maxWidth: "800px"
   }
 });
 
@@ -30,18 +29,9 @@ const TableCell = styled(MuiTableCell)({
   paddingRight: "8px"
 });
 
-function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
-  const {
-    city,
-    pickupDay,
-    email,
-    name,
-    phoneNumber,
-    postcode,
-    street,
-    webUrl
-  } = point;
+function Box({ box, onEdit, onDelete, isAdminMode }) {
   const { t } = useTranslation();
+  const { name, content, options } = box;
   return (
     <TableRow>
       {isAdminMode && (
@@ -56,44 +46,34 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
           </ButtonGroup>
         </TableCell>
       )}
-      <TableCell style={{ whiteSpace: "nowrap" }}>{name}</TableCell>
+      <TableCell>{name}</TableCell>
+      <TableCell>{content}</TableCell>
       <TableCell style={{ whiteSpace: "nowrap" }}>
-        {street}
-        <br />
-        {postcode}
-        <br />
-        {city}
-      </TableCell>
-      <TableCell>{pickupDay}</TableCell>
-      <TableCell>
-        {email && (
-          <>
-            {email}
-            <br />
-          </>
-        )}
-        {phoneNumber && (
-          <>
-            {phoneNumber}
-            <br />
-          </>
-        )}
-        {webUrl && (
-          <Link target="_blank" href={webUrl}>
-            {t("webAddress")}
-          </Link>
-        )}
+        {options
+          .filter((option) => option?.pricePerBox && option.numberOfBoxes)
+          .map(({ pricePerBox, numberOfBoxes }, index, { length }) => (
+            <React.Fragment key={index}>
+              {numberOfBoxes}
+              {t("pc")} x{" "}
+              <b>
+                {pricePerBox}
+                {getCurrency()}
+              </b>{" "}
+              (= {Number(numberOfBoxes) * Number(pricePerBox)})
+              {index < length - 1 && <br />}
+            </React.Fragment>
+          ))}
       </TableCell>
     </TableRow>
   );
 }
-PickupPoint.propTypes = {
-  point: PickupPointPropTypes.isRequired,
+Box.propTypes = {
+  box: BoxPropTypes.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
   isAdminMode: PropTypes.bool.isRequired
 };
-PickupPoint.defaultProps = {
+Box.defaultProps = {
   onEdit: undefined,
   onDelete: undefined
 };
@@ -114,7 +94,6 @@ function AddPointRow({ onAdd }) {
       <TableCell />
       <TableCell />
       <TableCell />
-      <TableCell />
     </TableRow>
   );
 }
@@ -122,7 +101,7 @@ AddPointRow.propTypes = {
   onAdd: PropTypes.func.isRequired
 };
 
-export default function PickupPointsTable({
+export default function BoxesTable({
   farm,
   onEdit,
   onDelete,
@@ -130,18 +109,8 @@ export default function PickupPointsTable({
   isAdminMode
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
-  const classes = useStyles({ isAdminMode });
-  const {
-    city,
-    email,
-    name,
-    phoneNumber,
-    postcode,
-    street,
-    webUrl,
-    pickupPoints
-  } = farm;
+  const classes = useStyles();
+  const { boxes } = farm;
 
   return (
     <TableContainer className={classes.paper} component={Paper}>
@@ -151,48 +120,42 @@ export default function PickupPointsTable({
             {isAdminMode && (
               <TableCell> {t("pickupPointsPage.editDelete")}</TableCell>
             )}
-            <TableCell>{t("name")}</TableCell>
-            <TableCell>{t("address")}</TableCell>
             <TableCell style={{ minWidth: "200px" }}>
-              {t("pickupPointsPage.pickupDay")}
+              {t("csaPage.boxName")}
             </TableCell>
-            <TableCell>{t("contacts")}</TableCell>
+            <TableCell style={{ whiteSpace: "nowrap", minWidth: "200px" }}>
+              {t("csaPage.boxContentHeading")}
+            </TableCell>
+            <TableCell style={{ whiteSpace: "nowrap" }}>
+              {t("priceList")}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {isAdminMode && <AddPointRow onAdd={onAdd} />}
-          {farm.isPickupPoint && (
-            <PickupPoint
-              isAdminMode={isAdminMode}
-              onEdit={() => history.push(`/farm/${farm.objectId}`)}
-              point={{
-                city,
-                email,
-                name,
-                phoneNumber,
-                pickupDay: t("pickupPointsPage.farmPickupDay"),
-                postcode,
-                street,
-                webUrl
-              }}
-            />
-          )}
-          {pickupPoints.map((point) => (
-            <PickupPoint
-              isAdminMode={isAdminMode}
-              key={point.objectId}
-              point={point}
-              onEdit={() => onEdit(point)}
-              onDelete={() => onDelete(point.objectId)}
-            />
-          ))}
+
+          {[...boxes]
+            .sort((a, b) => {
+              if (a.name === b.name) return 0;
+              if (a.name < b.name) return -1;
+              return 1;
+            })
+            .map((box) => (
+              <Box
+                isAdminMode={isAdminMode}
+                key={box.objectId}
+                box={box}
+                onEdit={() => onEdit(box)}
+                onDelete={() => onDelete(box.objectId)}
+              />
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
 }
 
-PickupPointsTable.propTypes = {
+BoxesTable.propTypes = {
   farm: FarmPropTypes.isRequired,
   onAdd: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,

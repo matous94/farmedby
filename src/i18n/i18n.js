@@ -17,21 +17,24 @@ export const supportedCountries = {
     flagSrc: czFlagSrc,
     countryName: "Česká republika",
     countryCode: "CZ",
-    languageCode: "cs"
+    languageCode: "cs",
+    currency: "kč"
   },
   GB: {
     translation: enLocales,
     flagSrc: gbFlagSrc,
     countryName: "United Kingdom",
     countryCode: "GB",
-    languageCode: "en"
+    languageCode: "en",
+    currency: "£"
   },
   SK: {
     translation: csLocales,
     flagSrc: skFlagSrc,
     countryName: "Slovenská republika",
     countryCode: "SK",
-    languageCode: "sk"
+    languageCode: "sk",
+    currency: "€"
   }
 };
 
@@ -50,6 +53,10 @@ export function getLanguageCode(code = countryCode) {
 
 export function getCountryCode() {
   return countryCode;
+}
+
+export function getCurrency(code = countryCode) {
+  return getCountry(code).currency;
 }
 
 export function changeCountry(code) {

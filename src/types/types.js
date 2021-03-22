@@ -21,12 +21,15 @@ export const ProductTypesPropTypes = PropTypes.arrayOf(
   PropTypes.oneOf(Object.values(ProductTypes))
 );
 
+export const BoxOptionPropTypes = PropTypes.shape({
+  numberOfBoxes: PropTypes.string,
+  pricePerBox: PropTypes.string
+});
 export const BoxPropTypes = PropTypes.shape({
   content: PropTypes.string,
-  discountPerBox: PropTypes.number,
   name: PropTypes.string,
   objectId: PropTypes.string,
-  unitPrice: PropTypes.number
+  options: PropTypes.arrayOf(BoxOptionPropTypes)
 });
 
 export const PickupPointPropTypes = PropTypes.shape({

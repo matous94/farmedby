@@ -20,6 +20,9 @@ const storeModel = {
   updateMyFarm: action((state, farm) => {
     state.myFarm = { ...state.myFarm, ...farm };
   }),
+  farmsResolved: action((state, farms) => {
+    state.farms = farms;
+  }),
   pickupPointSaved: action((state, newPoint) => {
     const pointIndex = state.myFarm.pickupPoints.findIndex(
       (point) => point.objectId === newPoint.objectId
@@ -33,8 +36,16 @@ const storeModel = {
     );
     if (index !== -1) state.myFarm.pickupPoints.splice(index, 1);
   }),
-  farmsResolved: action((state, farms) => {
-    state.farms = farms;
+  boxSaved: action((state, newBox) => {
+    const boxIndex = state.myFarm.boxes.findIndex(
+      (box) => box.objectId === newBox.objectId
+    );
+    if (boxIndex === -1) state.myFarm.boxes.push(newBox);
+    else state.myFarm.boxes[boxIndex] = newBox;
+  }),
+  boxDeleted: action((state, boxId) => {
+    const index = state.myFarm.boxes.findIndex((box) => box.objectId === boxId);
+    if (index !== -1) state.myFarm.boxes.splice(index, 1);
   }),
   signIn: action((state, payload) => {
     state.user = payload.user;

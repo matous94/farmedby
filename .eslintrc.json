@@ -26,6 +26,7 @@
     "import/prefer-default-export": "off",
     "no-unreachable": "warn",
     "arrow-body-style": "off",
-    "react/jsx-boolean-value": "off"
+    "react/jsx-boolean-value": "off",
+    "react/no-array-index-key": "off"
   }
 }

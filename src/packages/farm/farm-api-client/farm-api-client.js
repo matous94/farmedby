@@ -17,6 +17,10 @@ export async function updateFarm(farmData) {
   return callCloudFunction("updateFarm", { farmData });
 }
 
+export async function getFarms() {
+  return callCloudFunction("getFarms", { countryCode: getCountryCode() });
+}
+
 export async function savePickupPoint(pickupPointData) {
   return callCloudFunction("savePickupPoint", { pickupPointData });
 }
@@ -25,6 +29,10 @@ export async function deletePickupPoint(objectId) {
   return callCloudFunction("deletePickupPoint", { objectId });
 }
 
-export async function getFarms() {
-  return callCloudFunction("getFarms", { countryCode: getCountryCode() });
+export async function saveBox(boxData) {
+  return callCloudFunction("saveBox", { boxData });
+}
+
+export async function deleteBox(objectId) {
+  return callCloudFunction("deleteBox", { objectId });
 }
