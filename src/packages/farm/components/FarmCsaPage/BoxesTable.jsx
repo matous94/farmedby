@@ -11,6 +11,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -29,8 +30,7 @@ const TableCell = styled(MuiTableCell)({
   paddingRight: "8px"
 });
 
-function Box({ box, onEdit, onDelete, isAdminMode, currency }) {
-  const { t } = useTranslation();
+function ProduceBox({ box, onEdit, onDelete, isAdminMode }) {
   const { name, content, options } = box;
   return (
     <TableRow>
@@ -51,30 +51,32 @@ function Box({ box, onEdit, onDelete, isAdminMode, currency }) {
       <TableCell style={{ whiteSpace: "nowrap" }}>
         {options
           .filter((option) => option?.pricePerBox && option.numberOfBoxes)
-          .map(({ pricePerBox, numberOfBoxes }, index, { length }) => (
-            <React.Fragment key={index}>
-              {numberOfBoxes}
-              {t("pc")} x{" "}
-              <b>
-                {pricePerBox}
-                {currency}
-              </b>{" "}
-              (= {Number(numberOfBoxes) * Number(pricePerBox)})
-              {index < length - 1 && <br />}
-            </React.Fragment>
-          ))}
+          .map(({ pricePerBox, numberOfBoxes }, index, { length }) => {
+            return (
+              <Box display="flex" alignItems="center" key={index}>
+                <Box textAlign="right" minWidth="24px">
+                  {numberOfBoxes}
+                </Box>
+                <Box mx="3px">x</Box>
+                <Box mr="2px" fontWeight="bold" minWidth="25px">
+                  {pricePerBox}
+                </Box>
+                (= {Number(numberOfBoxes) * Number(pricePerBox)})
+                {index < length - 1 && <br />}
+              </Box>
+            );
+          })}
       </TableCell>
     </TableRow>
   );
 }
-Box.propTypes = {
+ProduceBox.propTypes = {
   box: BoxPropTypes.isRequired,
-  currency: PropTypes.string.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
   isAdminMode: PropTypes.bool.isRequired
 };
-Box.defaultProps = {
+ProduceBox.defaultProps = {
   onEdit: undefined,
   onDelete: undefined
 };
@@ -128,7 +130,9 @@ export default function BoxesTable({
               {t("csaPage.boxContentHeading")}
             </TableCell>
             <TableCell style={{ whiteSpace: "nowrap" }}>
-              {t("priceList")}
+              {t("boxesTable.priceHeading", {
+                currency: getCurrency(farm.countryCode)
+              })}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -142,13 +146,12 @@ export default function BoxesTable({
               return 1;
             })
             .map((box) => (
-              <Box
+              <ProduceBox
                 isAdminMode={isAdminMode}
                 key={box.objectId}
                 box={box}
                 onEdit={() => onEdit(box)}
                 onDelete={() => onDelete(box.objectId)}
-                currency={getCurrency(farm.countryCode)}
               />
             ))}
         </TableBody>

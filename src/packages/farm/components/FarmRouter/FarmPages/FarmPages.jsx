@@ -91,7 +91,7 @@ export default function FarmPages() {
                     : t("exampleFarmAlert")}
                 </Alert>
               )}
-              <Box pt="16px" pb="32px" px={["16px", "24px", "32px", "64px"]}>
+              <Box pt="16px" pb="64px" px={["16px", "24px", "32px", "64px"]}>
                 <Box mb="16px">
                   <Typography align="center" color="secondary" variant="h4">
                     {pageHeading}

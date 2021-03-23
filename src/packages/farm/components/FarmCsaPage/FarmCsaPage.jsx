@@ -10,6 +10,7 @@ import { FarmPropTypes } from "src/types";
 import ApiClient from "src/packages/api-client";
 import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
+import DeleteDialog from "src/components/DeleteDialog";
 
 import BoxEditor from "./BoxEditor";
 import BoxesTable from "./BoxesTable";
@@ -74,18 +75,11 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
         isOpen={submitter.hasError || deletter.hasError}
         onClose={submitter.hasError ? submitter.reset : deletter.reset}
       />
-      <Dialog
+      <DeleteDialog
         isOpen={deleteDialogSwitch.isOn}
         isLoading={deletter.isLoading}
-        text={t("areYouSure")}
-        primaryButton={{
-          onClick: () => deletter.execute(deleteDialogSwitch.state),
-          children: t("delete")
-        }}
-        secondaryButton={{
-          onClick: () => deleteDialogSwitch.reset(),
-          children: t("cancel")
-        }}
+        onDelete={() => deletter.execute(deleteDialogSwitch.state)}
+        onDismiss={() => deleteDialogSwitch.reset()}
       />
     </>
   );
