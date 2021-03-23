@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import MuiTypography from "@material-ui/core/Typography";
 import Hidden from "@material-ui/core/Hidden";
 import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ import TextField from "../TextField";
 import Button from "../Button";
 import imageUrl from "./call-to-action.jpg";
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(10),
     marginBottom: "64px",
@@ -27,11 +27,14 @@ const styles = (theme) => ({
   card: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
     backgroundColor: theme.palette.warning.main,
-    padding: theme.spacing(8, 3)
+    padding: theme.spacing(6, 2)
   },
-  cardContent: {
-    maxWidth: 500
+  form: {
+    maxWidth: 500,
+    marginBottom: "10px"
   },
   textField: {
     width: "100%",
@@ -53,17 +56,17 @@ const styles = (theme) => ({
     width: "100%",
     maxWidth: 600
   }
-});
+}));
 
-function ProductCTA(props) {
-  const { classes } = props;
+function ProductCTA() {
+  const classes = useStyles();
   const { t } = useTranslation();
   const { register, handleSubmit, reset } = useForm();
 
   const submitHandler = async (data) => {
     try {
       reset();
-      await ApiClient.Newsletter.subscribe(data.email);
+      await ApiClient.Newsletter.subscribeToNewsletter(data.email);
     } catch (error) {
       logger.app("Newsletter.subscribe failed silently", error);
     }
@@ -76,9 +79,9 @@ function ProductCTA(props) {
           <div className={classes.card}>
             <form
               onSubmit={handleSubmit(submitHandler)}
-              className={classes.cardContent}
+              className={classes.form}
             >
-              <Typography variant="h3" gutterBottom>
+              <Typography variant="h4" gutterBottom>
                 {t("landingPage.workInProgress")}
               </Typography>
               <Typography variant="h5">
@@ -102,6 +105,9 @@ function ProductCTA(props) {
                 {t("landingPage.subscribeToNewsletter")}
               </Button>
             </form>
+            <MuiTypography align="center" variant="caption">
+              {t("landingPage.contactDeveloper")} <b>matousvencl@gmail.com</b>
+            </MuiTypography>
           </div>
         </Grid>
         <Grid item xs={12} md={6} className={classes.imagesWrapper}>
@@ -118,17 +124,4 @@ function ProductCTA(props) {
   );
 }
 
-ProductCTA.propTypes = {
-  classes: PropTypes.shape({
-    root: PropTypes.string,
-    cardWrapper: PropTypes.string,
-    card: PropTypes.string,
-    cardContent: PropTypes.string,
-    textField: PropTypes.string,
-    button: PropTypes.string,
-    imagesWrapper: PropTypes.string,
-    image: PropTypes.string
-  }).isRequired
-};
-
-export default withStyles(styles)(ProductCTA);
+export default ProductCTA;

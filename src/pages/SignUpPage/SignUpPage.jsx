@@ -57,7 +57,7 @@ export default function SignUpPage() {
 
       // try {
       //   if (didSubscribeToNewsletter) {
-      //     await ApiClient.Newsletter.subscribe(email);
+      //     await ApiClient.Newsletter.subscribeToNewsletter(email);
       //   }
       // } catch (error) {
       //   logger.user(

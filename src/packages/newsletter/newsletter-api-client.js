@@ -1,15 +1,13 @@
-import { sendParseRequest } from "src/packages/api-client/requester";
+import { callCloudFunction } from "src/packages/api-client/requester";
 
-function subscribe(email) {
-  return sendParseRequest("classes/Newsletter", {
-    body: {
-      email
-    }
+function subscribeToNewsletter(email) {
+  return callCloudFunction("subscribeToNewsletter", {
+    email
   });
 }
 
 const NewsletterApiClient = {
-  subscribe
+  subscribeToNewsletter
 };
 
 export default NewsletterApiClient;

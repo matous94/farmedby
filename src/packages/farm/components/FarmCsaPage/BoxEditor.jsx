@@ -33,7 +33,7 @@ TextField.propTypes = {
   register: PropTypes.func.isRequired
 };
 
-function BoxOptions({ options, register }) {
+function BoxOptions({ options, register, currency }) {
   const { t } = useTranslation();
 
   return options.map((option, index) => (
@@ -55,7 +55,7 @@ function BoxOptions({ options, register }) {
         />
         <TextField
           name={`options[${index}].pricePerBox`}
-          label={t("boxEditor.pricePerBox")}
+          label={t("boxEditor.pricePerBox", { currency })}
           type="number"
           inputProps={{
             min: "0.01",
@@ -71,10 +71,11 @@ function BoxOptions({ options, register }) {
 }
 BoxOptions.propTypes = {
   options: PropTypes.arrayOf(BoxOptionPropTypes),
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired
 };
 
-export default function BoxEditor({ onClose, onSubmit, box }) {
+export default function BoxEditor({ onClose, onSubmit, box, currency }) {
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm({ defaultValues: box });
   const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("xs"));
@@ -113,7 +114,11 @@ export default function BoxEditor({ onClose, onSubmit, box }) {
             multiline
             type="text"
           />
-          <BoxOptions options={box.options} register={register} />
+          <BoxOptions
+            options={box.options}
+            register={register}
+            currency={currency}
+          />
         </DialogContent>
         <DialogActions>
           <Button type="button" onClick={onClose} color="primary">
@@ -130,7 +135,8 @@ export default function BoxEditor({ onClose, onSubmit, box }) {
 BoxEditor.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  box: BoxPropTypes
+  box: BoxPropTypes,
+  currency: PropTypes.string.isRequired
 };
 const defaultOption = {
   numberOfBoxes: "",

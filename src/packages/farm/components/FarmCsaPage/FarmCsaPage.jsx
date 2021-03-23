@@ -11,6 +11,7 @@ import ApiClient from "src/packages/api-client";
 import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import DeleteDialog from "src/components/DeleteDialog";
+import { getCurrency } from "src/i18n";
 
 import BoxEditor from "./BoxEditor";
 import BoxesTable from "./BoxesTable";
@@ -56,6 +57,7 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
             box={editorSwitch.state}
             onClose={() => editorSwitch.reset()}
             onSubmit={submitter.execute}
+            currency={getCurrency(farm.countryCode)}
           />
         )}
         <Box mb="16px" maxWidth="800px">
