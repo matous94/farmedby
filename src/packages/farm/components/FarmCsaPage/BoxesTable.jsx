@@ -48,29 +48,26 @@ function ProduceBox({ box, onEdit, onDelete, isAdminMode }) {
       )}
       <TableCell>{name}</TableCell>
       <TableCell>{content}</TableCell>
-      <TableCell style={{ whiteSpace: "nowrap" }}>
-        {options
-          .filter((option) => option?.pricePerBox && option.numberOfBoxes)
-          .map(({ pricePerBox, numberOfBoxes }, index, { length }) => {
-            return (
-              <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                key={index}
-              >
-                <Box textAlign="right" minWidth="24px">
-                  {numberOfBoxes}
+      <TableCell style={{ whiteSpace: "nowrap", textAlign: "center" }}>
+        <Box display="inline-flex" flexDirection="column">
+          {options
+            .filter((option) => option?.pricePerBox && option.numberOfBoxes)
+            .map(({ pricePerBox, numberOfBoxes }, index, { length }) => {
+              return (
+                <Box display="flex" alignItems="center" key={index}>
+                  <Box textAlign="right" minWidth="24px">
+                    {numberOfBoxes}
+                  </Box>
+                  <Box mx="3px">x</Box>
+                  <Box mr="2px" fontWeight="bold" minWidth="25px">
+                    {pricePerBox}
+                  </Box>
+                  (= {Number(numberOfBoxes) * Number(pricePerBox)})
+                  {index < length - 1 && <br />}
                 </Box>
-                <Box mx="3px">x</Box>
-                <Box mr="2px" fontWeight="bold" minWidth="25px">
-                  {pricePerBox}
-                </Box>
-                (= {Number(numberOfBoxes) * Number(pricePerBox)})
-                {index < length - 1 && <br />}
-              </Box>
-            );
-          })}
+              );
+            })}
+        </Box>
       </TableCell>
     </TableRow>
   );
