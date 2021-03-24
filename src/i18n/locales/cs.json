@@ -23,7 +23,7 @@
   "delete": "Smazat",
   "email": "Email",
   "exampleFarmAlert": "Tato farma není skutečná, jedná se o ilustraci.",
-  "exampleFarmFarmerModeAlert": "Ilustrativní farma z pohledu farmáře.",
+  "exampleFarmFarmerModeAlert": "Ilustrativní farma z pohledu farmáře. Nelze ukládat změny.",
   "farm": "Farma",
   "farmForm.isPickupPoint": "Odběry ze dvora",
   "farmForm.makeFarmPublic": "Zveřejnit farmu",
