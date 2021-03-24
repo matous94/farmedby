@@ -9,10 +9,11 @@ const styles = (theme) => ({
   root: {
     color: theme.palette.common.white,
     position: "relative",
+    minHeight: "75vh",
+    maxHeight: "600px",
     [theme.breakpoints.up("sm")]: {
-      height: "80vh",
-      minHeight: 500,
-      maxHeight: 1300
+      minHeight: "500px",
+      maxHeight: "1300px"
     }
   },
   container: {

@@ -53,7 +53,12 @@ function ProduceBox({ box, onEdit, onDelete, isAdminMode }) {
           .filter((option) => option?.pricePerBox && option.numberOfBoxes)
           .map(({ pricePerBox, numberOfBoxes }, index, { length }) => {
             return (
-              <Box display="flex" alignItems="center" key={index}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                key={index}
+              >
                 <Box textAlign="right" minWidth="24px">
                   {numberOfBoxes}
                 </Box>

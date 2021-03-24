@@ -61,7 +61,8 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
           />
         )}
         <Box mb="16px" maxWidth="800px">
-          <Typography>{t("csaPage.about")}</Typography>
+          <Typography paragraph>{t("csaPage.about")}</Typography>
+          <Typography>{t("csaPage.about2")}</Typography>
         </Box>
         <BoxesTable
           farm={farm}
