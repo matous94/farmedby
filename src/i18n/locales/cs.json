@@ -1,4 +1,5 @@
 {
+  "pricing": "Ceník",
   "landingPage.contactDeveloper": "Nebo kontaktuje vývojáře",
   "no": "Ne",
   "yes": "Ano",
@@ -8,7 +9,7 @@
   "deleteDialog.text": "Smazat vybranou položku?",
   "boxEditor.heading": "Editor Odběru",
   "boxEditor.namePlaceholder": "Např. Velká zeleninová bedýnka",
-  "boxEditor.numberOfBoxes": "Počet odběrů",
+  "boxEditor.numberOfBoxes": "Od počtu odběrů",
   "boxEditor.pricePerBox": "Cena za odběr ({{currency}})",
   "cancel": "Zrušit",
   "city": "Město",
@@ -55,7 +56,6 @@
   "lastName": "Příjmení",
   "myFarm": "Moje Farma",
   "name": "Jméno",
-  "option": "Možnost",
   "orders": "Objednávky",
   "password": "Heslo",
   "pc": "ks",

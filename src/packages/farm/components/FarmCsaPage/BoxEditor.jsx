@@ -19,10 +19,10 @@ const TextField = ({ register, ...rest }) => {
   return (
     <MuiTextField
       margin="dense"
+      size="small"
       fullWidth
       variant="outlined"
       inputRef={register}
-      required={true}
       InputLabelProps={{ shrink: true }}
       {...rest}
     />
@@ -33,44 +33,46 @@ TextField.propTypes = {
   register: PropTypes.func.isRequired
 };
 
-function BoxOptions({ options, register, currency }) {
+function Pricing({ options, register, currency }) {
   const { t } = useTranslation();
 
-  return options.map((option, index) => (
-    <Box key={index} mt="12px">
-      <Typography variant="subtitle1">
-        {t("option")} {index + 1}
-      </Typography>
-      <Box display="flex" justifyContent="space-between">
-        <TextField
-          name={`options[${index}].numberOfBoxes`}
-          label={t("boxEditor.numberOfBoxes")}
-          type="number"
-          inputProps={{
-            min: "1"
-          }}
-          style={{ width: "48%" }}
-          register={register}
-          required={index === 0}
-        />
-        <TextField
-          name={`options[${index}].pricePerBox`}
-          label={t("boxEditor.pricePerBox", { currency })}
-          type="number"
-          inputProps={{
-            min: "0.01",
-            step: "0.01"
-          }}
-          style={{ width: "48%" }}
-          register={register}
-          required={index === 0}
-        />
-      </Box>
-    </Box>
-  ));
+  return (
+    <>
+      <Typography variant="subtitle1">{t("pricing")}</Typography>
+      {options.map((option, index) => (
+        <Box key={index} mt="4px">
+          <Box display="flex" justifyContent="space-between">
+            <TextField
+              name={`options[${index}].numberOfBoxes`}
+              label={t("boxEditor.numberOfBoxes")}
+              type="number"
+              inputProps={{
+                min: "1"
+              }}
+              style={{ width: "48%" }}
+              register={register}
+              required={index === 0}
+            />
+            <TextField
+              name={`options[${index}].pricePerBox`}
+              label={t("boxEditor.pricePerBox", { currency })}
+              type="number"
+              inputProps={{
+                min: "0.01",
+                step: "0.01"
+              }}
+              style={{ width: "48%" }}
+              register={register}
+              required={index === 0}
+            />
+          </Box>
+        </Box>
+      ))}
+    </>
+  );
 }
-BoxOptions.propTypes = {
-  options: PropTypes.arrayOf(BoxOptionPropTypes),
+Pricing.propTypes = {
+  options: PropTypes.arrayOf(BoxOptionPropTypes).isRequired,
   register: PropTypes.func.isRequired,
   currency: PropTypes.string.isRequired
 };
@@ -94,27 +96,29 @@ export default function BoxEditor({ onClose, onSubmit, box, currency }) {
         display="flex"
         flexDirection="column"
       >
-        <DialogTitle style={{ paddingBottom: 0 }}>
+        <DialogTitle sx={{ paddingBottom: 0 }}>
           {t("boxEditor.heading")}
         </DialogTitle>
         <DialogContent>
           <TextField
-            style={{ marginBottom: "8px" }}
             register={register}
             name="name"
             label={t("csaPage.boxName")}
             placeholder={t("boxEditor.namePlaceholder")}
             type="text"
+            required
           />
           <TextField
+            sx={{ marginBottom: "16px", marginTop: "8px" }}
             register={register}
             name="content"
             label={t("csaPage.boxContentHeading")}
             placeholder={t("csaPage.boxContentPlaceholder")}
             multiline
             type="text"
+            required
           />
-          <BoxOptions
+          <Pricing
             options={box.options}
             register={register}
             currency={currency}

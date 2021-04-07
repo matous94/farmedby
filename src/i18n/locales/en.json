@@ -1,4 +1,5 @@
 {
+  "pricing": "Pricing",
   "landingPage.contactDeveloper": "Or contact the developer",
   "aboutFarm": "About Farm",
   "address": "Address",
@@ -6,7 +7,7 @@
   "deleteDialog.text": "Delete selected item?",
   "boxEditor.heading": "Subscription Editor",
   "boxEditor.namePlaceholder": "Eg. Vegetables for 4",
-  "boxEditor.numberOfBoxes": "Number of shares",
+  "boxEditor.numberOfBoxes": "From number of shares",
   "boxEditor.pricePerBox": "Price per share ({{currency}})",
   "cancel": "Cancel",
   "city": "City",
@@ -56,7 +57,6 @@
   "name": "Name",
   "no": "No",
   "yes": "Yes",
-  "option": "Option",
   "orders": "Orders",
   "password": "Password",
   "pc": "pc",
