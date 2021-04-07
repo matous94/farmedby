@@ -4,7 +4,6 @@ import { useStoreState } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import MuiAppBar from "@material-ui/core/AppBar";
-import MuiLink from "@material-ui/core/Link";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -59,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
 export default function AppBar({ onMenuClick, onlyLogo }) {
   const { t } = useTranslation();
 
-  const user = useStoreState(selectors.getUser);
   const myFarm = useStoreState(selectors.getMyFarm);
 
   const classes = useStyles();
