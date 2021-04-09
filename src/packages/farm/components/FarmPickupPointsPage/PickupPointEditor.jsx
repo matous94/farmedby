@@ -16,7 +16,7 @@ import { PickupPointPropTypes } from "src/types";
 export default function PickupPointEditor({ onClose, onSubmit, point }) {
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm({ defaultValues: point });
-  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const TextField = React.useCallback(
     (props) => {

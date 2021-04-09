@@ -2,16 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import MuiTypography from "@material-ui/core/Typography";
-import Hidden from "@material-ui/core/Hidden";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
 
 import logger from "src/packages/logger";
 import ApiClient from "src/packages/api-client";
 
-import Typography from "../Typography";
-import TextField from "../TextField";
 import Button from "../Button";
 import imageUrl from "./call-to-action.jpg";
 
@@ -36,11 +34,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
     marginBottom: "10px"
   },
-  textField: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2)
-  },
   button: {
     width: "100%"
   },
@@ -54,7 +47,10 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     bottom: 0,
     width: "100%",
-    maxWidth: 600
+    maxWidth: 600,
+    [theme.breakpoints.down("md")]: {
+      display: "none"
+    }
   }
 }));
 
@@ -81,10 +77,10 @@ function ProductCTA() {
               onSubmit={handleSubmit(submitHandler)}
               className={classes.form}
             >
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h4" component="h2" gutterBottom>
                 {t("landingPage.workInProgress")}
               </Typography>
-              <Typography variant="h5">
+              <Typography variant="h5" component="h3">
                 {t("landingPage.workInProgress2")}
               </Typography>
               <TextField
@@ -92,9 +88,13 @@ function ProductCTA() {
                 inputRef={register}
                 required
                 type="email"
-                noBorder
-                className={classes.textField}
-                placeholder={t("email")}
+                fullWidth
+                color="secondary"
+                sx={{
+                  mt: "24px",
+                  mb: "16px"
+                }}
+                label={t("email")}
               />
               <Button
                 type="submit"
@@ -105,19 +105,13 @@ function ProductCTA() {
                 {t("landingPage.subscribeToNewsletter")}
               </Button>
             </form>
-            <MuiTypography align="center" variant="caption">
+            <Typography align="center" variant="caption">
               {t("landingPage.contactDeveloper")} <b>matousvencl@gmail.com</b>
-            </MuiTypography>
+            </Typography>
           </div>
         </Grid>
         <Grid item xs={12} md={6} className={classes.imagesWrapper}>
-          <Hidden smDown>
-            <img
-              src={imageUrl}
-              alt="call to action"
-              className={classes.image}
-            />
-          </Hidden>
+          <img src={imageUrl} alt="call to action" className={classes.image} />
         </Grid>
       </Grid>
     </Container>

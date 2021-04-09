@@ -33,46 +33,52 @@ TextField.propTypes = {
   register: PropTypes.func.isRequired
 };
 
-function Pricing({ options, register, currency }) {
+function Pricing({ register, currency }) {
   const { t } = useTranslation();
+  const optionsList = [];
+  const numberOfOptions = 5;
+
+  // eslint-disable-next-line no-plusplus
+  for (let index = 0; index < numberOfOptions; index++) {
+    optionsList.push(
+      <Box key={index} mt="4px">
+        <Box display="flex" justifyContent="space-between">
+          <TextField
+            name={`options[${index}].numberOfBoxes`}
+            label={t("boxEditor.numberOfBoxes")}
+            type="number"
+            inputProps={{
+              min: "1"
+            }}
+            style={{ width: "48%" }}
+            register={register}
+            required={index === 0}
+          />
+          <TextField
+            name={`options[${index}].pricePerBox`}
+            label={t("boxEditor.pricePerBox", { currency })}
+            type="number"
+            inputProps={{
+              min: "0.01",
+              step: "0.01"
+            }}
+            style={{ width: "48%" }}
+            register={register}
+            required={index === 0}
+          />
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <>
       <Typography variant="subtitle1">{t("pricing")}</Typography>
-      {options.map((option, index) => (
-        <Box key={index} mt="4px">
-          <Box display="flex" justifyContent="space-between">
-            <TextField
-              name={`options[${index}].numberOfBoxes`}
-              label={t("boxEditor.numberOfBoxes")}
-              type="number"
-              inputProps={{
-                min: "1"
-              }}
-              style={{ width: "48%" }}
-              register={register}
-              required={index === 0}
-            />
-            <TextField
-              name={`options[${index}].pricePerBox`}
-              label={t("boxEditor.pricePerBox", { currency })}
-              type="number"
-              inputProps={{
-                min: "0.01",
-                step: "0.01"
-              }}
-              style={{ width: "48%" }}
-              register={register}
-              required={index === 0}
-            />
-          </Box>
-        </Box>
-      ))}
+      {optionsList}
     </>
   );
 }
 Pricing.propTypes = {
-  options: PropTypes.arrayOf(BoxOptionPropTypes).isRequired,
   register: PropTypes.func.isRequired,
   currency: PropTypes.string.isRequired
 };
@@ -80,7 +86,7 @@ Pricing.propTypes = {
 export default function BoxEditor({ onClose, onSubmit, box, currency }) {
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm({ defaultValues: box });
-  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
     <Dialog
@@ -142,20 +148,10 @@ BoxEditor.propTypes = {
   box: BoxPropTypes,
   currency: PropTypes.string.isRequired
 };
-const defaultOption = {
-  numberOfBoxes: "",
-  pricePerBox: ""
-};
 BoxEditor.defaultProps = {
   box: {
     name: "",
     content: "",
-    options: [
-      defaultOption,
-      defaultOption,
-      defaultOption,
-      defaultOption,
-      defaultOption
-    ]
+    options: []
   }
 };

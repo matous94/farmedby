@@ -22,8 +22,8 @@ export const ProductTypesPropTypes = PropTypes.arrayOf(
 );
 
 export const BoxOptionPropTypes = PropTypes.shape({
-  numberOfBoxes: PropTypes.string,
-  pricePerBox: PropTypes.string
+  numberOfBoxes: PropTypes.number,
+  pricePerBox: PropTypes.number
 });
 export const BoxPropTypes = PropTypes.shape({
   content: PropTypes.string,

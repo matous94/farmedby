@@ -27,11 +27,18 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
   const onSubmit = React.useCallback(
     async (box) => {
       const objectId = editorSwitch.state?.objectId;
-      const point = await ApiClient.Farm.saveBox({
+      const savedBox = await ApiClient.Farm.saveBox({
         ...box,
+        options: box.options
+          .filter((option) => option.numberOfBoxes && option.pricePerBox)
+          .map((option) => ({
+            ...option,
+            numberOfBoxes: parseInt(option.numberOfBoxes, 10),
+            pricePerBox: parseFloat(option.pricePerBox)
+          })),
         objectId
       });
-      boxSaved(point);
+      boxSaved(savedBox);
       editorSwitch.reset();
     },
     [boxSaved, editorSwitch]

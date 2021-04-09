@@ -9,7 +9,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -35,6 +34,7 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
   const { farmId, pageName } = useParams();
 
   const isUpSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+  const isDownSm = !isUpSm;
   if (isUpSm && isOpen) onClose();
 
   const signOut = useStoreActions((actions) => actions.signOut);
@@ -47,14 +47,8 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
   const LandingPageIcon = landingPage.Icon;
   const drawerContent = (
     <div>
-      <Toolbar>
-        <Hidden smUp>
-          <Logo />
-        </Hidden>
-      </Toolbar>
-      <Hidden smUp>
-        <Divider />
-      </Hidden>
+      <Toolbar>{isDownSm && <Logo />}</Toolbar>
+      {isDownSm && <Divider />}
       <Box px="8px" py="12px">
         <Typography variant="h5" align="center">
           {farmName}
@@ -107,35 +101,33 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
     </div>
   );
 
-  return (
-    <>
-      <Hidden smUp implementation="css">
-        <Drawer
-          variant="temporary"
-          open={isOpen}
-          onClose={onClose}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-          ModalProps={{
-            keepMounted: true // Better open performance on mobile.
-          }}
-        >
-          {drawerContent}
-        </Drawer>
-      </Hidden>
-      <Hidden xsDown implementation="css">
-        <Drawer
-          classes={{
-            paper: classes.drawerPaper
-          }}
-          variant="permanent"
-          open
-        >
-          {drawerContent}
-        </Drawer>
-      </Hidden>
-    </>
+  return isDownSm ? (
+    <Drawer
+      variant="temporary"
+      open={isOpen}
+      onClose={onClose}
+      classes={{
+        paper: classes.drawerPaper
+      }}
+      ModalProps={{
+        keepMounted: true // Better open performance on mobile.
+      }}
+    >
+      {drawerContent}
+    </Drawer>
+  ) : (
+    <Drawer
+      classes={{
+        paper: classes.drawerPaper
+      }}
+      PaperProps={{
+        sx: { zIndex: (theme) => theme.zIndex.appBar - 1 }
+      }}
+      variant="permanent"
+      open
+    >
+      {drawerContent}
+    </Drawer>
   );
 }
 

@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === "development") {
       )
     );
   };
+  window.theme = theme;
 }
 
 const store = createStore();
