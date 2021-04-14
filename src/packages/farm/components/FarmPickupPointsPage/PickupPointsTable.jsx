@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
-import { makeStyles, styled } from "@material-ui/core/styles";
+import { styled } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
@@ -18,12 +18,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Link from "@material-ui/core/Link";
 
 import { FarmPropTypes, PickupPointPropTypes } from "src/types";
-
-const useStyles = makeStyles({
-  paper: {
-    maxWidth: (props) => (props.isAdminMode ? "1000px" : "800px")
-  }
-});
 
 const TableCell = styled(MuiTableCell)({
   paddingLeft: "16px",
@@ -131,7 +125,6 @@ export default function PickupPointsTable({
 }) {
   const { t } = useTranslation();
   const history = useHistory();
-  const classes = useStyles({ isAdminMode });
   const {
     city,
     email,
@@ -144,7 +137,12 @@ export default function PickupPointsTable({
   } = farm;
 
   return (
-    <TableContainer className={classes.paper} component={Paper}>
+    <TableContainer
+      sx={{
+        maxWidth: isAdminMode ? "1000px" : "800px"
+      }}
+      component={Paper}
+    >
       <Table size="small" aria-label="pickup points table">
         <TableHead>
           <TableRow>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { makeStyles, styled } from "@material-ui/core/styles";
+import { styled } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import MuiTableCell from "@material-ui/core/TableCell";
@@ -12,12 +12,6 @@ import Paper from "@material-ui/core/Paper";
 
 import Link from "src/components/Link";
 import { ProductTypesPropTypes } from "src/types";
-
-const useStyles = makeStyles({
-  paper: {
-    maxWidth: 800
-  }
-});
 
 const TableCell = styled(MuiTableCell)({
   paddingLeft: "16px",
@@ -68,10 +62,14 @@ Farm.propTypes = {
 
 export default function FarmsTable({ farms }) {
   const { t } = useTranslation();
-  const classes = useStyles();
 
   return (
-    <TableContainer className={classes.paper} component={Paper}>
+    <TableContainer
+      sx={{
+        maxWidth: 800
+      }}
+      component={Paper}
+    >
       <Table size="small" aria-label="pickup points table">
         <TableHead>
           <TableRow>

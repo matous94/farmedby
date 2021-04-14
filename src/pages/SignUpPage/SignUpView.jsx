@@ -10,7 +10,6 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import Link from "src/components/Link";
@@ -18,29 +17,8 @@ import logger from "src/packages/logger";
 
 import Copyright from "./Copyright";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(2)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
-
 export default function SignUpView({ onSubmit, isLoading }) {
   const { t } = useTranslation();
-  const classes = useStyles();
   const inputRef = useRef();
   const [formData, setFormData] = useState({
     email: "",
@@ -68,14 +46,33 @@ export default function SignUpView({ onSubmit, isLoading }) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <Box
+        sx={{
+          marginTop: (theme) => theme.spacing(3),
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        <Avatar
+          sx={{
+            margin: (theme) => theme.spacing(1),
+            backgroundColor: (theme) => theme.palette.secondary.main
+          }}
+        >
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           {t("signUpPage.heading")}
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler}>
+        <Box
+          component="form"
+          sx={{
+            width: "100%",
+            marginTop: (theme) => theme.spacing(2)
+          }}
+          onSubmit={submitHandler}
+        >
           <Grid container justifyContent="center" spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -152,8 +149,9 @@ export default function SignUpView({ onSubmit, isLoading }) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
-            className={classes.submit}
+            sx={{
+              margin: (theme) => theme.spacing(3, 0, 2)
+            }}
           >
             {t("signUp")}
           </Button>
@@ -164,8 +162,8 @@ export default function SignUpView({ onSubmit, isLoading }) {
               </Link>
             </Grid>
           </Grid>
-        </form>
-      </div>
+        </Box>
+      </Box>
       <Box sx={{ my: 5 }}>
         <Copyright />
       </Box>

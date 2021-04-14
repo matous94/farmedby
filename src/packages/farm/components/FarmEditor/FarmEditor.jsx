@@ -6,7 +6,6 @@ import MuiTextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -16,21 +15,6 @@ import GenericFailureDialog from "src/components/GenericFailureDialog";
 import Dialog from "src/components/Dialog";
 import { ProductTypes, FarmPropTypes } from "src/types";
 import Select from "src/components/Select/Select";
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(2)
-  },
-  submit: {
-    margin: "24px 0 32px 0"
-  }
-}));
 
 function TextField(props) {
   return (
@@ -48,7 +32,6 @@ export default function FarmEditor({
   submitButtonText,
   onErrorDissmiss
 }) {
-  const classes = useStyles();
   const { t } = useTranslation();
 
   const productOptions = React.useMemo(
@@ -94,8 +77,23 @@ export default function FarmEditor({
     <>
       <GenericFailureDialog isOpen={hasError} onClose={onErrorDissmiss} />
       <Dialog isLoading={isLoading} />
-      <Container className={classes.container} component="main" maxWidth="xs">
-        <form className={classes.form} onSubmit={submitHandler}>
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+        component="main"
+        maxWidth="xs"
+      >
+        <Box
+          component="form"
+          sx={{
+            width: "100%",
+            marginTop: (theme) => theme.spacing(2)
+          }}
+          onSubmit={submitHandler}
+        >
           <Grid container justifyContent="center" spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -215,12 +213,11 @@ export default function FarmEditor({
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
-            className={classes.submit}
+            sx={{ margin: "24px 0 32px 0" }}
           >
             {submitButtonText}
           </Button>
-        </form>
+        </Box>
       </Container>
     </>
   );

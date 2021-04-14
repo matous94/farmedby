@@ -2,22 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import { makeStyles } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MUiDialog from "@material-ui/core/Dialog";
-
-const useStyles = makeStyles({
-  paper: {
-    minHeight: 140
-  },
-  loadingText: {
-    margin: "8px 0 0 0"
-  }
-});
 
 export default function Dialog({
   onClose,
@@ -41,7 +31,6 @@ export default function Dialog({
     // eslint-disable-next-line no-param-reassign
     status = "isLoading";
   }
-  const classes = useStyles();
 
   return (
     <MUiDialog
@@ -51,7 +40,11 @@ export default function Dialog({
       aria-describedby="alert-dialog-description"
       maxWidth="xs"
       fullWidth
-      PaperProps={{ className: status === "isLoading" ? classes.paper : "" }}
+      PaperProps={{
+        sx: {
+          minHeight: status === "isLoading" ? 140 : 0
+        }
+      }}
     >
       {status === "isLoading" && (
         <Box
@@ -66,7 +59,9 @@ export default function Dialog({
           <CircularProgress />
           {loadingText && (
             <DialogContentText
-              className={classes.loadingText}
+              sx={{
+                margin: "8px 0 0 0"
+              }}
               align="center"
               id="alert-dialog-description"
             >

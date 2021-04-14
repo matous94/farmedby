@@ -4,12 +4,12 @@ import { useHistory } from "react-router-dom";
 import Toolbar from "@material-ui/core/Toolbar";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Link from "src/components/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useTranslation } from "react-i18next";
 
@@ -18,28 +18,7 @@ import logger from "src/packages/logger";
 import AppBar from "src/components/AppBar";
 import Dialog from "src/components/Dialog";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(3),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(2)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
-
 export default function SignInPage() {
-  const classes = useStyles();
   const { t } = useTranslation();
   const history = useHistory();
   const signIn = useStoreActions((actions) => actions.signIn);
@@ -101,14 +80,33 @@ export default function SignInPage() {
       <AppBar />
       <Toolbar />
       <Container component="main" maxWidth="xs">
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+        <Box
+          sx={{
+            marginTop: (theme) => theme.spacing(3),
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <Avatar
+            sx={{
+              margin: (theme) => theme.spacing(1),
+              backgroundColor: (theme) => theme.palette.secondary.main
+            }}
+          >
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             {t("signInPage.heading")}
           </Typography>
-          <form className={classes.form} onSubmit={submitHandler}>
+          <Box
+            component="form"
+            sx={{
+              width: "100%",
+              marginTop: (theme) => theme.spacing(2)
+            }}
+            onSubmit={submitHandler}
+          >
             <Grid container justifyContent="center" spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -143,8 +141,9 @@ export default function SignInPage() {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
-              className={classes.submit}
+              sx={{
+                margin: (theme) => theme.spacing(3, 0, 2)
+              }}
             >
               {t("signIn")}
             </Button>
@@ -155,8 +154,8 @@ export default function SignInPage() {
                 </Link>
               </Grid>
             </Grid>
-          </form>
-        </div>
+          </Box>
+        </Box>
       </Container>
     </>
   );

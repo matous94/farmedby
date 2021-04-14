@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -13,49 +13,7 @@ import ApiClient from "src/packages/api-client";
 import Button from "../Button";
 import imageUrl from "./call-to-action.jpg";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(10),
-    marginBottom: "64px",
-    display: "flex"
-  },
-  cardWrapper: {
-    zIndex: 1
-  },
-  card: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    backgroundColor: theme.palette.warning.main,
-    padding: theme.spacing(6, 2)
-  },
-  form: {
-    maxWidth: 500,
-    marginBottom: "10px"
-  },
-  button: {
-    width: "100%"
-  },
-  imagesWrapper: {
-    position: "relative"
-  },
-  image: {
-    position: "absolute",
-    top: -28,
-    left: -28,
-    right: 0,
-    bottom: 0,
-    width: "100%",
-    maxWidth: 600,
-    [theme.breakpoints.down("md")]: {
-      display: "none"
-    }
-  }
-}));
-
 function ProductCTA() {
-  const classes = useStyles();
   const { t } = useTranslation();
   const { register, handleSubmit, reset } = useForm();
 
@@ -69,13 +27,40 @@ function ProductCTA() {
   };
 
   return (
-    <Container className={classes.root} component="section">
+    <Container
+      sx={{
+        marginTop: (theme) => theme.spacing(10),
+        marginBottom: "64px",
+        display: "flex"
+      }}
+      component="section"
+    >
       <Grid container>
-        <Grid item xs={12} md={6} className={classes.cardWrapper}>
-          <div className={classes.card}>
-            <form
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            zIndex: 1
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              backgroundColor: (theme) => theme.palette.warning.main,
+              padding: (theme) => theme.spacing(6, 2)
+            }}
+          >
+            <Box
+              component="form"
               onSubmit={handleSubmit(submitHandler)}
-              className={classes.form}
+              sx={{
+                maxWidth: 500,
+                marginBottom: "10px"
+              }}
             >
               <Typography variant="h4" component="h2" gutterBottom>
                 {t("landingPage.workInProgress")}
@@ -98,20 +83,42 @@ function ProductCTA() {
               />
               <Button
                 type="submit"
-                color="primary"
                 variant="contained"
-                className={classes.button}
+                sx={{
+                  width: "100%"
+                }}
               >
                 {t("landingPage.subscribeToNewsletter")}
               </Button>
-            </form>
+            </Box>
             <Typography align="center" variant="caption">
               {t("landingPage.contactDeveloper")} <b>matousvencl@gmail.com</b>
             </Typography>
-          </div>
+          </Box>
         </Grid>
-        <Grid item xs={12} md={6} className={classes.imagesWrapper}>
-          <img src={imageUrl} alt="call to action" className={classes.image} />
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            position: "relative"
+          }}
+        >
+          <Box
+            component="img"
+            src={imageUrl}
+            alt="call to action"
+            sx={{
+              position: "absolute",
+              top: -28,
+              left: -28,
+              right: 0,
+              bottom: 0,
+              width: "100%",
+              maxWidth: 600,
+              display: ["none", null, "inline-block"]
+            }}
+          />
         </Grid>
       </Grid>
     </Container>
