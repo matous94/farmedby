@@ -13,7 +13,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import ApiClient from "src/packages/api-client";
@@ -21,14 +20,7 @@ import Logo from "src/components/Logo";
 
 import pages, { landingPage } from "../../pages";
 
-const useStyles = makeStyles({
-  drawerPaper: {
-    width: (props) => props.width
-  }
-});
-
 function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
-  const classes = useStyles({ width });
   const history = useHistory();
   const { t } = useTranslation();
   const { farmId, pageName } = useParams();
@@ -49,7 +41,7 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
     <div>
       <Toolbar>{isDownSm && <Logo />}</Toolbar>
       {isDownSm && <Divider />}
-      <Box px="8px" py="12px">
+      <Box sx={{ px: "8px", py: "12px" }}>
         <Typography variant="h5" align="center">
           {farmName}
         </Typography>
@@ -106,22 +98,19 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
       variant="temporary"
       open={isOpen}
       onClose={onClose}
-      classes={{
-        paper: classes.drawerPaper
-      }}
       ModalProps={{
         keepMounted: true // Better open performance on mobile.
+      }}
+      PaperProps={{
+        width
       }}
     >
       {drawerContent}
     </Drawer>
   ) : (
     <Drawer
-      classes={{
-        paper: classes.drawerPaper
-      }}
       PaperProps={{
-        sx: { zIndex: (theme) => theme.zIndex.appBar - 1 }
+        sx: { zIndex: (theme) => theme.zIndex.appBar - 1, width }
       }}
       variant="permanent"
       open

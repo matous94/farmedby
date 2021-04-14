@@ -12,7 +12,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
-import { BoxPropTypes, BoxOptionPropTypes } from "src/types";
+import { BoxPropTypes } from "src/types";
 
 const TextField = ({ register, ...rest }) => {
   /* eslint-disable*/
@@ -21,7 +21,6 @@ const TextField = ({ register, ...rest }) => {
       margin="dense"
       size="small"
       fullWidth
-      variant="outlined"
       inputRef={register}
       InputLabelProps={{ shrink: true }}
       {...rest}
@@ -41,8 +40,8 @@ function Pricing({ register, currency }) {
   // eslint-disable-next-line no-plusplus
   for (let index = 0; index < numberOfOptions; index++) {
     optionsList.push(
-      <Box key={index} mt="4px">
-        <Box display="flex" justifyContent="space-between">
+      <Box key={index} sx={{ mt: "4px" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <TextField
             name={`options[${index}].numberOfBoxes`}
             label={t("boxEditor.numberOfBoxes")}
@@ -50,7 +49,7 @@ function Pricing({ register, currency }) {
             inputProps={{
               min: "1"
             }}
-            style={{ width: "48%" }}
+            sx={{ width: "48%" }}
             register={register}
             required={index === 0}
           />
@@ -62,7 +61,7 @@ function Pricing({ register, currency }) {
               min: "0.01",
               step: "0.01"
             }}
-            style={{ width: "48%" }}
+            sx={{ width: "48%" }}
             register={register}
             required={index === 0}
           />
@@ -99,12 +98,9 @@ export default function BoxEditor({ onClose, onSubmit, box, currency }) {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        display="flex"
-        flexDirection="column"
+        sx={{ display: "flex", flexDirection: "column" }}
       >
-        <DialogTitle sx={{ paddingBottom: 0 }}>
-          {t("boxEditor.heading")}
-        </DialogTitle>
+        <DialogTitle sx={{ pb: 0 }}>{t("boxEditor.heading")}</DialogTitle>
         <DialogContent>
           <TextField
             register={register}
@@ -131,12 +127,10 @@ export default function BoxEditor({ onClose, onSubmit, box, currency }) {
           />
         </DialogContent>
         <DialogActions>
-          <Button type="button" onClick={onClose} color="primary">
+          <Button type="button" onClick={onClose}>
             {t("cancel")}
           </Button>
-          <Button type="submit" color="primary">
-            {t("save")}
-          </Button>
+          <Button type="submit">{t("save")}</Button>
         </DialogActions>
       </Box>
     </Dialog>

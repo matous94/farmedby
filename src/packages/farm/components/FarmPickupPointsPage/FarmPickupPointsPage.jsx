@@ -53,7 +53,7 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
 
   return (
     <>
-      <Box display="flex" justifyContent="center">
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         {editorSwitch.isOn && (
           <PickupPointEditor
             point={editorSwitch.state}

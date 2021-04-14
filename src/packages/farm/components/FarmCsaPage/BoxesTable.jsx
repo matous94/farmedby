@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { makeStyles, styled } from "@material-ui/core/styles";
+import { styled } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
@@ -18,12 +18,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import { FarmPropTypes, BoxPropTypes } from "src/types";
 import { getCurrency } from "src/i18n";
-
-const useStyles = makeStyles({
-  paper: {
-    maxWidth: "800px"
-  }
-});
 
 const TableCell = styled(MuiTableCell)({
   paddingLeft: "16px",
@@ -48,18 +42,18 @@ function ProduceBox({ box, onEdit, onDelete, isAdminMode }) {
       )}
       <TableCell>{name}</TableCell>
       <TableCell>{content}</TableCell>
-      <TableCell style={{ whiteSpace: "nowrap", textAlign: "center" }}>
-        <Box display="inline-flex" flexDirection="column">
+      <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
+        <Box sx={{ display: "inline-flex", flexDirection: "column" }}>
           {options
             .filter((option) => option?.pricePerBox && option.numberOfBoxes)
             .map(({ pricePerBox, numberOfBoxes }, index, { length }) => {
               return (
-                <Box display="flex" alignItems="center" key={index}>
-                  <Box textAlign="right" minWidth="24px">
+                <Box sx={{ display: "flex", alignItems: "center" }} key={index}>
+                  <Box sx={{ textAlign: "right", minWidth: "24px" }}>
                     {numberOfBoxes}
                   </Box>
-                  <Box mx="3px">x</Box>
-                  <Box mr="2px" fontWeight="bold" minWidth="25px">
+                  <Box sx={{ mx: "3px" }}>x</Box>
+                  <Box sx={{ mr: "2px", fontWeight: "bold", minWidth: "25px" }}>
                     {pricePerBox}
                   </Box>
                   (= {Number(numberOfBoxes) * Number(pricePerBox)})
@@ -87,7 +81,7 @@ function AddPointRow({ onAdd }) {
   return (
     <TableRow>
       <TableCell>
-        <ButtonGroup disableElevation variant="contained" color="primary">
+        <ButtonGroup disableElevation variant="contained">
           <Button onClick={onAdd}>
             <AddCircleIcon />
           </Button>
@@ -114,24 +108,28 @@ export default function BoxesTable({
   isAdminMode
 }) {
   const { t } = useTranslation();
-  const classes = useStyles();
   const { boxes } = farm;
 
   return (
-    <TableContainer className={classes.paper} component={Paper}>
+    <TableContainer
+      sx={{
+        maxWidth: "800px"
+      }}
+      component={Paper}
+    >
       <Table size="small" aria-label="pickup points table">
         <TableHead>
           <TableRow>
             {isAdminMode && (
               <TableCell> {t("pickupPointsPage.editDelete")}</TableCell>
             )}
-            <TableCell style={{ minWidth: "200px" }}>
+            <TableCell sx={{ minWidth: "200px" }}>
               {t("csaPage.boxName")}
             </TableCell>
-            <TableCell style={{ whiteSpace: "nowrap", minWidth: "200px" }}>
+            <TableCell sx={{ whiteSpace: "nowrap", minWidth: "200px" }}>
               {t("csaPage.boxContentHeading")}
             </TableCell>
-            <TableCell style={{ whiteSpace: "nowrap" }}>
+            <TableCell sx={{ whiteSpace: "nowrap" }}>
               {t("boxesTable.priceHeading", {
                 currency: getCurrency(farm.countryCode)
               })}

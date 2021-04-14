@@ -56,7 +56,14 @@ function ProductHero() {
             </HeadingWord>
           ))}
       </Typography>
-      <Box height="4px" width="64px" margin="8px auto 0" bg="secondary" />
+      <Box
+        sx={{
+          height: "4px",
+          width: "64px",
+          margin: "8px auto 0",
+          bg: "secondary"
+        }}
+      />
       <Typography
         color="inherit"
         align="center"
@@ -67,7 +74,7 @@ function ProductHero() {
         {t("landingPage.subHeading")}
       </Typography>
       {/* <Input
-        style={{ background: "white", padding: "4px 12px", margin: "16px 0" }}
+        sx={{ background: "white", padding: "4px 12px", margin: "16px 0" }}
         placeholder="PSČ"
         disabled
       /> */}
@@ -81,7 +88,7 @@ function ProductHero() {
       >
         {t("farmsPage.heading")}
       </Button>
-      <Box my={["16px", "24px"]}>
+      <Box sx={{ my: ["16px", "24px"] }}>
         <Typography color="inherit" align="center" variant="h5" component="h3">
           {t("landingPage.or")}
         </Typography>
@@ -94,7 +101,7 @@ function ProductHero() {
         sx={{ minWidth: "200px" }}
         to={`/farm/${getIllustrativeFarmId()}`}
       >
-        <Box display="flex" flexDirection="column">
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
           {t("landingPage.showExampleFarm")}
           <br />
           <Typography color="inherit" align="center" variant="caption">

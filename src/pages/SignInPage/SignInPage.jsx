@@ -109,13 +109,12 @@ export default function SignInPage() {
             {t("signInPage.heading")}
           </Typography>
           <form className={classes.form} onSubmit={submitHandler}>
-            <Grid container justify="center" spacing={2}>
+            <Grid container justifyContent="center" spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoFocus
-                  variant="outlined"
                   required
                   fullWidth
                   id="email"
@@ -129,7 +128,6 @@ export default function SignInPage() {
                 <TextField
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  variant="outlined"
                   required
                   fullWidth
                   name="password"
@@ -150,7 +148,7 @@ export default function SignInPage() {
             >
               {t("signIn")}
             </Button>
-            <Grid container justify="flex-end">
+            <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/sign-up" variant="body2">
                   {t("signInPage.noAccount")}

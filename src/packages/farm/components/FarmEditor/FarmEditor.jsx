@@ -35,13 +35,7 @@ const useStyles = makeStyles((theme) => ({
 function TextField(props) {
   return (
     /* eslint-disable*/
-    <MuiTextField
-      fullWidth
-      variant="outlined"
-      required={true}
-      id={props.name}
-      {...props}
-    />
+    <MuiTextField fullWidth required={true} id={props.name} {...props} />
     /* eslint-enable */
   );
 }
@@ -102,7 +96,7 @@ export default function FarmEditor({
       <Dialog isLoading={isLoading} />
       <Container className={classes.container} component="main" maxWidth="xs">
         <form className={classes.form} onSubmit={submitHandler}>
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             <Grid item xs={12}>
               <TextField
                 onChange={onChange}
@@ -207,11 +201,11 @@ export default function FarmEditor({
               />
             </Grid>
           </Grid>
-          <Box mt="16px">
+          <Box sx={{ mt: "16px" }}>
             <Typography variant="h5">{t("aboutFarm")}</Typography>
             <TextareaAutosize
               name="about"
-              rowsMin={10}
+              minRows={10}
               style={{ width: "100%" }}
               value={formData.about}
               onChange={onChange}

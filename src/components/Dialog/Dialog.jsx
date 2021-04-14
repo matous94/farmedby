@@ -55,11 +55,13 @@ export default function Dialog({
     >
       {status === "isLoading" && (
         <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          flexGrow="1"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            flexGrow: "1"
+          }}
         >
           <CircularProgress />
           {loadingText && (

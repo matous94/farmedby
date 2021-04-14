@@ -48,17 +48,19 @@ export default function FarmsPage() {
       />
       {farmGetter.isResolved && (
         <Box
-          pt="16px"
-          pb="32px"
-          px={["16px", "24px", "32px", "64px"]}
-          display="flex"
-          alignItems="center"
-          flexDirection="column"
+          sx={{
+            pt: "16px",
+            pb: "32px",
+            px: ["16px", "24px", "32px", "64px"],
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column"
+          }}
         >
           <Typography align="center" color="secondary" variant="h4">
             {t("farmsPage.heading")}
           </Typography>
-          <Box mb="24px" mt="16px" width="256px">
+          <Box sx={{ mb: "24px", mt: "16px", width: "256px" }}>
             <TextField
               onChange={onChange}
               value={filterValue}
@@ -67,7 +69,6 @@ export default function FarmsPage() {
               label={t("farmsTable.deliversToHeading")}
               type="text"
               fullWidth
-              variant="outlined"
               placeholder={t("city")}
               InputProps={{
                 startAdornment: (

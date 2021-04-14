@@ -24,7 +24,7 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
   return (
     <MuiAppBar position="fixed">
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <Box display="flex" alignItems="center">
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           {onMenuClick && isDownSm && (
             <IconButton
               color="inherit"
@@ -37,9 +37,11 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
           )}
           <Logo />
           <Box
-            ml={["8px", "12px", "16px"]}
-            width={["24px", "32px", "40px"]}
-            height={["24px", "32px", "40px"]}
+            sx={{
+              ml: ["8px", "12px", "16px"],
+              width: ["24px", "32px", "40px"],
+              height: ["24px", "32px", "40px"]
+            }}
           >
             <CountrySelector />
           </Box>

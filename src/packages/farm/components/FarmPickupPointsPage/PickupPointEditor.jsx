@@ -23,11 +23,10 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
       /* eslint-disable*/
       return (
         <MuiTextField
-          margin="dense"
+          margin="normal"
+          size="small"
           fullWidth
-          variant="outlined"
           inputRef={register}
-          required={true}
           {...props}
         />
         /* eslint-enable */
@@ -47,27 +46,28 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        display="flex"
-        flexDirection="column"
+        sx={{ display: "flex", flexDirection: "column" }}
       >
-        <DialogTitle style={{ paddingBottom: 0 }}>
+        <DialogTitle sx={{ paddingBottom: 0 }}>
           {t("pickupPointEditor.heading")}
         </DialogTitle>
         <DialogContent>
           <TextField name="name" label={t("name")} type="text" />
           <TextField name="street" label={t("addressLine1")} type="text" />
-          <Box display="flex" justifyContent="space-between">
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <TextField
               name="city"
               label={t("city")}
               type="text"
-              style={{ width: "63%" }}
+              sx={{ width: "63%" }}
+              required={true}
             />
             <TextField
               name="postcode"
               label={t("postcode")}
               type="text"
-              style={{ width: "35%" }}
+              sx={{ width: "35%" }}
+              required={true}
             />
           </Box>
           <TextField
@@ -77,25 +77,11 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
             InputLabelProps={{ shrink: true }}
             type="text"
             multiline
+            required={true}
           />
-          <TextField
-            name="email"
-            label={t("email")}
-            type="email"
-            required={false}
-          />
-          <TextField
-            name="phoneNumber"
-            label={t("phoneNumber")}
-            type="tel"
-            required={false}
-          />
-          <TextField
-            name="webUrl"
-            label={t("webAddress")}
-            type="url"
-            required={false}
-          />
+          <TextField name="email" label={t("email")} type="email" />
+          <TextField name="phoneNumber" label={t("phoneNumber")} type="tel" />
+          <TextField name="webUrl" label={t("webAddress")} type="url" />
         </DialogContent>
         <DialogActions>
           <Button type="button" onClick={onClose} color="primary">

@@ -14,7 +14,7 @@ function FarmData({ label, value, url }) {
   return (
     <div>
       <Typography
-        style={{ marginRight: "6px", wordBreak: "break-all" }}
+        sx={{ marginRight: "6px", wordBreak: "break-all" }}
         variant="overline"
       >
         {label}:
@@ -61,12 +61,19 @@ export default function FarmView({ farm, isFarmOwner }) {
 
   const aboutAsParagraphs = about.split("\n");
   return (
-    <Box maxWidth="800px" mx="auto" display="flex" flexDirection="column">
+    <Box
+      sx={{
+        maxWidth: "800px",
+        mx: "auto",
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
       <FarmData label={t("producing")} value={producing} />
       <FarmData label={t("email")} value={email} />
       <FarmData label={t("phoneNumber")} value={phoneNumber} />
       <FarmData label={t("webAddress")} url={webUrl} />
-      <Box mb="16px">
+      <Box sx={{ mb: "16px" }}>
         <FarmData
           label={t("address")}
           value={createAddress({ city, countryCode, street, postcode }).full}
@@ -74,14 +81,14 @@ export default function FarmView({ farm, isFarmOwner }) {
       </Box>
       {(about || isFarmOwner) && (
         <>
-          <Typography style={{ marginBottom: "8px" }} variant="h5">
+          <Typography sx={{ marginBottom: "8px" }} variant="h5">
             {t("aboutFarm")}
           </Typography>
           {aboutAsParagraphs.map((paragraph, index) => (
             <Typography
               // eslint-disable-next-line react/no-array-index-key
               key={index}
-              style={{ paddingTop: paragraph === "" ? "24px" : 0 }}
+              sx={{ paddingTop: paragraph === "" ? "24px" : 0 }}
               variant="body1"
             >
               {paragraph}

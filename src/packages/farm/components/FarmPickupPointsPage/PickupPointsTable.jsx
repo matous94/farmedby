@@ -56,8 +56,8 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
           </ButtonGroup>
         </TableCell>
       )}
-      <TableCell style={{ whiteSpace: "nowrap" }}>{name}</TableCell>
-      <TableCell style={{ whiteSpace: "nowrap" }}>
+      <TableCell sx={{ whiteSpace: "nowrap" }}>{name}</TableCell>
+      <TableCell sx={{ whiteSpace: "nowrap" }}>
         {street}
         <br />
         {postcode}
@@ -153,7 +153,7 @@ export default function PickupPointsTable({
             )}
             <TableCell>{t("name")}</TableCell>
             <TableCell>{t("address")}</TableCell>
-            <TableCell style={{ minWidth: "200px" }}>
+            <TableCell sx={{ minWidth: "200px" }}>
               {t("pickupPointsPage.pickupDay")}
             </TableCell>
             <TableCell>{t("contacts")}</TableCell>

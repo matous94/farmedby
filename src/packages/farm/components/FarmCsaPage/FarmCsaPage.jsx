@@ -58,7 +58,9 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
 
   return (
     <>
-      <Box display="flex" flexDirection="column" alignItems="center">
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
         {editorSwitch.isOn && (
           <BoxEditor
             box={editorSwitch.state}
@@ -67,7 +69,7 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
             currency={getCurrency(farm.countryCode)}
           />
         )}
-        <Box mb="16px" maxWidth="800px">
+        <Box sx={{ mb: "16px", maxWidth: "800px" }}>
           <Typography paragraph>{t("csaPage.about")}</Typography>
           <Typography>{t("csaPage.about2")}</Typography>
         </Box>

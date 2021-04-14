@@ -2,12 +2,11 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Alert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/core/Alert";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -22,18 +21,9 @@ import ResponsiveDrawer from "./ResponsiveDrawer";
 import useGetFarm from "./useGetFarm";
 
 const drawerWidth = "240px";
-const useStyles = makeStyles((theme) => ({
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0
-    }
-  }
-}));
 
 export default function FarmPages() {
   const { pageName, farmId } = useParams();
-  const classes = useStyles();
   const { t } = useTranslation();
 
   const drawer = useSwitch(false);
@@ -55,8 +45,15 @@ export default function FarmPages() {
         }}
       />
       <AppBar onMenuClick={drawer.switchOn} />
-      <Box display="flex">
-        <nav className={classes.drawer} aria-label="mailbox folders">
+      <Box sx={{ display: "flex" }}>
+        <Box
+          component="nav"
+          sx={{
+            width: [null, drawerWidth],
+            flexShrink: 0
+          }}
+          aria-label="mailbox folders"
+        >
           <ResponsiveDrawer
             isOpen={drawer.isOn}
             onClose={drawer.switchOff}
@@ -64,16 +61,24 @@ export default function FarmPages() {
             farmName={farm?.name}
             isAdminMode={isAdminMode}
           />
-        </nav>
+        </Box>
         <Box
           component="main"
           position="relative"
-          width={isUpSm ? `calc(100vw - ${drawerWidth})` : "100vw"}
-          minHeight="100vh"
+          sx={{
+            width: isUpSm ? `calc(100vw - ${drawerWidth})` : "100vw",
+            minHeight: "100vh"
+          }}
         >
           <Toolbar />
           {status === "loading" && (
-            <Box position="absolute" top="100px" left="calc(50% - 20px)">
+            <Box
+              sx={{
+                position: "absolute",
+                top: "100px",
+                left: "calc(50% - 20px)"
+              }}
+            >
               <CircularProgress />
             </Box>
           )}
@@ -91,8 +96,14 @@ export default function FarmPages() {
                     : t("exampleFarmAlert")}
                 </Alert>
               )}
-              <Box pt="16px" pb="64px" px={["16px", "24px", "32px", "64px"]}>
-                <Box mb="16px">
+              <Box
+                sx={{
+                  pt: "16px",
+                  pb: "64px",
+                  px: ["16px", "24px", "32px", "64px"]
+                }}
+              >
+                <Box sx={{ mb: "16px" }}>
                   <Typography align="center" color="secondary" variant="h4">
                     {pageHeading}
                   </Typography>
@@ -105,10 +116,10 @@ export default function FarmPages() {
                 />
               </Box>
               {isFarmOwner && (
-                <Box position="fixed" bottom="16px" right="24px">
+                <Box sx={{ position: "fixed", bottom: "16px", right: "24px" }}>
                   <Fab
                     onClick={toggleAdminMode}
-                    style={{ minWidth: "80px" }}
+                    sx={{ minWidth: "80px" }}
                     size="medium"
                     variant="extended"
                     color="secondary"

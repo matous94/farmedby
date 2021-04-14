@@ -76,14 +76,13 @@ export default function SignUpView({ onSubmit, isLoading }) {
           {t("signUpPage.heading")}
         </Typography>
         <form className={classes.form} onSubmit={submitHandler}>
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={2}>
             <Grid item xs={12}>
               <TextField
                 onChange={onChange}
                 value={formData.firstName}
                 autoComplete="given-name"
                 name="firstName"
-                variant="outlined"
                 required
                 fullWidth
                 id="firstName"
@@ -97,7 +96,6 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 value={formData.lastName}
                 autoComplete="family-name"
                 name="lastName"
-                variant="outlined"
                 required
                 fullWidth
                 id="lastName"
@@ -109,7 +107,6 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 onChange={onChange}
                 value={formData.email}
                 inputRef={inputRef}
-                variant="outlined"
                 required
                 fullWidth
                 id="email"
@@ -123,7 +120,6 @@ export default function SignUpView({ onSubmit, isLoading }) {
               <TextField
                 onChange={onChange}
                 value={formData.password}
-                variant="outlined"
                 required
                 fullWidth
                 name="password"
@@ -161,7 +157,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
           >
             {t("signUp")}
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/sign-in" variant="body2">
                 {t("signUpPage.existingAccount")}
@@ -170,7 +166,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
           </Grid>
         </form>
       </div>
-      <Box my={5}>
+      <Box sx={{ my: 5 }}>
         <Copyright />
       </Box>
     </Container>
