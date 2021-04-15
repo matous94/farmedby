@@ -29,10 +29,10 @@ export async function deletePickupPoint(objectId) {
   return callCloudFunction("deletePickupPoint", { objectId });
 }
 
-export async function saveBox(boxData) {
-  return callCloudFunction("saveBox", { boxData });
+export async function saveSubscription(subscriptionData) {
+  return callCloudFunction("saveSubscription", { subscriptionData });
 }
 
-export async function deleteBox(objectId) {
-  return callCloudFunction("deleteBox", { objectId });
+export async function deleteSubscription(objectId) {
+  return callCloudFunction("deleteSubscription", { objectId });
 }

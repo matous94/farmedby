@@ -16,7 +16,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-import { FarmPropTypes, BoxPropTypes } from "src/types";
+import { FarmPropTypes, SubscriptionPropTypes } from "src/types";
 import { getCurrency } from "src/i18n";
 
 const TableCell = styled(MuiTableCell)({
@@ -24,8 +24,8 @@ const TableCell = styled(MuiTableCell)({
   paddingRight: "8px"
 });
 
-function ProduceBox({ box, onEdit, onDelete, isAdminMode }) {
-  const { name, content, options } = box;
+function Subscription({ subscription, onEdit, onDelete, isAdminMode }) {
+  const { name, content, options } = subscription;
   return (
     <TableRow>
       {isAdminMode && (
@@ -45,34 +45,43 @@ function ProduceBox({ box, onEdit, onDelete, isAdminMode }) {
       <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
         <Box sx={{ display: "inline-flex", flexDirection: "column" }}>
           {options
-            .filter((option) => option?.pricePerBox && option.numberOfBoxes)
-            .map(({ pricePerBox, numberOfBoxes }, index, { length }) => {
-              return (
-                <Box sx={{ display: "flex", alignItems: "center" }} key={index}>
-                  <Box sx={{ textAlign: "right", minWidth: "24px" }}>
-                    {numberOfBoxes}
+            .filter(
+              (option) => option?.pricePerDelivery && option.numberOfDeliveries
+            )
+            .map(
+              ({ pricePerDelivery, numberOfDeliveries }, index, { length }) => {
+                return (
+                  <Box
+                    sx={{ display: "flex", alignItems: "center" }}
+                    key={index}
+                  >
+                    <Box sx={{ textAlign: "right", minWidth: "24px" }}>
+                      {numberOfDeliveries}
+                    </Box>
+                    <Box sx={{ mx: "3px" }}>x</Box>
+                    <Box
+                      sx={{ mr: "2px", fontWeight: "bold", minWidth: "25px" }}
+                    >
+                      {pricePerDelivery}
+                    </Box>
+                    (= {Number(numberOfDeliveries) * Number(pricePerDelivery)})
+                    {index < length - 1 && <br />}
                   </Box>
-                  <Box sx={{ mx: "3px" }}>x</Box>
-                  <Box sx={{ mr: "2px", fontWeight: "bold", minWidth: "25px" }}>
-                    {pricePerBox}
-                  </Box>
-                  (= {Number(numberOfBoxes) * Number(pricePerBox)})
-                  {index < length - 1 && <br />}
-                </Box>
-              );
-            })}
+                );
+              }
+            )}
         </Box>
       </TableCell>
     </TableRow>
   );
 }
-ProduceBox.propTypes = {
-  box: BoxPropTypes.isRequired,
+Subscription.propTypes = {
+  subscription: SubscriptionPropTypes.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
   isAdminMode: PropTypes.bool.isRequired
 };
-ProduceBox.defaultProps = {
+Subscription.defaultProps = {
   onEdit: undefined,
   onDelete: undefined
 };
@@ -100,7 +109,7 @@ AddPointRow.propTypes = {
   onAdd: PropTypes.func.isRequired
 };
 
-export default function BoxesTable({
+export default function SubscriptionsTable({
   farm,
   onEdit,
   onDelete,
@@ -108,7 +117,7 @@ export default function BoxesTable({
   isAdminMode
 }) {
   const { t } = useTranslation();
-  const { boxes } = farm;
+  const { subscriptions } = farm;
 
   return (
     <TableContainer
@@ -124,13 +133,13 @@ export default function BoxesTable({
               <TableCell> {t("pickupPointsPage.editDelete")}</TableCell>
             )}
             <TableCell sx={{ minWidth: "200px" }}>
-              {t("csaPage.boxName")}
+              {t("subscriptionsPage.subscriptionName")}
             </TableCell>
             <TableCell sx={{ whiteSpace: "nowrap", minWidth: "200px" }}>
-              {t("csaPage.boxContentHeading")}
+              {t("subscriptionsPage.subscriptionContentHeading")}
             </TableCell>
             <TableCell sx={{ whiteSpace: "nowrap" }}>
-              {t("boxesTable.priceHeading", {
+              {t("subscriptionsTable.priceHeading", {
                 currency: getCurrency(farm.countryCode)
               })}
             </TableCell>
@@ -139,19 +148,19 @@ export default function BoxesTable({
         <TableBody>
           {isAdminMode && <AddPointRow onAdd={onAdd} />}
 
-          {[...boxes]
+          {[...subscriptions]
             .sort((a, b) => {
               if (a.name === b.name) return 0;
               if (a.name < b.name) return -1;
               return 1;
             })
-            .map((box) => (
-              <ProduceBox
+            .map((subscription) => (
+              <Subscription
                 isAdminMode={isAdminMode}
-                key={box.objectId}
-                box={box}
-                onEdit={() => onEdit(box)}
-                onDelete={() => onDelete(box.objectId)}
+                key={subscription.objectId}
+                subscription={subscription}
+                onEdit={() => onEdit(subscription)}
+                onDelete={() => onDelete(subscription.objectId)}
               />
             ))}
         </TableBody>
@@ -160,7 +169,7 @@ export default function BoxesTable({
   );
 }
 
-BoxesTable.propTypes = {
+SubscriptionsTable.propTypes = {
   farm: FarmPropTypes.isRequired,
   onAdd: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,

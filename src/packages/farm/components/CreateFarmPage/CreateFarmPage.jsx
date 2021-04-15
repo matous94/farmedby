@@ -40,7 +40,7 @@ export default function CreateFarmPage() {
         const farm = await ApiClient.Farm.createFarm({
           ...farmData,
           countryCode: getCountryCode(),
-          boxes: [],
+          subscriptions: [],
           pickupPoints: []
         });
         farm.owner = { objectId: user.objectId };

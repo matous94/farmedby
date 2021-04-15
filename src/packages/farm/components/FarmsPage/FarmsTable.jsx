@@ -25,7 +25,7 @@ function Farm({ farm }) {
   return (
     <TableRow>
       <TableCell>
-        <Link to={`/farm/${objectId}`}>{name}</Link>
+        <Link to={`/farm/${objectId}/subscriptions`}>{name}</Link>
       </TableCell>
       <TableCell>
         {productTypes

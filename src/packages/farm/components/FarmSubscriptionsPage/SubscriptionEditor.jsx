@@ -12,7 +12,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
-import { BoxPropTypes } from "src/types";
+import { SubscriptionPropTypes } from "src/types";
 
 const TextField = ({ register, ...rest }) => {
   /* eslint-disable*/
@@ -43,8 +43,8 @@ function Pricing({ register, currency }) {
       <Box key={index} sx={{ mt: "4px" }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <TextField
-            name={`options[${index}].numberOfBoxes`}
-            label={t("boxEditor.numberOfBoxes")}
+            name={`options[${index}].numberOfDeliveries`}
+            label={t("subscriptionEditor.numberOfDeliveries")}
             type="number"
             inputProps={{
               min: "1"
@@ -54,8 +54,8 @@ function Pricing({ register, currency }) {
             required={index === 0}
           />
           <TextField
-            name={`options[${index}].pricePerBox`}
-            label={t("boxEditor.pricePerBox", { currency })}
+            name={`options[${index}].pricePerDelivery`}
+            label={t("subscriptionEditor.pricePerDelivery", { currency })}
             type="number"
             inputProps={{
               min: "0.01",
@@ -82,9 +82,14 @@ Pricing.propTypes = {
   currency: PropTypes.string.isRequired
 };
 
-export default function BoxEditor({ onClose, onSubmit, box, currency }) {
+export default function SubscriptionEditor({
+  onClose,
+  onSubmit,
+  subscription,
+  currency
+}) {
   const { t } = useTranslation();
-  const { register, handleSubmit } = useForm({ defaultValues: box });
+  const { register, handleSubmit } = useForm({ defaultValues: subscription });
   const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   return (
@@ -100,13 +105,15 @@ export default function BoxEditor({ onClose, onSubmit, box, currency }) {
         onSubmit={handleSubmit(onSubmit)}
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <DialogTitle sx={{ pb: 0 }}>{t("boxEditor.heading")}</DialogTitle>
+        <DialogTitle sx={{ pb: 0 }}>
+          {t("subscriptionEditor.heading")}
+        </DialogTitle>
         <DialogContent>
           <TextField
             register={register}
             name="name"
-            label={t("csaPage.boxName")}
-            placeholder={t("boxEditor.namePlaceholder")}
+            label={t("subscriptionsPage.subscriptionName")}
+            placeholder={t("subscriptionEditor.namePlaceholder")}
             type="text"
             required
           />
@@ -114,14 +121,14 @@ export default function BoxEditor({ onClose, onSubmit, box, currency }) {
             sx={{ marginBottom: "16px", marginTop: "8px" }}
             register={register}
             name="content"
-            label={t("csaPage.boxContentHeading")}
-            placeholder={t("csaPage.boxContentPlaceholder")}
+            label={t("subscriptionsPage.subscriptionContentHeading")}
+            placeholder={t("subscriptionsPage.subscriptionContentPlaceholder")}
             multiline
             type="text"
             required
           />
           <Pricing
-            options={box.options}
+            options={subscription.options}
             register={register}
             currency={currency}
           />
@@ -136,14 +143,14 @@ export default function BoxEditor({ onClose, onSubmit, box, currency }) {
     </Dialog>
   );
 }
-BoxEditor.propTypes = {
+SubscriptionEditor.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  box: BoxPropTypes,
+  subscription: SubscriptionPropTypes,
   currency: PropTypes.string.isRequired
 };
-BoxEditor.defaultProps = {
-  box: {
+SubscriptionEditor.defaultProps = {
+  subscription: {
     name: "",
     content: "",
     options: []

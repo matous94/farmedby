@@ -36,16 +36,19 @@ const storeModel = {
     );
     if (index !== -1) state.myFarm.pickupPoints.splice(index, 1);
   }),
-  boxSaved: action((state, newBox) => {
-    const boxIndex = state.myFarm.boxes.findIndex(
-      (box) => box.objectId === newBox.objectId
+  subscriptionSaved: action((state, newSubscription) => {
+    const subscriptionIndex = state.myFarm.subscriptions.findIndex(
+      (subscription) => subscription.objectId === newSubscription.objectId
     );
-    if (boxIndex === -1) state.myFarm.boxes.push(newBox);
-    else state.myFarm.boxes[boxIndex] = newBox;
+    if (subscriptionIndex === -1)
+      state.myFarm.subscriptions.push(newSubscription);
+    else state.myFarm.subscriptions[subscriptionIndex] = newSubscription;
   }),
-  boxDeleted: action((state, boxId) => {
-    const index = state.myFarm.boxes.findIndex((box) => box.objectId === boxId);
-    if (index !== -1) state.myFarm.boxes.splice(index, 1);
+  subscriptionDeleted: action((state, subscriptionId) => {
+    const index = state.myFarm.subscriptions.findIndex(
+      (subscription) => subscription.objectId === subscriptionId
+    );
+    if (index !== -1) state.myFarm.subscriptions.splice(index, 1);
   }),
   signIn: action((state, payload) => {
     state.user = payload.user;

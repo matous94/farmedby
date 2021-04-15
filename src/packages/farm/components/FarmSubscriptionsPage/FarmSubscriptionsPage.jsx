@@ -13,44 +13,50 @@ import GenericFailureDialog from "src/components/GenericFailureDialog";
 import DeleteDialog from "src/components/DeleteDialog";
 import { getCurrency } from "src/i18n";
 
-import BoxEditor from "./BoxEditor";
-import BoxesTable from "./BoxesTable";
+import SubscriptionEditor from "./SubscriptionEditor";
+import SubscriptionsTable from "./SubscriptionsTable";
 
-export default function FarmCsaPage({ farm, isAdminMode }) {
+export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
   const { t } = useTranslation();
   const editorSwitch = useSwitch(false);
   const deleteDialogSwitch = useSwitch(false);
 
-  const boxSaved = useStoreActions((actions) => actions.boxSaved);
-  const boxDeleted = useStoreActions((actions) => actions.boxDeleted);
+  const subscriptionSaved = useStoreActions(
+    (actions) => actions.subscriptionSaved
+  );
+  const subscriptionDeleted = useStoreActions(
+    (actions) => actions.subscriptionDeleted
+  );
 
   const onSubmit = React.useCallback(
-    async (box) => {
+    async (subscription) => {
       const objectId = editorSwitch.state?.objectId;
-      const savedBox = await ApiClient.Farm.saveBox({
-        ...box,
-        options: box.options
-          .filter((option) => option.numberOfBoxes && option.pricePerBox)
+      const savedSubscription = await ApiClient.Farm.saveSubscription({
+        ...subscription,
+        options: subscription.options
+          .filter(
+            (option) => option.numberOfDeliveries && option.pricePerDelivery
+          )
           .map((option) => ({
             ...option,
-            numberOfBoxes: parseInt(option.numberOfBoxes, 10),
-            pricePerBox: parseFloat(option.pricePerBox)
+            numberOfDeliveries: parseInt(option.numberOfDeliveries, 10),
+            pricePerDelivery: parseFloat(option.pricePerDelivery)
           })),
         objectId
       });
-      boxSaved(savedBox);
+      subscriptionSaved(savedSubscription);
       editorSwitch.reset();
     },
-    [boxSaved, editorSwitch]
+    [subscriptionSaved, editorSwitch]
   );
 
   const onDelete = React.useCallback(
     async (pointId) => {
       deleteDialogSwitch.reset();
-      await ApiClient.Farm.deleteBox(pointId);
-      boxDeleted(pointId);
+      await ApiClient.Farm.deleteSubscription(pointId);
+      subscriptionDeleted(pointId);
     },
-    [boxDeleted, deleteDialogSwitch]
+    [subscriptionDeleted, deleteDialogSwitch]
   );
 
   const submitter = useAsync(onSubmit, { functionName: "onSubmit" });
@@ -62,18 +68,18 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         {editorSwitch.isOn && (
-          <BoxEditor
-            box={editorSwitch.state}
+          <SubscriptionEditor
+            subscription={editorSwitch.state}
             onClose={() => editorSwitch.reset()}
             onSubmit={submitter.execute}
             currency={getCurrency(farm.countryCode)}
           />
         )}
         <Box sx={{ mb: "16px", maxWidth: "800px" }}>
-          <Typography paragraph>{t("csaPage.about")}</Typography>
-          <Typography>{t("csaPage.about2")}</Typography>
+          <Typography paragraph>{t("subscriptionsPage.about")}</Typography>
+          <Typography>{t("subscriptionsPage.about2")}</Typography>
         </Box>
-        <BoxesTable
+        <SubscriptionsTable
           farm={farm}
           onAdd={() => editorSwitch.switchOn()}
           onEdit={editorSwitch.switchOn}
@@ -97,7 +103,7 @@ export default function FarmCsaPage({ farm, isAdminMode }) {
   );
 }
 
-FarmCsaPage.propTypes = {
+FarmSubscriptionsPage.propTypes = {
   farm: FarmPropTypes.isRequired,
   isAdminMode: PropTypes.bool.isRequired
 };

@@ -14,7 +14,7 @@ import FarmIcon from "src/icons/FarmIcon";
 
 import FarmLandingPage from "src/packages/farm/components/FarmLandingPage";
 import FarmPickupPointsPage from "src/packages/farm/components/FarmPickupPointsPage";
-import FarmCsaPage from "src/packages/farm/components/FarmCsaPage";
+import FarmSubscriptionsPage from "src/packages/farm/components/FarmSubscriptionsPage";
 
 export const landingPage = {
   name: "landing",
@@ -26,13 +26,13 @@ export const landingPage = {
 };
 
 export default {
-  csa: {
-    name: "csa",
-    translationKey: "farmPage.csa",
+  subscriptions: {
+    name: "subscriptions",
+    translationKey: "farmPage.subscriptions",
     Icon: ProductsIcon,
     disabled: false,
     private: false,
-    PageContent: FarmCsaPage
+    PageContent: FarmSubscriptionsPage
   },
   "pickup-points": {
     name: "pickup-points",
