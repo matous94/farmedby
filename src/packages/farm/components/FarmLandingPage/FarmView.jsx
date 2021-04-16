@@ -79,7 +79,7 @@ export default function FarmView({ farm, isFarmOwner }) {
           value={createAddress({ city, countryCode, street, postcode }).full}
         />
       </Box>
-      {(about || isFarmOwner) && (
+      {about && (
         <>
           <Typography sx={{ marginBottom: "8px" }} variant="h5">
             {t("aboutFarm")}

@@ -68,6 +68,7 @@ export default function CreateFarmPage() {
         onErrorDissmiss={onErrorDissmiss}
         hasError={hasError}
         submitButtonText={t("createFarm")}
+        mode="create"
       />
     </>
   );

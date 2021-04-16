@@ -47,7 +47,7 @@ export default {
     translationKey: "farmPage.eshop",
     Icon: ShoppingCartIcon,
     disabled: true,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -75,7 +75,7 @@ export default {
     translationKey: "farmPage.blog",
     Icon: CreateIcon,
     disabled: true,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -89,7 +89,7 @@ export default {
     translationKey: "farmPage.reviews",
     Icon: RateReviewIcon,
     disabled: true,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -103,7 +103,7 @@ export default {
     translationKey: "farmPage.photoGallery",
     Icon: PhotoIcon,
     disabled: true,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -117,7 +117,7 @@ export default {
     translationKey: "farmPage.volunteers",
     Icon: WcIcon,
     disabled: true,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -131,7 +131,7 @@ export default {
     translationKey: "farmPage.accommodation",
     Icon: HotelIcon,
     disabled: true,
-    private: false,
+    private: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>

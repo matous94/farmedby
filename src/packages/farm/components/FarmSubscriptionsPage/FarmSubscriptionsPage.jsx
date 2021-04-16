@@ -33,6 +33,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
       const objectId = editorSwitch.state?.objectId;
       const savedSubscription = await ApiClient.Farm.saveSubscription({
         ...subscription,
+        farmId: farm.objectId,
         options: subscription.options
           .filter(
             (option) => option.numberOfDeliveries && option.pricePerDelivery
@@ -47,7 +48,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
       subscriptionSaved(savedSubscription);
       editorSwitch.reset();
     },
-    [subscriptionSaved, editorSwitch]
+    [subscriptionSaved, editorSwitch, farm.objectId]
   );
 
   const onDelete = React.useCallback(

@@ -19,7 +19,7 @@ import Select from "src/components/Select/Select";
 function TextField(props) {
   return (
     /* eslint-disable*/
-    <MuiTextField fullWidth required={true} id={props.name} {...props} />
+    <MuiTextField fullWidth id={props.name} {...props} />
     /* eslint-enable */
   );
 }
@@ -29,6 +29,7 @@ export default function FarmEditor({
   isLoading,
   farm,
   hasError,
+  mode,
   submitButtonText,
   onErrorDissmiss
 }) {
@@ -102,6 +103,7 @@ export default function FarmEditor({
                 name="email"
                 label={t("email")}
                 type="email"
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -111,6 +113,7 @@ export default function FarmEditor({
                 name="name"
                 label={t("farmName")}
                 type="text"
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -132,6 +135,7 @@ export default function FarmEditor({
                 name="street"
                 label={t("addressLine1")}
                 autoComplete="street-address"
+                required
               />
             </Grid>
 
@@ -143,6 +147,7 @@ export default function FarmEditor({
                 label={t("city")}
                 type="text"
                 autoComplete="address-level2"
+                required
               />
             </Grid>
             <Grid item xs={4}>
@@ -152,63 +157,72 @@ export default function FarmEditor({
                 label={t("postcode")}
                 name="postcode"
                 type="text"
+                required
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                onChange={onChange}
-                required={false}
-                value={formData.phoneNumber}
-                name="phoneNumber"
-                label={t("phoneNumber")}
-                type="tel"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                onChange={onChange}
-                required={false}
-                value={formData.webUrl}
-                name="webUrl"
-                label={t("webAddress")}
-                type="url"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.published}
-                    onChange={onChange}
-                    name="published"
-                  />
-                }
-                label={t("farmForm.makeFarmPublic")}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.isPickupPoint}
-                    onChange={onChange}
-                    name="isPickupPoint"
-                  />
-                }
-                label={t("farmForm.isPickupPoint")}
-              />
-            </Grid>
+            {mode === "edit" && (
+              <Grid item xs={12}>
+                <TextField
+                  onChange={onChange}
+                  value={formData.phoneNumber}
+                  name="phoneNumber"
+                  label={t("phoneNumber")}
+                  type="tel"
+                />
+              </Grid>
+            )}
+            {mode === "edit" && (
+              <Grid item xs={12}>
+                <TextField
+                  onChange={onChange}
+                  value={formData.webUrl}
+                  name="webUrl"
+                  label={t("webAddress")}
+                  type="url"
+                />
+              </Grid>
+            )}
+            {mode === "edit" && (
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.published}
+                      onChange={onChange}
+                      name="published"
+                    />
+                  }
+                  label={t("farmForm.makeFarmPublic")}
+                />
+              </Grid>
+            )}
+            {mode === "edit" && (
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.isPickupPoint}
+                      onChange={onChange}
+                      name="isPickupPoint"
+                    />
+                  }
+                  label={t("farmForm.isPickupPoint")}
+                />
+              </Grid>
+            )}
           </Grid>
-          <Box sx={{ mt: "16px" }}>
-            <Typography variant="h5">{t("aboutFarm")}</Typography>
-            <TextareaAutosize
-              name="about"
-              minRows={10}
-              style={{ width: "100%" }}
-              value={formData.about}
-              onChange={onChange}
-            />
-          </Box>
+          {mode === "edit" && (
+            <Box sx={{ mt: "16px" }}>
+              <Typography variant="h5">{t("aboutFarm")}</Typography>
+              <TextareaAutosize
+                name="about"
+                minRows={10}
+                style={{ width: "100%" }}
+                value={formData.about}
+                onChange={onChange}
+              />
+            </Box>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -226,6 +240,7 @@ FarmEditor.propTypes = {
   hasError: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
   farm: FarmPropTypes,
+  mode: PropTypes.oneOf(["create", "edit"]).isRequired,
   submitButtonText: PropTypes.string.isRequired,
   onErrorDissmiss: PropTypes.func,
   onSubmit: PropTypes.func.isRequired

@@ -9,7 +9,7 @@ const storeModel = {
   myFarm: null,
   farms: null,
   farmPages: {
-    adminMode: adminMode == null ? false : JSON.parse(adminMode)
+    adminMode: adminMode == null ? true : JSON.parse(adminMode)
   },
   farmCreated: action((state, farm) => {
     state.myFarm = farm;
