@@ -67,7 +67,7 @@
   "pickupPointsPage.pickupDay": "Pickup day",
   "pickupPointsPage.pickupDayPlaceholder": "Eg. Weekly/Biweekly on Wednesday from 10am to 4pm. Or by agreement.",
   "postcode": "Postcode",
-  "subscriptionsTable.priceHeading": "Shares x Price ({{currency}})",
+  "subscriptionsTable.priceHeading": "Deliveries x Price ({{currency}})",
   "producing": "Producing",
   "productTypes.dairy": "Dairy",
   "productTypes.eggs": "Eggs",
