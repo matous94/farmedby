@@ -7,8 +7,6 @@ export default function StyledButton(props) {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       sx={{
-        // eslint-disable-next-line react/destructuring-assignment, react/prop-types
-        ...props.sx,
         borderRadius: 0,
         fontWeight: (theme) => theme.typography.fontWeightMedium,
         fontFamily: (theme) => theme.typography.fontFamilySecondary,
@@ -17,7 +15,9 @@ export default function StyledButton(props) {
         boxShadow: "none",
         "&:active, &:focus": {
           boxShadow: "none"
-        }
+        },
+        // eslint-disable-next-line react/destructuring-assignment, react/prop-types
+        ...props.sx
       }}
     />
   );

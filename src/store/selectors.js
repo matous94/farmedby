@@ -1,5 +1,3 @@
-import { isIllustrativeFarm } from "src/packages/utils";
-
 export function getMyFarm(state) {
   return state.myFarm;
 }
@@ -24,7 +22,7 @@ export function isFarmOwner(state, farmId) {
 export function isAdminMode(farmId) {
   return (state) => {
     const isOwner = isFarmOwner(state, farmId);
-    if (isOwner || isIllustrativeFarm(farmId)) return state.farmPages.adminMode;
+    if (isOwner) return state.farmPages.adminMode;
     return false;
   };
 }

@@ -41,8 +41,7 @@ FarmData.defaultProps = {
   url: null
 };
 
-export default function FarmView({ farm, isFarmOwner }) {
-  window.about = farm.about;
+export default function FarmView({ farm }) {
   const {
     about,
     city,
@@ -100,6 +99,5 @@ export default function FarmView({ farm, isFarmOwner }) {
   );
 }
 FarmView.propTypes = {
-  farm: FarmPropTypes.isRequired,
-  isFarmOwner: PropTypes.bool.isRequired
+  farm: FarmPropTypes.isRequired
 };

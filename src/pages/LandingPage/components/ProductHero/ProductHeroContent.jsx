@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 // import Input from "@material-ui/core/Input";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-
-import Link from "src/components/Link";
-import { getIllustrativeFarmId } from "src/packages/utils";
 
 import Button from "../Button";
 
@@ -82,32 +80,16 @@ function ProductHeroContent() {
       <Button
         color="secondary"
         variant="contained"
-        sx={{ minWidth: "200px", mt: ["40px", null, "80px"] }}
-        component={Link}
+        size="large"
+        sx={{
+          minWidth: "200px",
+          mt: ["40px", null, "80px"],
+          fontSize: "1.5rem"
+        }}
+        component={RouterLink}
         to="/farms"
       >
         {t("farmsPage.heading")}
-      </Button>
-      <Box sx={{ my: ["16px", "24px"] }}>
-        <Typography color="inherit" align="center" variant="h5" component="h3">
-          {t("landingPage.or")}
-        </Typography>
-      </Box>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        component={Link}
-        sx={{ minWidth: "200px" }}
-        to={`/farm/${getIllustrativeFarmId()}`}
-      >
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          {t("landingPage.showExampleFarm")}
-          <br />
-          <Typography color="inherit" align="center" variant="caption">
-            {t("landingPage.farmerMode")}
-          </Typography>
-        </Box>
       </Button>
     </Box>
   );
