@@ -70,7 +70,6 @@ function Subscription({
                         mr: "4px",
                         fontWeight: "bold",
                         minWidth: "25px"
-                        // textAlign: "left"
                       }}
                     >
                       {pricePerDelivery}
