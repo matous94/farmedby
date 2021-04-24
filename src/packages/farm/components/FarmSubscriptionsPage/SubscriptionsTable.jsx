@@ -24,7 +24,13 @@ const TableCell = styled(MuiTableCell)({
   paddingRight: "8px"
 });
 
-function Subscription({ subscription, onEdit, onDelete, isAdminMode }) {
+function Subscription({
+  subscription,
+  onEdit,
+  onDelete,
+  isAdminMode,
+  currency
+}) {
   const { name, content, options } = subscription;
   return (
     <TableRow>
@@ -60,11 +66,19 @@ function Subscription({ subscription, onEdit, onDelete, isAdminMode }) {
                     </Box>
                     <Box sx={{ mx: "3px" }}>x</Box>
                     <Box
-                      sx={{ mr: "2px", fontWeight: "bold", minWidth: "25px" }}
+                      sx={{
+                        mr: "4px",
+                        fontWeight: "bold",
+                        minWidth: "25px"
+                        // textAlign: "left"
+                      }}
                     >
                       {pricePerDelivery}
                     </Box>
-                    (= {Number(numberOfDeliveries) * Number(pricePerDelivery)})
+                    <Box>
+                      ({Number(numberOfDeliveries) * Number(pricePerDelivery)}{" "}
+                      {currency})
+                    </Box>
                     {index < length - 1 && <br />}
                   </Box>
                 );
@@ -79,7 +93,8 @@ Subscription.propTypes = {
   subscription: SubscriptionPropTypes.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
-  isAdminMode: PropTypes.bool.isRequired
+  isAdminMode: PropTypes.bool.isRequired,
+  currency: PropTypes.string.isRequired
 };
 Subscription.defaultProps = {
   onEdit: undefined,
@@ -118,6 +133,7 @@ export default function SubscriptionsTable({
 }) {
   const { t } = useTranslation();
   const { subscriptions } = farm;
+  const currency = getCurrency(farm.countryCode);
 
   return (
     <TableContainer
@@ -139,9 +155,7 @@ export default function SubscriptionsTable({
               {t("subscriptionsPage.subscriptionContentHeading")}
             </TableCell>
             <TableCell sx={{ whiteSpace: "nowrap" }}>
-              {t("subscriptionsTable.priceHeading", {
-                currency: getCurrency(farm.countryCode)
-              })}
+              {t("subscriptionsTable.priceHeading")}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -161,6 +175,7 @@ export default function SubscriptionsTable({
                 subscription={subscription}
                 onEdit={() => onEdit(subscription)}
                 onDelete={() => onDelete(subscription.objectId)}
+                currency={currency}
               />
             ))}
         </TableBody>

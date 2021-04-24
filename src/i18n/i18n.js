@@ -18,7 +18,7 @@ export const supportedCountries = {
     countryName: "Česká republika",
     countryCode: "CZ",
     languageCode: "cs",
-    currency: "kč",
+    currency: "Kč",
     illustrativeFarmId: "qHgur81fHZ"
   },
   GB: {
