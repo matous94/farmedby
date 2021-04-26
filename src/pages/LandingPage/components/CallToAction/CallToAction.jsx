@@ -101,13 +101,15 @@ function ProductCTA() {
           xs={12}
           md={6}
           sx={{
-            position: "relative"
+            position: "relative",
+            display: ["none", null, "inline-block"]
           }}
         >
           <Box
             component="img"
             src={imageUrl}
             alt="call to action"
+            defer
             sx={{
               position: "absolute",
               top: -28,
@@ -115,8 +117,7 @@ function ProductCTA() {
               right: 0,
               bottom: 0,
               width: "100%",
-              maxWidth: 600,
-              display: ["none", null, "inline-block"]
+              maxWidth: 600
             }}
           />
         </Grid>
