@@ -8,14 +8,14 @@ const TIMEOUT_DURATION = 150;
 export default function useFarmFilter(farms) {
   const timeoutIdRef = React.useRef();
   const [filterValue, setFilterValue] = React.useState(
-    localStorage.getItem(localStorageKeys.cityFilter) || ""
+    localStorage.getItem(localStorageKeys.deliversToFilter) || ""
   );
   const [filteredFarms, setFilteredFarms] = React.useState([]);
 
   const runFilter = React.useCallback(
     (toFilter) => {
+      localStorage.setItem(localStorageKeys.deliversToFilter, toFilter);
       const normalizedFilter = normalizeText(toFilter);
-      localStorage.setItem(localStorageKeys.cityFilter, normalizedFilter);
 
       if (normalizedFilter === "" || !farms) {
         setFilteredFarms(farms);
@@ -25,11 +25,13 @@ export default function useFarmFilter(farms) {
 
       farms.forEach((farm) => {
         const { deliversTo } = farm;
-        const filteredCities = deliversTo.filter((city) =>
-          normalizeText(city).startsWith(normalizedFilter)
+        const filterResult = deliversTo.filter(
+          (point) =>
+            normalizeText(point.city).startsWith(normalizedFilter) ||
+            normalizeText(point.postcode).startsWith(normalizedFilter)
         );
-        if (filteredCities.length) {
-          result.push({ ...farm, deliversTo: filteredCities });
+        if (filterResult.length) {
+          result.push({ ...farm, deliversTo: filterResult });
         }
       });
       setFilteredFarms(result);

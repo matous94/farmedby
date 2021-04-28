@@ -44,6 +44,7 @@ FarmData.defaultProps = {
 export default function FarmView({ farm }) {
   const {
     about,
+    addressLevel1,
     city,
     countryCode,
     email,
@@ -75,7 +76,15 @@ export default function FarmView({ farm }) {
       <Box sx={{ mb: "16px" }}>
         <FarmData
           label={t("address")}
-          value={createAddress({ city, countryCode, street, postcode }).full}
+          value={
+            createAddress({
+              addressLevel1,
+              city,
+              countryCode,
+              street,
+              postcode
+            }).full
+          }
         />
       </Box>
       {about && (

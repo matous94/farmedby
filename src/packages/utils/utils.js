@@ -1,17 +1,28 @@
-import { getCountry } from "src/i18n";
+import { getCountry, getCountryCode } from "src/i18n";
 
-export function createAddress({ city, countryCode, postcode, street }) {
+export function createAddress({
+  addressLevel1,
+  city,
+  countryCode = getCountryCode(),
+  postcode,
+  street
+}) {
   let country = "";
-  let countryName;
-  if (countryCode) {
-    countryName = getCountry(countryCode).countryName;
-    country = `, ${countryName}`;
+  let district = "";
+
+  const { countryName, requiresAddressLevel1 } = getCountry(countryCode);
+  country = `, ${countryName}`;
+
+  if (addressLevel1 && requiresAddressLevel1) {
+    district = `, ${addressLevel1}`;
   }
 
   return {
-    full: `${street}, ${postcode} ${city}${country}`,
-    line1: street,
-    line2: `${city} ${postcode}`,
+    full: `${street}, ${postcode}, ${city}${district}${country}`,
+    countryRelative: `${street}, ${postcode}, ${city}${district}`,
+    districtRelativeReverse: `${city}, ${postcode}, ${street}`,
+    streetAddress: street,
+    addressLevel2: `${postcode} ${city}`,
     countryName
   };
 }

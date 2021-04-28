@@ -19,7 +19,8 @@ export const supportedCountries = {
     countryCode: "CZ",
     languageCode: "cs",
     currency: "Kč",
-    illustrativeFarmId: "qHgur81fHZ"
+    illustrativeFarmId: "qHgur81fHZ",
+    requiresAddressLevel1: false
   },
   GB: {
     translation: enLocales,
@@ -28,7 +29,8 @@ export const supportedCountries = {
     countryCode: "GB",
     languageCode: "en",
     currency: "£",
-    illustrativeFarmId: "Qq3qOsnAqp"
+    illustrativeFarmId: "Qq3qOsnAqp",
+    requiresAddressLevel1: true
   },
   SK: {
     translation: csLocales,
@@ -37,7 +39,8 @@ export const supportedCountries = {
     countryCode: "SK",
     languageCode: "sk",
     currency: "€",
-    illustrativeFarmId: "Z0AeJAol2Q"
+    illustrativeFarmId: "Z0AeJAol2Q",
+    requiresAddressLevel1: false
   }
 };
 

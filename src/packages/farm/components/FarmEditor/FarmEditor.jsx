@@ -15,6 +15,7 @@ import GenericFailureDialog from "src/components/GenericFailureDialog";
 import Dialog from "src/components/Dialog";
 import { ProductTypes, FarmPropTypes } from "src/types";
 import Select from "src/components/Select/Select";
+import { getCountry } from "src/i18n";
 
 function TextField(props) {
   return (
@@ -51,10 +52,12 @@ export default function FarmEditor({
   const [formData, setFormData] = useState({
     about: farm.about ?? "",
     city: farm.city ?? "",
+    addressLevel1: farm.addressLevel1 ?? "",
     email: farm.email ?? "",
     isPickupPoint: farm.isPickupPoint ?? true,
     name: farm.name ?? "",
     phoneNumber: farm.phoneNumber ?? "",
+    pickupDay: farm.pickupDay ?? t("farmPickupDayDefaultValue"),
     postcode: farm.postcode ?? "",
     published: farm.published ?? true,
     street: farm.street ?? "",
@@ -138,7 +141,6 @@ export default function FarmEditor({
                 required
               />
             </Grid>
-
             <Grid item xs={8}>
               <TextField
                 onChange={onChange}
@@ -160,6 +162,19 @@ export default function FarmEditor({
                 required
               />
             </Grid>
+            {getCountry(farm.countryCode).requiresAddressLevel1 && (
+              <Grid item xs={12}>
+                <TextField
+                  onChange={onChange}
+                  value={formData.addressLevel1}
+                  type="text"
+                  name="addressLevel1"
+                  label={t("addressLevel1Label")}
+                  autoComplete="address-level1"
+                  required
+                />
+              </Grid>
+            )}
             {mode === "edit" && (
               <Grid item xs={12}>
                 <TextField
@@ -197,18 +212,30 @@ export default function FarmEditor({
               </Grid>
             )}
             {mode === "edit" && (
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.isPickupPoint}
-                      onChange={onChange}
-                      name="isPickupPoint"
-                    />
-                  }
-                  label={t("farmForm.isPickupPoint")}
-                />
-              </Grid>
+              <>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={formData.isPickupPoint}
+                        onChange={onChange}
+                        name="isPickupPoint"
+                      />
+                    }
+                    label={t("farmForm.isPickupPoint")}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    disabled={!formData.isPickupPoint}
+                    onChange={onChange}
+                    value={formData.pickupDay}
+                    name="pickupDay"
+                    label={t("pickupDayLabel")}
+                    type="text"
+                  />
+                </Grid>
+              </>
             )}
           </Grid>
           {mode === "edit" && (

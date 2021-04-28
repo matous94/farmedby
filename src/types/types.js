@@ -33,6 +33,7 @@ export const SubscriptionPropTypes = PropTypes.shape({
 });
 
 export const PickupPointPropTypes = PropTypes.shape({
+  addressLevel1: PropTypes.string,
   city: PropTypes.string,
   countryCode: PropTypes.string,
   pickupDay: PropTypes.string, // eg Biweekly, on Wednesday, from 10am to 5pm
@@ -47,6 +48,7 @@ export const PickupPointPropTypes = PropTypes.shape({
 
 export const FarmPropTypes = PropTypes.shape({
   about: PropTypes.string,
+  addressLevel1: PropTypes.string,
   subscriptions: PropTypes.arrayOf(SubscriptionPropTypes),
   city: PropTypes.string,
   countryCode: PropTypes.string,
@@ -56,6 +58,7 @@ export const FarmPropTypes = PropTypes.shape({
   objectId: PropTypes.string,
   owner: PropTypes.shape({ objectId: PropTypes.string }),
   phoneNumber: PropTypes.string,
+  pickupDay: PropTypes.string,
   pickupPoints: PropTypes.arrayOf(PickupPointPropTypes),
   postcode: PropTypes.string,
   productTypes: ProductTypesPropTypes,
