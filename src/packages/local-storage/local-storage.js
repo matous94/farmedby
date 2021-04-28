@@ -8,5 +8,5 @@ export const localStorageKeys = {
   sessionToken: createKey("sessionToken"),
   adminMode: createKey("adminMode"),
   countryCode: createKey("countryCode"),
-  cityFilter: createKey("cityFilter")
+  deliversToFilter: createKey("deliversToFilter")
 };

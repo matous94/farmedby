@@ -52,8 +52,18 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
           {t("pickupPointEditor.heading")}
         </DialogTitle>
         <DialogContent>
-          <TextField name="name" label={t("name")} type="text" />
-          <TextField name="street" label={t("addressLine1")} type="text" />
+          <TextField
+            name="name"
+            label={t("name")}
+            type="text"
+            required={true}
+          />
+          <TextField
+            name="street"
+            label={t("addressLine1")}
+            type="text"
+            required={true}
+          />
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <TextField
               name="city"
@@ -71,9 +81,14 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
             />
           </Box>
           <TextField
+            name="addressLevel1"
+            label={t("addressLevel1Label")}
+            type="text"
+          />
+          <TextField
             name="pickupDay"
-            label={t("pickupPointsPage.pickupDay")}
-            placeholder={t("pickupPointsPage.pickupDayPlaceholder")}
+            label={t("pickupDayLabel")}
+            placeholder={t("pickupDayPlaceholder")}
             InputLabelProps={{ shrink: true }}
             type="text"
             multiline

@@ -65,11 +65,11 @@ export default function FarmsPage() {
               onChange={onChange}
               value={filterValue}
               size="small"
-              name="cityFilter"
-              label={t("farmsTable.deliversToHeading")}
+              name="deliversToFilter"
+              label={t("farmsPage.deliversToHeading")}
               type="text"
               fullWidth
-              placeholder={t("city")}
+              placeholder={t("farmsTable.deliversToPlaceholder")}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

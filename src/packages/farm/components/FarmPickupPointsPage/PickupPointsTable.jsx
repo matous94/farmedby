@@ -125,16 +125,6 @@ export default function PickupPointsTable({
 }) {
   const { t } = useTranslation();
   const history = useHistory();
-  const {
-    city,
-    email,
-    name,
-    phoneNumber,
-    postcode,
-    street,
-    webUrl,
-    pickupPoints
-  } = farm;
 
   return (
     <TableContainer
@@ -152,7 +142,7 @@ export default function PickupPointsTable({
             <TableCell>{t("name")}</TableCell>
             <TableCell>{t("address")}</TableCell>
             <TableCell sx={{ minWidth: "200px" }}>
-              {t("pickupPointsPage.pickupDay")}
+              {t("pickupDayLabel")}
             </TableCell>
             <TableCell>{t("contacts")}</TableCell>
           </TableRow>
@@ -164,18 +154,18 @@ export default function PickupPointsTable({
               isAdminMode={isAdminMode}
               onEdit={() => history.push(`/farm/${farm.objectId}`)}
               point={{
-                city,
-                email,
-                name,
-                phoneNumber,
-                pickupDay: t("pickupPointsPage.farmPickupDay"),
-                postcode,
-                street,
-                webUrl
+                city: farm.city,
+                email: farm.email,
+                name: farm.name,
+                phoneNumber: farm.phoneNumber,
+                pickupDay: farm.pickupDay || t("farmPickupDayDefaultValue"),
+                postcode: farm.postcode,
+                street: farm.street,
+                webUrl: farm.webUrl
               }}
             />
           )}
-          {pickupPoints.map((point) => (
+          {farm.pickupPoints.map((point) => (
             <PickupPoint
               isAdminMode={isAdminMode}
               key={point.objectId}

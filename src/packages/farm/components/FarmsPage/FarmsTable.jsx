@@ -12,12 +12,20 @@ import Paper from "@material-ui/core/Paper";
 
 import Link from "src/components/Link";
 import { ProductTypesPropTypes } from "src/types";
+import { createAddress } from "src/packages/utils";
 
 const TableCell = styled(MuiTableCell)({
   paddingLeft: "16px",
   paddingRight: "8px",
   whiteSpace: "nowrap"
 });
+const deliversToPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    city: PropTypes.string,
+    postcode: PropTypes.string,
+    street: PropTypes.string
+  })
+).isRequired;
 
 function Farm({ farm }) {
   const { objectId, name, productTypes, deliversTo } = farm;
@@ -40,11 +48,11 @@ function Farm({ farm }) {
             </React.Fragment>
           ))}
       </TableCell>
-      <TableCell>
-        {deliversTo.map((city, index) => (
-          <React.Fragment key={city}>
-            {city}
-            {index <= deliversTo.length - 1 && <br />}
+      <TableCell sx={{ whiteSpace: "nowrap" }}>
+        {deliversTo.map((location, index) => (
+          <React.Fragment key={index}>
+            {createAddress(location).districtRelativeReverse}
+            {index === deliversTo.length - 1 ? null : <br />}
           </React.Fragment>
         ))}
       </TableCell>
@@ -56,7 +64,7 @@ Farm.propTypes = {
     objectId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     productTypes: ProductTypesPropTypes.isRequired,
-    deliversTo: PropTypes.arrayOf(PropTypes.string).isRequired
+    deliversTo: deliversToPropTypes
   }).isRequired
 };
 
@@ -75,7 +83,7 @@ export default function FarmsTable({ farms }) {
           <TableRow>
             <TableCell>{t("farmName")}</TableCell>
             <TableCell>{t("farmsTable.producingHeading")}</TableCell>
-            <TableCell>{t("farmsTable.deliversToHeading")}</TableCell>
+            <TableCell>{t("farmsPage.deliversToHeading")}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -94,7 +102,7 @@ FarmsTable.propTypes = {
       objectId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       productTypes: ProductTypesPropTypes.isRequired,
-      deliversTo: PropTypes.arrayOf(PropTypes.string).isRequired
+      deliversTo: deliversToPropTypes
     })
   ).isRequired
 };
