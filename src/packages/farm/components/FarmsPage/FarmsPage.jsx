@@ -8,15 +8,18 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 
+import Select from "src/components/Select";
 import LoadingOverlay from "src/components/LoadingOverlay";
 import ApiClient from "src/packages/api-client";
 import { useAsync } from "src/packages/hooks";
 import AppBar from "src/components/AppBar";
 import { selectors } from "src/store";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
+import useProductTypesOptions from "src/packages/farm/hooks/useProductTypesOptions";
 
 import FarmsTable from "./FarmsTable";
-import useFarmFilter from "./useFarmFilter";
+import useLocationFilter from "./useLocationFilter";
+import useProducingFilter from "./useProducingFilter";
 
 export default function FarmsPage() {
   const { t } = useTranslation();
@@ -35,7 +38,9 @@ export default function FarmsPage() {
       functionName: "getFarms"
     }
   );
-  const { filterValue, onChange, filteredFarms } = useFarmFilter(farms);
+  const productTypesOptions = useProductTypesOptions();
+  const locationFilter = useLocationFilter(farms || []);
+  const producingFilter = useProducingFilter(locationFilter.filteredFarms);
 
   return (
     <>
@@ -60,12 +65,12 @@ export default function FarmsPage() {
           <Typography align="center" color="secondary" variant="h4">
             {t("farmsPage.heading")}
           </Typography>
-          <Box sx={{ mb: "24px", mt: "16px", width: "256px" }}>
+          <Box sx={{ my: "24px", width: "256px" }}>
             <TextField
-              onChange={onChange}
-              value={filterValue}
+              onChange={locationFilter.onChange}
+              value={locationFilter.filterValue}
               size="small"
-              name="deliversToFilter"
+              name="cityFilter"
               label={t("farmsPage.deliversToHeading")}
               type="text"
               fullWidth
@@ -78,9 +83,24 @@ export default function FarmsPage() {
                 )
               }}
             />
+            <Select
+              sx={{
+                mt: "16px"
+              }}
+              size="small"
+              onChange={producingFilter.onChange}
+              selected={producingFilter.filterValue}
+              label={t("farmsPage.producingLabel")}
+              options={productTypesOptions}
+              multiple
+              name="productTypes"
+            />
           </Box>
 
-          <FarmsTable farms={filteredFarms} />
+          <FarmsTable
+            farms={producingFilter.filteredFarms}
+            productTypesFilter={producingFilter.filterValue}
+          />
         </Box>
       )}
     </>

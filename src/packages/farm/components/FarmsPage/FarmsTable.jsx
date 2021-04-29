@@ -27,9 +27,12 @@ const deliversToPropTypes = PropTypes.arrayOf(
   })
 ).isRequired;
 
-function Farm({ farm }) {
+function Farm({ farm, productTypesFilter }) {
   const { objectId, name, productTypes, deliversTo } = farm;
   const { t } = useTranslation();
+  const filterTranslations = productTypesFilter.map((type) =>
+    t(`productTypes.${type}`)
+  );
   return (
     <TableRow>
       <TableCell>
@@ -41,7 +44,11 @@ function Farm({ farm }) {
           .sort()
           .map((productName, index) => (
             <React.Fragment key={productName}>
-              {productName}
+              {filterTranslations.includes(productName) ? (
+                <b>{productName}</b>
+              ) : (
+                productName
+              )}
               {index !== productTypes.length - 1 && ","}
               <>&nbsp;</>
               {index % 2 === 1 && index <= productTypes.length - 1 && <br />}
@@ -65,10 +72,11 @@ Farm.propTypes = {
     name: PropTypes.string.isRequired,
     productTypes: ProductTypesPropTypes.isRequired,
     deliversTo: deliversToPropTypes
-  }).isRequired
+  }).isRequired,
+  productTypesFilter: ProductTypesPropTypes.isRequired
 };
 
-export default function FarmsTable({ farms }) {
+export default function FarmsTable({ farms, productTypesFilter }) {
   const { t } = useTranslation();
 
   return (
@@ -82,13 +90,17 @@ export default function FarmsTable({ farms }) {
         <TableHead>
           <TableRow>
             <TableCell>{t("farmName")}</TableCell>
-            <TableCell>{t("farmsTable.producingHeading")}</TableCell>
+            <TableCell>{t("farmsPage.producingLabel")}</TableCell>
             <TableCell>{t("farmsPage.deliversToHeading")}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {farms.map((farm) => (
-            <Farm key={farm.objectId} farm={farm} />
+            <Farm
+              key={farm.objectId}
+              farm={farm}
+              productTypesFilter={productTypesFilter}
+            />
           ))}
         </TableBody>
       </Table>
@@ -104,5 +116,6 @@ FarmsTable.propTypes = {
       productTypes: ProductTypesPropTypes.isRequired,
       deliversTo: deliversToPropTypes
     })
-  ).isRequired
+  ).isRequired,
+  productTypesFilter: ProductTypesPropTypes.isRequired
 };

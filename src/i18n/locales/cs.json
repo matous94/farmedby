@@ -1,4 +1,5 @@
 {
+  "production": "Produkce",
   "addressLevel1Label": "Okres", 
   "pricing": "Ceník",
   "landingPage.contactDeveloper": "Nebo kontaktuje vývojáře",
@@ -43,7 +44,7 @@
   "farmsPage.heading": "Najdi Farmu",
   "farmsPage.deliversToHeading": "Odběrová místa v",
   "farmsTable.deliversToPlaceholder": "Město / PSČ",
-  "farmsTable.producingHeading": "Produkuje",
+  "farmsPage.producingLabel": "Produkuje",
   "firstName": "Jméno",
   "genericFailureMessage": "Něco se porouchalo. Zkuste opakovat akci později.",
   "landingPage.heading": "Lokální produkty přímo z farmy",

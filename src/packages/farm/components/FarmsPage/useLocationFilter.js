@@ -5,7 +5,7 @@ import { localStorageKeys } from "src/packages/local-storage";
 
 const TIMEOUT_DURATION = 150;
 
-export default function useFarmFilter(farms) {
+export default function useLocationFilter(farms) {
   const timeoutIdRef = React.useRef();
   const [filterValue, setFilterValue] = React.useState(
     localStorage.getItem(localStorageKeys.deliversToFilter) || ""

@@ -25,7 +25,9 @@ export default function Select({
   multiple,
   label,
   name,
-  required
+  required,
+  size,
+  sx
 }) {
   const isChecked = (id) => {
     if (multiple) {
@@ -35,7 +37,13 @@ export default function Select({
   };
 
   return (
-    <FormControl variant="outlined" fullWidth required={required}>
+    <FormControl
+      size={size}
+      variant="outlined"
+      fullWidth
+      required={required}
+      sx={sx}
+    >
       <InputLabel>{label}</InputLabel>
       <MuiSelect
         name={name}
@@ -47,6 +55,11 @@ export default function Select({
           multiple ? value.map((id) => options[id].label).join(", ") : value
         }
         MenuProps={MenuProps}
+        sx={{
+          "& .MuiSelect-select:focus": {
+            background: "inherit"
+          }
+        }}
       >
         {Object.values(options).map((option) => (
           <MenuItem key={option.id} value={option.id}>
@@ -71,10 +84,14 @@ Select.propTypes = {
     })
   ).isRequired,
   required: PropTypes.bool,
-  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  sx: PropTypes.shape({}),
+  size: PropTypes.string
 };
 Select.defaultProps = {
   multiple: false,
   name: undefined,
-  required: false
+  required: false,
+  sx: undefined,
+  size: undefined
 };

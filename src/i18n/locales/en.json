@@ -1,4 +1,5 @@
 {
+  "production": "Produkce",
   "addressLevel1Label": "State / Province / District", 
   "pricing": "Pricing",
   "landingPage.contactDeveloper": "Or contact the developer",
@@ -41,7 +42,7 @@
   "farmsPage.heading": "Find Farm",
   "farmsPage.deliversToHeading": "Pickup points in",
   "farmsTable.deliversToPlaceholder": "City / Postcode",
-  "farmsTable.producingHeading": "Producing",
+  "farmsPage.producingLabel": "Producing",
   "firstName": "First name",
   "genericFailureMessage": "Something's wrong. Please try again later.",
   "landingPage.heading": "Local produce directly from a farm",

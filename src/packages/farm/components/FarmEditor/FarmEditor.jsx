@@ -13,9 +13,10 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import Dialog from "src/components/Dialog";
-import { ProductTypes, FarmPropTypes } from "src/types";
-import Select from "src/components/Select/Select";
+import { FarmPropTypes } from "src/types";
+import Select from "src/components/Select";
 import { getCountry } from "src/i18n";
+import useProductTypesOptions from "src/packages/farm/hooks/useProductTypesOptions";
 
 function TextField(props) {
   return (
@@ -35,19 +36,7 @@ export default function FarmEditor({
   onErrorDissmiss
 }) {
   const { t } = useTranslation();
-
-  const productOptions = React.useMemo(
-    () =>
-      Object.values(ProductTypes).reduce((options, productId) => {
-        // eslint-disable-next-line no-param-reassign
-        options[productId] = {
-          id: productId,
-          label: t(`productTypes.${productId}`)
-        };
-        return options;
-      }, {}),
-    [t]
-  );
+  const productTypesOptions = useProductTypesOptions();
 
   const [formData, setFormData] = useState({
     about: farm.about ?? "",
@@ -124,7 +113,7 @@ export default function FarmEditor({
                 onChange={onChange}
                 selected={formData.productTypes}
                 label={t("producing")}
-                options={productOptions}
+                options={productTypesOptions}
                 multiple
                 required
                 name="productTypes"
