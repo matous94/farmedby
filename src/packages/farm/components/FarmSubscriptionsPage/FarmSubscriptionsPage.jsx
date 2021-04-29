@@ -11,7 +11,7 @@ import ApiClient from "src/packages/api-client";
 import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import DeleteDialog from "src/components/DeleteDialog";
-import { getCurrency } from "src/i18n";
+import { getCountry } from "src/i18n";
 
 import SubscriptionEditor from "./SubscriptionEditor";
 import SubscriptionsTable from "./SubscriptionsTable";
@@ -62,6 +62,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
 
   const submitter = useAsync(onSubmit, { functionName: "onSubmit" });
   const deletter = useAsync(onDelete, { functionName: "onDelete" });
+  const farmCountry = getCountry(farm.countryCode);
 
   return (
     <>
@@ -73,7 +74,8 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
             subscription={editorSwitch.state}
             onClose={() => editorSwitch.reset()}
             onSubmit={submitter.execute}
-            currency={getCurrency(farm.countryCode)}
+            currency={farmCountry.currency}
+            currencyMultiplier={farmCountry.currencyMultiplier}
           />
         )}
         <Box sx={{ mb: "16px", maxWidth: "800px" }}>

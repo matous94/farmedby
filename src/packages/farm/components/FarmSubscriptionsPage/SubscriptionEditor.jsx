@@ -32,19 +32,35 @@ TextField.propTypes = {
   register: PropTypes.func.isRequired
 };
 
-function Pricing({ register, currency }) {
+function Pricing({
+  register,
+  currency,
+  currencyMultiplier,
+  displayPlaceholders
+}) {
   const { t } = useTranslation();
   const optionsList = [];
   const numberOfOptions = 5;
 
   // eslint-disable-next-line no-plusplus
   for (let index = 0; index < numberOfOptions; index++) {
+    const pricePlaceholder = 500 - index * 20;
+    const pricePlaceholderCountryRelative =
+      pricePlaceholder * currencyMultiplier;
+    const pricePlaceholderRounded =
+      Math.trunc(pricePlaceholderCountryRelative * 10) / 10;
+
     optionsList.push(
       <Box key={index} sx={{ mt: "4px" }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <TextField
             name={`options[${index}].numberOfDeliveries`}
             label={t("subscriptionEditor.numberOfDeliveries")}
+            placeholder={
+              displayPlaceholders
+                ? String(index === 0 ? 1 : index * 5)
+                : undefined
+            }
             type="number"
             inputProps={{
               min: "1"
@@ -56,6 +72,9 @@ function Pricing({ register, currency }) {
           <TextField
             name={`options[${index}].pricePerDelivery`}
             label={t("subscriptionEditor.pricePerDelivery", { currency })}
+            placeholder={
+              displayPlaceholders ? String(pricePlaceholderRounded) : undefined
+            }
             type="number"
             inputProps={{
               min: "0.01",
@@ -79,14 +98,17 @@ function Pricing({ register, currency }) {
 }
 Pricing.propTypes = {
   register: PropTypes.func.isRequired,
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string.isRequired,
+  currencyMultiplier: PropTypes.number.isRequired,
+  displayPlaceholders: PropTypes.bool.isRequired
 };
 
 export default function SubscriptionEditor({
   onClose,
   onSubmit,
   subscription,
-  currency
+  currency,
+  currencyMultiplier
 }) {
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm({ defaultValues: subscription });
@@ -122,15 +144,16 @@ export default function SubscriptionEditor({
             register={register}
             name="content"
             label={t("subscriptionsPage.subscriptionContentHeading")}
-            placeholder={t("subscriptionsPage.subscriptionContentPlaceholder")}
+            placeholder={t("subscriptionEditor.contentPlaceholder")}
             multiline
             type="text"
             required
           />
           <Pricing
-            options={subscription.options}
+            displayPlaceholders={Boolean(subscription?.options?.length === 0)}
             register={register}
             currency={currency}
+            currencyMultiplier={currencyMultiplier}
           />
         </DialogContent>
         <DialogActions>
@@ -147,7 +170,8 @@ SubscriptionEditor.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   subscription: SubscriptionPropTypes,
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string.isRequired,
+  currencyMultiplier: PropTypes.number.isRequired
 };
 SubscriptionEditor.defaultProps = {
   subscription: {

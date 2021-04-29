@@ -20,7 +20,8 @@ export const supportedCountries = {
     languageCode: "cs",
     currency: "Kč",
     illustrativeFarmId: "qHgur81fHZ",
-    requiresAddressLevel1: false
+    requiresAddressLevel1: false,
+    currencyMultiplier: 1
   },
   GB: {
     translation: enLocales,
@@ -30,7 +31,8 @@ export const supportedCountries = {
     languageCode: "en",
     currency: "£",
     illustrativeFarmId: "Qq3qOsnAqp",
-    requiresAddressLevel1: true
+    requiresAddressLevel1: true,
+    currencyMultiplier: 0.034
   },
   SK: {
     translation: csLocales,
@@ -40,7 +42,8 @@ export const supportedCountries = {
     languageCode: "sk",
     currency: "€",
     illustrativeFarmId: "Z0AeJAol2Q",
-    requiresAddressLevel1: false
+    requiresAddressLevel1: false,
+    currencyMultiplier: 0.039
   }
 };
 
