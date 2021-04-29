@@ -32,9 +32,9 @@ export default function FarmsPage() {
       farmsResolved(refreshedFarms);
     },
     {
-      runIfEmpty: true,
-      refreshCache: true,
-      cachedResult: farms,
+      runOnMount: true,
+      cache: farms,
+      hasCache: farms && farms.length,
       functionName: "getFarms"
     }
   );
