@@ -92,7 +92,7 @@ function ProductCTA() {
               </Button>
             </Box>
             <Typography align="center" variant="caption">
-              {t("landingPage.contactDeveloper")} <b>matousvencl@gmail.com</b>
+              {t("landingPage.contactDeveloper")} <b>matous@farmedby.com</b>
             </Typography>
           </Box>
         </Grid>
