@@ -28,7 +28,7 @@ export const landingPage = {
 export default {
   subscriptions: {
     name: "subscriptions",
-    translationKey: "farmPage.subscriptions",
+    translationKey: "subscriptionsPage.heading",
     Icon: ProductsIcon,
     disabled: false,
     private: false,
@@ -44,7 +44,7 @@ export default {
   },
   eshop: {
     name: "eshop",
-    translationKey: "farmPage.eshop",
+    translationKey: "eshop.heading",
     Icon: ShoppingCartIcon,
     disabled: true,
     private: true,
@@ -72,7 +72,7 @@ export default {
   },
   blog: {
     name: "blog",
-    translationKey: "farmPage.blog",
+    translationKey: "blog.heading",
     Icon: CreateIcon,
     disabled: true,
     private: true,
@@ -86,7 +86,7 @@ export default {
   },
   reviews: {
     name: "reviews",
-    translationKey: "farmPage.reviews",
+    translationKey: "reviews.heading",
     Icon: RateReviewIcon,
     disabled: true,
     private: true,
@@ -100,7 +100,7 @@ export default {
   },
   "photo-gallery": {
     name: "photo-gallery",
-    translationKey: "farmPage.photoGallery",
+    translationKey: "photoGallery.heading",
     Icon: PhotoIcon,
     disabled: true,
     private: true,
@@ -114,7 +114,7 @@ export default {
   },
   volunteers: {
     name: "volunteers",
-    translationKey: "farmPage.volunteers",
+    translationKey: "volunteers.heading",
     Icon: WcIcon,
     disabled: true,
     private: true,
@@ -128,7 +128,7 @@ export default {
   },
   accommodation: {
     name: "accommodation",
-    translationKey: "farmPage.accommodation",
+    translationKey: "accommodation.heading",
     Icon: HotelIcon,
     disabled: true,
     private: true,

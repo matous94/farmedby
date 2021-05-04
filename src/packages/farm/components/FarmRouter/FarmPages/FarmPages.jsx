@@ -85,7 +85,7 @@ export default function FarmPages() {
             <>
               {!farm.published && isFarmOwner && (
                 <Alert variant="filled" severity="info">
-                  {t("farmPage.farmIsNotPublishedAlert")}
+                  {t("farmPages.farmIsNotPublishedAlert")}
                 </Alert>
               )}
               {farm.isExampleFarm && (
@@ -122,8 +122,8 @@ export default function FarmPages() {
                     color="secondary"
                   >
                     {isAdminMode
-                      ? t("farmPage.switchToViewMode")
-                      : t("farmPage.switchToAdminMode")}
+                      ? t("farmPages.switchToViewMode")
+                      : t("farmPages.switchToAdminMode")}
                   </Fab>
                 </Box>
               )}

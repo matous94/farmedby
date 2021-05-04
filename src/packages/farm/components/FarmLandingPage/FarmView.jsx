@@ -25,7 +25,7 @@ function FarmData({ label, value, url }) {
         </Typography>
       ) : (
         <Link target="_blank" href={url}>
-          {t("farmPage.openWebPage")}
+          {t("farmLandingPage.openWebPage")}
         </Link>
       )}
     </div>
