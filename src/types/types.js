@@ -66,3 +66,27 @@ export const FarmPropTypes = PropTypes.shape({
   street: PropTypes.string,
   webUrl: PropTypes.string
 });
+
+export const OrderPropTypes = PropTypes.shape({
+  objectId: PropTypes.string,
+  farm: PropTypes.shape({
+    countryCode: PropTypes.string,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    objectId: PropTypes.string,
+    phoneNumber: PropTypes.string
+  }),
+  completed: PropTypes.string,
+  journal: PropTypes.string,
+  note: PropTypes.string,
+  pickupPoint: PickupPointPropTypes,
+  subscriptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      content: PropTypes.string,
+      name: PropTypes.string,
+      objectId: PropTypes.string,
+      numberOfDeliveries: PropTypes.number,
+      pricePerDelivery: PropTypes.number
+    })
+  )
+});
