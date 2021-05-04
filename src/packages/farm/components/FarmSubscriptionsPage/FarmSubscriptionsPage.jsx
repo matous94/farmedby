@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import { useStoreActions } from "easy-peasy";
-import { useTranslation } from "react-i18next";
-import Typography from "@material-ui/core/Typography";
 
 import { useSwitch, useAsync } from "src/packages/hooks";
 import { FarmPropTypes } from "src/types";
@@ -15,9 +13,9 @@ import { getCountry } from "src/i18n";
 
 import SubscriptionEditor from "./SubscriptionEditor";
 import SubscriptionsTable from "./SubscriptionsTable";
+import HowItWorks from "./HowItWorks";
 
 export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
-  const { t } = useTranslation();
   const editorSwitch = useSwitch(false);
   const deleteDialogSwitch = useSwitch(false);
 
@@ -78,9 +76,8 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
             currencyMultiplier={farmCountry.currencyMultiplier}
           />
         )}
-        <Box sx={{ mb: "16px", maxWidth: "800px" }}>
-          <Typography paragraph>{t("subscriptionsPage.about")}</Typography>
-          <Typography>{t("subscriptionsPage.about2")}</Typography>
+        <Box sx={{ mb: "32px", maxWidth: "580px", mx: "auto" }}>
+          <HowItWorks />
         </Box>
         <SubscriptionsTable
           farm={farm}
