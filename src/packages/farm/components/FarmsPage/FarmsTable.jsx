@@ -15,8 +15,6 @@ import { ProductTypesPropTypes } from "src/types";
 import { createAddress } from "src/packages/utils";
 
 const TableCell = styled(MuiTableCell)({
-  paddingLeft: "16px",
-  paddingRight: "8px",
   whiteSpace: "nowrap"
 });
 const deliversToPropTypes = PropTypes.arrayOf(

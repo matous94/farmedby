@@ -2,12 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
-import { styled } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import TableBody from "@material-ui/core/TableBody";
-import MuiTableCell from "@material-ui/core/TableCell";
+import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -18,11 +17,6 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Link from "@material-ui/core/Link";
 
 import { FarmPropTypes, PickupPointPropTypes } from "src/types";
-
-const TableCell = styled(MuiTableCell)({
-  paddingLeft: "16px",
-  paddingRight: "8px"
-});
 
 function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
   const {

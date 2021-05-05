@@ -9,6 +9,16 @@ const theme = createMuiTheme({
     secondary: {
       main: "#5e35b1"
     }
+  },
+  components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          paddingLeft: "12px",
+          paddingRight: "12px"
+        }
+      }
+    }
   }
 });
 

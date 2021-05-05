@@ -5,8 +5,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import TableRow from "@material-ui/core/TableRow";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
-
-import TableCell from "./TableCell";
+import TableCell from "@material-ui/core/TableCell";
 
 export default function AddPointRow({ onAdd }) {
   return (
@@ -21,6 +20,7 @@ export default function AddPointRow({ onAdd }) {
           </Button>
         </ButtonGroup>
       </TableCell>
+      <TableCell />
       <TableCell />
       <TableCell />
       <TableCell />

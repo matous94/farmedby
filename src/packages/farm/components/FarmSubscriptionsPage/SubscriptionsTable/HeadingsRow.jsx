@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TableRow from "@material-ui/core/TableRow";
 import { useTranslation } from "react-i18next";
-
-import TableCell from "./TableCell";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
 
 export default function HeadingsRow({ isAdminMode }) {
   const { t } = useTranslation();
@@ -21,6 +20,9 @@ export default function HeadingsRow({ isAdminMode }) {
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
         {t("subscriptionsTable.pricing")}
+      </TableCell>
+      <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
+        {t("subscriptionsTable.quantityHeading")}
       </TableCell>
     </TableRow>
   );

@@ -17,7 +17,6 @@ export default function HowItWorks() {
   return (
     <Typography
       sx={{
-        //   mt: "12px",
         fontWeight: "bold"
       }}
       variant="subtitle1"
