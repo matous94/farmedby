@@ -29,8 +29,7 @@ function ProductCTA() {
   return (
     <Container
       sx={{
-        marginTop: (theme) => theme.spacing(10),
-        marginBottom: "64px",
+        my: ["40px", "60px", "80px"],
         display: "flex"
       }}
       component="section"
@@ -51,7 +50,7 @@ function ProductCTA() {
               alignItems: "center",
               flexDirection: "column",
               backgroundColor: (theme) => theme.palette.warning.main,
-              padding: (theme) => theme.spacing(6, 2)
+              padding: ["24px 16px", "48px 24px"]
             }}
           >
             <Box

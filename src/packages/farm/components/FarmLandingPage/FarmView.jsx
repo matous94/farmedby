@@ -89,7 +89,7 @@ export default function FarmView({ farm }) {
       </Box>
       {about && (
         <>
-          <Typography sx={{ marginBottom: "8px" }} variant="h5">
+          <Typography sx={{ marginBottom: "8px" }} variant="h4">
             {t("aboutFarm")}
           </Typography>
           {aboutAsParagraphs.map((paragraph, index) => (

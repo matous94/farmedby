@@ -62,7 +62,7 @@ export default function FarmsPage() {
             flexDirection: "column"
           }}
         >
-          <Typography align="center" color="secondary" variant="h4">
+          <Typography align="center" color="secondary" variant="h3">
             {t("farmsPage.heading")}
           </Typography>
           <Box sx={{ my: "24px", width: "256px" }}>

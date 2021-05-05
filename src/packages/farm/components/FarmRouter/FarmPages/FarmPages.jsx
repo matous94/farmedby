@@ -101,7 +101,7 @@ export default function FarmPages() {
                 }}
               >
                 <Box sx={{ mb: "16px" }}>
-                  <Typography align="center" color="secondary" variant="h4">
+                  <Typography align="center" color="secondary" variant="h3">
                     {pageHeading}
                   </Typography>
                 </Box>

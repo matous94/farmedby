@@ -10,7 +10,7 @@ export default function StyledButton(props) {
         borderRadius: 0,
         fontWeight: (theme) => theme.typography.fontWeightMedium,
         fontFamily: (theme) => theme.typography.fontFamilySecondary,
-        padding: (theme) => theme.spacing(2, 4),
+        padding: ["12px 20px", "16px 32px"],
         fontSize: (theme) => theme.typography.pxToRem(14),
         boxShadow: "none",
         "&:active, &:focus": {
