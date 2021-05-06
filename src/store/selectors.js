@@ -35,6 +35,15 @@ export function getVisitedFarm(state) {
   return state.visitedFarm;
 }
 
-export function getCurrentFarm(state) {
-  return getVisitedFarm(state) || getMyFarm(state);
-}
+export const orderDraft = {
+  createGetSubscription(subscriptionId) {
+    return (state) => state.orderDraft.data.subscriptionsById[subscriptionId];
+  },
+  getSubscriptionsById(state) {
+    return state.orderDraft.data.subscriptionsById;
+  }
+};
+
+// export function getCurrentFarm(state) {
+//   return getVisitedFarm(state) || getMyFarm(state);
+// }

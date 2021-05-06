@@ -1,5 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import TableRow from "@material-ui/core/TableRow";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -8,9 +9,10 @@ import EditIcon from "@material-ui/icons/Edit";
 import TableCell from "@material-ui/core/TableCell";
 
 import { SubscriptionPropTypes } from "src/types";
+import { selectors } from "src/store";
 
 import PricingTableCell from "./PricingTableCell";
-import QuantityTableCell from "./QuantityTableCell";
+import NumberOfDeliveriesTableCell from "./NumberOfDeliveriesTableCell";
 import PriceTableCell from "./PriceTableCell";
 
 export default function SubscriptionRow({
@@ -22,9 +24,15 @@ export default function SubscriptionRow({
 }) {
   const { name, content, options } = subscription;
   const initialMinimum = options[0].numberOfDeliveries;
-  const minimumQuantity = options.reduce(
+  const minimumNumberOfDeliveries = options.reduce(
     (min, option) => Math.min(min, option.numberOfDeliveries),
     initialMinimum
+  );
+  const updateNumberOfDeliveries = useStoreActions(
+    (actions) => actions.orderDraft.updateNumberOfDeliveries
+  );
+  const subscriptionDraft = useStoreState(
+    selectors.orderDraft.createGetSubscription(subscription.objectId)
   );
 
   return (
@@ -44,10 +52,17 @@ export default function SubscriptionRow({
       <TableCell>{name}</TableCell>
       <TableCell>{content}</TableCell>
       <PricingTableCell options={options} currency={currency} />
-      <QuantityTableCell minimum={minimumQuantity} />
+      <NumberOfDeliveriesTableCell
+        minimum={minimumNumberOfDeliveries}
+        onChange={(numberOfDeliveries) =>
+          updateNumberOfDeliveries({ subscription, numberOfDeliveries })
+        }
+        value={subscriptionDraft?.numberOfDeliveries}
+      />
       <PriceTableCell
         currency={currency}
-        display={options[0].numberOfDeliveries === 3}
+        pricePerDelivery={subscriptionDraft?.pricePerDelivery}
+        numberOfDeliveries={subscriptionDraft?.numberOfDeliveries}
       />
     </TableRow>
   );

@@ -24,6 +24,7 @@ export default function AddPointRow({ onAdd }) {
       <TableCell />
       <TableCell />
       <TableCell />
+      <TableCell />
     </TableRow>
   );
 }

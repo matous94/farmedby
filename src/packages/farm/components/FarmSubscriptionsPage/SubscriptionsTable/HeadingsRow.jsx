@@ -22,9 +22,11 @@ export default function HeadingsRow({ isAdminMode }) {
         {t("subscriptionsTable.pricingHeading")}
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
-        {t("subscriptionsTable.quantityHeading")}
+        {t("subscriptionsTable.numberOfDeliveriesHeading")}
       </TableCell>
-      <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
+      <TableCell
+        sx={{ whiteSpace: "nowrap", textAlign: "center", minWidth: "100px" }}
+      >
         {t("subscriptionsTable.priceHeading")}
       </TableCell>
     </TableRow>

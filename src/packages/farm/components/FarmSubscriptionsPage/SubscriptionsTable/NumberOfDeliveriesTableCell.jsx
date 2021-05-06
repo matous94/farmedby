@@ -3,11 +3,17 @@ import PropTypes from "prop-types";
 import TableCell from "@material-ui/core/TableCell";
 import TextField from "@material-ui/core/TextField";
 
-export default function QuantityTableCell({ minimum }) {
+export default function NumberOfDeliveriesTableCell({
+  minimum,
+  onChange,
+  value
+}) {
   return (
     <TableCell sx={{ textAlign: "center" }}>
       <TextField
-        name="quantity"
+        onChange={(e) => onChange(e.target.value)}
+        value={value}
+        name="numberOfDeliveries"
         margin="dense"
         size="small"
         type="number"
@@ -30,6 +36,11 @@ export default function QuantityTableCell({ minimum }) {
     </TableCell>
   );
 }
-QuantityTableCell.propTypes = {
-  minimum: PropTypes.number.isRequired
+NumberOfDeliveriesTableCell.propTypes = {
+  minimum: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+};
+NumberOfDeliveriesTableCell.defaultProps = {
+  value: ""
 };

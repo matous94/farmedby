@@ -12,6 +12,9 @@ export default function useGetFarm() {
   const visitedFarmResolved = useStoreActions(
     (actions) => actions.visitedFarmResolved
   );
+  const resetVisitedFarm = useStoreActions(
+    (actions) => actions.resetVisitedFarm
+  );
   const visitedFarm = useStoreState(selectors.getVisitedFarm);
   const isFarmOwner = useStoreState((state) =>
     selectors.isFarmOwner(state, farmId)
@@ -34,6 +37,11 @@ export default function useGetFarm() {
         setStatus("error");
       });
   }, [farmId, isFarmOwner, hasVisitedFarm, visitedFarmResolved]);
+  React.useEffect(() => {
+    if (isFarmOwner && hasVisitedFarm) {
+      resetVisitedFarm();
+    }
+  });
 
   return React.useMemo(
     () => ({

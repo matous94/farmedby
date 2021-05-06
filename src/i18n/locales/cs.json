@@ -1,7 +1,7 @@
 {
   "aboutFarm": "O Farmě",
   "subscriptionsTable.priceHeading": "Price",
-  "subscriptionsTable.quantityHeading": "Počet odběrů",
+  "subscriptionsTable.numberOfDeliveriesHeading": "Počet odběrů",
   "accommodation.heading": "Ubytování",
   "address": "Adresa",
   "addressLevel1Label": "Okres", 

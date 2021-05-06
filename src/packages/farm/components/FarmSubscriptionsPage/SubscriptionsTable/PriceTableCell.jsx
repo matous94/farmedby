@@ -1,18 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TableCell from "@material-ui/core/TableCell";
+import Box from "@material-ui/core/Box";
 
-export default function PriceTableCell({ currency, display }) {
-  const pricePerDelivery = 12.5;
-  const quantity = 6;
-  return display ? (
-    <TableCell sx={{ textAlign: "center" }}>
-      {pricePerDelivery * quantity} {currency}
+export default function PriceTableCell({
+  currency,
+  pricePerDelivery,
+  numberOfDeliveries
+}) {
+  let price = "—";
+  let calculation;
+  if (pricePerDelivery && numberOfDeliveries) {
+    price = `${pricePerDelivery * numberOfDeliveries} ${currency}`;
+    calculation = `(${numberOfDeliveries} x ${pricePerDelivery})`;
+  }
+
+  return (
+    <TableCell sx={{ textAlign: "center", whiteSpace: "nowrap" }}>
+      <Box sx={{ fontWeight: 500 }}>{price}</Box>
+      {calculation && <Box sx={{ fontSize: "0.7rem" }}>{calculation}</Box>}
     </TableCell>
-  ) : (
-    <TableCell sx={{ textAlign: "center" }}>&mdash;</TableCell>
   );
 }
 PriceTableCell.propTypes = {
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string.isRequired,
+  pricePerDelivery: PropTypes.number,
+  numberOfDeliveries: PropTypes.number
+};
+PriceTableCell.defaultProps = {
+  pricePerDelivery: undefined,
+  numberOfDeliveries: undefined
 };

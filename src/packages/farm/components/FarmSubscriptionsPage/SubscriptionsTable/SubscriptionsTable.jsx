@@ -27,7 +27,7 @@ export default function SubscriptionsTable({
   return (
     <TableContainer
       sx={{
-        maxWidth: "800px"
+        maxWidth: isAdminMode ? "1100px" : "900px"
       }}
       component={Paper}
     >
@@ -54,7 +54,7 @@ export default function SubscriptionsTable({
                 currency={currency}
               />
             ))}
-          <PriceSumRow />
+          <PriceSumRow currency={currency} isAdminMode={isAdminMode} />
         </TableBody>
       </Table>
     </TableContainer>

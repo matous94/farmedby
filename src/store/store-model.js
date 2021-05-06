@@ -2,14 +2,41 @@
 import { action } from "easy-peasy";
 import { localStorageKeys } from "src/packages/local-storage";
 
+import { getPricePerDelivery } from "src/packages/farm/utils";
+
 const adminMode = localStorage.getItem(localStorageKeys.adminMode);
+
+const initialOrderDraftData = {
+  note: "",
+  pickupPoint: null,
+  subscriptionsById: {}
+};
 
 const storeModel = {
   user: null,
   myFarm: null,
   farms: null,
   visitedFarm: null,
-  order: null,
+  orderDraft: {
+    data: initialOrderDraftData,
+    updateNumberOfDeliveries: action((orderDraft, payload) => {
+      const { subscription, numberOfDeliveries } = payload;
+      if (!numberOfDeliveries) {
+        delete orderDraft.data.subscriptionsById[subscription.objectId];
+        return;
+      }
+      const pricePerDelivery = getPricePerDelivery({
+        subscription,
+        numberOfDeliveries
+      });
+      orderDraft.data.subscriptionsById[subscription.objectId] = {
+        content: subscription.content,
+        name: subscription.name,
+        numberOfDeliveries: parseInt(numberOfDeliveries, 10),
+        pricePerDelivery
+      };
+    })
+  },
   farmPages: {
     adminMode: adminMode == null ? true : JSON.parse(adminMode)
   },
@@ -18,16 +45,21 @@ const storeModel = {
   }),
   refreshMyFarm: action((state, farm) => {
     state.myFarm = farm;
+    state.orderDraft.data = initialOrderDraftData;
   }),
   updateMyFarm: action((state, farm) => {
     state.myFarm = { ...state.myFarm, ...farm };
+    state.orderDraft.data = initialOrderDraftData;
   }),
   farmsResolved: action((state, farms) => {
     state.farms = farms;
   }),
   visitedFarmResolved: action((state, farm) => {
     state.visitedFarm = farm;
-    state.order = null;
+    state.orderDraft.data = initialOrderDraftData;
+  }),
+  resetVisitedFarm: action((state) => {
+    state.visitedFarm = null;
   }),
   pickupPointSaved: action((state, newPoint) => {
     const pointIndex = state.myFarm.pickupPoints.findIndex(
@@ -60,6 +92,7 @@ const storeModel = {
     state.user = payload.user;
     state.myFarm = payload.farm;
     state.visitedFarm = null;
+    state.orderDraft.data = initialOrderDraftData;
   }),
   signOut: action((state) => {
     state.user = null;
