@@ -1,6 +1,7 @@
 {
   "aboutFarm": "About Farm",
   "subscriptionsTable.quantityHeading": "Quantity",
+  "subscriptionsTable.priceHeading": "Price",
   "accommodation.heading": "Accommodation",
   "address": "Address",
   "addressLevel1Label": "State / Province / District", 
@@ -90,7 +91,7 @@
   "subscriptionsPage.heading": "Subscriptions",
   "subscriptionsPage.subscriptionContentHeading": "(Possible) content",
   "subscriptionsPage.subscriptionName": "Subscription name",
-  "subscriptionsTable.pricing": "Pricing",
+  "subscriptionsTable.pricingHeading": "Pricing",
   "tryItLater": "Try it again later.",
   "volunteers.heading": "Volunteers",
   "webAddress": "Web address",

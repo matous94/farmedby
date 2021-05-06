@@ -19,10 +19,13 @@ export default function HeadingsRow({ isAdminMode }) {
         {t("subscriptionsPage.subscriptionContentHeading")}
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
-        {t("subscriptionsTable.pricing")}
+        {t("subscriptionsTable.pricingHeading")}
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
         {t("subscriptionsTable.quantityHeading")}
+      </TableCell>
+      <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
+        {t("subscriptionsTable.priceHeading")}
       </TableCell>
     </TableRow>
   );

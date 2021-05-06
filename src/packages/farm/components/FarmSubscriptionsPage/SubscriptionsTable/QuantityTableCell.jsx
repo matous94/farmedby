@@ -1,29 +1,28 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 import TableCell from "@material-ui/core/TableCell";
 import TextField from "@material-ui/core/TextField";
 
-export default function QuantityTableCell() {
-  const { t } = useTranslation();
+export default function QuantityTableCell({ minimum }) {
   return (
     <TableCell sx={{ textAlign: "center" }}>
       <TextField
         name="quantity"
-        // label={t("subscriptionEditor.numberOfDeliveries")}
         margin="dense"
         size="small"
-        // InputLabelProps={{ shrink: true }}
         type="number"
         inputProps={{
-          min: "1",
-          defaultValue: 0
+          min: minimum
         }}
+        placeholder="0"
         // eslint-disable-next-line react/jsx-no-duplicate-props
         InputProps={{
           sx: {
             width: "64px",
             "& input": {
-              textAlign: "center"
+              py: "6px",
+              pl: "10px",
+              pr: "3px"
             }
           }
         }}
@@ -31,3 +30,6 @@ export default function QuantityTableCell() {
     </TableCell>
   );
 }
+QuantityTableCell.propTypes = {
+  minimum: PropTypes.number.isRequired
+};

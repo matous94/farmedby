@@ -11,6 +11,7 @@ import { SubscriptionPropTypes } from "src/types";
 
 import PricingTableCell from "./PricingTableCell";
 import QuantityTableCell from "./QuantityTableCell";
+import PriceTableCell from "./PriceTableCell";
 
 export default function SubscriptionRow({
   subscription,
@@ -20,6 +21,12 @@ export default function SubscriptionRow({
   currency
 }) {
   const { name, content, options } = subscription;
+  const initialMinimum = options[0].numberOfDeliveries;
+  const minimumQuantity = options.reduce(
+    (min, option) => Math.min(min, option.numberOfDeliveries),
+    initialMinimum
+  );
+
   return (
     <TableRow>
       {isAdminMode && (
@@ -37,7 +44,11 @@ export default function SubscriptionRow({
       <TableCell>{name}</TableCell>
       <TableCell>{content}</TableCell>
       <PricingTableCell options={options} currency={currency} />
-      <QuantityTableCell />
+      <QuantityTableCell minimum={minimumQuantity} />
+      <PriceTableCell
+        currency={currency}
+        display={options[0].numberOfDeliveries === 3}
+      />
     </TableRow>
   );
 }

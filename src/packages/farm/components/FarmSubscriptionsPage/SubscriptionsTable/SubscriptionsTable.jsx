@@ -12,6 +12,7 @@ import { getCurrency } from "src/i18n";
 import AddPointRow from "./AddPointRow";
 import HeadingsRow from "./HeadingsRow";
 import SubscriptionRow from "./SubscriptionRow";
+import PriceSumRow from "./PriceSumRow";
 
 export default function SubscriptionsTable({
   farm,
@@ -53,6 +54,7 @@ export default function SubscriptionsTable({
                 currency={currency}
               />
             ))}
+          <PriceSumRow />
         </TableBody>
       </Table>
     </TableContainer>

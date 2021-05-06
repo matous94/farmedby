@@ -1,5 +1,6 @@
 {
   "aboutFarm": "O Farmě",
+  "subscriptionsTable.priceHeading": "Price",
   "subscriptionsTable.quantityHeading": "Počet odběrů",
   "accommodation.heading": "Ubytování",
   "address": "Adresa",
@@ -90,7 +91,7 @@
   "subscriptionsPage.heading": "Předplatné",
   "subscriptionsPage.subscriptionContentHeading": "(Možný) obsah",
   "subscriptionsPage.subscriptionName": "Jméno předplatného",
-  "subscriptionsTable.pricing": "Ceník",
+  "subscriptionsTable.pricingHeading": "Ceník",
   "tryItLater": "Zkuste akci opakovat později.",
   "volunteers.heading": "Dobrovolníci",
   "webAddress": "Webová adresa",
