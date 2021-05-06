@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
-import { useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 import logger from "src/packages/logger";
 import { selectors } from "src/store";
@@ -9,28 +9,31 @@ import ApiClient from "src/packages/api-client";
 export default function useGetFarm() {
   const { farmId } = useParams();
   const myFarm = useStoreState(selectors.getMyFarm);
+  const visitedFarmResolved = useStoreActions(
+    (actions) => actions.visitedFarmResolved
+  );
+  const visitedFarm = useStoreState(selectors.getVisitedFarm);
   const isFarmOwner = useStoreState((state) =>
     selectors.isFarmOwner(state, farmId)
   );
 
+  const hasVisitedFarm = visitedFarm && visitedFarm.objectId === farmId;
   // loading, resolved, error
   const [status, setStatus] = React.useState(
-    isFarmOwner ? "resolved" : "loading"
+    isFarmOwner || hasVisitedFarm ? "resolved" : "loading"
   );
-  const [visitedFarm, setVisitedFarm] = React.useState(null);
-
   React.useEffect(() => {
-    if (isFarmOwner) return;
+    if (isFarmOwner || hasVisitedFarm) return;
     ApiClient.Farm.getFarmById(farmId)
       .then((fetchedFarm) => {
-        setVisitedFarm(fetchedFarm);
+        visitedFarmResolved(fetchedFarm);
         setStatus("resolved");
       })
       .catch((error) => {
         logger.farm("useGetFarm => getFarmById failed", error);
         setStatus("error");
       });
-  }, [farmId, isFarmOwner]);
+  }, [farmId, isFarmOwner, hasVisitedFarm, visitedFarmResolved]);
 
   return React.useMemo(
     () => ({

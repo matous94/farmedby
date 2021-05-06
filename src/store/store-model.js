@@ -8,6 +8,8 @@ const storeModel = {
   user: null,
   myFarm: null,
   farms: null,
+  visitedFarm: null,
+  order: null,
   farmPages: {
     adminMode: adminMode == null ? true : JSON.parse(adminMode)
   },
@@ -22,6 +24,10 @@ const storeModel = {
   }),
   farmsResolved: action((state, farms) => {
     state.farms = farms;
+  }),
+  visitedFarmResolved: action((state, farm) => {
+    state.visitedFarm = farm;
+    state.order = null;
   }),
   pickupPointSaved: action((state, newPoint) => {
     const pointIndex = state.myFarm.pickupPoints.findIndex(
@@ -53,6 +59,7 @@ const storeModel = {
   signIn: action((state, payload) => {
     state.user = payload.user;
     state.myFarm = payload.farm;
+    state.visitedFarm = null;
   }),
   signOut: action((state) => {
     state.user = null;

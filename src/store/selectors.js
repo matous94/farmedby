@@ -30,3 +30,11 @@ export function isAdminMode(farmId) {
 export function getFarms(state) {
   return state.farms;
 }
+
+export function getVisitedFarm(state) {
+  return state.visitedFarm;
+}
+
+export function getCurrentFarm(state) {
+  return getVisitedFarm(state) || getMyFarm(state);
+}
