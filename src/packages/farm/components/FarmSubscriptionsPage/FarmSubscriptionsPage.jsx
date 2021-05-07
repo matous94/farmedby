@@ -5,10 +5,10 @@ import Box from "@material-ui/core/Box";
 import { useSwitch } from "src/packages/hooks";
 import { FarmPropTypes } from "src/types";
 import { getCountry } from "src/i18n";
+import NumberedList from "src/components/NumberedList";
 
 import SubscriptionEditor from "./SubscriptionEditor";
 import SubscriptionsTable from "./SubscriptionsTable";
-import HowItWorks from "./HowItWorks";
 import DeleteSubscriptionDialog from "./DeleteSubscriptionDialog";
 
 export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
@@ -35,9 +35,11 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <Box sx={{ mb: "32px", maxWidth: "580px", mx: "auto" }}>
-          <HowItWorks />
-        </Box>
+        <NumberedList
+          sx={{ mb: "32px", maxWidth: "580px", mx: "auto" }}
+          length={5}
+          translationKey="subscriptionsPage.howItWorks"
+        />
         <SubscriptionsTable
           farm={farm}
           onAdd={() => editorSwitch.switchOn()}

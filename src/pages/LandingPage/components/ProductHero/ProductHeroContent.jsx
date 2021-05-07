@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import NumberedList from "src/components/NumberedList/NumberedList";
 
 import Button from "../Button";
 
@@ -43,24 +44,12 @@ function ProductHeroContent() {
           background: theme.palette.primary.main
         }}
       />
-      <Typography
-        sx={{
-          mt: ["12px", null, "20px"],
-          [theme.breakpoints.down(410)]: {
-            fontSize: "1rem"
-          }
-        }}
+      <NumberedList
+        sx={{ mt: ["12px", null, "20px"] }}
+        length={4}
+        translationKey="landingPage.howItWorks"
         color="white"
-        variant="h6"
-        component="h2"
-      >
-        {howItWorksKeys.map((key, index) => (
-          <Box key={key} sx={{ display: "flex" }}>
-            <Box sx={{ minWidth: "22px", fontWeight: "400" }}>{index + 1}.</Box>
-            <div>{t(key)}</div>
-          </Box>
-        ))}
-      </Typography>
+      />
       <Button
         color="secondary"
         variant="contained"
