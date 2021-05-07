@@ -9,6 +9,7 @@ import { getCountry } from "src/i18n";
 import SubscriptionEditor from "./SubscriptionEditor";
 import SubscriptionsTable from "./SubscriptionsTable";
 import HowItWorks from "./HowItWorks";
+import DeleteSubscriptionDialog from "./DeleteSubscriptionDialog";
 
 export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
   const editorSwitch = useSwitch(false);
@@ -18,20 +19,22 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
 
   return (
     <>
+      <SubscriptionEditor
+        isOpen={editorSwitch.isOn}
+        subscription={editorSwitch.state}
+        onClose={() => editorSwitch.reset()}
+        farmId={farm.objectId}
+        currency={farmCountry.currency}
+        currencyMultiplier={farmCountry.currencyMultiplier}
+      />
+      <DeleteSubscriptionDialog
+        isOpen={deleteDialogSwitch.isOn}
+        onDismiss={deleteDialogSwitch.reset}
+        subscriptionId={deleteDialogSwitch.state}
+      />
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        {editorSwitch.isOn && (
-          <SubscriptionEditor
-            isOpenDeleteDialog={deleteDialogSwitch.isOn}
-            onDismissDeleteDialog={deleteDialogSwitch.reset}
-            subscription={editorSwitch.state}
-            onClose={() => editorSwitch.reset()}
-            farmId={farm.objectId}
-            currency={farmCountry.currency}
-            currencyMultiplier={farmCountry.currencyMultiplier}
-          />
-        )}
         <Box sx={{ mb: "32px", maxWidth: "580px", mx: "auto" }}>
           <HowItWorks />
         </Box>

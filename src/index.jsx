@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { StoreProvider } from "easy-peasy";
 import CssBaseline from "@material-ui/core/CssBaseline";
-// import GlobalStyles from "@material-ui/core/GlobalStyles";
 import { ThemeProvider } from "@material-ui/core/styles";
 
 import { setupI18n, getCountryCode } from "src/i18n";
@@ -36,13 +35,6 @@ async function renderReactApp() {
         <StoreProvider store={store}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {/* <GlobalStyles
-              styles={{
-                "*::-webkit-scrollbar": {
-                  display: "block"
-                }
-              }}
-            /> */}
             <App key={getCountryCode()} />
           </ThemeProvider>
         </StoreProvider>

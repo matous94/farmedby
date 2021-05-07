@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import { useStoreActions } from "easy-peasy";
-import { useTranslation } from "react-i18next";
 
 import { useSwitch, useAsync } from "src/packages/hooks";
 import { FarmPropTypes } from "src/types";
@@ -15,7 +14,6 @@ import PickupPointEditor from "./PickupPointEditor";
 import PickupPointsTable from "./PickupPointsTable";
 
 export default function FarmPickupPointsPage({ farm, isAdminMode }) {
-  const { t } = useTranslation();
   const editorSwitch = useSwitch(false);
   const deleteDialogSwitch = useSwitch(false);
 
