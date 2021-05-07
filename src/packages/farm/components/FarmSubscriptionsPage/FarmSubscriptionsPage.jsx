@@ -62,7 +62,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
           flexDirection: "column",
           alignItems: "center",
           mx: "auto",
-          pb: "500px"
+          pb: "64px"
         }}
       >
         <Heading
