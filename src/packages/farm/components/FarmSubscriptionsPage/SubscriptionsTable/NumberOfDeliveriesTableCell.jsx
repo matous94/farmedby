@@ -11,7 +11,20 @@ export default function NumberOfDeliveriesTableCell({
   return (
     <TableCell sx={{ textAlign: "center" }}>
       <TextField
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          const numberOfDeliveries = e.target.value;
+          e.target.reportValidity();
+          if (
+            numberOfDeliveries == null ||
+            numberOfDeliveries === "" ||
+            numberOfDeliveries.startsWith("-") ||
+            numberOfDeliveries === "0"
+          ) {
+            onChange("");
+            return;
+          }
+          onChange(numberOfDeliveries);
+        }}
         value={value}
         name="numberOfDeliveries"
         margin="dense"
