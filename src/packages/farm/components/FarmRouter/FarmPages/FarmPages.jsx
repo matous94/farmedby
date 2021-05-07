@@ -29,7 +29,7 @@ export default function FarmPages() {
   const { status, farm, isFarmOwner } = useGetFarm();
   const toggleAdminMode = useStoreActions((actions) => actions.toggleAdminMode);
   const isAdminMode = useStoreState(selectors.isAdminMode(farmId));
-  const isUpSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+  const isUpMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   const { PageContent, translationKey } = pageName
     ? pages[pageName]
@@ -48,7 +48,7 @@ export default function FarmPages() {
         <Box
           component="nav"
           sx={{
-            width: [null, drawerWidth],
+            width: [null, null, drawerWidth],
             flexShrink: 0
           }}
           aria-label="mailbox folders"
@@ -65,8 +65,9 @@ export default function FarmPages() {
           component="main"
           position="relative"
           sx={{
-            width: isUpSm ? `calc(100vw - ${drawerWidth})` : "100vw",
-            minHeight: "100vh"
+            width: isUpMd ? `calc(100vw - ${drawerWidth})` : "100vw",
+            minHeight: "100vh",
+            overflowX: "auto"
           }}
         >
           <Toolbar />

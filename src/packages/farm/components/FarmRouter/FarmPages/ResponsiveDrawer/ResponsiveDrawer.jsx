@@ -25,9 +25,9 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
   const { t } = useTranslation();
   const { farmId, pageName } = useParams();
 
-  const isUpSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
-  const isDownSm = !isUpSm;
-  if (isUpSm && isOpen) onClose();
+  const isUpMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  const isDownMd = !isUpMd;
+  if (isUpMd && isOpen) onClose();
 
   const signOut = useStoreActions((actions) => actions.signOut);
   function signOutHandler() {
@@ -39,8 +39,8 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
   const LandingPageIcon = landingPage.Icon;
   const drawerContent = (
     <div>
-      <Toolbar>{isDownSm && <Logo />}</Toolbar>
-      {isDownSm && <Divider />}
+      <Toolbar>{isDownMd && <Logo />}</Toolbar>
+      {isDownMd && <Divider />}
       <Box sx={{ px: "8px", py: "12px" }}>
         <Typography variant="h5" align="center">
           {farmName}
@@ -93,7 +93,7 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
     </div>
   );
 
-  return isDownSm ? (
+  return isDownMd ? (
     <Drawer
       variant="temporary"
       open={isOpen}

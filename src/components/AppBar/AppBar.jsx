@@ -19,13 +19,13 @@ export default function AppBar({ onMenuClick, onlyLogo }) {
   const { t } = useTranslation();
 
   const myFarm = useStoreState(selectors.getMyFarm);
-  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isDownMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   return (
     <MuiAppBar position="fixed">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          {onMenuClick && isDownSm && (
+          {onMenuClick && isDownMd && (
             <IconButton
               color="inherit"
               aria-label="open drawer"
