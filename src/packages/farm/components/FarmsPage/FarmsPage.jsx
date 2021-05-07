@@ -89,7 +89,7 @@ export default function FarmsPage() {
               }}
               size="small"
               onChange={producingFilter.onChange}
-              selected={producingFilter.filterValue}
+              value={producingFilter.filterValue}
               label={t("farmsPage.producingLabel")}
               options={productTypesOptions}
               multiple

@@ -48,9 +48,7 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
         onSubmit={handleSubmit(onSubmit)}
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <DialogTitle sx={{ paddingBottom: 0 }}>
-          {t("pickupPointEditor.heading")}
-        </DialogTitle>
+        <DialogTitle sx={{ paddingBottom: 0 }}>{t("pickupPoint")}</DialogTitle>
         <DialogContent>
           <TextField
             name="name"

@@ -19,7 +19,7 @@ const MenuProps = {
 };
 
 export default function Select({
-  selected,
+  value,
   onChange,
   options,
   multiple,
@@ -31,9 +31,9 @@ export default function Select({
 }) {
   const isChecked = (id) => {
     if (multiple) {
-      return selected.indexOf(id) > -1;
+      return value.indexOf(id) > -1;
     }
-    return selected === id;
+    return value === id;
   };
 
   return (
@@ -49,11 +49,17 @@ export default function Select({
         name={name}
         label={label}
         multiple={multiple}
-        value={selected}
+        value={value}
         onChange={onChange}
-        renderValue={(value) =>
-          multiple ? value.map((id) => options[id].label).join(", ") : value
-        }
+        renderValue={(selectedValue) => {
+          if (multiple) {
+            return selectedValue.map((id) => options[id].label).join(", ");
+          }
+          if (selectedValue === "") {
+            return "";
+          }
+          return options[selectedValue].label;
+        }}
         MenuProps={MenuProps}
         sx={{
           "& .MuiSelect-select:focus": {
@@ -63,8 +69,13 @@ export default function Select({
       >
         {Object.values(options).map((option) => (
           <MenuItem key={option.id} value={option.id}>
-            <Checkbox checked={isChecked(option.id)} />
-            <ListItemText primary={option.label} />
+            {multiple ? <Checkbox checked={isChecked(option.id)} /> : null}
+            <ListItemText
+              primary={option.label}
+              sx={{
+                whiteSpace: "normal"
+              }}
+            />
           </MenuItem>
         ))}
       </MuiSelect>
@@ -84,7 +95,7 @@ Select.propTypes = {
     })
   ).isRequired,
   required: PropTypes.bool,
-  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   sx: PropTypes.shape({}),
   size: PropTypes.string
 };

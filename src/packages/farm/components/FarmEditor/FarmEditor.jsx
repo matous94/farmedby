@@ -111,7 +111,7 @@ export default function FarmEditor({
             <Grid item xs={12}>
               <Select
                 onChange={onChange}
-                selected={formData.productTypes}
+                value={formData.productTypes}
                 label={t("producing")}
                 options={productTypesOptions}
                 multiple

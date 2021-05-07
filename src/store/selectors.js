@@ -41,6 +41,9 @@ export const orderDraft = {
   },
   getSubscriptionsById(state) {
     return state.orderDraft.data.subscriptionsById;
+  },
+  getPickupPoint(state) {
+    return state.orderDraft.data.pickupPoint;
   }
 };
 

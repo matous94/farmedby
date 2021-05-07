@@ -27,7 +27,7 @@ export default function SubscriptionsTable({
   return (
     <TableContainer
       sx={{
-        maxWidth: isAdminMode ? "1100px" : "900px"
+        width: "100%"
       }}
       component={Paper}
     >

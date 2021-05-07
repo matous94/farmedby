@@ -35,6 +35,9 @@ const storeModel = {
         numberOfDeliveries: parseInt(numberOfDeliveries, 10),
         pricePerDelivery
       };
+    }),
+    setPickupPoint: action((orderDraft, pickupPoint) => {
+      orderDraft.data.pickupPoint = pickupPoint;
     })
   },
   farmPages: {
