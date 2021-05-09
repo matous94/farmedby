@@ -38,6 +38,9 @@ const storeModel = {
     }),
     setPickupPoint: action((orderDraft, pickupPoint) => {
       orderDraft.data.pickupPoint = pickupPoint;
+    }),
+    setNote: action((orderDraft, note) => {
+      orderDraft.data.note = note;
     })
   },
   farmPages: {

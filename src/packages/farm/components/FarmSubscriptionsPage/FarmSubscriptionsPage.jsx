@@ -13,6 +13,7 @@ import SubscriptionEditor from "./SubscriptionEditor";
 import SubscriptionsTable from "./SubscriptionsTable";
 import DeleteSubscriptionDialog from "./DeleteSubscriptionDialog";
 import PickupPointSelector from "./PickupPointSelector";
+import NoteField from "./NoteField";
 
 // eslint-disable-next-line react/prop-types
 function Heading({ sx, ...rest }) {
@@ -21,7 +22,6 @@ function Heading({ sx, ...rest }) {
       sx={{
         mt: ["24px", "32px", "44px"],
         mb: ["12px", "16px"],
-        width: "100%",
         ...sx
       }}
       component="h2"
@@ -60,7 +60,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "start",
           mx: "auto",
           pb: "64px"
         }}
@@ -74,7 +74,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
           {t("howItWorks?")}
         </Heading>
         <NumberedList
-          sx={{ maxWidth: "580px", mr: "auto", fontWeight: 400 }}
+          sx={{ maxWidth: "580px", fontWeight: 400 }}
           length={5}
           translationKey="subscriptionsPage.howItWorks"
         />
@@ -88,8 +88,9 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
         />
         <Heading>{t("subscriptionsPage.selectPickupPointHeading")}</Heading>
         <PickupPointSelector farm={farm} />
+        <Heading>{t("subscriptionsPage.noteHeading")}</Heading>
+        <NoteField />
         {/* 
-        <NoteInput />
         <CustomerData />
         <SubmitButton /> */}
       </Box>

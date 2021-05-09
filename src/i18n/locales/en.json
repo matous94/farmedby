@@ -83,6 +83,7 @@
   "somethingWentWrong": "Something went wrong",
   "subscriptionEditor.contentPlaceholder": "Various seasonal vegetables",
   "subscriptionEditor.heading": "Subscription Editor",
+  "subscriptionsPage.noteHeading": "Note", 
   "subscriptionEditor.namePlaceholder": "Vegetables for 4",
   "subscriptionEditor.numberOfDeliveries": "From number of deliveries",
   "subscriptionEditor.pricePerDelivery": "Price per delivery ({{currency}})",

@@ -44,6 +44,9 @@ export const orderDraft = {
   },
   getPickupPoint(state) {
     return state.orderDraft.data.pickupPoint;
+  },
+  getNote(state) {
+    return state.orderDraft.data.note;
   }
 };
 
