@@ -73,12 +73,14 @@ const storeModel = {
     );
     if (pointIndex === -1) state.myFarm.pickupPoints.push(newPoint);
     else state.myFarm.pickupPoints[pointIndex] = newPoint;
+    state.orderDraft.data = initialOrderDraftData;
   }),
   pickupPointDeleted: action((state, pointId) => {
     const index = state.myFarm.pickupPoints.findIndex(
       (point) => point.objectId === pointId
     );
     if (index !== -1) state.myFarm.pickupPoints.splice(index, 1);
+    state.orderDraft.data = initialOrderDraftData;
   }),
   subscriptionSaved: action((state, newSubscription) => {
     const subscriptionIndex = state.myFarm.subscriptions.findIndex(
@@ -87,12 +89,14 @@ const storeModel = {
     if (subscriptionIndex === -1)
       state.myFarm.subscriptions.push(newSubscription);
     else state.myFarm.subscriptions[subscriptionIndex] = newSubscription;
+    state.orderDraft.data = initialOrderDraftData;
   }),
   subscriptionDeleted: action((state, subscriptionId) => {
     const index = state.myFarm.subscriptions.findIndex(
       (subscription) => subscription.objectId === subscriptionId
     );
     if (index !== -1) state.myFarm.subscriptions.splice(index, 1);
+    state.orderDraft.data = initialOrderDraftData;
   }),
   signIn: action((state, payload) => {
     state.user = payload.user;
