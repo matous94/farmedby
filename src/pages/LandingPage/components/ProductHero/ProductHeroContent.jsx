@@ -8,13 +8,6 @@ import NumberedList from "src/components/NumberedList/NumberedList";
 
 import Button from "../Button";
 
-const howItWorksKeys = [
-  "landingPage.howItWorks1",
-  "landingPage.howItWorks2",
-  "landingPage.howItWorks3",
-  "landingPage.howItWorks4"
-];
-
 function ProductHeroContent() {
   const { t } = useTranslation();
   const theme = useTheme();
