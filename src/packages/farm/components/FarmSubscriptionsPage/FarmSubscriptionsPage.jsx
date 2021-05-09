@@ -87,7 +87,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
           isAdminMode={isAdminMode}
         />
         <Heading>{t("subscriptionsPage.selectPickupPointHeading")}</Heading>
-        <PickupPointSelector points={farm.pickupPoints} />
+        <PickupPointSelector farm={farm} />
         {/* 
         <NoteInput />
         <CustomerData />
