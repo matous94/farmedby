@@ -2,11 +2,11 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import NumberedList from "src/components/NumberedList/NumberedList";
 
-import Button from "../Button";
+import NumberedList from "src/components/NumberedList/NumberedList";
 
 function ProductHeroContent() {
   const { t } = useTranslation();
@@ -50,7 +50,8 @@ function ProductHeroContent() {
         sx={{
           minWidth: "200px",
           my: ["36px", null, "64px"],
-          fontSize: ["1.4rem", "1.5rem"]
+          fontSize: ["1.4rem", "1.5rem"],
+          padding: ["12px 20px", "16px 32px"]
         }}
         component={RouterLink}
         to="/farms"

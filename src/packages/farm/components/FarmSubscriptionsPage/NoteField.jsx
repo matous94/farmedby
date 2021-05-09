@@ -4,7 +4,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { selectors } from "src/store";
 
-export default function NoteField() {
+function NoteField() {
   const { t } = useTranslation();
   const translationPrefix = "subscriptionsPage.note.placeholder.line";
   const line1 = t(translationPrefix + 1);
@@ -24,3 +24,5 @@ export default function NoteField() {
     />
   );
 }
+
+export default React.memo(NoteField);

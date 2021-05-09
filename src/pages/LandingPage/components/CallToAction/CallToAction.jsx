@@ -1,16 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
-import { useTranslation } from "react-i18next";
+import Button from "@material-ui/core/Button";
 
 import logger from "src/packages/logger";
 import ApiClient from "src/packages/api-client";
 
-import Button from "../Button";
 import imageUrl from "./call-to-action.jpg";
 
 function ProductCTA() {
@@ -84,7 +84,8 @@ function ProductCTA() {
                 type="submit"
                 variant="contained"
                 sx={{
-                  width: "100%"
+                  width: "100%",
+                  padding: ["12px 20px", "16px 32px"]
                 }}
               >
                 {t("landingPage.subscribeToNewsletter")}

@@ -14,13 +14,7 @@ import HeadingsRow from "./HeadingsRow";
 import SubscriptionRow from "./SubscriptionRow";
 import PriceSumRow from "./PriceSumRow";
 
-export default function SubscriptionsTable({
-  farm,
-  onEdit,
-  onDelete,
-  onAdd,
-  isAdminMode
-}) {
+function SubscriptionsTable({ farm, onDelete, isAdminMode, openEditor }) {
   const { subscriptions } = farm;
   const currency = getCurrency(farm.countryCode);
 
@@ -36,7 +30,7 @@ export default function SubscriptionsTable({
           <HeadingsRow isAdminMode={isAdminMode} />
         </TableHead>
         <TableBody>
-          {isAdminMode && <AddPointRow onAdd={onAdd} />}
+          {isAdminMode && <AddPointRow onAdd={() => openEditor()} />}
 
           {[...subscriptions]
             .sort((a, b) => {
@@ -49,7 +43,7 @@ export default function SubscriptionsTable({
                 isAdminMode={isAdminMode}
                 key={subscription.objectId}
                 subscription={subscription}
-                onEdit={() => onEdit(subscription)}
+                onEdit={() => openEditor(subscription)}
                 onDelete={() => onDelete(subscription.objectId)}
                 currency={currency}
               />
@@ -63,8 +57,9 @@ export default function SubscriptionsTable({
 
 SubscriptionsTable.propTypes = {
   farm: FarmPropTypes.isRequired,
-  onAdd: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
+  openEditor: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   isAdminMode: PropTypes.bool.isRequired
 };
+
+export default React.memo(SubscriptionsTable);

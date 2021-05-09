@@ -91,7 +91,7 @@ Select.propTypes = {
   options: PropTypes.objectOf(
     PropTypes.shape({
       id: PropTypes.string,
-      label: PropTypes.oneOfType(PropTypes.string, PropTypes.element)
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
     })
   ).isRequired,
   required: PropTypes.bool,

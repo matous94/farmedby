@@ -7,6 +7,11 @@ import { getPricePerDelivery } from "src/packages/farm/utils";
 const adminMode = localStorage.getItem(localStorageKeys.adminMode);
 
 const initialOrderDraftData = {
+  customer: {
+    name: "",
+    email: "",
+    phoneNumber: ""
+  },
   note: "",
   pickupPoint: null,
   subscriptionsById: {}
@@ -41,6 +46,9 @@ const storeModel = {
     }),
     setNote: action((orderDraft, note) => {
       orderDraft.data.note = note;
+    }),
+    updateCustomer: action((orderDraft, customer) => {
+      orderDraft.data.customer = { ...orderDraft.data.customer, ...customer };
     })
   },
   farmPages: {

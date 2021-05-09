@@ -1,4 +1,7 @@
 {
+  "subscriptionsPage.submit.button": "Odeslat objednávku",
+  "subscriptionsPage.customerData.heading": "Kontaktní údaje",
+  "fullname": "Jméno a příjmení",
   "howItWorks?": "Jak to funguje?",
   "subscriptionsPage.selectPickupPointHeading": "Vyber odběrové místo",
   "subscriptionsPage.selectSubscriptionHeading": "Vyber předplatné",

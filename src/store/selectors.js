@@ -47,9 +47,15 @@ export const orderDraft = {
   },
   getNote(state) {
     return state.orderDraft.data.note;
+  },
+  getCustomer(state) {
+    return state.orderDraft.data.customer;
+  },
+  getData(state) {
+    return state.orderDraft.data;
   }
 };
 
-// export function getCurrentFarm(state) {
+// export function getFarm(state) {
 //   return getVisitedFarm(state) || getMyFarm(state);
 // }

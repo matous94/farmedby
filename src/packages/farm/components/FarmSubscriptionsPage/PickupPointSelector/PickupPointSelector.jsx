@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -36,7 +35,7 @@ function createOption(point) {
   };
 }
 
-export default function PickupPointSelector({ farm, sx }) {
+function PickupPointSelector({ farm }) {
   const { t } = useTranslation();
   const selectedPoint = useStoreState(selectors.orderDraft.getPickupPoint);
   const setPickupPoint = useStoreActions(
@@ -84,8 +83,7 @@ export default function PickupPointSelector({ farm, sx }) {
       sx={{
         "& .MuiSelect-select": {
           whiteSpace: "normal"
-        },
-        ...sx
+        }
       }}
       size="small"
       onChange={onChange}
@@ -93,6 +91,7 @@ export default function PickupPointSelector({ farm, sx }) {
       label={t("pickupPoint")}
       options={options}
       name="pickupPoints"
+      required
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -104,9 +103,7 @@ export default function PickupPointSelector({ farm, sx }) {
   );
 }
 PickupPointSelector.propTypes = {
-  farm: FarmPropTypes.isRequired,
-  sx: PropTypes.shape({})
+  farm: FarmPropTypes.isRequired
 };
-PickupPointSelector.defaultProps = {
-  sx: undefined
-};
+
+export default React.memo(PickupPointSelector);
