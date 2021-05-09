@@ -61,7 +61,7 @@ export default function SubscriptionEditor({
     onClose();
   }
 
-  const submitter = useAsync(onSubmit, { functionName: "onSubmit" });
+  const submitter = useAsync(onSubmit);
 
   return (
     <>

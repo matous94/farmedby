@@ -29,12 +29,13 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
       const objectId = editorSwitch.state?.objectId;
       const point = await ApiClient.Farm.savePickupPoint({
         ...pickupPoint,
+        countryCode: farm.countryCode,
         objectId
       });
       pickupPointSaved(point);
       editorSwitch.reset();
     },
-    [pickupPointSaved, editorSwitch]
+    [pickupPointSaved, editorSwitch, farm.countryCode]
   );
 
   const onDelete = React.useCallback(

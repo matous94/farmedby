@@ -6,10 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useStoreState } from "easy-peasy";
 
-import { useSwitch } from "src/packages/hooks";
+import { useSwitch, useAsync } from "src/packages/hooks";
 import { FarmPropTypes } from "src/types";
 import { getCountry } from "src/i18n";
 import NumberedList from "src/components/NumberedList";
+import ApiClient from "src/packages/api-client";
 import { selectors } from "src/store";
 
 import SubscriptionEditor from "./SubscriptionEditor";
@@ -44,9 +45,32 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
 
   const farmCountry = getCountry(farm.countryCode);
 
-  function handleSubmit(e) {
+  const orderSubmitter = useAsync(
+    async (orderData) => {
+      // display loading dialog
+      const order = await ApiClient.Order.createOrder(orderData);
+      // display success dialog text
+      // redirect on OK to order / display link to order
+    },
+    { functionName: "createOrderSubmit" }
+  );
+  function onSubmit(e) {
     e.preventDefault();
     console.log("Submit called:", orderDraft);
+
+    orderSubmitter.execute({
+      customer: orderDraft.customer,
+      farm: {
+        countryCode: farm.countryCode,
+        email: farm.email,
+        name: farm.name,
+        objectId: farm.objectId,
+        phoneNumber: farm.phoneNumber
+      },
+      note: orderDraft.note,
+      pickupPoint: orderDraft.pickupPoint,
+      subscriptions: Object.values(orderDraft.subscriptionsById)
+    });
   }
 
   return (
@@ -66,7 +90,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
       />
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         sx={{
           maxWidth: isAdminMode ? "1100px" : "900px",
           width: "100%",

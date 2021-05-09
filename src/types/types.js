@@ -76,6 +76,7 @@ export const OrderPropTypes = PropTypes.shape({
     objectId: PropTypes.string,
     phoneNumber: PropTypes.string
   }),
+  farmId: PropTypes.string,
   journal: PropTypes.string,
   note: PropTypes.string,
   objectId: PropTypes.string,
