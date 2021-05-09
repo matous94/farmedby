@@ -7,7 +7,7 @@ export default function StyledButton(props) {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       sx={{
-        borderRadius: 0,
+        borderRadius: "4px",
         fontWeight: (theme) => theme.typography.fontWeightMedium,
         fontFamily: (theme) => theme.typography.fontFamilySecondary,
         padding: ["12px 20px", "16px 32px"],

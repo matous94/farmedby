@@ -87,7 +87,7 @@
   "subscriptionEditor.namePlaceholder": "Vegetables for 4",
   "subscriptionEditor.numberOfDeliveries": "From number of deliveries",
   "subscriptionEditor.pricePerDelivery": "Price per delivery ({{currency}})",
-  "subscriptionsPage.howItWorks1": "Create an order",
+  "subscriptionsPage.howItWorks1": "Create an order below",
   "subscriptionsPage.howItWorks2": "Wait for an email from the farmer with payment information",
   "subscriptionsPage.howItWorks3": "Pay for the order",
   "subscriptionsPage.howItWorks4": "Wait for an email with first delivery day",

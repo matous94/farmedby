@@ -23,7 +23,8 @@ function ProductHeroContent() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: "rgba(0,0,0,0.8)"
+        backgroundColor: "rgba(0,0,0,0.8)",
+        borderRadius: "4px"
       }}
     >
       <Typography textAlign="center" color="white" variant="h2" component="h1">
