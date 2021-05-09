@@ -36,6 +36,14 @@ function Farm({ farm, productTypesFilter }) {
       <TableCell>
         <Link to={`/farm/${objectId}/subscriptions`}>{name}</Link>
       </TableCell>
+      <TableCell sx={{ whiteSpace: "nowrap" }}>
+        {deliversTo.map((location, index) => (
+          <React.Fragment key={index}>
+            {createAddress(location).districtRelativeReverse}
+            {index === deliversTo.length - 1 ? null : <br />}
+          </React.Fragment>
+        ))}
+      </TableCell>
       <TableCell>
         {productTypes
           .map((type) => t(`productTypes.${type}`))
@@ -52,14 +60,6 @@ function Farm({ farm, productTypesFilter }) {
               {index % 2 === 1 && index <= productTypes.length - 1 && <br />}
             </React.Fragment>
           ))}
-      </TableCell>
-      <TableCell sx={{ whiteSpace: "nowrap" }}>
-        {deliversTo.map((location, index) => (
-          <React.Fragment key={index}>
-            {createAddress(location).districtRelativeReverse}
-            {index === deliversTo.length - 1 ? null : <br />}
-          </React.Fragment>
-        ))}
       </TableCell>
     </TableRow>
   );
@@ -88,8 +88,8 @@ export default function FarmsTable({ farms, productTypesFilter }) {
         <TableHead>
           <TableRow>
             <TableCell>{t("farmName")}</TableCell>
-            <TableCell>{t("farmsPage.producingLabel")}</TableCell>
             <TableCell>{t("farmsPage.deliversToHeading")}</TableCell>
+            <TableCell>{t("farmsPage.producingLabel")}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
