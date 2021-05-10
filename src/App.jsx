@@ -78,7 +78,7 @@ function App() {
         <FarmsPage />
       </Route>
 
-      <Route path="/orders/:orderId">
+      <Route path="/order/:orderId">
         <OrderPage />
       </Route>
 

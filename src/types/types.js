@@ -69,6 +69,11 @@ export const FarmPropTypes = PropTypes.shape({
 
 export const OrderPropTypes = PropTypes.shape({
   completed: PropTypes.string,
+  customer: PropTypes.shape({
+    email: PropTypes.string,
+    name: PropTypes.string,
+    phoneNumber: PropTypes.string
+  }),
   farm: PropTypes.shape({
     countryCode: PropTypes.string,
     email: PropTypes.string,
@@ -85,7 +90,7 @@ export const OrderPropTypes = PropTypes.shape({
     PropTypes.shape({
       content: PropTypes.string,
       name: PropTypes.string,
-      // objectId: PropTypes.string,
+      objectId: PropTypes.string,
       numberOfDeliveries: PropTypes.number,
       pricePerDelivery: PropTypes.number
     })

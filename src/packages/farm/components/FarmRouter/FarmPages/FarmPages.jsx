@@ -98,7 +98,7 @@ export default function FarmPages() {
                 sx={{
                   pt: "16px",
                   pb: "64px",
-                  px: ["16px", "24px", "32px", "64px"]
+                  px: ["16px", "24px", "32px", "46px"]
                 }}
               >
                 <Box sx={{ mb: "16px" }}>

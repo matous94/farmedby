@@ -55,6 +55,7 @@
   "name": "Jméno",
   "no": "Ne",
   "orders": "Objednávky",
+  "orderPage.heading": "Objednávka #{{orderId}}",
   "password": "Heslo",
   "pc": "ks",
   "phoneNumber": "Telefonní číslo",

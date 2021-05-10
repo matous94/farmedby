@@ -55,6 +55,7 @@
   "name": "Name",
   "no": "No",
   "orders": "Orders",
+  "orderPage.heading": "Order #{{orderId}}",
   "password": "Password",
   "pc": "pc",
   "phoneNumber": "Phone number",
