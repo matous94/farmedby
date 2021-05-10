@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import logger from "../logger";
 
 const StatusEnum = Object.freeze({
@@ -136,3 +137,22 @@ export default function useAsync(
     [status, result, execute, refresh, isRefreshing]
   );
 }
+
+export const useAsyncPropTypes = PropTypes.shape({
+  status: PropTypes.string,
+  isLoading: PropTypes.bool,
+  hasError: PropTypes.bool,
+  isResolved: PropTypes.bool,
+  isRefreshing: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  result: PropTypes.any,
+  StatusEnum: PropTypes.shape({
+    initial: PropTypes.oneOf(["initial"]),
+    loading: PropTypes.oneOf(["loading"]),
+    resolved: PropTypes.oneOf(["resolved"]),
+    error: PropTypes.oneOf(["error"])
+  }),
+  execute: PropTypes.func,
+  refresh: PropTypes.func,
+  reset: PropTypes.func
+});

@@ -1,4 +1,7 @@
 {
+  "ok": "Ok",
+  "subscriptionsPage.submit.success.text": "Objednávka byla úspěšně odeslána farmáři a na tvůj email.",
+  "subscriptionsPage.submit.success.nextSteps": "Další kroky:",
   "subscriptionsPage.submit.button": "Odeslat objednávku",
   "subscriptionsPage.customerData.heading": "Kontaktní údaje",
   "fullname": "Jméno a příjmení",

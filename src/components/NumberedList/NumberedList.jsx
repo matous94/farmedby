@@ -4,10 +4,17 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { useTranslation } from "react-i18next";
 
-export default function NumberedList({ length, translationKey, color, sx }) {
+export default function NumberedList({
+  stepOffset,
+  variant,
+  length,
+  translationKey,
+  color,
+  sx
+}) {
   const { t } = useTranslation();
   const list = [];
-  for (let i = 1; i <= length; i += 1) {
+  for (let i = 1 + stepOffset; i <= length; i += 1) {
     const translation = t(`${translationKey}${i}`);
     list.push(
       <Box key={translation} display="flex">
@@ -17,7 +24,7 @@ export default function NumberedList({ length, translationKey, color, sx }) {
             fontWeight: "400"
           }}
         >
-          {i}.
+          {i - stepOffset}.
         </Box>
         <Box>{translation}</Box>
       </Box>
@@ -33,8 +40,7 @@ export default function NumberedList({ length, translationKey, color, sx }) {
         ...sx
       }}
       color={color}
-      variant="h6"
-      component="h2"
+      variant={variant}
     >
       {list}
     </Typography>
@@ -42,11 +48,15 @@ export default function NumberedList({ length, translationKey, color, sx }) {
 }
 NumberedList.propTypes = {
   length: PropTypes.number.isRequired,
+  stepOffset: PropTypes.number,
   translationKey: PropTypes.string.isRequired,
   color: PropTypes.string,
+  variant: PropTypes.string,
   sx: PropTypes.shape({})
 };
 NumberedList.defaultProps = {
   color: undefined,
-  sx: undefined
+  sx: undefined,
+  variant: "h6",
+  stepOffset: 0
 };

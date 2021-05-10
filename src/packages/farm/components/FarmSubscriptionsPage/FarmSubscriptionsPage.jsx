@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { useStoreState } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 import { useSwitch, useAsync } from "src/packages/hooks";
 import { FarmPropTypes } from "src/types";
@@ -19,6 +19,7 @@ import DeleteSubscriptionDialog from "./DeleteSubscriptionDialog";
 import PickupPointSelector from "./PickupPointSelector";
 import NoteField from "./NoteField";
 import CustomerData from "./CustomerData";
+import SubmitFeedbackDialog from "./SubmitFeedbackDialog";
 
 // eslint-disable-next-line react/prop-types
 function Heading({ sx, ...rest }) {
@@ -42,21 +43,22 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
   const editorSwitch = useSwitch(false);
   const deleteDialogSwitch = useSwitch(false);
   const orderDraft = useStoreState(selectors.orderDraft.getData);
+  const orderResolved = useStoreActions(
+    (actions) => actions.order.orderResolved
+  );
 
   const farmCountry = getCountry(farm.countryCode);
 
   const orderSubmitter = useAsync(
     async (orderData) => {
-      // display loading dialog
       const order = await ApiClient.Order.createOrder(orderData);
-      // display success dialog text
-      // redirect on OK to order / display link to order
+      orderResolved(order);
+      return order;
     },
     { functionName: "createOrderSubmit" }
   );
   function onSubmit(e) {
     e.preventDefault();
-    console.log("Submit called:", orderDraft);
 
     orderSubmitter.execute({
       customer: orderDraft.customer,
@@ -88,6 +90,7 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
         onDismiss={deleteDialogSwitch.reset}
         subscriptionId={deleteDialogSwitch.state}
       />
+      <SubmitFeedbackDialog submitter={orderSubmitter} />
       <Box
         component="form"
         onSubmit={onSubmit}

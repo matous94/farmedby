@@ -121,7 +121,7 @@ Dialog.propTypes = {
   }),
   status: PropTypes.oneOf(["isOpen", "close", "isLoading"]),
   title: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 };
 Dialog.defaultProps = {
   onClose: undefined,

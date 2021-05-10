@@ -1,4 +1,7 @@
 {
+  "ok": "Ok",
+  "subscriptionsPage.submit.success.text": "The order has been successfully sent to the farmer and to your email.",
+  "subscriptionsPage.submit.success.nextSteps": "Next steps:",
   "subscriptionsPage.customerData.heading": "Contact information",
   "subscriptionsPage.submit.button": "Create order",
   "fullname": "Fullname",

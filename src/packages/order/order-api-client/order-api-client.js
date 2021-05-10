@@ -1,6 +1,6 @@
 import { callCloudFunction } from "src/packages/api-client/requester";
 
-export async function createOrder({
+export function createOrder({
   customer,
   farm,
   note,
@@ -14,4 +14,8 @@ export async function createOrder({
     pickupPoint,
     subscriptions
   });
+}
+
+export function getOrder(orderId) {
+  return callCloudFunction("getOrder", { orderId });
 }

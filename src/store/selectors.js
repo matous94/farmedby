@@ -35,6 +35,10 @@ export function getVisitedFarm(state) {
   return state.visitedFarm;
 }
 
+// export function getFarm(state) {
+//   return getVisitedFarm(state) || getMyFarm(state);
+// }
+
 export const orderDraft = {
   createGetSubscription(subscriptionId) {
     return (state) => state.orderDraft.data.subscriptionsById[subscriptionId];
@@ -56,6 +60,8 @@ export const orderDraft = {
   }
 };
 
-// export function getFarm(state) {
-//   return getVisitedFarm(state) || getMyFarm(state);
-// }
+export const order = {
+  createGetOrder(orderId) {
+    return (state) => state.order.ordersById[orderId];
+  }
+};

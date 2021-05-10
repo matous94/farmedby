@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign,no-underscore-dangle */
 import { action } from "easy-peasy";
 import { localStorageKeys } from "src/packages/local-storage";
-
 import { getPricePerDelivery } from "src/packages/farm/utils";
 
 const adminMode = localStorage.getItem(localStorageKeys.adminMode);
@@ -49,6 +48,15 @@ const storeModel = {
     }),
     updateCustomer: action((orderDraft, customer) => {
       orderDraft.data.customer = { ...orderDraft.data.customer, ...customer };
+    }),
+    reset: action((orderDraft) => {
+      orderDraft.data = initialOrderDraftData;
+    })
+  },
+  order: {
+    ordersById: {},
+    orderResolved: action((state, order) => {
+      state.ordersById[order.objectId] = order;
     })
   },
   farmPages: {

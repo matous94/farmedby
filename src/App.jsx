@@ -16,6 +16,7 @@ import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
 import FarmRouter from "src/packages/farm/components/FarmRouter";
 import FarmsPage from "src/packages/farm/components/FarmsPage";
+import OrderPage from "src/packages/order/OrderPage";
 
 function getSessionToken() {
   return localStorage.getItem(localStorageKeys.sessionToken);
@@ -75,6 +76,10 @@ function App() {
 
       <Route path="/farms">
         <FarmsPage />
+      </Route>
+
+      <Route path="/orders/:orderId">
+        <OrderPage />
       </Route>
 
       <Route exact path="*">
