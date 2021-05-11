@@ -15,6 +15,7 @@ import FarmIcon from "src/icons/FarmIcon";
 import FarmLandingPage from "src/packages/farm/components/FarmLandingPage";
 import FarmPickupPointsPage from "src/packages/farm/components/FarmPickupPointsPage";
 import FarmSubscriptionsPage from "src/packages/farm/components/FarmSubscriptionsPage";
+import OrdersPage from "src/packages/order/components/OrdersPage";
 
 export const landingPage = {
   name: "landing",
@@ -42,24 +43,18 @@ export default {
     private: false,
     PageContent: FarmPickupPointsPage
   },
-  eshop: {
-    name: "eshop",
-    translationKey: "eshop.heading",
-    Icon: ShoppingCartIcon,
-    disabled: true,
-    private: true,
-    PageContent: ({ farm }) => {
-      return (
-        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
-          {JSON.stringify(farm, null, 2)}
-        </pre>
-      );
-    }
-  },
   orders: {
     name: "orders",
     translationKey: "orders",
     Icon: PaymentIcon,
+    disabled: false,
+    private: true,
+    PageContent: OrdersPage
+  },
+  eshop: {
+    name: "eshop",
+    translationKey: "eshop.heading",
+    Icon: ShoppingCartIcon,
     disabled: true,
     private: true,
     PageContent: ({ farm }) => {

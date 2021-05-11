@@ -11,7 +11,7 @@ import { useAsync } from "src/packages/hooks";
 import ApiClient from "src/packages/api-client";
 import GenericFailureDialog from "src/components/GenericFailureDialog/GenericFailureDialog";
 
-export default function Order() {
+export default function OrderOverview() {
   const { t } = useTranslation();
   const { orderId } = useParams();
   const order = useStoreState(selectors.order.createGetOrder(orderId));

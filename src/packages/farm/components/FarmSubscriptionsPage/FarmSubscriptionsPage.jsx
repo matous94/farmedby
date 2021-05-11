@@ -63,11 +63,15 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
     orderSubmitter.execute({
       customer: orderDraft.customer,
       farm: {
+        addressLevel1: farm.addressLevel1,
+        city: farm.city,
         countryCode: farm.countryCode,
         email: farm.email,
         name: farm.name,
         objectId: farm.objectId,
-        phoneNumber: farm.phoneNumber
+        phoneNumber: farm.phoneNumber,
+        postcode: farm.postcode,
+        street: farm.street
       },
       note: orderDraft.note,
       pickupPoint: orderDraft.pickupPoint,

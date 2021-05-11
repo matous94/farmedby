@@ -2,7 +2,6 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -66,7 +65,8 @@ export default function FarmPages() {
           position="relative"
           sx={{
             width: isUpMd ? `calc(100vw - ${drawerWidth})` : "100vw",
-            minHeight: "100vh",
+            minHeight: (theme) =>
+              `calc(100vh-${theme.mixins.toolbar.minHeight}px)`,
             overflowX: "auto"
           }}
         >

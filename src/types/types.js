@@ -63,6 +63,7 @@ export const FarmPropTypes = PropTypes.shape({
   postcode: PropTypes.string,
   productTypes: ProductTypesPropTypes,
   published: PropTypes.bool,
+  ordersIds: PropTypes.arrayOf(PropTypes.string),
   street: PropTypes.string,
   webUrl: PropTypes.string
 });

@@ -2,8 +2,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 
 import AppBar from "src/components/AppBar";
-
-import Order from "../Order/Order";
+import OrderOverview from "src/packages/order/components/OrderOverview";
 
 export default function OrderPage() {
   return (
@@ -19,7 +18,7 @@ export default function OrderPage() {
           px: ["16px", "24px", "32px", "46px"]
         }}
       >
-        <Order />
+        <OrderOverview />
       </Box>
     </>
   );

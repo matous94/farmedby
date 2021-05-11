@@ -16,7 +16,7 @@ export default function Dialog({
   isLoading,
   loadingText,
   secondaryButton,
-  status, // isOpen, loading, close
+  status, // isOpen, isLoading, close
   title,
   text
 }) {

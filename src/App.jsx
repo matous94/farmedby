@@ -16,7 +16,7 @@ import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
 import FarmRouter from "src/packages/farm/components/FarmRouter";
 import FarmsPage from "src/packages/farm/components/FarmsPage";
-import OrderPage from "src/packages/order/OrderPage";
+import OrderPage from "src/packages/order/components/OrderPage";
 
 function getSessionToken() {
   return localStorage.getItem(localStorageKeys.sessionToken);
