@@ -9,13 +9,15 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
+const createMenuProps = (itemHeight = ITEM_HEIGHT) => {
+  return {
+    PaperProps: {
+      sx: {
+        maxHeight: itemHeight * 4.5 + ITEM_PADDING_TOP,
+        width: 250
+      }
     }
-  }
+  };
 };
 
 export default function Select({
@@ -26,6 +28,7 @@ export default function Select({
   label,
   name,
   required,
+  itemHeight,
   size,
   sx
 }) {
@@ -60,7 +63,7 @@ export default function Select({
           }
           return options[selectedValue].label;
         }}
-        MenuProps={MenuProps}
+        MenuProps={createMenuProps(itemHeight)}
         sx={{
           "& .MuiSelect-select:focus": {
             background: "inherit"
@@ -97,12 +100,14 @@ Select.propTypes = {
   required: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   sx: PropTypes.shape({}),
-  size: PropTypes.string
+  size: PropTypes.string,
+  itemHeight: PropTypes.number
 };
 Select.defaultProps = {
   multiple: false,
   name: undefined,
   required: false,
   sx: undefined,
-  size: undefined
+  size: undefined,
+  itemHeight: undefined
 };

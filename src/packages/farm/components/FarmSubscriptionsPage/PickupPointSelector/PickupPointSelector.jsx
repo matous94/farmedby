@@ -17,7 +17,7 @@ function createOption(point) {
     city: point.city,
     postcode: point.postcode,
     street: point.street
-  }).countryRelative;
+  }).countryRelativeReverse;
   const nameLabel = i18next.t("name");
   const addressLabel = i18next.t("address");
   const pickupDayLabel = i18next.t("pickupDayLabel");
@@ -26,11 +26,11 @@ function createOption(point) {
     id: point.objectId,
     label: (
       <span>
-        <b>{nameLabel}:</b>
-        {` ${point.name}`}
-        <br />
         <b>{addressLabel}:</b>
         {` ${address}`}
+        <br />
+        <b>{nameLabel}:</b>
+        {` ${point.name}`}
         <br />
         <b>{pickupDayLabel}:</b>
         {` ${point.pickupDay}`}
@@ -47,13 +47,14 @@ function PickupPointSelector({ farm }) {
   );
   const options = React.useMemo(() => {
     const result = {};
+    const pointsList = [...farm.pickupPoints];
     if (farm.isPickupPoint) {
-      result[farm.objectId] = createOption(farm);
+      pointsList.push(farm);
     }
-    farm.pickupPoints
+    pointsList
       .sort((a, b) => {
-        if (a.name === b.name) return 0;
-        if (a.name < b.name) return -1;
+        if (a.city === b.city) return 0;
+        if (a.city < b.city) return -1;
         return 1;
       })
       .forEach((point) => {
@@ -92,6 +93,7 @@ function PickupPointSelector({ farm }) {
     <>
       <Select
         sx={{
+          maxHeight: "360px",
           "& .MuiSelect-select": {
             whiteSpace: "normal"
           }
@@ -102,6 +104,7 @@ function PickupPointSelector({ farm }) {
         label={t("pickupPoint")}
         options={options}
         name="pickupPoints"
+        itemHeight={92}
         required
         InputProps={{
           startAdornment: (
