@@ -15,15 +15,16 @@ import Link from "src/components/Link";
 
 import CountrySelector from "./CountrySelector";
 
-export default function AppBar({ onMenuClick, onlyLogo, renderHeightOffset }) {
+export default function AppBar({ onMenuClick, onlyLogo, noOffset }) {
   const { t } = useTranslation();
+  const appBarRef = React.useRef();
 
   const myFarm = useStoreState(selectors.getMyFarm);
   const isDownMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   return (
     <>
-      <MuiAppBar position="fixed">
+      <MuiAppBar position="fixed" ref={appBarRef}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {onMenuClick && isDownMd && (
@@ -94,7 +95,7 @@ export default function AppBar({ onMenuClick, onlyLogo, renderHeightOffset }) {
           )}
         </Toolbar>
       </MuiAppBar>
-      {renderHeightOffset && <Toolbar />}
+      {noOffset ? null : <Toolbar />}
     </>
   );
 }
@@ -102,10 +103,10 @@ export default function AppBar({ onMenuClick, onlyLogo, renderHeightOffset }) {
 AppBar.propTypes = {
   onMenuClick: PropTypes.func,
   onlyLogo: PropTypes.bool,
-  renderHeightOffset: PropTypes.bool
+  noOffset: PropTypes.bool
 };
 AppBar.defaultProps = {
   onMenuClick: undefined,
   onlyLogo: false,
-  renderHeightOffset: false
+  noOffset: false
 };

@@ -6,7 +6,7 @@ import AppBar from "src/components/AppBar";
 export default function LoadingScreen() {
   return (
     <>
-      <AppBar onlyLogo />
+      <AppBar onlyLogo noOffset />
       <LoadingOverlay />
     </>
   );

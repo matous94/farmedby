@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useStoreActions } from "easy-peasy";
 import { useHistory } from "react-router-dom";
-import Toolbar from "@material-ui/core/Toolbar";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
@@ -78,7 +77,6 @@ export default function SignInPage() {
       />
       <Dialog isLoading={isLoading} />
       <AppBar />
-      <Toolbar />
       <Container component="main" maxWidth="xs">
         <Box
           sx={{

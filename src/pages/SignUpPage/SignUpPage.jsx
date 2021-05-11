@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import Toolbar from "@material-ui/core/Toolbar";
 import { useStoreActions } from "easy-peasy";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -78,7 +77,6 @@ export default function SignUpPage() {
       />
       <Dialog isLoading={isLoading} />
       <AppBar />
-      <Toolbar />
       <SignUpView isLoading={isLoading} onSubmit={submitHandler} />
     </>
   );

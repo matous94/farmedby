@@ -8,7 +8,7 @@ import Order from "../Order/Order";
 export default function OrderPage() {
   return (
     <>
-      <AppBar renderHeightOffset />
+      <AppBar />
       <Box
         sx={{
           mx: "auto",

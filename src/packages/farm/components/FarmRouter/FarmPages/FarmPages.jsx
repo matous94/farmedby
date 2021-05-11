@@ -70,7 +70,6 @@ export default function FarmPages() {
             overflowX: "auto"
           }}
         >
-          <Toolbar />
           {status === "loading" && (
             <Box
               sx={{

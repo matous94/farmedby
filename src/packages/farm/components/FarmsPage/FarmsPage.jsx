@@ -2,7 +2,6 @@ import * as React from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import Box from "@material-ui/core/Box";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -45,7 +44,6 @@ export default function FarmsPage() {
   return (
     <>
       <AppBar />
-      <Toolbar />
       {farmGetter.isLoading && <LoadingOverlay />}
       <GenericFailureDialog
         isOpen={farmGetter.hasError}

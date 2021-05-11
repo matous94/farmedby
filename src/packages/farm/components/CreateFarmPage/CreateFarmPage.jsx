@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Toolbar from "@material-ui/core/Toolbar";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 
@@ -59,7 +58,6 @@ export default function CreateFarmPage() {
   return (
     <>
       <AppBar />
-      <Toolbar />
       <Heading />
       <FarmEditor
         farm={{ email: user.email }}

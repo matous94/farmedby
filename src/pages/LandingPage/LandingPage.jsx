@@ -1,6 +1,5 @@
 import React from "react";
 import AppBar from "src/components/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import ProductHero from "./components/ProductHero";
 import CallToAction from "./components/CallToAction";
 
@@ -10,7 +9,6 @@ export default function LandingPage() {
   return (
     <>
       <AppBar />
-      <Toolbar />
       <ProductHero />
       <CallToAction />
     </>
