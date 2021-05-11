@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
 import { FarmPropTypes } from "src/types";
 import Select from "src/components/Select";
@@ -15,7 +17,7 @@ function createOption(point) {
     city: point.city,
     postcode: point.postcode,
     street: point.street
-  }).districtRelativeReverse;
+  }).countryRelative;
   const nameLabel = i18next.t("name");
   const addressLabel = i18next.t("address");
   const pickupDayLabel = i18next.t("pickupDayLabel");
@@ -25,9 +27,11 @@ function createOption(point) {
     label: (
       <span>
         <b>{nameLabel}:</b>
-        {` ${point.name}; `}
+        {` ${point.name}`}
+        <br />
         <b>{addressLabel}:</b>
-        {` ${address}; `}
+        {` ${address}`}
+        <br />
         <b>{pickupDayLabel}:</b>
         {` ${point.pickupDay}`}
       </span>
@@ -46,9 +50,15 @@ function PickupPointSelector({ farm }) {
     if (farm.isPickupPoint) {
       result[farm.objectId] = createOption(farm);
     }
-    farm.pickupPoints.forEach((point) => {
-      result[point.objectId] = createOption(point);
-    });
+    farm.pickupPoints
+      .sort((a, b) => {
+        if (a.name === b.name) return 0;
+        if (a.name < b.name) return -1;
+        return 1;
+      })
+      .forEach((point) => {
+        result[point.objectId] = createOption(point);
+      });
     return result;
   }, [farm]);
 
@@ -79,27 +89,41 @@ function PickupPointSelector({ farm }) {
   }
 
   return (
-    <Select
-      sx={{
-        "& .MuiSelect-select": {
-          whiteSpace: "normal"
-        }
-      }}
-      size="small"
-      onChange={onChange}
-      value={selectedPoint?.objectId || ""}
-      label={t("pickupPoint")}
-      options={options}
-      name="pickupPoints"
-      required
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <MyLocationIcon />
-          </InputAdornment>
-        )
-      }}
-    />
+    <>
+      <Select
+        sx={{
+          "& .MuiSelect-select": {
+            whiteSpace: "normal"
+          }
+        }}
+        size="small"
+        onChange={onChange}
+        value={selectedPoint?.objectId || ""}
+        label={t("pickupPoint")}
+        options={options}
+        name="pickupPoints"
+        required
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <MyLocationIcon />
+            </InputAdornment>
+          )
+        }}
+      />
+      {/* <Box sx={{ mt: "8px", display: selectedPoint ? "block" : "none" }}>
+        <Typography variant="h6">{t("pickupDayLabel")}:</Typography>
+        <Typography
+          component="span"
+          variant="subtitle2"
+          sx={{
+            display: selectedPoint ? "block" : "none"
+          }}
+        >
+          {selectedPoint?.pickupDay}
+        </Typography>
+      </Box> */}
+    </>
   );
 }
 PickupPointSelector.propTypes = {

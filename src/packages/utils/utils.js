@@ -18,8 +18,8 @@ export function createAddress({
   }
 
   return {
-    full: `${street}, ${postcode}, ${city}${district}${country}`,
-    countryRelative: `${street}, ${postcode}, ${city}${district}`,
+    full: `${street}, ${postcode} ${city}${district}${country}`,
+    countryRelative: `${street}, ${postcode} ${city}${district}`,
     districtRelativeReverse: `${city}, ${postcode}, ${street}`,
     streetAddress: street,
     addressLevel2: `${postcode} ${city}`,
