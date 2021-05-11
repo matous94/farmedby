@@ -38,7 +38,7 @@ export default function OrderOverview() {
       <GenericFailureDialog
         isOpen={orderGetter.hasError}
         onClose={() => {
-          window.location = "/";
+          window.location = `/`;
         }}
       />
       <Typography align="center" color="secondary" variant="h3">
