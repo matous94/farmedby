@@ -1,45 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 
 import { FarmPropTypes } from "src/types";
 import { createAddress } from "src/packages/utils";
-
-function FarmData({ label, value, url }) {
-  const { t } = useTranslation();
-  if (!value && !url) return null;
-  return (
-    <div>
-      <Typography
-        sx={{ marginRight: "6px", wordBreak: "break-all" }}
-        variant="overline"
-      >
-        {label}:
-      </Typography>
-      {value ? (
-        <Typography component="span" variant="subtitle2">
-          {value}
-        </Typography>
-      ) : (
-        <Link target="_blank" href={url}>
-          {t("farmLandingPage.openWebPage")}
-        </Link>
-      )}
-    </div>
-  );
-}
-FarmData.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  url: PropTypes.string
-};
-FarmData.defaultProps = {
-  value: null,
-  url: null
-};
+import LabelValueDataList from "src/components/LabelValueDataList";
 
 export default function FarmView({ farm }) {
   const {
@@ -69,27 +35,25 @@ export default function FarmView({ farm }) {
         flexDirection: "column"
       }}
     >
-      <FarmData label={t("producing")} value={producing} />
-      <FarmData label={t("email")} value={email} />
-      <FarmData label={t("phoneNumber")} value={phoneNumber} />
-      <FarmData label={t("webAddress")} url={webUrl} />
-      <Box sx={{ mb: "16px" }}>
-        <FarmData
-          label={t("address")}
-          value={
-            createAddress({
-              addressLevel1,
-              city,
-              countryCode,
-              street,
-              postcode
-            }).full
-          }
-        />
-      </Box>
+      <LabelValueDataList label={t("producing")} value={producing} />
+      <LabelValueDataList
+        label={t("address")}
+        value={
+          createAddress({
+            addressLevel1,
+            city,
+            countryCode,
+            street,
+            postcode
+          }).full
+        }
+      />
+      <LabelValueDataList label={t("email")} value={email} />
+      <LabelValueDataList label={t("phoneNumber")} value={phoneNumber} />
+      <LabelValueDataList label={t("webAddress")} url={webUrl} />
       {about && (
         <>
-          <Typography sx={{ marginBottom: "8px" }} variant="h4">
+          <Typography sx={{ marginBottom: "8px", mt: "16px" }} variant="h4">
             {t("aboutFarm")}
           </Typography>
           {aboutAsParagraphs.map((paragraph, index) => (
