@@ -11,7 +11,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useSwitch } from "src/packages/hooks";
 import { selectors } from "src/store";
-import AppBar from "src/components/AppBar";
+import AppBar, { useAppBarMinHeight } from "src/components/AppBar";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 
 import pages, { landingPage } from "../pages";
@@ -23,6 +23,7 @@ const drawerWidth = "240px";
 export default function FarmPages() {
   const { pageName, farmId } = useParams();
   const { t } = useTranslation();
+  const appBarMinHeight = useAppBarMinHeight();
 
   const drawer = useSwitch(false);
   const { status, farm, isFarmOwner } = useGetFarm();
@@ -65,8 +66,7 @@ export default function FarmPages() {
           position="relative"
           sx={{
             width: isUpMd ? `calc(100vw - ${drawerWidth})` : "100vw",
-            minHeight: (theme) =>
-              `calc(100vh-${theme.mixins.toolbar.minHeight}px)`,
+            minHeight: `calc(100vh - ${appBarMinHeight}px)`,
             overflowX: "auto"
           }}
         >

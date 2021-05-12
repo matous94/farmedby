@@ -69,7 +69,7 @@ export const FarmPropTypes = PropTypes.shape({
 });
 
 export const OrderPropTypes = PropTypes.shape({
-  completed: PropTypes.string,
+  completed: PropTypes.bool,
   customer: PropTypes.shape({
     email: PropTypes.string,
     name: PropTypes.string,

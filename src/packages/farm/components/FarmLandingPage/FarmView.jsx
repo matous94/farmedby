@@ -35,37 +35,54 @@ export default function FarmView({ farm }) {
         flexDirection: "column"
       }}
     >
-      <LabelValueDataList label={t("producing")} value={producing} />
       <LabelValueDataList
-        label={t("address")}
-        value={
-          createAddress({
-            addressLevel1,
-            city,
-            countryCode,
-            street,
-            postcode
-          }).full
-        }
+        items={[
+          {
+            label: t("producing"),
+            value: producing
+          },
+          {
+            label: t("address"),
+            value: createAddress({
+              addressLevel1,
+              city,
+              countryCode,
+              street,
+              postcode
+            }).full
+          },
+          {
+            label: t("email"),
+            value: email
+          },
+          {
+            label: t("phoneNumber"),
+            value: phoneNumber
+          },
+          {
+            label: t("webAddress"),
+            href: webUrl
+          }
+        ]}
       />
-      <LabelValueDataList label={t("email")} value={email} />
-      <LabelValueDataList label={t("phoneNumber")} value={phoneNumber} />
-      <LabelValueDataList label={t("webAddress")} url={webUrl} />
       {about && (
         <>
           <Typography sx={{ marginBottom: "8px", mt: "16px" }} variant="h4">
             {t("aboutFarm")}
           </Typography>
-          {aboutAsParagraphs.map((paragraph, index) => (
-            <Typography
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              sx={{ paddingTop: paragraph === "" ? "24px" : 0 }}
-              variant="body1"
-            >
-              {paragraph}
-            </Typography>
-          ))}
+          {aboutAsParagraphs.map((paragraph, index) =>
+            paragraph === "" ? (
+              <br key={index} />
+            ) : (
+              <Typography
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                variant="body1"
+              >
+                {paragraph}
+              </Typography>
+            )
+          )}
         </>
       )}
     </Box>

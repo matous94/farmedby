@@ -1,10 +1,13 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 
+import { useAppBarMinHeight } from "src/components/AppBar";
+
 import ProductHeroContent from "./ProductHeroContent";
 import heroImageUrl from "./hero2.jpg";
 
 export default function ProductHero() {
+  const appBarMinHeight = useAppBarMinHeight();
   return (
     <Box
       component="section"
@@ -14,8 +17,7 @@ export default function ProductHero() {
         alignItems: "start",
         color: (theme) => theme.palette.common.white,
         position: "relative",
-        minHeight: (theme) =>
-          `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
+        minHeight: `calc(100vh - ${appBarMinHeight}px)`,
         padding: "32px 16px"
       }}
     >

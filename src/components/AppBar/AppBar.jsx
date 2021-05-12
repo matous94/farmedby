@@ -8,12 +8,18 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core";
 
 import { selectors } from "src/store";
 import Logo from "src/components/Logo";
 import Link from "src/components/Link";
 
 import CountrySelector from "./CountrySelector";
+
+export function useAppBarMinHeight() {
+  const theme = useTheme();
+  return theme.mixins.toolbar.minHeight;
+}
 
 export default function AppBar({ onMenuClick, onlyLogo, noOffset }) {
   const { t } = useTranslation();
