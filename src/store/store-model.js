@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign,no-underscore-dangle */
-import { action } from "easy-peasy";
+import { action, actionOn } from "easy-peasy";
 import { localStorageKeys } from "src/packages/local-storage";
 import { getPricePerDelivery } from "src/packages/farm/utils";
 
@@ -23,6 +23,19 @@ const storeModel = {
       appState.appBarHeight = height;
     })
   },
+  onOrderCreated: actionOn(
+    (actions) => actions.order.orderCreated,
+    (state, target) => {
+      const order = target.payload;
+      if (state.myFarm && state.myFarm.objectId === order.farmId) {
+        state.myFarm.orders.push({
+          objectId: order.objectId,
+          createdAt: order.createdAt,
+          pickupPointName: order.pickupPoint.name
+        });
+      }
+    }
+  ),
   user: null,
   myFarm: null,
   farms: null,
@@ -62,6 +75,9 @@ const storeModel = {
   order: {
     ordersById: {},
     orderResolved: action((state, order) => {
+      state.ordersById[order.objectId] = order;
+    }),
+    orderCreated: action((state, order) => {
       state.ordersById[order.objectId] = order;
     })
   },

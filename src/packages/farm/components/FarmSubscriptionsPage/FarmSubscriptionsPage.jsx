@@ -43,16 +43,14 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
   const editorSwitch = useSwitch(false);
   const deleteDialogSwitch = useSwitch(false);
   const orderDraft = useStoreState(selectors.orderDraft.getData);
-  const orderResolved = useStoreActions(
-    (actions) => actions.order.orderResolved
-  );
+  const orderCreated = useStoreActions((actions) => actions.order.orderCreated);
 
   const farmCountry = getCountry(farm.countryCode);
 
   const orderSubmitter = useAsync(
     async (orderData) => {
       const order = await ApiClient.Order.createOrder(orderData);
-      orderResolved(order);
+      orderCreated(order);
       return order;
     },
     { functionName: "createOrderSubmit" }

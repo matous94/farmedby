@@ -5,20 +5,22 @@ import Link from "src/components/Link";
 import { FarmPropTypes } from "src/types";
 
 export default function OrdersPage({ farm }) {
-  const { ordersIds } = farm;
+  const { orders } = farm;
   return (
     <Box
       sx={{
         maxWidth: "1000px",
         mx: "auto",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column"
+        width: "100%"
       }}
     >
-      {ordersIds.map((orderId) => (
-        <Link key={orderId} to={`/order/${orderId}`}>
-          {`#${orderId}`}
+      {orders.map(({ objectId }) => (
+        <Link
+          sx={{ display: "block" }}
+          key={objectId}
+          to={`/order/${objectId}`}
+        >
+          {`#${objectId}`}
         </Link>
       ))}
     </Box>

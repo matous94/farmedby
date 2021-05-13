@@ -46,6 +46,12 @@ export const PickupPointPropTypes = PropTypes.shape({
   webUrl: PropTypes.string
 });
 
+export const OrderPreviewPropTypes = PropTypes.shape({
+  completed: PropTypes.bool,
+  createdAt: PropTypes.string,
+  objectId: PropTypes.string,
+  pickupPointName: PropTypes.string
+});
 export const FarmPropTypes = PropTypes.shape({
   about: PropTypes.string,
   addressLevel1: PropTypes.string,
@@ -63,7 +69,7 @@ export const FarmPropTypes = PropTypes.shape({
   postcode: PropTypes.string,
   productTypes: ProductTypesPropTypes,
   published: PropTypes.bool,
-  ordersIds: PropTypes.arrayOf(PropTypes.string),
+  orders: PropTypes.arrayOf(OrderPreviewPropTypes),
   street: PropTypes.string,
   webUrl: PropTypes.string
 });
@@ -71,7 +77,6 @@ export const FarmPropTypes = PropTypes.shape({
 export const OrderedSubscriptionPropTypes = PropTypes.shape({
   content: PropTypes.string,
   name: PropTypes.string,
-  // objectId: PropTypes.string,
   numberOfDeliveries: PropTypes.number,
   pricePerDelivery: PropTypes.number
 });
