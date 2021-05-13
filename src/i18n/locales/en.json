@@ -1,6 +1,7 @@
 {
   "order.status.label": "Status",
   "order.status.completed": "Completed",
+  "order.orders.completed.heading": "Completed",
   "order.status.active": "In progress",
   "subscriptionsTable.pricePerDelivery.heading": "Price per delivery",
   "customer": "Customer",

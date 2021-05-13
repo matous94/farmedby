@@ -1,6 +1,7 @@
 {
   "order.status.label": "Stav",
   "order.status.completed": "Dokončena",
+  "order.orders.completed.heading": "Dokončené",
   "order.status.active": "Aktivní",
   "subscriptionsTable.pricePerDelivery.heading": "Cena za odběr",
   "customer": "Zákazník",
