@@ -16,6 +16,7 @@ import OrderData from "./OrderData";
 import CustomerData from "./CustomerData";
 import FarmData from "./FarmData";
 import PickupPointData from "./PickupPointData";
+import OrderedSubscriptionsTable from "./OrderedSubscriptionsTable";
 
 export default function OrderOverview() {
   const { t } = useTranslation();
@@ -73,19 +74,32 @@ export default function OrderOverview() {
           />
         )}
         {orderGetter.isResolved && (
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <OrderData order={order} sx={{ mb: "16px" }} />
-              <FarmData farm={order.farm} />
+          <>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <OrderData order={order} />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FarmData farm={order.farm} />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <CustomerData customer={order.customer} note={order.note} />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <PickupPointData pickupPoint={order.pickupPoint} />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <CustomerData customer={order.customer} note={order.note} />
-              <PickupPointData
-                pickupPoint={order.pickupPoint}
-                sx={{ mt: "16px" }}
-              />
-            </Grid>
-          </Grid>
+            <Typography
+              variant="h5"
+              sx={{ mt: ["24px", "32px"], mb: ["6px", "10px"] }}
+            >
+              {t("subscription.subscriptions.heading")}
+            </Typography>
+            <OrderedSubscriptionsTable
+              subscriptions={order.subscriptions}
+              countryCode={order.farm.countryCode}
+            />
+          </>
         )}
       </Paper>
     </>

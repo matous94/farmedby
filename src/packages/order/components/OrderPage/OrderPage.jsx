@@ -1,11 +1,11 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 
-import AppBar, { useAppBarMinHeight } from "src/components/AppBar";
+import AppBar, { useAppBarHeight } from "src/components/AppBar";
 import OrderOverview from "src/packages/order/components/OrderOverview";
 
 export default function OrderPage() {
-  const appBarMinHeight = useAppBarMinHeight();
+  const appBarMinHeight = useAppBarHeight();
   return (
     <>
       <AppBar />

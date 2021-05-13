@@ -65,3 +65,9 @@ export const order = {
     return (state) => state.order.ordersById[orderId];
   }
 };
+
+export const app = {
+  getAppBarHeight(state) {
+    return state.app.appBarHeight;
+  }
+};

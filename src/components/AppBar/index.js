@@ -1,2 +1,2 @@
 export { default } from "./AppBar";
-export { useAppBarMinHeight } from "./AppBar";
+export { useAppBarHeight } from "./AppBar";

@@ -17,6 +17,12 @@ const initialOrderDraftData = {
 };
 
 const storeModel = {
+  app: {
+    appBarHeight: 0,
+    setAppBarHeight: action((appState, height) => {
+      appState.appBarHeight = height;
+    })
+  },
   user: null,
   myFarm: null,
   farms: null,

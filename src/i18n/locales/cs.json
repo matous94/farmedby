@@ -1,7 +1,8 @@
 {
   "order.status.label": "Stav",
-  "order.status.completed": "Vyřízena",
+  "order.status.completed": "Dokončena",
   "order.status.active": "Aktivní",
+  "subscriptionsTable.pricePerDelivery.heading": "Cena za odběr",
   "customer": "Zákazník",
   "note": "Poznámka",
   "dateOfCreation": "Datum vytvoření",
@@ -109,7 +110,7 @@
   "subscriptionsPage.note.placeholder.line1": "Frekvence odběru: jednou za 14 dní", 
   "subscriptionsPage.note.placeholder.line2": "Oblíbená zelenina: paprika, rajče, mrkev, salát, okurka",
   "subscriptionsPage.note.placeholder.line3": "Neoblíbená zelenina: kopr, cibule, brokolice",
-  "subscriptionsPage.heading": "Předplatné",
+  "subscription.subscriptions.heading": "Předplatné",
   "subscriptionsPage.subscriptionContentHeading": "(Možný) obsah",
   "subscriptionsPage.subscriptionName": "Jméno předplatného",
   "subscriptionsTable.pricingHeading": "Ceník",

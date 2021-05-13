@@ -29,7 +29,7 @@ export const landingPage = {
 export default {
   subscriptions: {
     name: "subscriptions",
-    translationKey: "subscriptionsPage.heading",
+    translationKey: "subscription.subscriptions.heading",
     Icon: ProductsIcon,
     disabled: false,
     private: false,

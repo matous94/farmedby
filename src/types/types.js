@@ -68,6 +68,14 @@ export const FarmPropTypes = PropTypes.shape({
   webUrl: PropTypes.string
 });
 
+export const OrderedSubscriptionPropTypes = PropTypes.shape({
+  content: PropTypes.string,
+  name: PropTypes.string,
+  // objectId: PropTypes.string,
+  numberOfDeliveries: PropTypes.number,
+  pricePerDelivery: PropTypes.number
+});
+
 export const OrderPropTypes = PropTypes.shape({
   completed: PropTypes.bool,
   customer: PropTypes.shape({
@@ -87,13 +95,5 @@ export const OrderPropTypes = PropTypes.shape({
   note: PropTypes.string,
   objectId: PropTypes.string,
   pickupPoint: PickupPointPropTypes,
-  subscriptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      content: PropTypes.string,
-      name: PropTypes.string,
-      objectId: PropTypes.string,
-      numberOfDeliveries: PropTypes.number,
-      pricePerDelivery: PropTypes.number
-    })
-  )
+  subscriptions: PropTypes.arrayOf(OrderedSubscriptionPropTypes)
 });

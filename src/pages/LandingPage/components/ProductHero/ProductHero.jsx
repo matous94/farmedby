@@ -1,13 +1,13 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 
-import { useAppBarMinHeight } from "src/components/AppBar";
+import { useAppBarHeight } from "src/components/AppBar";
 
 import ProductHeroContent from "./ProductHeroContent";
 import heroImageUrl from "./hero2.jpg";
 
 export default function ProductHero() {
-  const appBarMinHeight = useAppBarMinHeight();
+  const appBarMinHeight = useAppBarHeight();
   return (
     <Box
       component="section"
