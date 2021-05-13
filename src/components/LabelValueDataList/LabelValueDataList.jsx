@@ -12,7 +12,7 @@ export default function LabelValueDataList({ items, heading, sx }) {
       {heading && <Typography variant="h5">{heading}</Typography>}
       {items
         .filter((item) => item.value || item.href || item.to)
-        .map(({ sx, ...rest }, index) => (
+        .map(({ sx: itemSx, ...rest }, index) => (
           <LabelValueData
             key={index}
             // eslint-disable-next-line react/jsx-props-no-spreading
@@ -22,7 +22,7 @@ export default function LabelValueDataList({ items, heading, sx }) {
               "&:last-child": {
                 marginBottom: 0
               },
-              ...sx
+              ...itemSx
             }}
           />
         ))}
