@@ -63,6 +63,9 @@ export const orderDraft = {
 export const order = {
   createGetOrder(orderId) {
     return (state) => state.order.ordersById[orderId];
+  },
+  getSortByOrders(state) {
+    return state.order.sortByOrders;
   }
 };
 

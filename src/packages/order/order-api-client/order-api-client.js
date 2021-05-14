@@ -19,3 +19,7 @@ export function createOrder({
 export function getOrder(orderId) {
   return callCloudFunction("getOrder", { orderId });
 }
+
+export function updateOrder({ objectId, journal, completed }) {
+  return callCloudFunction("updateOrder", { objectId, journal, completed });
+}

@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { FarmPropTypes } from "src/types";
 
 import OrderPreviewList from "./OrderPreviewList";
+import SortBy from "./SortBy";
 
 export default function OrdersPage({ farm }) {
   const { t } = useTranslation();
@@ -32,23 +33,34 @@ export default function OrdersPage({ farm }) {
         maxWidth: "1000px",
         mx: "auto",
         width: "100%",
-        pt: ["8px", "24px"],
+        pt: ["8px", "16px"],
         pl: ["12px", "0px", "32px", "128px"],
         pr: ["0px", null, "8px", "32px"]
       }}
     >
+      <Box sx={{ mb: "24px", display: "flex", justifyContent: "center" }}>
+        <SortBy />
+      </Box>
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} item>
           <Typography sx={{ mb: "16px" }} variant="h4">
             {t("order.status.active")}
           </Typography>
-          <OrderPreviewList orders={activeOrders} sortBy="createdAt" />
+          <OrderPreviewList
+            farmId={farm.objectId}
+            orders={activeOrders}
+            sortBy="createdAt"
+          />
         </Grid>
         <Grid xs={12} sm={6} item>
           <Typography sx={{ mb: "16px" }} variant="h4">
             {t("order.orders.completed.heading")}
           </Typography>
-          <OrderPreviewList orders={completedOrders} sortBy="createdAt" />
+          <OrderPreviewList
+            farmId={farm.objectId}
+            orders={completedOrders}
+            sortBy="createdAt"
+          />
         </Grid>
       </Grid>
     </Box>

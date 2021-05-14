@@ -1,4 +1,9 @@
 {
+  "sortBy": "Řadit dle",
+  "order.journal.heading": "Deník objednávky",
+  "order.adminModeForm.completed.label" : "Objednávka dokončena",
+  "order.sortByOrders.createdAt.label":  "Datum",
+  "order.sortByOrders.pickupPointName.label":  "Odběrové místo",
   "order.status.label": "Stav",
   "order.status.completed": "Dokončena",
   "order.orders.completed.heading": "Dokončené",

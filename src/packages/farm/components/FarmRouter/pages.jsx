@@ -16,6 +16,7 @@ import FarmLandingPage from "src/packages/farm/components/FarmLandingPage";
 import FarmPickupPointsPage from "src/packages/farm/components/FarmPickupPointsPage";
 import FarmSubscriptionsPage from "src/packages/farm/components/FarmSubscriptionsPage";
 import OrdersPage from "src/packages/order/components/OrdersPage";
+import OrderOverview from "src/packages/order/components/OrderOverview/OrderOverview";
 
 export const landingPage = {
   name: "landing",
@@ -33,6 +34,7 @@ export default {
     Icon: ProductsIcon,
     disabled: false,
     private: false,
+    selectable: true,
     PageContent: FarmSubscriptionsPage
   },
   "pickup-points": {
@@ -41,6 +43,7 @@ export default {
     Icon: MyLocationIcon,
     disabled: false,
     private: false,
+    selectable: true,
     PageContent: FarmPickupPointsPage
   },
   orders: {
@@ -49,7 +52,15 @@ export default {
     Icon: PaymentIcon,
     disabled: false,
     private: true,
+    selectable: true,
     PageContent: OrdersPage
+  },
+  order: {
+    name: "order",
+    disabled: false,
+    private: false,
+    selectable: false,
+    PageContent: OrderOverview
   },
   eshop: {
     name: "eshop",
@@ -57,6 +68,7 @@ export default {
     Icon: ShoppingCartIcon,
     disabled: true,
     private: true,
+    selectable: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -71,6 +83,7 @@ export default {
     Icon: CreateIcon,
     disabled: true,
     private: true,
+    selectable: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -85,6 +98,7 @@ export default {
     Icon: RateReviewIcon,
     disabled: true,
     private: true,
+    selectable: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -99,6 +113,7 @@ export default {
     Icon: PhotoIcon,
     disabled: true,
     private: true,
+    selectable: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -113,6 +128,7 @@ export default {
     Icon: WcIcon,
     disabled: true,
     private: true,
+    selectable: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
@@ -127,6 +143,7 @@ export default {
     Icon: HotelIcon,
     disabled: true,
     private: true,
+    selectable: true,
     PageContent: ({ farm }) => {
       return (
         <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>

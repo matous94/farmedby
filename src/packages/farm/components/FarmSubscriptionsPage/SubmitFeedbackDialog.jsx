@@ -45,7 +45,9 @@ export default function SubmitFeedbackDialog({ submitter }) {
         primaryButton={{
           onClick: () => {
             resetOrderDraft();
-            history.push(`/order/${submitter.result.objectId}`);
+            history.push(
+              `/farm/${submitter.result.farmId}/order/${submitter.result.objectId}`
+            );
           },
           children: t("ok")
         }}

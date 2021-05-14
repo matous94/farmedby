@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
@@ -17,18 +18,20 @@ import CustomerData from "./CustomerData";
 import FarmData from "./FarmData";
 import PickupPointData from "./PickupPointData";
 import OrderedSubscriptionsTable from "./OrderedSubscriptionsTable";
+import AdminModeForm from "./AdminModeForm/AdminModeForm";
 
-export default function OrderOverview() {
+export default function OrderOverview({ isAdminMode }) {
   const { t } = useTranslation();
-  const { orderId } = useParams();
-  const order = useStoreState(selectors.order.createGetOrder(orderId));
+  const { pageId, farmId } = useParams();
+  const history = useHistory();
+  const order = useStoreState(selectors.order.createGetOrder(pageId));
   const orderResolved = useStoreActions(
     (actions) => actions.order.orderResolved
   );
   const hasOrder = Boolean(order);
   const orderGetter = useAsync(
     async () => {
-      const resolvedOrder = await ApiClient.Order.getOrder(orderId);
+      const resolvedOrder = await ApiClient.Order.getOrder(pageId);
       orderResolved(resolvedOrder);
       return resolvedOrder;
     },
@@ -40,21 +43,29 @@ export default function OrderOverview() {
     }
   );
 
+  if (!pageId) {
+    return <Redirect to={farmId ? `/farm/${farmId}` : "/"} />;
+  }
+
   return (
     <>
       <GenericFailureDialog
         isOpen={orderGetter.hasError}
         onClose={() => {
-          window.location = `/`;
+          if (farmId) {
+            history.push(`/farm/${farmId}`);
+          } else {
+            window.location = "/";
+          }
         }}
       />
       <Typography
-        sx={{ marginBottom: "12px" }}
+        sx={{ marginBottom: "16px" }}
         align="center"
         color="secondary"
-        variant="h4"
+        variant="h3"
       >
-        {t("orderPage.heading", { orderId })}
+        {t("orderPage.heading", { orderId: pageId })}
       </Typography>
       <Paper
         sx={{
@@ -99,9 +110,16 @@ export default function OrderOverview() {
               subscriptions={order.subscriptions}
               countryCode={order.farm.countryCode}
             />
+            {isAdminMode && <AdminModeForm order={order} />}
           </>
         )}
       </Paper>
     </>
   );
 }
+OrderOverview.propTypes = {
+  isAdminMode: PropTypes.bool
+};
+OrderOverview.defaultProps = {
+  isAdminMode: false
+};

@@ -5,8 +5,9 @@ function createKey(key) {
 }
 
 export const localStorageKeys = {
-  sessionToken: createKey("sessionToken"),
   adminMode: createKey("adminMode"),
   countryCode: createKey("countryCode"),
-  deliversToFilter: createKey("deliversToFilter")
+  deliversToFilter: createKey("deliversToFilter"),
+  sessionToken: createKey("sessionToken"),
+  sortByOrders: createKey("sortByOrders")
 };

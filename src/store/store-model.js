@@ -2,6 +2,7 @@
 import { action, actionOn } from "easy-peasy";
 import { localStorageKeys } from "src/packages/local-storage";
 import { getPricePerDelivery } from "src/packages/farm/utils";
+import { SortByOrdersEnum } from "src/types";
 
 const adminMode = localStorage.getItem(localStorageKeys.adminMode);
 
@@ -23,6 +24,10 @@ const storeModel = {
       appState.appBarHeight = height;
     })
   },
+  user: null,
+  myFarm: null,
+  farms: null,
+  visitedFarm: null,
   onOrderCreated: actionOn(
     (actions) => actions.order.orderCreated,
     (state, target) => {
@@ -36,10 +41,19 @@ const storeModel = {
       }
     }
   ),
-  user: null,
-  myFarm: null,
-  farms: null,
-  visitedFarm: null,
+  onOrderUpdated: actionOn(
+    (actions) => actions.order.orderUpdated,
+    (state, target) => {
+      const update = target.payload;
+      const orderIndex = state.myFarm.orders.findIndex(
+        (order) => order.objectId === update.objectId
+      );
+      if (orderIndex === -1) return;
+      if (typeof update.completed === "boolean") {
+        state.myFarm.orders[orderIndex].completed = update.completed;
+      }
+    }
+  ),
   orderDraft: {
     data: initialOrderDraftData,
     updateNumberOfDeliveries: action((orderDraft, payload) => {
@@ -74,11 +88,22 @@ const storeModel = {
   },
   order: {
     ordersById: {},
-    orderResolved: action((state, order) => {
-      state.ordersById[order.objectId] = order;
+    orderResolved: action((orderState, order) => {
+      orderState.ordersById[order.objectId] = order;
     }),
-    orderCreated: action((state, order) => {
-      state.ordersById[order.objectId] = order;
+    orderCreated: action((orderState, order) => {
+      orderState.ordersById[order.objectId] = order;
+    }),
+    orderUpdated: action((orderState, update) => {
+      const order = orderState.ordersById[update.objectId];
+      orderState.ordersById[update.objectId] = { ...order, ...update };
+    }),
+    sortByOrders:
+      localStorage.getItem(localStorageKeys.sortByOrders) ||
+      SortByOrdersEnum.createdAt,
+    setSortByOrders: action((orderState, sortBy) => {
+      orderState.sortByOrders = sortBy;
+      localStorage.setItem(localStorageKeys.sortByOrders, sortBy);
     })
   },
   farmPages: {

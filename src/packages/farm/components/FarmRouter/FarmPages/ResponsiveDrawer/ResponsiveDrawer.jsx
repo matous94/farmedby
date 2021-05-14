@@ -63,7 +63,7 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
           <ListItemText primary={`${t(landingPage.translationKey)}`} />
         </ListItem>
         {Object.values(pages)
-          .filter((page) => !page.private || isAdminMode)
+          .filter((page) => page.selectable && (!page.private || isAdminMode))
           .map(({ name, translationKey, Icon, disabled }) => (
             <ListItem
               onClick={() => {

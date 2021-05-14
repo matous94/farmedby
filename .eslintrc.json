@@ -28,6 +28,7 @@
     "arrow-body-style": "off",
     "react/jsx-boolean-value": "off",
     "react/no-array-index-key": "off",
-    "react/prop-types": "warn"
+    "react/prop-types": "warn",
+    "prefer-arrow-callback": "off"
   }
 }

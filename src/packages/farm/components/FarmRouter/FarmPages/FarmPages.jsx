@@ -34,7 +34,12 @@ export default function FarmPages() {
   const { PageContent, translationKey } = pageName
     ? pages[pageName]
     : landingPage;
-  const pageHeading = pageName ? t(translationKey) : farm?.name;
+
+  let pageHeading = null;
+  const isLandingPage = pageName === "";
+  if (translationKey) pageHeading = t(translationKey);
+  if (isLandingPage) pageHeading = farm?.name;
+
   return (
     <>
       <GenericFailureDialog
@@ -100,11 +105,16 @@ export default function FarmPages() {
                   px: ["16px", "24px", "32px", "46px"]
                 }}
               >
-                <Box sx={{ mb: "16px" }}>
-                  <Typography align="center" color="secondary" variant="h3">
+                {pageHeading && (
+                  <Typography
+                    sx={{ mb: "16px" }}
+                    align="center"
+                    color="secondary"
+                    variant="h3"
+                  >
                     {pageHeading}
                   </Typography>
-                </Box>
+                )}
                 <PageContent
                   farm={farm}
                   isAdminMode={isAdminMode}

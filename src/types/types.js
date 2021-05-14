@@ -50,7 +50,8 @@ export const OrderPreviewPropTypes = PropTypes.shape({
   completed: PropTypes.bool,
   createdAt: PropTypes.string,
   objectId: PropTypes.string,
-  pickupPointName: PropTypes.string
+  pickupPointName: PropTypes.string,
+  farmId: PropTypes.string
 });
 export const FarmPropTypes = PropTypes.shape({
   about: PropTypes.string,
@@ -102,3 +103,12 @@ export const OrderPropTypes = PropTypes.shape({
   pickupPoint: PickupPointPropTypes,
   subscriptions: PropTypes.arrayOf(OrderedSubscriptionPropTypes)
 });
+
+export const SortByOrdersEnum = Object.freeze({
+  createdAt: "createdAt",
+  pickupPointName: "pickupPointName"
+});
+
+export const SortByOrdersPropTypes = PropTypes.oneOf(
+  Object.values(SortByOrdersEnum)
+);

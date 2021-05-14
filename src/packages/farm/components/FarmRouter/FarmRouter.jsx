@@ -32,6 +32,9 @@ export default function FarmRouter() {
       <Route exact path={url}>
         <Redirect to="/farms" />
       </Route>
+      <Route exact path={`${url}/:farmId/:pageName/:pageId`}>
+        <FarmPageRouter />
+      </Route>
       <Route exact path={`${url}/:farmId/:pageName`}>
         <FarmPageRouter />
       </Route>
