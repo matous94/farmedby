@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { StoreProvider } from "easy-peasy";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import GlobalStyles from "@material-ui/core/GlobalStyles";
 import { ThemeProvider } from "@material-ui/core/styles";
 
 import { setupI18n, getCountryCode } from "src/i18n";
@@ -35,6 +36,14 @@ async function renderReactApp() {
         <StoreProvider store={store}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
+            <GlobalStyles
+              styles={`
+                input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button {  
+                  opacity: 1;
+                }
+              `}
+            />
             <App key={getCountryCode()} />
           </ThemeProvider>
         </StoreProvider>
