@@ -24,6 +24,7 @@ export default function SubmitFeedbackDialog({ submitter }) {
         stepOffset={1}
         translationKey="subscriptionsPage.howItWorks"
         variant="body1"
+        component="div"
       />
     </>
   );
@@ -38,6 +39,9 @@ export default function SubmitFeedbackDialog({ submitter }) {
         isOpen={submitter.isResolved}
         title={t("subscriptionsPage.submit.success.text")}
         text={text}
+        DialogContentTextProps={{
+          component: "div"
+        }}
         primaryButton={{
           onClick: () => {
             resetOrderDraft();

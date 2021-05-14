@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 export default function NumberedList({
   stepOffset,
   variant,
+  component,
   length,
   translationKey,
   color,
@@ -41,6 +42,7 @@ export default function NumberedList({
       }}
       color={color}
       variant={variant}
+      component={component}
     >
       {list}
     </Typography>
@@ -51,6 +53,7 @@ NumberedList.propTypes = {
   stepOffset: PropTypes.number,
   translationKey: PropTypes.string.isRequired,
   color: PropTypes.string,
+  component: PropTypes.string,
   variant: PropTypes.string,
   sx: PropTypes.shape({})
 };
@@ -58,5 +61,6 @@ NumberedList.defaultProps = {
   color: undefined,
   sx: undefined,
   variant: "h6",
+  component: undefined,
   stepOffset: 0
 };

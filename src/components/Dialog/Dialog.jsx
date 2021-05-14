@@ -18,7 +18,8 @@ export default function Dialog({
   secondaryButton,
   status, // isOpen, isLoading, close
   title,
-  text
+  text,
+  DialogContentTextProps
 }) {
   if (isOpen == null && status == null && isLoading == null) {
     throw new Error("One of [isOpen, status, isLoading] props is required.");
@@ -75,7 +76,11 @@ export default function Dialog({
           {title && <DialogTitle id="alert-dialog-title">{title}</DialogTitle>}
           {text && (
             <DialogContent>
-              <DialogContentText id="alert-dialog-description">
+              <DialogContentText
+                id="alert-dialog-description"
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...DialogContentTextProps}
+              >
                 {text}
               </DialogContentText>
             </DialogContent>
@@ -121,7 +126,8 @@ Dialog.propTypes = {
   }),
   status: PropTypes.oneOf(["isOpen", "close", "isLoading"]),
   title: PropTypes.string,
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  DialogContentTextProps: PropTypes.shape({ component: PropTypes.string })
 };
 Dialog.defaultProps = {
   onClose: undefined,
@@ -132,5 +138,6 @@ Dialog.defaultProps = {
   secondaryButton: undefined,
   status: undefined,
   title: undefined,
-  text: undefined
+  text: undefined,
+  DialogContentTextProps: undefined
 };
