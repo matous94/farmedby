@@ -9,6 +9,7 @@ import PublicPage from "src/components/PublicPage";
 import PrivatePage from "src/components/PrivatePage";
 import CreateFarmPage from "src/packages/farm/components/CreateFarmPage";
 import { localStorageKeys } from "src/packages/local-storage";
+import useScrollToTop from "src/packages/hooks/useScrollToTop";
 
 import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
@@ -25,6 +26,8 @@ function getSessionToken() {
 function App() {
   const signIn = useStoreActions((actions) => actions.signIn);
   const [isLoading, setIsLoading] = React.useState(Boolean(getSessionToken()));
+
+  useScrollToTop();
 
   React.useEffect(() => {
     if (!isLoading) return;
