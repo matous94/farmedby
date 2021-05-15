@@ -16,9 +16,7 @@ export default function useGetFarm() {
     (actions) => actions.resetVisitedFarm
   );
   const visitedFarm = useStoreState(selectors.getVisitedFarm);
-  const isFarmOwner = useStoreState((state) =>
-    selectors.isFarmOwner(state, farmId)
-  );
+  const isFarmOwner = useStoreState(selectors.createIsFarmOwner(farmId));
 
   const hasVisitedFarm = visitedFarm && visitedFarm.objectId === farmId;
   // loading, resolved, error

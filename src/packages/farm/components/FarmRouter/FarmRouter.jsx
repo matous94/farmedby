@@ -9,14 +9,14 @@ import pages from "./pages";
 function FarmPageRouter() {
   const { params } = useRouteMatch();
   const { farmId, pageName } = params;
-  const isAdminMode = useStoreState(selectors.isAdminMode(farmId));
+  const isFarmOwner = useStoreState(selectors.createIsFarmOwner(farmId));
   const isLandingPage = pageName == null && farmId;
   if (isLandingPage) return <FarmPages />;
 
   if (pages[pageName] == null) return <Redirect to={`/farm/${farmId}`} />;
 
-  const isAuthorized = !pages[pageName].private || isAdminMode;
-  const isEnabledPage = pages[pageName] && !pages[pageName].disabled;
+  const isAuthorized = pages[pageName].private === false || isFarmOwner;
+  const isEnabledPage = pages[pageName].disabled === false;
   if (isAuthorized && isEnabledPage) {
     return <FarmPages />;
   }

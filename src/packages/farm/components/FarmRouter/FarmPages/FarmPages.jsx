@@ -28,17 +28,11 @@ export default function FarmPages() {
   const drawer = useSwitch(false);
   const { status, farm, isFarmOwner } = useGetFarm();
   const toggleAdminMode = useStoreActions((actions) => actions.toggleAdminMode);
-  const isAdminMode = useStoreState(selectors.isAdminMode(farmId));
+  const isAdminMode = useStoreState(selectors.createIsAdminMode(farmId));
   const isUpMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
-  const { PageContent, translationKey } = pageName
-    ? pages[pageName]
-    : landingPage;
-
-  let pageHeading = null;
-  const isLandingPage = pageName === "";
-  if (translationKey) pageHeading = t(translationKey);
-  if (isLandingPage) pageHeading = farm?.name;
+  const currentPage = pageName ? pages[pageName] : landingPage;
+  const { PageContent } = currentPage;
 
   return (
     <>
@@ -105,14 +99,14 @@ export default function FarmPages() {
                   px: ["16px", "24px", "32px", "46px"]
                 }}
               >
-                {pageHeading && (
+                {currentPage.renderHeading && (
                   <Typography
                     sx={{ mb: "16px" }}
                     align="center"
                     color="secondary"
                     variant="h3"
                   >
-                    {pageHeading}
+                    {t(currentPage.translationKey)}
                   </Typography>
                 )}
                 <PageContent
@@ -122,7 +116,7 @@ export default function FarmPages() {
                   toggleAdminMode={toggleAdminMode}
                 />
               </Box>
-              {isFarmOwner && (
+              {isFarmOwner && !currentPage.private && (
                 <Box sx={{ position: "fixed", bottom: "16px", right: "24px" }}>
                   <Fab
                     onClick={toggleAdminMode}

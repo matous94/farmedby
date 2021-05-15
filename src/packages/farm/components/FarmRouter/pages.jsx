@@ -21,6 +21,7 @@ import OrderOverview from "src/packages/order/components/OrderOverview/OrderOver
 export const landingPage = {
   name: "landing",
   translationKey: "farm",
+  renderHeading: false,
   Icon: FarmIcon,
   disabled: false,
   private: false,
@@ -31,6 +32,7 @@ export default {
   subscriptions: {
     name: "subscriptions",
     translationKey: "subscription.subscriptions.heading",
+    renderHeading: true,
     Icon: ProductsIcon,
     disabled: false,
     private: false,
@@ -40,6 +42,7 @@ export default {
   "pickup-points": {
     name: "pickup-points",
     translationKey: "pickupPoints",
+    renderHeading: true,
     Icon: MyLocationIcon,
     disabled: false,
     private: false,
@@ -49,6 +52,7 @@ export default {
   orders: {
     name: "orders",
     translationKey: "orders",
+    renderHeading: true,
     Icon: PaymentIcon,
     disabled: false,
     private: true,
@@ -57,6 +61,7 @@ export default {
   },
   order: {
     name: "order",
+    renderHeading: false,
     disabled: false,
     private: false,
     selectable: false,
@@ -65,6 +70,7 @@ export default {
   eshop: {
     name: "eshop",
     translationKey: "eshop.heading",
+    renderHeading: true,
     Icon: ShoppingCartIcon,
     disabled: true,
     private: true,
@@ -80,6 +86,7 @@ export default {
   blog: {
     name: "blog",
     translationKey: "blog.heading",
+    renderHeading: true,
     Icon: CreateIcon,
     disabled: true,
     private: true,
@@ -95,6 +102,7 @@ export default {
   reviews: {
     name: "reviews",
     translationKey: "reviews.heading",
+    renderHeading: true,
     Icon: RateReviewIcon,
     disabled: true,
     private: true,
@@ -110,6 +118,7 @@ export default {
   "photo-gallery": {
     name: "photo-gallery",
     translationKey: "photoGallery.heading",
+    renderHeading: true,
     Icon: PhotoIcon,
     disabled: true,
     private: true,
@@ -125,6 +134,7 @@ export default {
   volunteers: {
     name: "volunteers",
     translationKey: "volunteers.heading",
+    renderHeading: true,
     Icon: WcIcon,
     disabled: true,
     private: true,
@@ -140,6 +150,7 @@ export default {
   accommodation: {
     name: "accommodation",
     translationKey: "accommodation.heading",
+    renderHeading: true,
     Icon: HotelIcon,
     disabled: true,
     private: true,

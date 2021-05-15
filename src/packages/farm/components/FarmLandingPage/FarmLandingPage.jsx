@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStoreActions } from "easy-peasy";
 import { useTranslation } from "react-i18next";
+import Typography from "@material-ui/core/Typography";
 
 import ApiClient from "src/packages/api-client";
 import { FarmPropTypes } from "src/types";
@@ -40,6 +41,14 @@ export default function FarmLandingPage({
 
   return (
     <>
+      <Typography
+        sx={{ mb: "16px" }}
+        align="center"
+        color="secondary"
+        variant="h3"
+      >
+        {farm.name}
+      </Typography>
       {isAdminMode ? (
         <FarmEditor
           mode="edit"

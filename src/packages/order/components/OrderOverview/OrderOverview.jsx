@@ -69,20 +69,13 @@ export default function OrderOverview({ isAdminMode }) {
       </Typography>
       <Paper
         sx={{
-          minHeight: "100%",
           width: "100%",
           position: "relative",
           p: ["12px", null, "24px"]
         }}
       >
         {orderGetter.isLoading && (
-          <CircularProgress
-            sx={{
-              position: "absolute",
-              top: "100px",
-              left: "calc(50% - 20px)"
-            }}
-          />
+          <CircularProgress sx={{ display: "block", mx: "auto" }} />
         )}
         {orderGetter.isResolved && (
           <>

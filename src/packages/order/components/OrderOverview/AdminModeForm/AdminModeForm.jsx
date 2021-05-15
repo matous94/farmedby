@@ -18,7 +18,6 @@ import { OrderPropTypes } from "src/types";
 export default function AdminModeForm({ order }) {
   const { t } = useTranslation();
   const orderUpdated = useStoreActions((actions) => actions.order.orderUpdated);
-  console.log(order);
   const { register, handleSubmit } = useForm({
     defaultValues: {
       completed: order.completed,

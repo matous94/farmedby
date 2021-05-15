@@ -6,22 +6,24 @@ export function getUser(state) {
   return state.user;
 }
 
-export function isFarmOwner(state, farmId) {
-  const user = getUser(state);
-  const myFarm = getMyFarm(state);
+export function createIsFarmOwner(farmId) {
+  return (state) => {
+    const user = getUser(state);
+    const myFarm = getMyFarm(state);
 
-  if (myFarm == null || user == null) return false;
+    if (myFarm == null || user == null) return false;
 
-  if (farmId) {
-    return myFarm.objectId === farmId;
-  }
+    if (farmId) {
+      return myFarm.objectId === farmId;
+    }
 
-  return user.objectId === myFarm.owner.objectId;
+    return user.objectId === myFarm.owner.objectId;
+  };
 }
 
-export function isAdminMode(farmId) {
+export function createIsAdminMode(farmId) {
   return (state) => {
-    const isOwner = isFarmOwner(state, farmId);
+    const isOwner = createIsFarmOwner(farmId)(state);
     if (isOwner) return state.farmPages.adminMode;
     return false;
   };
