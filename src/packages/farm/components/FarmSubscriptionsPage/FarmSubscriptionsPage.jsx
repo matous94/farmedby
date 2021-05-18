@@ -118,6 +118,8 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
           length={5}
           translationKey="subscriptionsPage.howItWorks"
         />
+        <Heading>{t("subscriptionsPage.selectPickupPointHeading")}</Heading>
+        <PickupPointSelector farm={farm} />
         <Heading>{t("subscriptionsPage.selectSubscriptionHeading")}</Heading>
         <SubscriptionsTable
           farm={farm}
@@ -125,8 +127,6 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
           onDelete={deleteDialogSwitch.switchOn}
           isAdminMode={isAdminMode}
         />
-        <Heading>{t("subscriptionsPage.selectPickupPointHeading")}</Heading>
-        <PickupPointSelector farm={farm} />
         <Heading>{t("subscriptionsPage.noteHeading")}</Heading>
         <NoteField />
         <Heading>{t("subscriptionsPage.customerData.heading")}</Heading>

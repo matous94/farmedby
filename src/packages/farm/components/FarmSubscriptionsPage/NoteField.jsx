@@ -6,11 +6,6 @@ import { selectors } from "src/store";
 
 function NoteField() {
   const { t } = useTranslation();
-  const translationPrefix = "subscriptionsPage.note.placeholder.line";
-  const line1 = t(translationPrefix + 1);
-  const line2 = t(translationPrefix + 2);
-  const line3 = t(translationPrefix + 3);
-
   const note = useStoreState(selectors.orderDraft.getNote);
   const setNote = useStoreActions((actions) => actions.orderDraft.setNote);
   return (
@@ -20,7 +15,7 @@ function NoteField() {
       style={{ maxWidth: "500px", width: "100%", padding: "8px" }}
       value={note}
       onChange={(e) => setNote(e.target.value)}
-      placeholder={`${line1}\n${line2}\n${line3}`}
+      placeholder={t("subscriptionsPage.note.placeholder")}
     />
   );
 }

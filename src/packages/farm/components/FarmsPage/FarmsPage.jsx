@@ -63,7 +63,7 @@ export default function FarmsPage() {
           <Typography align="center" color="secondary" variant="h3">
             {t("farmsPage.heading")}
           </Typography>
-          <Box sx={{ my: "24px", width: "256px" }}>
+          <Box sx={{ my: "24px", width: "300px" }}>
             <TextField
               onChange={locationFilter.onChange}
               value={locationFilter.filterValue}

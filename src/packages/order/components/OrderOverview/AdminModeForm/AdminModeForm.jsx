@@ -59,7 +59,7 @@ export default function AdminModeForm({ order }) {
         name="journal"
         minRows={10}
         style={{ maxWidth: "700px", width: "100%", padding: "8px" }}
-        // placeholder={`${line1}\n${line2}\n${line3}`}
+        placeholder={t("subscription.journal.placeholder")}
       />
       <Box
         sx={{
@@ -93,8 +93,3 @@ export default function AdminModeForm({ order }) {
 AdminModeForm.propTypes = {
   order: OrderPropTypes.isRequired
 };
-
-// const translationPrefix = "subscriptionsPage.note.placeholder.line";
-// const line1 = t(translationPrefix + 1);
-// const line2 = t(translationPrefix + 2);
-// const line3 = t(translationPrefix + 3);

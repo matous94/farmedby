@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 
 import { FarmPropTypes } from "src/types";
 import Select from "src/components/Select";
@@ -93,10 +91,7 @@ function PickupPointSelector({ farm }) {
     <>
       <Select
         sx={{
-          maxHeight: "360px",
-          "& .MuiSelect-select": {
-            whiteSpace: "normal"
-          }
+          maxHeight: "360px"
         }}
         size="small"
         onChange={onChange}

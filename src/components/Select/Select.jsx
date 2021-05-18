@@ -67,6 +67,9 @@ export default function Select({
         sx={{
           "& .MuiSelect-select:focus": {
             background: "inherit"
+          },
+          "& .MuiSelect-select": {
+            whiteSpace: "normal"
           }
         }}
       >
