@@ -36,11 +36,12 @@ export const PickupPointPropTypes = PropTypes.shape({
   addressLevel1: PropTypes.string,
   city: PropTypes.string,
   countryCode: PropTypes.string,
-  pickupDay: PropTypes.string, // eg Biweekly, on Wednesday, from 10am to 5pm
   email: PropTypes.string,
+  isFarmPickupPoint: PropTypes.bool,
   name: PropTypes.string,
   objectId: PropTypes.string,
   phoneNumber: PropTypes.string,
+  pickupDay: PropTypes.string, // eg Biweekly, on Wednesday, from 10am to 5pm
   postcode: PropTypes.string,
   street: PropTypes.string,
   webUrl: PropTypes.string
@@ -60,7 +61,7 @@ export const FarmPropTypes = PropTypes.shape({
   city: PropTypes.string,
   countryCode: PropTypes.string,
   email: PropTypes.string,
-  isPickupPoint: PropTypes.bool,
+  isFarmPickupPoint: PropTypes.bool,
   name: PropTypes.string,
   objectId: PropTypes.string,
   owner: PropTypes.shape({ objectId: PropTypes.string }),

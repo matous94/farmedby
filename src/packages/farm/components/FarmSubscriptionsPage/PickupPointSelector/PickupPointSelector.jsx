@@ -19,8 +19,12 @@ function createOption(point) {
   const nameLabel = i18next.t("name");
   const addressLabel = i18next.t("address");
   const pickupDayLabel = i18next.t("pickupDayLabel");
+  const pickupPointName = point.isFarmPickupPoint
+    ? i18next.t("pickupPoint.isFarmPickupPoint.name")
+    : point.name;
 
   return {
+    address,
     id: point.objectId,
     label: (
       <span>
@@ -28,7 +32,7 @@ function createOption(point) {
         {` ${address}`}
         <br />
         <b>{nameLabel}:</b>
-        {` ${point.name}`}
+        {` ${pickupPointName}`}
         <br />
         <b>{pickupDayLabel}:</b>
         {` ${point.pickupDay}`}
@@ -45,18 +49,19 @@ function PickupPointSelector({ farm }) {
   );
   const options = React.useMemo(() => {
     const result = {};
-    const pointsList = [...farm.pickupPoints];
-    if (farm.isPickupPoint) {
-      pointsList.push(farm);
+    const points = [...farm.pickupPoints];
+    if (farm.isFarmPickupPoint) {
+      points.push(farm);
     }
-    pointsList
+    points
+      .map((point) => createOption(point))
       .sort((a, b) => {
-        if (a.city === b.city) return 0;
-        if (a.city < b.city) return -1;
+        if (a.address === b.address) return 0;
+        if (a.address < b.address) return -1;
         return 1;
       })
       .forEach((point) => {
-        result[point.objectId] = createOption(point);
+        result[point.id] = point;
       });
     return result;
   }, [farm]);
@@ -76,11 +81,12 @@ function PickupPointSelector({ farm }) {
       addressLevel1: pickupPoint.addressLevel1,
       city: pickupPoint.city,
       countryCode: pickupPoint.countryCode,
-      pickupDay: pickupPoint.pickupDay,
       email: pickupPoint.email,
+      isFarmPickupPoint: pickupPoint.isFarmPickupPoint,
       name: pickupPoint.name,
       objectId: pickupPoint.objectId,
       phoneNumber: pickupPoint.phoneNumber,
+      pickupDay: pickupPoint.pickupDay,
       postcode: pickupPoint.postcode,
       street: pickupPoint.street,
       webUrl: pickupPoint.webUrl
@@ -109,18 +115,6 @@ function PickupPointSelector({ farm }) {
           )
         }}
       />
-      {/* <Box sx={{ mt: "8px", display: selectedPoint ? "block" : "none" }}>
-        <Typography variant="h6">{t("pickupDayLabel")}:</Typography>
-        <Typography
-          component="span"
-          variant="subtitle2"
-          sx={{
-            display: selectedPoint ? "block" : "none"
-          }}
-        >
-          {selectedPoint?.pickupDay}
-        </Typography>
-      </Box> */}
     </>
   );
 }

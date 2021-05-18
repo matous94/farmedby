@@ -8,8 +8,17 @@ import { PickupPointPropTypes } from "src/types";
 
 export default function PickupPointData({ pickupPoint, sx }) {
   const { t } = useTranslation();
-  const items = React.useMemo(
-    () => [
+  const items = React.useMemo(() => {
+    if (pickupPoint.isFarmPickupPoint) {
+      return [
+        {
+          label: t("name"),
+          value: t("pickupPoint.isFarmPickupPoint.name")
+        },
+        { label: t("pickupDayLabel"), value: pickupPoint.pickupDay }
+      ];
+    }
+    return [
       {
         label: t("name"),
         value: pickupPoint.name
@@ -29,10 +38,10 @@ export default function PickupPointData({ pickupPoint, sx }) {
         value: pickupPoint.email
       },
       { label: t("phoneNumber"), value: pickupPoint.phoneNumber },
+      { label: t("webAddress"), href: pickupPoint.webUrl },
       { label: t("pickupDayLabel"), value: pickupPoint.pickupDay }
-    ],
-    [t, pickupPoint]
-  );
+    ];
+  }, [t, pickupPoint]);
 
   return (
     <LabelValueDataList heading={t("pickupPoint")} items={items} sx={sx} />

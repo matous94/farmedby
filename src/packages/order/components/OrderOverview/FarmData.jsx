@@ -28,7 +28,8 @@ export default function FarmData({ farm }) {
         label: t("email"),
         value: farm.email
       },
-      { label: t("phoneNumber"), value: farm.phoneNumber }
+      { label: t("phoneNumber"), value: farm.phoneNumber },
+      { label: t("webAddress"), href: farm.webUrl }
     ],
     [t, farm]
   );

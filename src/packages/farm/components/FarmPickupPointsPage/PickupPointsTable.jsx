@@ -44,7 +44,11 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
           </ButtonGroup>
         </TableCell>
       )}
-      <TableCell sx={{ whiteSpace: "nowrap" }}>{name}</TableCell>
+      <TableCell sx={{ whiteSpace: "nowrap" }}>
+        {point.isFarmPickupPoint
+          ? t("pickupPoint.isFarmPickupPoint.name")
+          : name}
+      </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap" }}>
         {street}
         <br />
@@ -143,13 +147,14 @@ export default function PickupPointsTable({
         </TableHead>
         <TableBody>
           {isAdminMode && <AddPointRow onAdd={onAdd} />}
-          {farm.isPickupPoint && (
+          {farm.isFarmPickupPoint && (
             <PickupPoint
               isAdminMode={isAdminMode}
               onEdit={() => history.push(`/farm/${farm.objectId}`)}
               point={{
                 city: farm.city,
                 email: farm.email,
+                isFarmPickupPoint: farm.isFarmPickupPoint,
                 name: farm.name,
                 phoneNumber: farm.phoneNumber,
                 pickupDay: farm.pickupDay || t("farmPickupDayDefaultValue"),

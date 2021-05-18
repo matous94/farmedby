@@ -43,7 +43,7 @@ export default function FarmEditor({
     city: farm.city ?? "",
     addressLevel1: farm.addressLevel1 ?? "",
     email: farm.email ?? "",
-    isPickupPoint: farm.isPickupPoint ?? true,
+    isFarmPickupPoint: farm.isFarmPickupPoint ?? true,
     name: farm.name ?? "",
     phoneNumber: farm.phoneNumber ?? "",
     pickupDay: farm.pickupDay ?? t("farmPickupDayDefaultValue"),
@@ -206,17 +206,17 @@ export default function FarmEditor({
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={formData.isPickupPoint}
+                        checked={formData.isFarmPickupPoint}
                         onChange={onChange}
-                        name="isPickupPoint"
+                        name="isFarmPickupPoint"
                       />
                     }
-                    label={t("farmForm.isPickupPoint")}
+                    label={t("farmForm.isFarmPickupPoint")}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    disabled={!formData.isPickupPoint}
+                    disabled={!formData.isFarmPickupPoint}
                     onChange={onChange}
                     value={formData.pickupDay}
                     name="pickupDay"

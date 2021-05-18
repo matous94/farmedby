@@ -69,7 +69,8 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
         objectId: farm.objectId,
         phoneNumber: farm.phoneNumber,
         postcode: farm.postcode,
-        street: farm.street
+        street: farm.street,
+        webUrl: farm.webUrl
       },
       note: orderDraft.note,
       pickupPoint: orderDraft.pickupPoint,
