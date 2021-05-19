@@ -4,31 +4,51 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { useTranslation } from "react-i18next";
 
+function ListItem({ number, content }) {
+  return (
+    <Box display="flex">
+      <Box
+        sx={{
+          minWidth: "22px",
+          fontWeight: "400"
+        }}
+      >
+        {number}.
+      </Box>
+      <Box>{content}</Box>
+    </Box>
+  );
+}
+ListItem.propTypes = {
+  number: PropTypes.number.isRequired,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired
+};
+
 export default function NumberedList({
   stepOffset,
   variant,
   component,
   length,
   translationKey,
+  translations,
   color,
   sx
 }) {
   const { t } = useTranslation();
   const list = [];
-  for (let i = 1 + stepOffset; i <= length; i += 1) {
-    const translation = t(`${translationKey}${i}`);
-    list.push(
-      <Box key={translation} display="flex">
-        <Box
-          sx={{
-            minWidth: "22px",
-            fontWeight: "400"
-          }}
-        >
-          {i - stepOffset}.
-        </Box>
-        <Box>{translation}</Box>
-      </Box>
+
+  if (length) {
+    for (let i = 1 + stepOffset; i <= length; i += 1) {
+      const translation = t(`${translationKey}${i}`);
+      list.push(
+        <ListItem key={i} content={translation} number={i - stepOffset} />
+      );
+    }
+  } else if (translations) {
+    translations.forEach((translation, index) =>
+      list.push(
+        <ListItem key={index} content={translation} number={index + 1} />
+      )
     );
   }
 
@@ -49,9 +69,12 @@ export default function NumberedList({
   );
 }
 NumberedList.propTypes = {
-  length: PropTypes.number.isRequired,
+  length: PropTypes.number,
   stepOffset: PropTypes.number,
-  translationKey: PropTypes.string.isRequired,
+  translationKey: PropTypes.string,
+  translations: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+  ),
   color: PropTypes.string,
   component: PropTypes.string,
   variant: PropTypes.string,
@@ -61,6 +84,9 @@ NumberedList.defaultProps = {
   color: undefined,
   sx: undefined,
   variant: "h6",
+  length: undefined,
+  translationKey: undefined,
   component: undefined,
-  stepOffset: 0
+  stepOffset: 0,
+  translations: undefined
 };

@@ -28,6 +28,18 @@ const deliversToPropTypes = PropTypes.arrayOf(
 function Farm({ farm, productTypesFilter }) {
   const { objectId, name, productTypes, deliversTo } = farm;
   const { t } = useTranslation();
+
+  const sortedByAddress = React.useMemo(
+    () =>
+      deliversTo
+        .map((location) => createAddress(location).districtRelativeReverse)
+        .sort((a, b) => {
+          if (a === b) return 0;
+          if (a < b) return -1;
+          return 1;
+        }),
+    [deliversTo]
+  );
   const filterTranslations = productTypesFilter.map((type) =>
     t(`productTypes.${type}`)
   );
@@ -37,9 +49,9 @@ function Farm({ farm, productTypesFilter }) {
         <Link to={`/farm/${objectId}/subscriptions`}>{name}</Link>
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap" }}>
-        {deliversTo.map((location, index) => (
+        {sortedByAddress.map((address, index) => (
           <React.Fragment key={index}>
-            {createAddress(location).districtRelativeReverse}
+            {address}
             {index === deliversTo.length - 1 ? null : <br />}
           </React.Fragment>
         ))}

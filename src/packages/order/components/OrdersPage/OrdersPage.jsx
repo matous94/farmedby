@@ -38,7 +38,7 @@ export default function OrdersPage({ farm }) {
         pr: ["0px", null, "8px", "32px"]
       }}
     >
-      <Box sx={{ mb: "24px", display: "flex", justifyContent: "center" }}>
+      <Box sx={{ mb: "24px" }}>
         <SortBy />
       </Box>
       <Grid container spacing={3}>

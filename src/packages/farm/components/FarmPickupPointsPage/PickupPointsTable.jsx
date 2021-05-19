@@ -52,9 +52,7 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
       <TableCell sx={{ whiteSpace: "nowrap" }}>
         {street}
         <br />
-        {postcode}
-        <br />
-        {city}
+        {postcode} {city}
       </TableCell>
       <TableCell>{pickupDay}</TableCell>
       <TableCell>
@@ -123,11 +121,20 @@ export default function PickupPointsTable({
 }) {
   const { t } = useTranslation();
   const history = useHistory();
+  const sortedPoints = React.useMemo(
+    () =>
+      [...farm.pickupPoints].sort((a, b) => {
+        if (a.name === b.name) return 0;
+        if (a.name < b.name) return -1;
+        return 1;
+      }),
+    [farm.pickupPoints]
+  );
 
   return (
     <TableContainer
       sx={{
-        maxWidth: isAdminMode ? "1000px" : "800px"
+        maxWidth: "1000px"
       }}
       component={Paper}
     >
@@ -164,7 +171,7 @@ export default function PickupPointsTable({
               }}
             />
           )}
-          {farm.pickupPoints.map((point) => (
+          {sortedPoints.map((point) => (
             <PickupPoint
               isAdminMode={isAdminMode}
               key={point.objectId}

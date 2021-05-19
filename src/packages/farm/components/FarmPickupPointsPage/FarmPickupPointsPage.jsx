@@ -9,6 +9,7 @@ import ApiClient from "src/packages/api-client";
 import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import DeleteDialog from "src/components/DeleteDialog";
+import { getCountry } from "src/i18n";
 
 import PickupPointEditor from "./PickupPointEditor";
 import PickupPointsTable from "./PickupPointsTable";
@@ -58,6 +59,9 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
             point={editorSwitch.state}
             onClose={() => editorSwitch.reset()}
             onSubmit={submitter.execute}
+            requiresAddressLevel1={
+              getCountry(farm.countryCode).requiresAddressLevel1
+            }
           />
         )}
         <PickupPointsTable

@@ -14,19 +14,24 @@ export default function SubmitFeedbackDialog({ submitter }) {
   const resetOrderDraft = useStoreActions(
     (actions) => actions.orderDraft.reset
   );
+  const translationKey = "subscriptionsPage.howItWorks";
 
-  const text = (
-    <>
-      {t("subscriptionsPage.submit.success.nextSteps")}
-      <br />
-      <NumberedList
-        length={5}
-        stepOffset={1}
-        translationKey="subscriptionsPage.howItWorks"
-        variant="body1"
-        component="div"
-      />
-    </>
+  const text = submitter.result && (
+    <NumberedList
+      translations={[
+        <>
+          {t(`${translationKey}2`)} <b>({submitter.result.farm.email})</b>
+        </>,
+        t(`${translationKey}3`),
+        t(`${translationKey}4`),
+        <>
+          {t(`${translationKey}5`)}{" "}
+          <b>({submitter.result.pickupPoint.pickupDay})</b>
+        </>
+      ]}
+      variant="body1"
+      component="div"
+    />
   );
   return (
     <>

@@ -187,20 +187,6 @@ export default function FarmEditor({
               </Grid>
             )}
             {mode === "edit" && (
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.published}
-                      onChange={onChange}
-                      name="published"
-                    />
-                  }
-                  label={t("farmForm.makeFarmPublic")}
-                />
-              </Grid>
-            )}
-            {mode === "edit" && (
               <>
                 <Grid item xs={12}>
                   <FormControlLabel
@@ -225,6 +211,20 @@ export default function FarmEditor({
                   />
                 </Grid>
               </>
+            )}
+            {mode === "edit" && (
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={formData.published}
+                      onChange={onChange}
+                      name="published"
+                    />
+                  }
+                  label={t("farmForm.makeFarmPublic")}
+                />
+              </Grid>
             )}
           </Grid>
           {mode === "edit" && (

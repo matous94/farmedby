@@ -13,7 +13,12 @@ import { useForm } from "react-hook-form";
 
 import { PickupPointPropTypes } from "src/types";
 
-export default function PickupPointEditor({ onClose, onSubmit, point }) {
+export default function PickupPointEditor({
+  onClose,
+  onSubmit,
+  point,
+  requiresAddressLevel1
+}) {
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm({ defaultValues: point });
   const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
@@ -78,11 +83,13 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
               required={true}
             />
           </Box>
-          <TextField
-            name="addressLevel1"
-            label={t("addressLevel1Label")}
-            type="text"
-          />
+          {requiresAddressLevel1 && (
+            <TextField
+              name="addressLevel1"
+              label={t("addressLevel1Label")}
+              type="text"
+            />
+          )}
           <TextField
             name="pickupDay"
             label={t("pickupDayLabel")}
@@ -111,7 +118,8 @@ export default function PickupPointEditor({ onClose, onSubmit, point }) {
 PickupPointEditor.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  point: PickupPointPropTypes
+  point: PickupPointPropTypes,
+  requiresAddressLevel1: PropTypes.bool.isRequired
 };
 PickupPointEditor.defaultProps = {
   point: undefined
