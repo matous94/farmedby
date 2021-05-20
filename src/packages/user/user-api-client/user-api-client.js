@@ -1,37 +1,33 @@
-import { sendParseRequest } from "src/packages/api-client/requester";
+import {
+  sendParseRequest,
+  callCloudFunction
+} from "src/packages/api-client/requester";
 import logger from "src/packages/logger";
 import { localStorageKeys } from "src/packages/local-storage";
 
 export async function signUp({ email, password, firstName, lastName }) {
-  const response = await sendParseRequest("users", {
-    body: {
-      email,
-      username: email,
-      password,
-      firstName,
-      lastName
-    }
+  const user = await callCloudFunction("signUp", {
+    email,
+    password,
+    firstName,
+    lastName
   });
-  localStorage.setItem(localStorageKeys.sessionToken, response.sessionToken);
-  return response;
+  localStorage.setItem(localStorageKeys.sessionToken, user.sessionToken);
+  return user;
 }
 
 export async function signIn({ email, password }) {
-  const response = await sendParseRequest("login", {
-    query: {
-      username: email,
-      password
-    }
+  const user = await callCloudFunction("signIn", {
+    email,
+    password
   });
-  localStorage.setItem(localStorageKeys.sessionToken, response.sessionToken);
-  return response;
+  localStorage.setItem(localStorageKeys.sessionToken, user.sessionToken);
+  return user;
 }
 
 export async function getBySessionToken(sessionToken) {
-  return sendParseRequest("users/me", {
-    headers: {
-      "X-Parse-Session-Token": sessionToken
-    }
+  return callCloudFunction("getBySessionToken", {
+    sessionToken
   });
 }
 

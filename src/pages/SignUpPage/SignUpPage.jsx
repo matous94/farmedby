@@ -39,7 +39,7 @@ export default function SignUpPage() {
           lastName
         });
         logger.user("User signed up", user);
-        signUp({ email, firstName, lastName, ...user });
+        signUp(user);
         history.push("/create-farm");
       } catch (error) {
         logger.user("SignUpPage -> signUp failed:", error);

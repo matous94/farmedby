@@ -120,7 +120,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 required
                 fullWidth
                 name="password"
-                label={t("Password")}
+                label={t("password")}
                 type="password"
                 id="password"
                 inputProps={{
