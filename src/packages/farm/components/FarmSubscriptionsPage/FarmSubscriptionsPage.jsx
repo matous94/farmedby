@@ -78,6 +78,23 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
     });
   }
 
+  // eslint-disable-next-line no-param-reassign
+  // farm.pickupPoints = [];
+  // eslint-disable-next-line no-param-reassign
+  // farm.isFarmPickupPoint = false;
+  // eslint-disable-next-line no-param-reassign
+  // farm.subscriptions = [];
+
+  const hasPickupPoints =
+    farm.isFarmPickupPoint || farm.pickupPoints.length > 0;
+  const hasSubscriptions = farm.subscriptions.length > 0;
+
+  const displayPriceCalculator =
+    hasPickupPoints === false && hasSubscriptions && isAdminMode === false;
+  const displayEmptyView = hasSubscriptions === false && isAdminMode === false;
+  const displayOrderForm =
+    hasSubscriptions && hasPickupPoints && isAdminMode === false;
+
   return (
     <>
       <SubscriptionEditor
@@ -94,6 +111,17 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
         subscriptionId={deleteDialogSwitch.state}
       />
       <SubmitFeedbackDialog submitter={orderSubmitter} />
+      {displayEmptyView && (
+        <Typography
+          variant="subtitle1"
+          sx={{
+            color: (theme) => theme.palette.text.secondary,
+            textAlign: "center"
+          }}
+        >
+          {t("subscription.empty.text")}
+        </Typography>
+      )}
       <Box
         component="form"
         onSubmit={onSubmit}
@@ -106,47 +134,74 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
           mx: "auto"
         }}
       >
-        <Heading
-          sx={{
-            mt: ["0px", "12px"],
-            mb: ["4px", "6px"]
-          }}
-        >
-          {t("howItWorks?")}
-        </Heading>
-        <NumberedList
-          sx={{ maxWidth: "580px", fontWeight: 400 }}
-          length={5}
-          translationKey="subscriptionsPage.howItWorks"
-        />
-        <Heading>{t("subscriptionsPage.selectPickupPointHeading")}</Heading>
-        <PickupPointSelector farm={farm} />
-        <Heading>{t("subscriptionsPage.selectSubscriptionHeading")}</Heading>
-        <SubscriptionsTable
-          farm={farm}
-          openEditor={editorSwitch.switchOn}
-          onDelete={deleteDialogSwitch.switchOn}
-          isAdminMode={isAdminMode}
-        />
-        <Heading>{t("subscriptionsPage.noteHeading")}</Heading>
-        <NoteField />
-        <Heading>{t("subscriptionsPage.customerData.heading")}</Heading>
-        <CustomerData />
-        <Button
-          disabled={Object.keys(orderDraft.subscriptionsById).length === 0}
-          type="submit"
-          color="secondary"
-          variant="contained"
-          sx={{
-            minWidth: "200px",
-            my: ["36px", null, "64px"],
-            mx: "auto",
-            fontSize: ["1.4rem", "1.5rem"],
-            padding: ["12px 20px", "16px 32px"]
-          }}
-        >
-          {t("subscriptionsPage.submit.button")}
-        </Button>
+        {displayOrderForm && (
+          <>
+            <Heading
+              sx={{
+                mt: ["0px", "12px"],
+                mb: ["4px", "6px"]
+              }}
+            >
+              {t("howItWorks?")}
+            </Heading>
+            <NumberedList
+              sx={{ maxWidth: "580px", fontWeight: 400 }}
+              length={5}
+              translationKey="subscriptionsPage.howItWorks"
+            />
+            <Heading>{t("subscriptionsPage.selectPickupPointHeading")}</Heading>
+            <PickupPointSelector farm={farm} />
+            <Heading>
+              {t("subscriptionsPage.selectSubscriptionHeading")}
+            </Heading>
+          </>
+        )}
+        {displayPriceCalculator && (
+          <>
+            <Heading
+              sx={{
+                mt: ["0px", null, null, "12px"],
+                mb: ["4px", "6px"]
+              }}
+            >
+              {t("subscription.calculator.heading")}
+            </Heading>
+            <Typography sx={{ mb: "12px" }}>
+              {t("subscription.calculator.text")}
+            </Typography>
+          </>
+        )}
+        {displayEmptyView ? null : (
+          <SubscriptionsTable
+            farm={farm}
+            openEditor={editorSwitch.switchOn}
+            onDelete={deleteDialogSwitch.switchOn}
+            isAdminMode={isAdminMode}
+          />
+        )}
+        {displayOrderForm && (
+          <>
+            <Heading>{t("subscriptionsPage.noteHeading")}</Heading>
+            <NoteField />
+            <Heading>{t("subscriptionsPage.customerData.heading")}</Heading>
+            <CustomerData />
+            <Button
+              disabled={Object.keys(orderDraft.subscriptionsById).length === 0}
+              type="submit"
+              color="secondary"
+              variant="contained"
+              sx={{
+                minWidth: "200px",
+                my: ["36px", null, "64px"],
+                mx: "auto",
+                fontSize: ["1.4rem", "1.5rem"],
+                padding: ["12px 20px", "16px 32px"]
+              }}
+            >
+              {t("subscriptionsPage.submit.button")}
+            </Button>
+          </>
+        )}
       </Box>
     </>
   );

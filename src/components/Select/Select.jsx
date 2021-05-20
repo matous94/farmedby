@@ -14,6 +14,7 @@ const createMenuProps = (itemHeight = ITEM_HEIGHT) => {
     PaperProps: {
       sx: {
         maxHeight: itemHeight * 4.5 + ITEM_PADDING_TOP,
+        minHeight: itemHeight * 1 + ITEM_PADDING_TOP,
         width: 250
       }
     }
@@ -28,6 +29,7 @@ export default function Select({
   label,
   name,
   required,
+  disabled,
   itemHeight,
   size,
   sx
@@ -46,6 +48,7 @@ export default function Select({
       fullWidth
       required={required}
       sx={sx}
+      disabled={disabled}
     >
       <InputLabel>{label}</InputLabel>
       <MuiSelect
@@ -104,7 +107,8 @@ Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   sx: PropTypes.shape({}),
   size: PropTypes.string,
-  itemHeight: PropTypes.number
+  itemHeight: PropTypes.number,
+  disabled: PropTypes.bool
 };
 Select.defaultProps = {
   multiple: false,
@@ -112,5 +116,6 @@ Select.defaultProps = {
   required: false,
   sx: undefined,
   size: undefined,
-  itemHeight: undefined
+  itemHeight: undefined,
+  disabled: false
 };

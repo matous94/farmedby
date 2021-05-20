@@ -96,9 +96,6 @@ function PickupPointSelector({ farm }) {
   return (
     <>
       <Select
-        sx={{
-          maxHeight: "360px"
-        }}
         size="small"
         onChange={onChange}
         value={selectedPoint?.objectId || ""}

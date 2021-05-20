@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import { useStoreActions } from "easy-peasy";
 
 import { useSwitch, useAsync } from "src/packages/hooks";
@@ -15,6 +17,7 @@ import PickupPointEditor from "./PickupPointEditor";
 import PickupPointsTable from "./PickupPointsTable";
 
 export default function FarmPickupPointsPage({ farm, isAdminMode }) {
+  const { t } = useTranslation();
   const editorSwitch = useSwitch(false);
   const deleteDialogSwitch = useSwitch(false);
 
@@ -50,6 +53,7 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
 
   const submitter = useAsync(onSubmit, { functionName: "onSubmit" });
   const deletter = useAsync(onDelete, { functionName: "onDelete" });
+  const hasPickupPoints = farm.isFarmPickupPoint || farm.pickupPoints.length;
 
   return (
     <>
@@ -64,13 +68,25 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
             }
           />
         )}
-        <PickupPointsTable
-          farm={farm}
-          onAdd={() => editorSwitch.switchOn()}
-          onEdit={editorSwitch.switchOn}
-          onDelete={deleteDialogSwitch.switchOn}
-          isAdminMode={isAdminMode}
-        />
+        {!hasPickupPoints || isAdminMode ? (
+          <PickupPointsTable
+            farm={farm}
+            onAdd={() => editorSwitch.switchOn()}
+            onEdit={editorSwitch.switchOn}
+            onDelete={deleteDialogSwitch.switchOn}
+            isAdminMode={isAdminMode}
+          />
+        ) : (
+          <Typography
+            variant="subtitle1"
+            sx={{
+              color: (theme) => theme.palette.text.secondary,
+              textAlign: "center"
+            }}
+          >
+            {t("pickupPoint.empty.text")}
+          </Typography>
+        )}
       </Box>
       <Dialog isLoading={submitter.isLoading} />
       <GenericFailureDialog
