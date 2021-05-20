@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useStoreActions } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import { useHistory, useParams } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -29,10 +28,8 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
   const isDownMd = !isUpMd;
   if (isUpMd && isOpen) onClose();
 
-  const signOut = useStoreActions((actions) => actions.signOut);
   function signOutHandler() {
     ApiClient.User.signOut();
-    signOut();
     window.location.reload();
   }
 

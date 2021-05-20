@@ -10,11 +10,11 @@ export async function getMyFarm() {
 }
 
 export async function createFarm(farmData) {
-  return callCloudFunction("createFarm", { farmData });
+  return callCloudFunction("createFarm", farmData);
 }
 
 export async function updateFarm(farmData) {
-  return callCloudFunction("updateFarm", { farmData });
+  return callCloudFunction("updateFarm", farmData);
 }
 
 export async function getFarms() {
@@ -22,7 +22,7 @@ export async function getFarms() {
 }
 
 export async function savePickupPoint(pickupPointData) {
-  return callCloudFunction("savePickupPoint", { pickupPointData });
+  return callCloudFunction("savePickupPoint", pickupPointData);
 }
 
 export async function deletePickupPoint(objectId) {
@@ -30,7 +30,7 @@ export async function deletePickupPoint(objectId) {
 }
 
 export async function saveSubscription(subscriptionData) {
-  return callCloudFunction("saveSubscription", { subscriptionData });
+  return callCloudFunction("saveSubscription", subscriptionData);
 }
 
 export async function deleteSubscription(objectId) {

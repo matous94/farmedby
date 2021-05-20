@@ -124,7 +124,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 type="password"
                 id="password"
                 inputProps={{
-                  minLength: "5"
+                  minLength: "7"
                 }}
                 autoComplete="current-password"
               />

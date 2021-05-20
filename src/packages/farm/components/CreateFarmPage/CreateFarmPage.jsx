@@ -38,11 +38,8 @@ export default function CreateFarmPage() {
 
         const farm = await ApiClient.Farm.createFarm({
           ...farmData,
-          countryCode: getCountryCode(),
-          subscriptions: [],
-          pickupPoints: []
+          countryCode: getCountryCode()
         });
-        farm.owner = { objectId: user.objectId };
 
         logger.farm("CreateFarmPage -> createdFarm", farm);
         farmCreated(farm);
@@ -53,7 +50,7 @@ export default function CreateFarmPage() {
         setHasError(true);
       }
     },
-    [history, farmCreated, user]
+    [history, farmCreated]
   );
   return (
     <>

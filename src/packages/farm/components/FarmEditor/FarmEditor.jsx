@@ -40,8 +40,8 @@ export default function FarmEditor({
 
   const [formData, setFormData] = useState({
     about: farm.about ?? "",
-    city: farm.city ?? "",
     addressLevel1: farm.addressLevel1 ?? "",
+    city: farm.city ?? "",
     email: farm.email ?? "",
     isFarmPickupPoint: farm.isFarmPickupPoint ?? true,
     name: farm.name ?? "",
