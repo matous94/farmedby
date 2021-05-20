@@ -202,6 +202,7 @@ export default function FarmEditor({
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    multiline
                     disabled={!formData.isFarmPickupPoint}
                     onChange={onChange}
                     value={formData.pickupDay}
@@ -211,20 +212,6 @@ export default function FarmEditor({
                   />
                 </Grid>
               </>
-            )}
-            {mode === "edit" && (
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.published}
-                      onChange={onChange}
-                      name="published"
-                    />
-                  }
-                  label={t("farmForm.makeFarmPublic")}
-                />
-              </Grid>
             )}
           </Grid>
           {mode === "edit" && (
@@ -239,11 +226,25 @@ export default function FarmEditor({
               />
             </Box>
           )}
+          {mode === "edit" && (
+            <Grid sx={{ mt: "16px", textAlign: "center" }} item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.published}
+                    onChange={onChange}
+                    name="published"
+                  />
+                }
+                label={t("farmForm.makeFarmPublic")}
+              />
+            </Grid>
+          )}
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ margin: "24px 0 32px 0" }}
+            sx={{ mt: mode === "edit" ? "8px" : "24px", mb: "32px" }}
           >
             {submitButtonText}
           </Button>

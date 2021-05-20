@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useStoreActions } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 import ApiClient from "src/packages/api-client";
 import { FarmPropTypes } from "src/types";
@@ -42,7 +43,10 @@ export default function FarmLandingPage({
   return (
     <>
       <Typography
-        sx={{ mb: "16px" }}
+        sx={{
+          mb: "16px",
+          pr: isAdminMode ? [null, null, null, "110px"] : undefined
+        }}
         align="center"
         color="secondary"
         variant="h3"
@@ -50,15 +54,17 @@ export default function FarmLandingPage({
         {farm.name}
       </Typography>
       {isAdminMode ? (
-        <FarmEditor
-          mode="edit"
-          farm={farm}
-          onSubmit={submitHandler}
-          hasError={hasError}
-          isLoading={isLoading}
-          onErrorDissmiss={onErrorDissmiss}
-          submitButtonText={t("save")}
-        />
+        <Box sx={{ width: "100%", pr: [null, null, null, "110px"] }}>
+          <FarmEditor
+            mode="edit"
+            farm={farm}
+            onSubmit={submitHandler}
+            hasError={hasError}
+            isLoading={isLoading}
+            onErrorDissmiss={onErrorDissmiss}
+            submitButtonText={t("save")}
+          />
+        </Box>
       ) : (
         <FarmView farm={farm} isFarmOwner={isFarmOwner} />
       )}
