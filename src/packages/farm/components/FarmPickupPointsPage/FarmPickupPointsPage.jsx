@@ -68,7 +68,7 @@ export default function FarmPickupPointsPage({ farm, isAdminMode }) {
             }
           />
         )}
-        {!hasPickupPoints || isAdminMode ? (
+        {hasPickupPoints || isAdminMode ? (
           <PickupPointsTable
             farm={farm}
             onAdd={() => editorSwitch.switchOn()}

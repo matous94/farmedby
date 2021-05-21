@@ -33,6 +33,17 @@ export default function FarmPages() {
 
   const currentPage = pageName ? pages[pageName] : landingPage;
   const { PageContent } = currentPage;
+  let displayEnableOrderFormAlert = false;
+
+  if (status === "resolved") {
+    const hasSubscriptions = farm.subscriptions.length > 0;
+    const hasPickupPoints =
+      farm.isFarmPickupPoint || farm.pickupPoints.length > 0;
+    const isSubscriptionsPage = currentPage.name === pages.subscriptions.name;
+    if (hasSubscriptions && !hasPickupPoints && isSubscriptionsPage) {
+      displayEnableOrderFormAlert = true;
+    }
+  }
 
   return (
     <>
@@ -85,6 +96,11 @@ export default function FarmPages() {
               {!farm.published && isFarmOwner && (
                 <Alert variant="filled" severity="info">
                   {t("farmPages.farmIsNotPublishedAlert")}
+                </Alert>
+              )}
+              {displayEnableOrderFormAlert && (
+                <Alert variant="filled" severity="info">
+                  {t("subscription.enableOrderForm.alert")}
                 </Alert>
               )}
               {farm.isExampleFarm && (
