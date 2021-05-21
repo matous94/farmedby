@@ -9,7 +9,7 @@ export default function Footer() {
       sx={{
         width: "100vw",
         pt: ["24px", "32px"],
-        pb: ["16px", "24px"],
+        pb: ["16px"],
         px: ["16px", "24px", "32px"],
         background: (theme) => theme.palette.secondary.dark,
         display: "flex",
@@ -52,7 +52,16 @@ export default function Footer() {
           <Link to="/privacy-policy">Reklamace</Link>
         </Box>
       </Box>
-      <Typography sx={{ mt: "12px" }}>© 2021 FarmedBy.com</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: ["column", "row"],
+          mt: "16px"
+        }}
+      >
+        <Typography sx={{ mr: [null, "32px"] }}>matous@farmedby.com</Typography>
+        <Typography>© 2021 FarmedBy.com</Typography>
+      </Box>
     </Box>
   );
 }

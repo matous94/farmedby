@@ -91,9 +91,6 @@ function ProductCTA() {
                 {t("landingPage.subscribeToNewsletter")}
               </Button>
             </Box>
-            <Typography align="center" variant="caption">
-              {t("landingPage.contactDeveloper")} <b>matous@farmedby.com</b>
-            </Typography>
           </Box>
         </Grid>
         <Grid
