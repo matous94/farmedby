@@ -15,8 +15,6 @@ import Container from "@material-ui/core/Container";
 import Link from "src/components/Link";
 import logger from "src/packages/logger";
 
-import Copyright from "./Copyright";
-
 export default function SignUpView({ onSubmit, isLoading }) {
   const { t } = useTranslation();
   const inputRef = useRef();
@@ -163,9 +161,6 @@ export default function SignUpView({ onSubmit, isLoading }) {
             </Grid>
           </Grid>
         </Box>
-      </Box>
-      <Box sx={{ my: 5 }}>
-        <Copyright />
       </Box>
     </Container>
   );

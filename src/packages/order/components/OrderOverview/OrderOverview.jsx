@@ -70,7 +70,6 @@ export default function OrderOverview({ isAdminMode }) {
       <Paper
         sx={{
           width: "100%",
-          position: "relative",
           p: ["12px", null, "24px"]
         }}
       >

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useStoreActions } from "easy-peasy";
+import Box from "@material-ui/core/Box";
 
 import ApiClient from "src/packages/api-client";
 import logger from "src/packages/logger";
@@ -10,11 +11,13 @@ import PrivatePage from "src/components/PrivatePage";
 import CreateFarmPage from "src/packages/farm/components/CreateFarmPage";
 import { localStorageKeys } from "src/packages/local-storage";
 import useScrollToTop from "src/packages/hooks/useScrollToTop";
+import Footer from "src/components/Footer";
 
 import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
 import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
+import PrivacyPolicy from "src/pages/PrivacyPolicy";
 import FarmRouter from "src/packages/farm/components/FarmRouter";
 import FarmsPage from "src/packages/farm/components/FarmsPage";
 import OrderPage from "src/packages/order/components/OrderPage";
@@ -47,48 +50,60 @@ function App() {
     authenticateUser();
   }, [signIn, isLoading]);
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
   return (
-    <Switch>
-      <Route exact path="/">
-        <LandingPage />
-      </Route>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
+      {isLoading && <LoadingScreen />}
+      {!isLoading && (
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
 
-      <Route path="/error">
-        <ErrorPage />
-      </Route>
+          <Route path="/error">
+            <ErrorPage />
+          </Route>
 
-      <Route path="/sign-in">
-        <PublicPage key="sign-in" Page={SignInPage} />
-      </Route>
+          <Route path="/sign-in">
+            <PublicPage key="sign-in" Page={SignInPage} />
+          </Route>
 
-      <Route path="/sign-up">
-        <PublicPage key="sign-up" Page={SignUpPage} />
-      </Route>
+          <Route path="/sign-up">
+            <PublicPage key="sign-up" Page={SignUpPage} />
+          </Route>
 
-      <Route path="/create-farm">
-        <PrivatePage key="create-farm" Page={CreateFarmPage} />
-      </Route>
+          <Route path="/create-farm">
+            <PrivatePage key="create-farm" Page={CreateFarmPage} />
+          </Route>
 
-      <Route path="/farm">
-        <FarmRouter />
-      </Route>
+          <Route path="/farm">
+            <FarmRouter />
+          </Route>
 
-      <Route path="/farms">
-        <FarmsPage />
-      </Route>
+          <Route path="/farms">
+            <FarmsPage />
+          </Route>
 
-      <Route path="/order/:pageId">
-        <OrderPage />
-      </Route>
+          <Route path="/order/:pageId">
+            <OrderPage />
+          </Route>
 
-      <Route exact path="*">
-        <Redirect to="/" />
-      </Route>
-    </Switch>
+          <Route path="/privacy-policy">
+            <PrivacyPolicy />
+          </Route>
+
+          <Route exact path="*">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      )}
+      <Footer />
+    </Box>
   );
 }
 
