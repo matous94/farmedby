@@ -16,7 +16,8 @@ export default function Footer() {
         flexDirection: "column",
         alignItems: "center",
         mt: "auto",
-        color: (theme) => theme.palette.secondary.contrastText
+        color: (theme) => theme.palette.secondary.contrastText,
+        zIndex: (theme) => theme.zIndex.appBar
       }}
     >
       <Box
