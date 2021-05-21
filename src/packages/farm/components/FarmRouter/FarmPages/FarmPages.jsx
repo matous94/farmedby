@@ -112,7 +112,10 @@ export default function FarmPages() {
                 sx={{
                   pt: "16px",
                   pb: "64px",
-                  px: ["16px", "24px", "32px", "46px"]
+                  px: ["16px", "24px", "32px", "46px"],
+                  "@media (min-width: 1650px)": {
+                    paddingRight: "10vw"
+                  }
                 }}
               >
                 {currentPage.renderHeading && (
