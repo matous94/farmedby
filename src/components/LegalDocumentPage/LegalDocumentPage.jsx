@@ -9,6 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import AppBar from "src/components/AppBar";
 import { useAsync } from "src/packages/hooks";
 import ApiClient from "src/packages/api-client";
+import GenericFailureDialog from "src/components/GenericFailureDialog";
 
 /* const documentDataStructure = [
   {
@@ -64,6 +65,12 @@ export default function LegalDocumentPage({ documentId }) {
           mx: "auto"
         }}
       >
+        <GenericFailureDialog
+          isOpen={documentGetter.hasError}
+          onClose={() => {
+            window.location = "/";
+          }}
+        />
         {documentGetter.isLoading && (
           <CircularProgress sx={{ display: "block", mx: "auto" }} />
         )}

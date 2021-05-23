@@ -1,5 +1,12 @@
 {
   "legalDocument.privacyPolicy.heading": "Podmínky ochrany osobních údajů",
+  "legalDocument.privacyPolicy.link": "Ochrana osobních údajů",
+  "legalDocument.termsOfUse.heading": "Obchodní podmínky užívání FarmedBy.com",
+  "legalDocument.termsOfUse.link": "Obchodní podmínky",
+  "legalDocument.sellerTermsOfUse.heading": "Obchodní podmínky pro prodejce",
+  "legalDocument.sellerTermsOfUse.link": "Podmínky pro prodejce",
+  "legalDocument.claims.heading": "Reklamace",
+  "legalDocument.claims.link": "Reklamace",
   "aboutFarm": "O Farmě",
   "accommodation.heading": "Ubytování",
   "address": "Adresa",

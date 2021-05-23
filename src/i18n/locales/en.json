@@ -1,4 +1,12 @@
 {
+  "legalDocument.privacyPolicy.heading": "Privacy policy",
+  "legalDocument.privacyPolicy.link": "Privacy policy",
+  "legalDocument.termsOfUse.heading": "Terms of use",
+  "legalDocument.termsOfUse.link": "Terms of use",
+  "legalDocument.sellerTermsOfUse.heading": "Terms of use for sellers",
+  "legalDocument.sellerTermsOfUse.link": "Terms of use for sellers",
+  "legalDocument.claims.heading": "Claims",
+  "legalDocument.claims.link": "Claims",
   "aboutFarm": "About Farm",
   "accommodation.heading": "Accommodation",
   "address": "Address",

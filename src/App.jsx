@@ -17,7 +17,8 @@ import ErrorPage from "src/pages/ErrorPage";
 import LandingPage from "src/pages/LandingPage";
 import SignInPage from "src/pages/SignInPage";
 import SignUpPage from "src/pages/SignUpPage";
-import PrivacyPolicy from "src/pages/PrivacyPolicy";
+import PrivacyPolicyPage from "src/pages/PrivacyPolicyPage";
+import TermsOfUsePage from "src/pages/TermsOfUsePage";
 import FarmRouter from "src/packages/farm/components/FarmRouter";
 import FarmsPage from "src/packages/farm/components/FarmsPage";
 import OrderPage from "src/packages/order/components/OrderPage";
@@ -94,8 +95,20 @@ function App() {
           </Route>
 
           <Route path="/privacy-policy">
-            <PrivacyPolicy />
+            <PrivacyPolicyPage />
           </Route>
+
+          <Route path="/terms-of-use">
+            <TermsOfUsePage />
+          </Route>
+
+          {/* <Route path="/claims">
+            <PrivacyPolicyPage />
+          </Route> */}
+
+          {/* <Route path="/seller-terms-of-use">
+            <PrivacyPolicyPage />
+          </Route> */}
 
           <Route exact path="*">
             <Redirect to="/" />
