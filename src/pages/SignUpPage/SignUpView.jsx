@@ -1,11 +1,9 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -23,7 +21,6 @@ export default function SignUpView({ onSubmit, isLoading }) {
     firstName: "",
     lastName: "",
     password: ""
-    // didSubscribeToNewsletter: false
   });
   const onChange = (e) => {
     const change = {
@@ -63,6 +60,13 @@ export default function SignUpView({ onSubmit, isLoading }) {
         <Typography component="h1" variant="h5">
           {t("signUpPage.heading")}
         </Typography>
+        <Link
+          to="/sign-in"
+          variant="body1"
+          sx={{ fontWeight: "500", mt: "12px", mb: "8px" }}
+        >
+          {t("signUpPage.existingAccount")}
+        </Link>
         <Box
           component="form"
           sx={{
@@ -127,20 +131,6 @@ export default function SignUpView({ onSubmit, isLoading }) {
                 autoComplete="current-password"
               />
             </Grid>
-            {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    onChange={onChange}
-                    name="didSubscribeToNewsletter"
-                    checked={formData.didSubscribeToNewsletter}
-                    value="subscribeToNewsletter"
-                    color="primary"
-                  />
-                }
-                label={t("signUpPage.newsletterCheckbox")}
-              />
-            </Grid> */}
           </Grid>
           <Button
             disabled={isLoading}
@@ -148,18 +138,20 @@ export default function SignUpView({ onSubmit, isLoading }) {
             fullWidth
             variant="contained"
             sx={{
-              margin: (theme) => theme.spacing(3, 0, 2)
+              mt: "24px"
             }}
           >
             {t("signUp")}
           </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link to="/sign-in" variant="body2">
-                {t("signUpPage.existingAccount")}
-              </Link>
-            </Grid>
-          </Grid>
+          <Typography sx={{ mt: "8px", mb: "64px" }} variant="body2">
+            <Trans
+              i18nKey="signUpPage.userConsent.text"
+              components={{
+                TermsOfUseLink: <Link to="/terms-of-use" />,
+                PrivacyPolicyLink: <Link to="/privacy-policy" />
+              }}
+            />
+          </Typography>
         </Box>
       </Box>
     </Container>

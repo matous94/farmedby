@@ -39,7 +39,7 @@ export const supportedCountries = {
     flagSrc: skFlagSrc,
     countryName: "Slovenská republika",
     countryCode: "SK",
-    languageCode: "sk",
+    languageCode: "cs",
     currency: "€",
     illustrativeFarmId: "Z0AeJAol2Q",
     requiresAddressLevel1: false,

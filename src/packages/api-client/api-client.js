@@ -11,8 +11,11 @@ const ApiClient = {
   User: UserApiClient,
   Newsletter: NewsletterApiClient,
   LegalDocument: {
-    getLegalDocument(documentId) {
-      return callCloudFunction("getLegalDocument", { documentId });
+    getLegalDocument({ documentId, languageCode }) {
+      return callCloudFunction("getLegalDocument", {
+        documentId,
+        languageCode
+      });
     }
   }
 };

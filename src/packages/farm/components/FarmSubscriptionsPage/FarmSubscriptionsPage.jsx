@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -12,6 +12,7 @@ import { getCountry } from "src/i18n";
 import NumberedList from "src/components/NumberedList";
 import ApiClient from "src/packages/api-client";
 import { selectors } from "src/store";
+import Link from "src/components/Link";
 
 import SubscriptionEditor from "./SubscriptionEditor";
 import SubscriptionsTable from "./SubscriptionsTable";
@@ -185,21 +186,43 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
             <NoteField />
             <Heading>{t("subscriptionsPage.customerData.heading")}</Heading>
             <CustomerData />
-            <Button
-              disabled={Object.keys(orderDraft.subscriptionsById).length === 0}
-              type="submit"
-              color="secondary"
-              variant="contained"
+            <Box
               sx={{
-                minWidth: "200px",
                 my: ["36px", null, "64px"],
-                mx: "auto",
-                fontSize: ["1.4rem", "1.5rem"],
-                padding: ["12px 20px", "16px 32px"]
+                display: "flex",
+                justifyContent: "center",
+                width: "100%"
               }}
             >
-              {t("subscriptionsPage.submit.button")}
-            </Button>
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Button
+                  disabled={
+                    Object.keys(orderDraft.subscriptionsById).length === 0
+                  }
+                  type="submit"
+                  color="secondary"
+                  variant="contained"
+                  sx={{
+                    fontSize: ["1.4rem", "1.5rem"],
+                    padding: ["12px 20px", "16px 32px"]
+                  }}
+                >
+                  {t("subscriptionsPage.submit.button")}
+                </Button>
+                <Typography
+                  variant="body2"
+                  sx={{ maxWidth: "360px", mt: "8px" }}
+                >
+                  <Trans
+                    i18nKey="order.userConsent.text"
+                    components={{
+                      TermsOfUseLink: <Link to="/terms-of-use" />,
+                      PrivacyPolicyLink: <Link to="/privacy-policy" />
+                    }}
+                  />
+                </Typography>
+              </Box>
+            </Box>
           </>
         )}
       </Box>

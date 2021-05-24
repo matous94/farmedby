@@ -7,6 +7,8 @@
   "legalDocument.sellerTermsOfUse.link": "Terms of use for sellers",
   "legalDocument.claims.heading": "Claims",
   "legalDocument.claims.link": "Claims",
+  "signUpPage.userConsent.text": "By signing up, you agree to our <TermsOfUseLink>Terms of Use</TermsOfUseLink> and <PrivacyPolicyLink>Privacy Policy</PrivacyPolicyLink>.",
+  "order.userConsent.text": "By creating an order, you agree to our <TermsOfUseLink>Terms of Use</TermsOfUseLink> and <PrivacyPolicyLink>Privacy Policy</PrivacyPolicyLink>.",
   "aboutFarm": "About Farm",
   "accommodation.heading": "Accommodation",
   "address": "Address",

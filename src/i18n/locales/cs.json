@@ -7,6 +7,8 @@
   "legalDocument.sellerTermsOfUse.link": "Podmínky pro prodejce",
   "legalDocument.claims.heading": "Reklamace",
   "legalDocument.claims.link": "Reklamace",
+  "signUpPage.userConsent.text": "Registrováním souhlasím s <TermsOfUseLink>Obchodními podmínky</TermsOfUseLink> a <PrivacyPolicyLink>Podmínky ochrany osobních údajů</PrivacyPolicyLink>.",
+  "order.userConsent.text": "Odesláním objednávky souhlasím s <TermsOfUseLink>Obchodními podmínky</TermsOfUseLink> a <PrivacyPolicyLink>Podmínky ochrany osobních údajů</PrivacyPolicyLink>.",
   "aboutFarm": "O Farmě",
   "accommodation.heading": "Ubytování",
   "address": "Adresa",
