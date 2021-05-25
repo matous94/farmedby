@@ -16,6 +16,18 @@ export default function SubmitFeedbackDialog({ submitter }) {
   );
   const translationKey = "subscriptionsPage.howItWorks";
 
+  // const testResult = {
+  //   farm: {
+  //     email: "matous@farmedby.com"
+  //   },
+  //   pickupPoint: {
+  //     pickupDay: "Středa od 10 do 17 hodin",
+  //     deliveryPeriod: "week"
+  //   }
+  // };
+  // eslint-disable-next-line no-param-reassign
+  // submitter.result = testResult;
+
   const text = submitter.result && (
     <NumberedList
       translations={[
@@ -25,8 +37,16 @@ export default function SubmitFeedbackDialog({ submitter }) {
         t(`${translationKey}3`),
         t(`${translationKey}4`),
         <>
-          {t(`${translationKey}5`)}{" "}
-          <b>({submitter.result.pickupPoint.pickupDay})</b>
+          {t(`${translationKey}5`)}
+          <br />
+          <b>{t("pickupDayLabel")}:</b>
+          {` ${submitter.result.pickupPoint.pickupDay}`}
+          <br />
+          <b>{t("pickupPoint.deliveryPeriod.label")}:</b>
+          &nbsp;
+          {t(
+            `pickupPoint.deliveryPeriod.${submitter.result.pickupPoint.deliveryPeriod}`
+          )}
         </>
       ]}
       variant="body1"

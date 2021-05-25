@@ -9,6 +9,7 @@ import { FarmPropTypes } from "src/types";
 import Select from "src/components/Select";
 import { createAddress } from "src/packages/utils";
 import { selectors } from "src/store";
+import { DeliveryPeriodEnum } from "src/packages/pickup-point/delivery-period";
 
 function createOption(point) {
   const address = createAddress({
@@ -18,7 +19,6 @@ function createOption(point) {
   }).countryRelativeReverse;
   const nameLabel = i18next.t("name");
   const addressLabel = i18next.t("address");
-  const pickupDayLabel = i18next.t("pickupDayLabel");
   const pickupPointName = point.isFarmPickupPoint
     ? i18next.t("pickupPoint.isFarmPickupPoint.name")
     : point.name;
@@ -34,8 +34,11 @@ function createOption(point) {
         <b>{nameLabel}:</b>
         {` ${pickupPointName}`}
         <br />
-        <b>{pickupDayLabel}:</b>
+        <b>{i18next.t("pickupDayLabel")}:</b>
         {` ${point.pickupDay}`}
+        <br />
+        <b>{i18next.t("pickupPoint.deliveryPeriod.label")}:</b>
+        {` ${i18next.t(`pickupPoint.deliveryPeriod.${point.deliveryPeriod}`)}`}
       </span>
     )
   };
@@ -51,7 +54,7 @@ function PickupPointSelector({ farm }) {
     const result = {};
     const points = [...farm.pickupPoints];
     if (farm.isFarmPickupPoint) {
-      points.push(farm);
+      points.push({ ...farm, deliveryPeriod: DeliveryPeriodEnum.week });
     }
     points
       .map((point) => createOption(point))
@@ -81,6 +84,7 @@ function PickupPointSelector({ farm }) {
       addressLevel1: pickupPoint.addressLevel1,
       city: pickupPoint.city,
       countryCode: pickupPoint.countryCode,
+      deliveryPeriod: pickupPoint.deliveryPeriod,
       email: pickupPoint.email,
       isFarmPickupPoint: pickupPoint.isFarmPickupPoint,
       name: pickupPoint.name,

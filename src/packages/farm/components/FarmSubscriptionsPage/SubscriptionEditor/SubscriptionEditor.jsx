@@ -29,7 +29,7 @@ export default function SubscriptionEditor({
   currencyMultiplier
 }) {
   const { t } = useTranslation();
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit, reset, watch } = useForm({
     defaultValues: subscription
   });
   React.useEffect(() => {
@@ -46,6 +46,10 @@ export default function SubscriptionEditor({
     const savedSubscription = await ApiClient.Farm.saveSubscription({
       ...subscriptionToSubmit,
       farmId,
+      maximumNumberOfDeliveries: parseInt(
+        subscriptionToSubmit.maximumNumberOfDeliveries,
+        10
+      ),
       options: subscriptionToSubmit.options
         .filter(
           (option) => option.numberOfDeliveries && option.pricePerDelivery
@@ -62,6 +66,18 @@ export default function SubscriptionEditor({
   }
 
   const submitter = useAsync(onSubmit);
+  const { options } = watch();
+
+  const minimumNumberOfDeliveries =
+    isOpen === false
+      ? 1
+      : options.reduce((min, option) => {
+          if (option.numberOfDeliveries) {
+            const asNumber = parseInt(option.numberOfDeliveries, 10);
+            return typeof min === "number" ? Math.min(min, asNumber) : asNumber;
+          }
+          return min;
+        }, undefined);
 
   return (
     <>
@@ -72,47 +88,74 @@ export default function SubscriptionEditor({
         open={isOpen}
         onClose={onClose}
       >
-        <Box
-          component="form"
-          onSubmit={handleSubmit(submitter.execute)}
-          sx={{ display: "flex", flexDirection: "column" }}
-        >
-          <DialogTitle sx={{ pb: 0 }}>
-            {t("subscriptionEditor.heading")}
-          </DialogTitle>
-          <DialogContent>
-            <TextField
-              register={register}
-              name="name"
-              label={t("subscriptionsPage.subscriptionName")}
-              placeholder={t("subscriptionEditor.namePlaceholder")}
-              type="text"
-              required
-            />
-            <TextField
-              sx={{ marginBottom: "16px", marginTop: "10px" }}
-              register={register}
-              name="content"
-              label={t("subscriptionsPage.subscriptionContentHeading")}
-              placeholder={t("subscriptionEditor.contentPlaceholder")}
-              multiline
-              type="text"
-              required
-            />
-            <Pricing
-              displayPlaceholders={Boolean(subscription?.options?.length === 0)}
-              register={register}
-              currency={currency}
-              currencyMultiplier={currencyMultiplier}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button type="button" onClick={onClose}>
-              {t("cancel")}
-            </Button>
-            <Button type="submit">{t("save")}</Button>
-          </DialogActions>
-        </Box>
+        {isOpen && (
+          <Box
+            component="form"
+            onSubmit={handleSubmit(submitter.execute)}
+            sx={{ display: "flex", flexDirection: "column" }}
+          >
+            <DialogTitle sx={{ pb: 0 }}>
+              {t("subscriptionEditor.heading")}
+            </DialogTitle>
+            <DialogContent>
+              <TextField
+                register={register}
+                name="name"
+                label={t("subscriptionsPage.subscriptionName")}
+                placeholder={t("subscriptionEditor.namePlaceholder")}
+                type="text"
+                required
+              />
+              <TextField
+                sx={{ marginTop: "16px" }}
+                register={register}
+                name="content"
+                label={t("subscriptionsPage.subscriptionContentHeading")}
+                placeholder={t("subscriptionEditor.contentPlaceholder")}
+                multiline
+                type="text"
+                required
+              />
+              <TextField
+                sx={{ marginTop: "16px" }}
+                name="minimumNumberOfDeliveries"
+                label={t("subscription.minimumNumberOfDeliveries.label")}
+                type="number"
+                value={minimumNumberOfDeliveries || 1}
+                helperText={t(
+                  "subscription.minimumNumberOfDeliveries.helperText"
+                )}
+                disabled
+              />
+              <TextField
+                sx={{ my: "16px" }}
+                register={register}
+                name="maximumNumberOfDeliveries"
+                defaultValue={50}
+                label={t("subscription.maximumNumberOfDeliveries.label")}
+                type="number"
+                helperText={t(
+                  "subscription.maximumNumberOfDeliveries.helperText"
+                )}
+                required
+              />
+              <Pricing
+                displayPlaceholders={Boolean(
+                  subscription?.options?.length === 0
+                )}
+                register={register}
+                currency={currency}
+                currencyMultiplier={currencyMultiplier}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button type="button" onClick={onClose}>
+                {t("cancel")}
+              </Button>
+              <Button type="submit">{t("save")}</Button>
+            </DialogActions>
+          </Box>
+        )}
       </MuiDialog>
       <Dialog isLoading={submitter.isLoading} />
       <GenericFailureDialog
@@ -132,6 +175,7 @@ SubscriptionEditor.propTypes = {
 };
 SubscriptionEditor.defaultProps = {
   subscription: {
+    maximumNumberOfDeliveries: 50,
     name: "",
     content: "",
     options: []

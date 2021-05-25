@@ -39,7 +39,13 @@ export default function PickupPointData({ pickupPoint, sx }) {
       },
       { label: t("phoneNumber"), value: pickupPoint.phoneNumber },
       { label: t("webAddress"), href: pickupPoint.webUrl },
-      { label: t("pickupDayLabel"), value: pickupPoint.pickupDay }
+      { label: t("pickupDayLabel"), value: pickupPoint.pickupDay },
+      {
+        label: t("pickupPoint.deliveryPeriod.label"),
+        value: pickupPoint.deliveryPeriod
+          ? t(`pickupPoint.deliveryPeriod.${pickupPoint.deliveryPeriod}`)
+          : undefined
+      }
     ];
   }, [t, pickupPoint]);
 

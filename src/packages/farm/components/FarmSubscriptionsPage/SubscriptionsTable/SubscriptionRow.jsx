@@ -23,11 +23,6 @@ export default function SubscriptionRow({
   currency
 }) {
   const { name, content, options } = subscription;
-  const initialMinimum = options[0].numberOfDeliveries;
-  const minimumNumberOfDeliveries = options.reduce(
-    (min, option) => Math.min(min, option.numberOfDeliveries),
-    initialMinimum
-  );
   const updateNumberOfDeliveries = useStoreActions(
     (actions) => actions.orderDraft.updateNumberOfDeliveries
   );
@@ -53,7 +48,7 @@ export default function SubscriptionRow({
       <TableCell>{content}</TableCell>
       <PricingTableCell options={options} currency={currency} />
       <NumberOfDeliveriesTableCell
-        minimum={minimumNumberOfDeliveries}
+        subscription={subscription}
         onChange={(numberOfDeliveries) =>
           updateNumberOfDeliveries({ subscription, numberOfDeliveries })
         }

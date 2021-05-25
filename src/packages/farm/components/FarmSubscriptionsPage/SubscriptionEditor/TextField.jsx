@@ -17,5 +17,8 @@ export default function TextField({ register, ...rest }) {
   );
 }
 TextField.propTypes = {
-  register: PropTypes.func.isRequired
+  register: PropTypes.func
+};
+TextField.defaultProps = {
+  register: undefined
 };

@@ -41,6 +41,7 @@ export default function Pricing({
             }}
             sx={{ width: "48%" }}
             register={register}
+            defaultValue={index === 0 ? 1 : undefined}
             required={index === 0}
           />
           <TextField

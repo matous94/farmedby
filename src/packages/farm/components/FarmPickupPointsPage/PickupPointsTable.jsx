@@ -17,10 +17,12 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import Link from "@material-ui/core/Link";
 
 import { FarmPropTypes, PickupPointPropTypes } from "src/types";
+import { DeliveryPeriodEnum } from "src/packages/pickup-point/delivery-period";
 
 function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
   const {
     city,
+    deliveryPeriod,
     pickupDay,
     email,
     name,
@@ -54,7 +56,13 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
         <br />
         {postcode} {city}
       </TableCell>
-      <TableCell>{pickupDay}</TableCell>
+      <TableCell>
+        {pickupDay}
+        <br />
+        <b>{t("pickupPoint.deliveryPeriod.table.label")}:</b>
+        &nbsp;
+        {t(`pickupPoint.deliveryPeriod.${deliveryPeriod}`)}
+      </TableCell>
       <TableCell>
         {email && (
           <>
@@ -146,7 +154,7 @@ export default function PickupPointsTable({
             )}
             <TableCell>{t("name")}</TableCell>
             <TableCell>{t("address")}</TableCell>
-            <TableCell sx={{ minWidth: "200px" }}>
+            <TableCell sx={{ minWidth: "200px", whiteSpace: "nowrap" }}>
               {t("pickupDayLabel")}
             </TableCell>
             <TableCell>{t("contacts")}</TableCell>
@@ -160,6 +168,7 @@ export default function PickupPointsTable({
               onEdit={() => history.push(`/farm/${farm.objectId}`)}
               point={{
                 city: farm.city,
+                deliveryPeriod: DeliveryPeriodEnum.week,
                 email: farm.email,
                 isFarmPickupPoint: farm.isFarmPickupPoint,
                 name: farm.name,

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { DeliveryPeriodEnum } from "src/packages/pickup-point/delivery-period";
 
 export const UserPropTypes = PropTypes.shape({
   createdAt: PropTypes.string,
@@ -27,21 +28,27 @@ export const SubscriptionOptionPropTypes = PropTypes.shape({
 });
 export const SubscriptionPropTypes = PropTypes.shape({
   content: PropTypes.string,
+  maximumNumberOfDeliveries: PropTypes.number,
   name: PropTypes.string,
   objectId: PropTypes.string,
   options: PropTypes.arrayOf(SubscriptionOptionPropTypes)
 });
 
+export const DeliveryPeriodPropTypes = PropTypes.oneOf(
+  Object.values(DeliveryPeriodEnum)
+);
+
 export const PickupPointPropTypes = PropTypes.shape({
   addressLevel1: PropTypes.string,
   city: PropTypes.string,
   countryCode: PropTypes.string,
+  deliveryPeriod: DeliveryPeriodPropTypes,
   email: PropTypes.string,
   isFarmPickupPoint: PropTypes.bool,
   name: PropTypes.string,
   objectId: PropTypes.string,
   phoneNumber: PropTypes.string,
-  pickupDay: PropTypes.string, // eg Biweekly, on Wednesday, from 10am to 5pm
+  pickupDay: PropTypes.string, // eg Every Wednesday, from 10am to 5pm
   postcode: PropTypes.string,
   street: PropTypes.string,
   webUrl: PropTypes.string
@@ -54,12 +61,14 @@ export const OrderPreviewPropTypes = PropTypes.shape({
   pickupPointName: PropTypes.string,
   farmId: PropTypes.string
 });
+
 export const FarmPropTypes = PropTypes.shape({
   about: PropTypes.string,
   addressLevel1: PropTypes.string,
   subscriptions: PropTypes.arrayOf(SubscriptionPropTypes),
   city: PropTypes.string,
   countryCode: PropTypes.string,
+  deliveryPeriod: DeliveryPeriodPropTypes,
   email: PropTypes.string,
   isFarmPickupPoint: PropTypes.bool,
   name: PropTypes.string,

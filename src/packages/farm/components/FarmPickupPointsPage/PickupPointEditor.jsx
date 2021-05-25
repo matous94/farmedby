@@ -11,7 +11,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 
+import Select from "src/components/Select";
 import { PickupPointPropTypes } from "src/types";
+import { useDeliveryPeriodOptions } from "src/packages/pickup-point/delivery-period";
 
 export default function PickupPointEditor({
   onClose,
@@ -22,6 +24,10 @@ export default function PickupPointEditor({
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm({ defaultValues: point });
   const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const deliveryPeriodOptions = useDeliveryPeriodOptions();
+  const [deliveryPeriod, setDeliveryPeriod] = React.useState(
+    point?.deliveryPeriod || deliveryPeriodOptions.week.id
+  );
 
   const TextField = React.useCallback(
     (props) => {
@@ -50,7 +56,9 @@ export default function PickupPointEditor({
     >
       <Box
         component="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit((pickupPointData) =>
+          onSubmit({ ...pickupPointData, deliveryPeriod })
+        )}
         sx={{ display: "flex", flexDirection: "column" }}
       >
         <DialogTitle sx={{ paddingBottom: 0 }}>{t("pickupPoint")}</DialogTitle>
@@ -98,6 +106,15 @@ export default function PickupPointEditor({
             type="text"
             multiline
             required={true}
+          />
+          <Select
+            size="small"
+            margin="normal"
+            onChange={(e) => setDeliveryPeriod(e.target.value)}
+            value={deliveryPeriod}
+            label={t("pickupPoint.deliveryPeriod.label")}
+            options={deliveryPeriodOptions}
+            name="deliveryPeriod"
           />
           <TextField name="email" label={t("email")} type="email" />
           <TextField name="phoneNumber" label={t("phoneNumber")} type="tel" />

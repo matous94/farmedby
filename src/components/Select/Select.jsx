@@ -32,7 +32,8 @@ export default function Select({
   disabled,
   itemHeight,
   size,
-  sx
+  sx,
+  margin
 }) {
   const isChecked = (id) => {
     if (multiple) {
@@ -44,6 +45,7 @@ export default function Select({
   return (
     <FormControl
       size={size}
+      margin={margin}
       variant="outlined"
       fullWidth
       required={required}
@@ -108,7 +110,8 @@ Select.propTypes = {
   sx: PropTypes.shape({}),
   size: PropTypes.string,
   itemHeight: PropTypes.number,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  margin: PropTypes.string
 };
 Select.defaultProps = {
   multiple: false,
@@ -117,5 +120,6 @@ Select.defaultProps = {
   sx: undefined,
   size: undefined,
   itemHeight: undefined,
-  disabled: false
+  disabled: false,
+  margin: undefined
 };
