@@ -134,13 +134,20 @@ export default function FarmPages() {
                 />
               </Box>
               {isFarmOwner && !currentPage.private && (
-                <Box sx={{ position: "fixed", bottom: "16px", right: "24px" }}>
+                <Box
+                  sx={{
+                    position: "fixed",
+                    bottom: "24px",
+                    right: "24px",
+                    zIndex: 1101
+                  }}
+                >
                   <Fab
                     onClick={toggleAdminMode}
                     sx={{ minWidth: "80px" }}
                     size="medium"
                     variant="extended"
-                    color="secondary"
+                    color="primary"
                   >
                     {isAdminMode
                       ? t("farmPages.switchToViewMode")
