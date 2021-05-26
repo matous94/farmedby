@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import dayjs from "dayjs";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -13,6 +14,11 @@ import AddPointRow from "./AddPointRow";
 import HeadingsRow from "./HeadingsRow";
 import SubscriptionRow from "./SubscriptionRow";
 import PriceSumRow from "./PriceSumRow";
+
+function isExpired(endOfSeason) {
+  if (endOfSeason == null) return false;
+  return dayjs(endOfSeason) < dayjs(dayjs().format("MM-DD-YYYY"));
+}
 
 function SubscriptionsTable({ farm, onDelete, isAdminMode, openEditor }) {
   const { subscriptions } = farm;
@@ -33,6 +39,10 @@ function SubscriptionsTable({ farm, onDelete, isAdminMode, openEditor }) {
           {isAdminMode && <AddPointRow onAdd={() => openEditor()} />}
 
           {[...subscriptions]
+            .filter(
+              (subscription) =>
+                isAdminMode || !isExpired(subscription.endOfSeason)
+            )
             .sort((a, b) => {
               if (a.name === b.name) return 0;
               if (a.name < b.name) return -1;
@@ -41,6 +51,7 @@ function SubscriptionsTable({ farm, onDelete, isAdminMode, openEditor }) {
             .map((subscription) => (
               <SubscriptionRow
                 isAdminMode={isAdminMode}
+                isExpired={isExpired(subscription.endOfSeason)}
                 key={subscription.objectId}
                 subscription={subscription}
                 onEdit={() => openEditor(subscription)}

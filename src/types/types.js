@@ -28,6 +28,7 @@ export const SubscriptionOptionPropTypes = PropTypes.shape({
 });
 export const SubscriptionPropTypes = PropTypes.shape({
   content: PropTypes.string,
+  endOfSeason: PropTypes.string,
   maximumNumberOfDeliveries: PropTypes.number,
   name: PropTypes.string,
   objectId: PropTypes.string,

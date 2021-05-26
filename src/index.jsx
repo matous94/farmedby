@@ -6,6 +6,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import GlobalStyles from "@material-ui/core/GlobalStyles";
 import { ThemeProvider } from "@material-ui/core/styles";
 import dayjs from "dayjs";
+import AdapterDayjs from "@material-ui/lab/AdapterDayjs";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 
 import { setupI18n, getCountryCode } from "src/i18n";
 import { createStore } from "src/store";
@@ -40,13 +42,18 @@ async function renderReactApp() {
             <CssBaseline />
             <GlobalStyles
               styles={`
+                body {
+                  overflow-x: hidden;
+                }
                 input[type=number]::-webkit-inner-spin-button, 
                 input[type=number]::-webkit-outer-spin-button {  
                   opacity: 1;
                 }
               `}
             />
-            <App key={getCountryCode()} />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <App key={getCountryCode()} />
+            </LocalizationProvider>
           </ThemeProvider>
         </StoreProvider>
       </Router>

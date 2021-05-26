@@ -1,7 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import dayjs from "dayjs";
-import "dayjs/locale/cs";
+import csDatesLocale from "dayjs/locale/cs";
+import enDatesLocale from "dayjs/locale/en";
 
 import { localStorageKeys } from "src/packages/local-storage";
 
@@ -23,7 +24,9 @@ export const supportedCountries = {
     currency: "Kč",
     illustrativeFarmId: "qHgur81fHZ",
     requiresAddressLevel1: false,
-    currencyMultiplier: 1
+    currencyMultiplier: 1,
+    datesLocale: csDatesLocale,
+    dateMask: "__.__.____"
   },
   GB: {
     translation: enLocales,
@@ -34,7 +37,9 @@ export const supportedCountries = {
     currency: "£",
     illustrativeFarmId: "Qq3qOsnAqp",
     requiresAddressLevel1: true,
-    currencyMultiplier: 0.034
+    currencyMultiplier: 0.034,
+    datesLocale: enDatesLocale,
+    dateMask: "__/__/____"
   },
   SK: {
     translation: csLocales,
@@ -45,7 +50,9 @@ export const supportedCountries = {
     currency: "€",
     illustrativeFarmId: "Z0AeJAol2Q",
     requiresAddressLevel1: false,
-    currencyMultiplier: 0.039
+    currencyMultiplier: 0.039,
+    datesLocale: csDatesLocale,
+    dateMask: "__.__.____"
   }
 };
 
@@ -64,6 +71,14 @@ export function getLanguageCode(code = countryCode) {
 
 export function getCountryCode() {
   return countryCode;
+}
+
+export function getDatesLocale(code = countryCode) {
+  return getCountry(code).datesLocale;
+}
+
+export function getDateMask(code = countryCode) {
+  return getCountry(code).dateMask;
 }
 
 export function getCurrency(code = countryCode) {

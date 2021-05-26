@@ -1,4 +1,5 @@
 {
+  "datePlaceholder": "mm/dd/yyyy",
   "legalDocument.privacyPolicy.heading": "Privacy policy",
   "legalDocument.privacyPolicy.link": "Privacy policy",
   "legalDocument.termsOfUse.heading": "Terms of use",
@@ -109,9 +110,11 @@
   "signUpPage.newsletterCheckbox": "Subscribe to FarmedBy newsletter",
   "somethingWentWrong": "Something went wrong",
   "sortBy": "Sort by",
+  "subscription.endOfSeason.label": "End of season / orders",
+  "subscription.endOfSeason.helperText": "If provided, once \"End of season\" date is reached, the subscription won't be visible to customers anymore. Also if \"Maximum deliveries\" is not provided, end of season date will be used to determine the maximum possible order.",
   "subscription.maximumNumberOfDeliveries.label": "Maximum deliveries in weeks",
   "subscription.minimumNumberOfDeliveries.label": "Minimum deliveries",
-  "subscription.maximumNumberOfDeliveries.helperText" : "It is divided by pickup point frequency, to determine maximum possible order.",
+  "subscription.maximumNumberOfDeliveries.helperText" : "It is divided by pickup point frequency, to determine the maximum possible order.",
   "subscription.minimumNumberOfDeliveries.helperText" : "Determined automatically from the pricing below.",
   "subscription.calculator.heading": "Price calculator",
   "subscription.calculator.text": "Contact the farmer to place an order",

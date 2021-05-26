@@ -17,6 +17,7 @@ import PriceTableCell from "./PriceTableCell";
 
 export default function SubscriptionRow({
   subscription,
+  isExpired,
   onEdit,
   onDelete,
   isAdminMode,
@@ -31,7 +32,12 @@ export default function SubscriptionRow({
   );
 
   return (
-    <TableRow>
+    <TableRow
+      sx={{
+        background: (theme) =>
+          isExpired ? theme.palette.warning.light : "inherit"
+      }}
+    >
       {isAdminMode && (
         <TableCell>
           <ButtonGroup disableElevation variant="contained" color="primary">
@@ -67,6 +73,7 @@ SubscriptionRow.propTypes = {
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
   isAdminMode: PropTypes.bool.isRequired,
+  isExpired: PropTypes.bool.isRequired,
   currency: PropTypes.string.isRequired
 };
 SubscriptionRow.defaultProps = {

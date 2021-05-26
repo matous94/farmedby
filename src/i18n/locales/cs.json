@@ -1,4 +1,5 @@
 {
+  "datePlaceholder": "dd.mm.rrrr",
   "legalDocument.privacyPolicy.heading": "Podmínky ochrany osobních údajů",
   "legalDocument.privacyPolicy.link": "Ochrana osobních údajů",
   "legalDocument.termsOfUse.heading": "Obchodní podmínky užívání FarmedBy.com",
@@ -109,6 +110,8 @@
   "signUpPage.newsletterCheckbox": "Chci novinky od FarmedBy na email.",
   "somethingWentWrong": "Něco se porouchalo",
   "sortBy": "Řadit dle",
+  "subscription.endOfSeason.label": "Konec sezóny / objednávek",
+  "subscription.endOfSeason.helperText": "Pokud zadáte datum \"Konec sezóny / objednávek\", tak se po jeho uplynutí, předplatné přestane zobrazovat zákazníkům. Zároveň pokud nebude zadán \"Maximální počet závozů\" bude datum použito k dopočítání maximální objednávky.",
   "subscription.maximumNumberOfDeliveries.label": "Maximální počet závozů v týdnech",
   "subscription.maximumNumberOfDeliveries.helperText" : "Pro určení maximální objednávky se vydělí frekvencí odběrového místa.",
   "subscription.minimumNumberOfDeliveries.helperText" : "Vypočítá se automaticky z ceníku níže.",

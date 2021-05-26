@@ -14,7 +14,7 @@ export default function NumberOfDeliveriesTableCell({
   value
 }) {
   const selectedPoint = useStoreState(selectors.orderDraft.getPickupPoint);
-  const { options, maximumNumberOfDeliveries } = subscription;
+  const { options, maximumNumberOfDeliveries = 50 } = subscription;
 
   const minimum = React.useMemo(() => {
     const initialMinimum = options[0].numberOfDeliveries;
@@ -35,11 +35,17 @@ export default function NumberOfDeliveriesTableCell({
     }
   }, [minimum, maximum, onChange, value, selectedPoint]);
 
+  let helperText = `${minimum} -${maximum}`;
+  if (minimum > maximum) helperText = "";
+  if (minimum === maximum) {
+    helperText = `Min/Max = ${minimum}`;
+  }
+
   return (
-    <TableCell sx={{ textAlign: "center" }}>
+    <TableCell sx={{ textAlign: "center", whiteSpace: "nowrap" }}>
       <TextField
         disabled={minimum > maximum}
-        helperText={minimum > maximum ? "" : `0 - ${maximum}`}
+        helperText={helperText}
         onChange={(e) => {
           const numberOfDeliveries = e.target.value;
           e.target.reportValidity();
@@ -59,6 +65,7 @@ export default function NumberOfDeliveriesTableCell({
         margin="dense"
         size="small"
         type="number"
+        sx={{ alignItems: "center" }}
         inputProps={{
           min: minimum,
           max: maximum

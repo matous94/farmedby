@@ -10,12 +10,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Box from "@material-ui/core/Box";
+import DatePicker from "@material-ui/lab/DatePicker";
 
 import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import { SubscriptionPropTypes } from "src/types";
 import ApiClient from "src/packages/api-client";
 import { useAsync } from "src/packages/hooks";
+import { getDateMask } from "src/i18n";
 
 import TextField from "./TextField";
 import Pricing from "./Pricing";
@@ -29,9 +31,11 @@ export default function SubscriptionEditor({
   currencyMultiplier
 }) {
   const { t } = useTranslation();
-  const { register, handleSubmit, reset, watch } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     defaultValues: subscription
   });
+  const [endOfSeason, setEndOfSeason] = React.useState(null);
+
   React.useEffect(() => {
     if (isOpen) reset(subscription);
   }, [isOpen, reset, subscription]);
@@ -43,13 +47,15 @@ export default function SubscriptionEditor({
   );
 
   async function onSubmit(subscriptionToSubmit) {
+    const { maximumNumberOfDeliveries } = subscriptionToSubmit;
+    const parsedMaximum = maximumNumberOfDeliveries
+      ? parseInt(subscriptionToSubmit.maximumNumberOfDeliveries, 10)
+      : undefined;
     const savedSubscription = await ApiClient.Farm.saveSubscription({
       ...subscriptionToSubmit,
       farmId,
-      maximumNumberOfDeliveries: parseInt(
-        subscriptionToSubmit.maximumNumberOfDeliveries,
-        10
-      ),
+      endOfSeason: endOfSeason ? endOfSeason.format("MM-DD-YYYY") : undefined,
+      maximumNumberOfDeliveries: parsedMaximum,
       options: subscriptionToSubmit.options
         .filter(
           (option) => option.numberOfDeliveries && option.pricePerDelivery
@@ -66,18 +72,18 @@ export default function SubscriptionEditor({
   }
 
   const submitter = useAsync(onSubmit);
-  const { options } = watch();
+  // const { options } = watch();
 
-  const minimumNumberOfDeliveries =
-    isOpen === false
-      ? 1
-      : options.reduce((min, option) => {
-          if (option.numberOfDeliveries) {
-            const asNumber = parseInt(option.numberOfDeliveries, 10);
-            return typeof min === "number" ? Math.min(min, asNumber) : asNumber;
-          }
-          return min;
-        }, undefined);
+  // const minimumNumberOfDeliveries =
+  //   isOpen === false
+  //     ? 1
+  //     : options.reduce((min, option) => {
+  //         if (option.numberOfDeliveries) {
+  //           const asNumber = parseInt(option.numberOfDeliveries, 10);
+  //           return typeof min === "number" ? Math.min(min, asNumber) : asNumber;
+  //         }
+  //         return min;
+  //       }, undefined);
 
   return (
     <>
@@ -117,7 +123,45 @@ export default function SubscriptionEditor({
                 required
               />
               <TextField
-                sx={{ marginTop: "16px" }}
+                sx={{ my: "16px" }}
+                register={register}
+                name="maximumNumberOfDeliveries"
+                placeholder="50"
+                label={t("subscription.maximumNumberOfDeliveries.label")}
+                type="number"
+                helperText={t(
+                  "subscription.maximumNumberOfDeliveries.helperText"
+                )}
+              />
+              <DatePicker
+                label={t("subscription.endOfSeason.label")}
+                mask={getDateMask()}
+                value={endOfSeason}
+                onChange={(newValue) => {
+                  setEndOfSeason(newValue);
+                }}
+                renderInput={(params) => {
+                  // eslint-disable-next-line no-param-reassign
+                  params.inputProps.placeholder = t("datePlaceholder");
+                  return (
+                    <TextField
+                      // eslint-disable-next-line react/jsx-props-no-spreading
+                      {...params}
+                      FormHelperTextProps={{
+                        sx: {
+                          mx: "6px"
+                        }
+                      }}
+                      sx={{
+                        mb: "16px"
+                      }}
+                      helperText={t("subscription.endOfSeason.helperText")}
+                    />
+                  );
+                }}
+              />
+              {/* <TextField
+                sx={{ my: "16px" }}
                 name="minimumNumberOfDeliveries"
                 label={t("subscription.minimumNumberOfDeliveries.label")}
                 type="number"
@@ -126,19 +170,7 @@ export default function SubscriptionEditor({
                   "subscription.minimumNumberOfDeliveries.helperText"
                 )}
                 disabled
-              />
-              <TextField
-                sx={{ my: "16px" }}
-                register={register}
-                name="maximumNumberOfDeliveries"
-                defaultValue={50}
-                label={t("subscription.maximumNumberOfDeliveries.label")}
-                type="number"
-                helperText={t(
-                  "subscription.maximumNumberOfDeliveries.helperText"
-                )}
-                required
-              />
+              /> */}
               <Pricing
                 displayPlaceholders={Boolean(
                   subscription?.options?.length === 0
@@ -175,7 +207,7 @@ SubscriptionEditor.propTypes = {
 };
 SubscriptionEditor.defaultProps = {
   subscription: {
-    maximumNumberOfDeliveries: 50,
+    maximumNumberOfDeliveries: undefined,
     name: "",
     content: "",
     options: []
