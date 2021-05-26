@@ -35,7 +35,7 @@ export default function NumberOfDeliveriesTableCell({
     }
   }, [minimum, maximum, onChange, value, selectedPoint]);
 
-  let helperText = `${minimum} -${maximum}`;
+  let helperText = `${minimum} - ${maximum}`;
   if (minimum > maximum) helperText = "";
   if (minimum === maximum) {
     helperText = `Min/Max = ${minimum}`;
