@@ -59,7 +59,7 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
       <TableCell>
         {pickupDay}
         <br />
-        <b>{t("pickupPoint.deliveryPeriod.table.label")}:</b>
+        <b>{t("pickupPoint.deliveryPeriod.label")}:</b>
         &nbsp;
         {t(`pickupPoint.deliveryPeriod.${deliveryPeriod}`)}
       </TableCell>
