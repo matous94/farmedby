@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export function getPricePerDelivery({ subscription, numberOfDeliveries }) {
   const { options } = subscription;
   const initialPrice = options[0].pricePerDelivery;
@@ -9,4 +11,9 @@ export function getPricePerDelivery({ subscription, numberOfDeliveries }) {
     }
     return price;
   }, initialPrice);
+}
+
+export function isSubscriptionExpired(endOfSeason) {
+  if (endOfSeason == null) return false;
+  return dayjs(endOfSeason) < dayjs(dayjs().format("MM-DD-YYYY"));
 }

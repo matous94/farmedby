@@ -18,12 +18,57 @@ import { SubscriptionPropTypes } from "src/types";
 import ApiClient from "src/packages/api-client";
 import { useAsync } from "src/packages/hooks";
 import { getDateMask } from "src/i18n";
+import { isSubscriptionExpired } from "src/packages/farm/utils";
 
 import TextField from "./TextField";
 import Pricing from "./Pricing";
 
-export default function SubscriptionEditor({
+export default function SubscriptionEditorDialog({
   isOpen,
+  onClose,
+  farmId,
+  subscription,
+  currency,
+  currencyMultiplier
+}) {
+  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
+  return (
+    <MuiDialog
+      fullScreen={isDownSm}
+      fullWidth
+      maxWidth="xs"
+      open={isOpen}
+      onClose={onClose}
+    >
+      <SubscriptionEditor
+        subscription={subscription}
+        onClose={onClose}
+        farmId={farmId}
+        currency={currency}
+        currencyMultiplier={currencyMultiplier}
+      />
+    </MuiDialog>
+  );
+}
+SubscriptionEditorDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  farmId: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  subscription: SubscriptionPropTypes,
+  currency: PropTypes.string.isRequired,
+  currencyMultiplier: PropTypes.number.isRequired
+};
+SubscriptionEditorDialog.defaultProps = {
+  subscription: {
+    maximumNumberOfDeliveries: undefined,
+    name: "",
+    content: "",
+    options: []
+  }
+};
+
+function SubscriptionEditor({
   farmId,
   onClose,
   subscription,
@@ -31,17 +76,12 @@ export default function SubscriptionEditor({
   currencyMultiplier
 }) {
   const { t } = useTranslation();
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: subscription
   });
-  const [endOfSeason, setEndOfSeason] = React.useState(null);
-
-  React.useEffect(() => {
-    if (isOpen) reset(subscription);
-  }, [isOpen, reset, subscription]);
-
-  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-
+  const [endOfSeason, setEndOfSeason] = React.useState(
+    subscription.endOfSeason || null
+  );
   const subscriptionSaved = useStoreActions(
     (actions) => actions.subscriptionSaved
   );
@@ -87,80 +127,71 @@ export default function SubscriptionEditor({
 
   return (
     <>
-      <MuiDialog
-        fullScreen={isDownSm}
-        fullWidth
-        maxWidth="xs"
-        open={isOpen}
-        onClose={onClose}
+      <Box
+        component="form"
+        onSubmit={handleSubmit(submitter.execute)}
+        sx={{ display: "flex", flexDirection: "column" }}
       >
-        {isOpen && (
-          <Box
-            component="form"
-            onSubmit={handleSubmit(submitter.execute)}
-            sx={{ display: "flex", flexDirection: "column" }}
-          >
-            <DialogTitle sx={{ pb: 0 }}>
-              {t("subscriptionEditor.heading")}
-            </DialogTitle>
-            <DialogContent>
-              <TextField
-                register={register}
-                name="name"
-                label={t("subscriptionsPage.subscriptionName")}
-                placeholder={t("subscriptionEditor.namePlaceholder")}
-                type="text"
-                required
-              />
-              <TextField
-                sx={{ marginTop: "16px" }}
-                register={register}
-                name="content"
-                label={t("subscriptionsPage.subscriptionContentHeading")}
-                placeholder={t("subscriptionEditor.contentPlaceholder")}
-                multiline
-                type="text"
-                required
-              />
-              <TextField
-                sx={{ my: "16px" }}
-                register={register}
-                name="maximumNumberOfDeliveries"
-                placeholder="50"
-                label={t("subscription.maximumNumberOfDeliveries.label")}
-                type="number"
-                helperText={t(
-                  "subscription.maximumNumberOfDeliveries.helperText"
-                )}
-              />
-              <DatePicker
-                label={t("subscription.endOfSeason.label")}
-                mask={getDateMask()}
-                value={endOfSeason}
-                onChange={(newValue) => {
-                  setEndOfSeason(newValue);
-                }}
-                renderInput={(params) => {
-                  // eslint-disable-next-line no-param-reassign
-                  params.inputProps.placeholder = t("datePlaceholder");
-                  return (
-                    <TextField
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...params}
-                      FormHelperTextProps={{
-                        sx: {
-                          mx: "6px"
-                        }
-                      }}
-                      sx={{
-                        mb: "16px"
-                      }}
-                      helperText={t("subscription.endOfSeason.helperText")}
-                    />
-                  );
-                }}
-              />
-              {/* <TextField
+        <DialogTitle sx={{ pb: 0 }}>
+          {t("subscriptionEditor.heading")}
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            register={register}
+            name="name"
+            label={t("subscriptionsPage.subscriptionName")}
+            placeholder={t("subscriptionEditor.namePlaceholder")}
+            type="text"
+            required
+          />
+          <TextField
+            sx={{ marginTop: "16px" }}
+            register={register}
+            name="content"
+            label={t("subscriptionsPage.subscriptionContentHeading")}
+            placeholder={t("subscriptionEditor.contentPlaceholder")}
+            multiline
+            type="text"
+            required
+          />
+          <TextField
+            sx={{ my: "16px" }}
+            register={register}
+            name="maximumNumberOfDeliveries"
+            placeholder="50"
+            label={t("subscription.maximumNumberOfDeliveries.label")}
+            type="number"
+            helperText={t("subscription.maximumNumberOfDeliveries.helperText")}
+          />
+          <DatePicker
+            label={t("subscription.endOfSeason.label")}
+            mask={getDateMask()}
+            value={endOfSeason}
+            onChange={(newValue) => {
+              setEndOfSeason(newValue);
+            }}
+            renderInput={(params) => {
+              // eslint-disable-next-line no-param-reassign
+              params.inputProps.placeholder = t("datePlaceholder");
+              return (
+                <TextField
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...params}
+                  error={isSubscriptionExpired(endOfSeason)}
+                  FormHelperTextProps={{
+                    sx: {
+                      mx: "6px"
+                    }
+                  }}
+                  sx={{
+                    mb: "16px"
+                  }}
+                  helperText={t("subscription.endOfSeason.helperText")}
+                />
+              );
+            }}
+          />
+          {/* <TextField
                 sx={{ my: "16px" }}
                 name="minimumNumberOfDeliveries"
                 label={t("subscription.minimumNumberOfDeliveries.label")}
@@ -171,24 +202,20 @@ export default function SubscriptionEditor({
                 )}
                 disabled
               /> */}
-              <Pricing
-                displayPlaceholders={Boolean(
-                  subscription?.options?.length === 0
-                )}
-                register={register}
-                currency={currency}
-                currencyMultiplier={currencyMultiplier}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button type="button" onClick={onClose}>
-                {t("cancel")}
-              </Button>
-              <Button type="submit">{t("save")}</Button>
-            </DialogActions>
-          </Box>
-        )}
-      </MuiDialog>
+          <Pricing
+            displayPlaceholders={Boolean(subscription?.options?.length === 0)}
+            register={register}
+            currency={currency}
+            currencyMultiplier={currencyMultiplier}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button type="button" onClick={onClose}>
+            {t("cancel")}
+          </Button>
+          <Button type="submit">{t("save")}</Button>
+        </DialogActions>
+      </Box>
       <Dialog isLoading={submitter.isLoading} />
       <GenericFailureDialog
         isOpen={submitter.hasError}
@@ -198,18 +225,9 @@ export default function SubscriptionEditor({
   );
 }
 SubscriptionEditor.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
   farmId: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
-  subscription: SubscriptionPropTypes,
+  subscription: SubscriptionPropTypes.isRequired,
   currency: PropTypes.string.isRequired,
   currencyMultiplier: PropTypes.number.isRequired
-};
-SubscriptionEditor.defaultProps = {
-  subscription: {
-    maximumNumberOfDeliveries: undefined,
-    name: "",
-    content: "",
-    options: []
-  }
 };
