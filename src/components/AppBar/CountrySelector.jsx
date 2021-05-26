@@ -60,7 +60,6 @@ export default function CountrySelector() {
       </Box>
       <Menu
         elevation={1}
-        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center"
