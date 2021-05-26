@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { styled } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import MuiTableCell from "@material-ui/core/TableCell";
@@ -14,9 +13,18 @@ import Link from "src/components/Link";
 import { ProductTypesPropTypes } from "src/types";
 import { createAddress } from "src/packages/utils";
 
-const TableCell = styled(MuiTableCell)({
-  whiteSpace: "nowrap"
-});
+// eslint-disable-next-line react/prop-types
+const TableCell = ({ sx, ...rest }) => (
+  <MuiTableCell
+    sx={{
+      whiteSpace: "nowrap",
+      ...sx
+    }}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...rest}
+  />
+);
+
 const deliversToPropTypes = PropTypes.arrayOf(
   PropTypes.shape({
     city: PropTypes.string,
