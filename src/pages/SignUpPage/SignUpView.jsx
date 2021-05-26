@@ -63,7 +63,13 @@ export default function SignUpView({ onSubmit, isLoading }) {
         <Link
           to="/sign-in"
           variant="body1"
-          sx={{ fontWeight: "500", mt: "12px", mb: "8px" }}
+          sx={{
+            fontWeight: "500",
+            mt: "12px",
+            mb: "8px",
+            width: "100%",
+            textAlign: "center"
+          }}
         >
           {t("signUpPage.existingAccount")}
         </Link>
