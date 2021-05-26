@@ -39,7 +39,7 @@ export default function NumberOfDeliveriesTableCell({
     <TableCell sx={{ textAlign: "center" }}>
       <TextField
         disabled={minimum > maximum}
-        helperText={minimum > maximum ? "" : `${minimum} - ${maximum}`}
+        helperText={minimum > maximum ? "" : `0 - ${maximum}`}
         onChange={(e) => {
           const numberOfDeliveries = e.target.value;
           e.target.reportValidity();
