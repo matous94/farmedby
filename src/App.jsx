@@ -56,7 +56,8 @@ function App() {
       sx={{
         minHeight: "100vh",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        overflowX: "hidden"
       }}
     >
       {isLoading && <LoadingScreen />}

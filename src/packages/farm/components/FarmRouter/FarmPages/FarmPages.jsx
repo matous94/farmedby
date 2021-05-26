@@ -7,7 +7,6 @@ import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Alert from "@material-ui/core/Alert";
 import Typography from "@material-ui/core/Typography";
-// import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useSwitch } from "src/packages/hooks";
 import { selectors } from "src/store";
@@ -29,7 +28,6 @@ export default function FarmPages() {
   const { status, farm, isFarmOwner } = useGetFarm();
   const toggleAdminMode = useStoreActions((actions) => actions.toggleAdminMode);
   const isAdminMode = useStoreState(selectors.createIsAdminMode(farmId));
-  // const isUpMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   const currentPage = pageName ? pages[pageName] : landingPage;
   const { PageContent } = currentPage;
@@ -54,7 +52,7 @@ export default function FarmPages() {
         }}
       />
       <AppBar onMenuClick={drawer.switchOn} />
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", width: "100%" }}>
         <Box
           component="nav"
           sx={{
@@ -75,9 +73,7 @@ export default function FarmPages() {
           component="main"
           position="relative"
           sx={{
-            // width: isUpMd ? `calc(100vw - ${drawerWidth})` : "100vw",
-            // width: "100%",
-            flexGrow: "1",
+            flexGrow: 1,
             minHeight: `calc(100vh - ${appBarMinHeight}px)`,
             overflowX: "auto"
           }}

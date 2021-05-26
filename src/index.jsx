@@ -42,9 +42,6 @@ async function renderReactApp() {
             <CssBaseline />
             <GlobalStyles
               styles={`
-                body {
-                  overflow-x: hidden;
-                }
                 input[type=number]::-webkit-inner-spin-button, 
                 input[type=number]::-webkit-outer-spin-button {  
                   opacity: 1;
