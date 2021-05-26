@@ -1,5 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import dayjs from "dayjs";
+import "dayjs/locale/cs";
 
 import { localStorageKeys } from "src/packages/local-storage";
 
@@ -90,12 +92,14 @@ export async function setupI18n({ onCountryChange }) {
     },
     {}
   );
+
+  const { languageCode } = getCountry();
+
   await i18n
     .use(initReactI18next) // passes i18n down to react-i18next
     .init({
       resources,
-      lng: getCountry().languageCode,
-      // lng: "cs",
+      lng: languageCode,
       fallbackLng: false,
       keySeparator: false,
       debug: process.env.NODE_ENV === "development",
@@ -103,6 +107,8 @@ export async function setupI18n({ onCountryChange }) {
         escapeValue: false
       }
     });
+
+  dayjs.locale(languageCode);
 
   i18n.on("languageChanged", onCountryChange);
 }

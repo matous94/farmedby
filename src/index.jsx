@@ -5,6 +5,7 @@ import { StoreProvider } from "easy-peasy";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import GlobalStyles from "@material-ui/core/GlobalStyles";
 import { ThemeProvider } from "@material-ui/core/styles";
+import dayjs from "dayjs";
 
 import { setupI18n, getCountryCode } from "src/i18n";
 import { createStore } from "src/store";
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV === "development") {
     );
   };
   window.theme = theme;
+  window.dayjs = dayjs;
 }
 
 const store = createStore();
