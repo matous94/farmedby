@@ -12,7 +12,7 @@ export default function HeadingsRow() {
         {t("subscriptionsPage.subscriptionName")}
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap", minWidth: "200px" }}>
-        {t("subscriptionsPage.subscriptionContentHeading")}
+        {t("subscriptionsPage.subscriptionDescriptionHeading")}
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap", textAlign: "center" }}>
         {t("subscriptionsTable.numberOfDeliveriesHeading")}

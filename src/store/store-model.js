@@ -67,7 +67,7 @@ const storeModel = {
         numberOfDeliveries
       });
       orderDraft.data.subscriptionsById[subscription.objectId] = {
-        content: subscription.content,
+        description: subscription.description,
         name: subscription.name,
         numberOfDeliveries: parseInt(numberOfDeliveries, 10),
         pricePerDelivery

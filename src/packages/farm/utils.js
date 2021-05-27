@@ -13,7 +13,14 @@ export function getPricePerDelivery({ subscription, numberOfDeliveries }) {
   }, initialPrice);
 }
 
+export function numberOfDaysUntilEndOfSeason(endOfSeason) {
+  if (endOfSeason == null) throw new Error("endOfSeason is required argument");
+  const endOfSeasonDate = dayjs(endOfSeason);
+  const now = dayjs(dayjs().format("MM-DD-YYYY"));
+  return endOfSeasonDate.diff(now, "day");
+}
+
 export function isSubscriptionExpired(endOfSeason) {
   if (endOfSeason == null) return false;
-  return dayjs(endOfSeason) < dayjs(dayjs().format("MM-DD-YYYY"));
+  return numberOfDaysUntilEndOfSeason(endOfSeason) <= 0;
 }

@@ -10,6 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 
 import { SubscriptionPropTypes } from "src/types";
 import { selectors } from "src/store";
+import useGetMaximumDeliveries from "src/packages/farm/hooks/useGetMaximumDeliveries";
 
 import PricingTableCell from "./PricingTableCell";
 import NumberOfDeliveriesTableCell from "./NumberOfDeliveriesTableCell";
@@ -23,7 +24,7 @@ export default function SubscriptionRow({
   isAdminMode,
   currency
 }) {
-  const { name, content, options } = subscription;
+  const { name, description, options } = subscription;
   const updateNumberOfDeliveries = useStoreActions(
     (actions) => actions.orderDraft.updateNumberOfDeliveries
   );
@@ -31,6 +32,13 @@ export default function SubscriptionRow({
     selectors.orderDraft.createGetSubscription(subscription.objectId)
   );
 
+  const maximumNumberOfDeliveries = useGetMaximumDeliveries({
+    deliveryPeriod: isAdminMode
+      ? undefined
+      : subscriptionDraft?.selectedPoint?.deliveryPeriod,
+    endOfSeason: subscription.endOfSeason,
+    maximumNumberOfDeliveries: subscription.maximumNumberOfDeliveries
+  });
   if (isExpired && isAdminMode === false) return null;
 
   return (
@@ -53,14 +61,20 @@ export default function SubscriptionRow({
         </TableCell>
       )}
       <TableCell>{name}</TableCell>
-      <TableCell>{content}</TableCell>
-      <PricingTableCell options={options} currency={currency} />
+      <TableCell>{description}</TableCell>
+      <PricingTableCell
+        options={options}
+        currency={currency}
+        maximumNumberOfDeliveries={maximumNumberOfDeliveries}
+        isAdminMode={isAdminMode}
+      />
       <NumberOfDeliveriesTableCell
         subscription={subscription}
         onChange={(numberOfDeliveries) =>
           updateNumberOfDeliveries({ subscription, numberOfDeliveries })
         }
         value={subscriptionDraft?.numberOfDeliveries}
+        maximum={maximumNumberOfDeliveries}
       />
       <PriceTableCell
         currency={currency}

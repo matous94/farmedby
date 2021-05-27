@@ -5,29 +5,18 @@ import TextField from "@material-ui/core/TextField";
 import { useStoreState } from "easy-peasy";
 
 import { selectors } from "src/store";
-import { getNumberOfWeeks } from "src/packages/pickup-point/delivery-period";
 import { SubscriptionPropTypes } from "src/types";
+import useGetMinimumDeliveries from "src/packages/farm/hooks/useGetMinimumDeliveries";
 
 export default function NumberOfDeliveriesTableCell({
   subscription,
+  maximum,
   onChange,
   value
 }) {
   const selectedPoint = useStoreState(selectors.orderDraft.getPickupPoint);
-  const { options, maximumNumberOfDeliveries = 50 } = subscription;
 
-  const minimum = React.useMemo(() => {
-    const initialMinimum = options[0].numberOfDeliveries;
-    const result = options.reduce(
-      (min, option) => Math.min(min, option.numberOfDeliveries),
-      initialMinimum
-    );
-    return result;
-  }, [options]);
-  const deliveryPeriodInWeeks = selectedPoint
-    ? getNumberOfWeeks(selectedPoint.deliveryPeriod)
-    : 1;
-  const maximum = Math.floor(maximumNumberOfDeliveries / deliveryPeriodInWeeks);
+  const minimum = useGetMinimumDeliveries(subscription.options);
 
   React.useEffect(() => {
     if (value !== "" && minimum > maximum) {
@@ -89,6 +78,7 @@ export default function NumberOfDeliveriesTableCell({
 NumberOfDeliveriesTableCell.propTypes = {
   subscription: SubscriptionPropTypes.isRequired,
   onChange: PropTypes.func.isRequired,
+  maximum: PropTypes.number.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 NumberOfDeliveriesTableCell.defaultProps = {

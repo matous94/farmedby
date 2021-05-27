@@ -32,7 +32,11 @@ export default function Pricing({
             label={t("subscriptionEditor.numberOfDeliveries")}
             placeholder={
               displayPlaceholders
-                ? String(index === 0 ? 1 : index * 5)
+                ? String(
+                    index === 0
+                      ? t("subscription.minimumNumberOfDeliveries.label")
+                      : index * 5
+                  )
                 : undefined
             }
             type="number"
@@ -41,7 +45,6 @@ export default function Pricing({
             }}
             sx={{ width: "48%" }}
             register={register}
-            defaultValue={index === 0 ? 1 : undefined}
             required={index === 0}
           />
           <TextField

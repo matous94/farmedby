@@ -27,7 +27,7 @@ export const SubscriptionOptionPropTypes = PropTypes.shape({
   pricePerDelivery: PropTypes.number
 });
 export const SubscriptionPropTypes = PropTypes.shape({
-  content: PropTypes.string,
+  description: PropTypes.string,
   endOfSeason: PropTypes.string,
   maximumNumberOfDeliveries: PropTypes.number,
   name: PropTypes.string,
@@ -87,7 +87,7 @@ export const FarmPropTypes = PropTypes.shape({
 });
 
 export const OrderedSubscriptionPropTypes = PropTypes.shape({
-  content: PropTypes.string,
+  description: PropTypes.string,
   name: PropTypes.string,
   numberOfDeliveries: PropTypes.number,
   pricePerDelivery: PropTypes.number

@@ -6,14 +6,23 @@ import PropTypes from "prop-types";
 
 import { SubscriptionOptionPropTypes } from "src/types";
 
-export default function PricingTableCell({ options, currency }) {
+export default function PricingTableCell({
+  options,
+  currency,
+  maximumNumberOfDeliveries,
+  isAdminMode
+}) {
   const { t } = useTranslation();
   return (
     <TableCell sx={{ whiteSpace: "nowrap" }}>
       <Box sx={{ display: "inline-flex", flexDirection: "column" }}>
         {options
           .filter(
-            (option) => option?.pricePerDelivery && option.numberOfDeliveries
+            (option) =>
+              option?.pricePerDelivery &&
+              option.numberOfDeliveries &&
+              (isAdminMode ||
+                option.numberOfDeliveries <= maximumNumberOfDeliveries)
           )
           .map(
             ({ pricePerDelivery, numberOfDeliveries }, index, { length }) => {
@@ -46,5 +55,7 @@ export default function PricingTableCell({ options, currency }) {
 }
 PricingTableCell.propTypes = {
   currency: PropTypes.string.isRequired,
+  isAdminMode: PropTypes.bool.isRequired,
+  maximumNumberOfDeliveries: PropTypes.number.isRequired,
   options: PropTypes.arrayOf(SubscriptionOptionPropTypes).isRequired
 };

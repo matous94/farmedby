@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useStoreActions } from "easy-peasy";
 import { useForm } from "react-hook-form";
+import dayjs from "dayjs";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
 import MuiDialog from "@material-ui/core/Dialog";
@@ -63,7 +64,7 @@ SubscriptionEditorDialog.defaultProps = {
   subscription: {
     maximumNumberOfDeliveries: undefined,
     name: "",
-    content: "",
+    description: "",
     options: []
   }
 };
@@ -90,11 +91,11 @@ function SubscriptionEditor({
     const { maximumNumberOfDeliveries } = subscriptionToSubmit;
     const parsedMaximum = maximumNumberOfDeliveries
       ? parseInt(subscriptionToSubmit.maximumNumberOfDeliveries, 10)
-      : undefined;
+      : null;
     const savedSubscription = await ApiClient.Farm.saveSubscription({
       ...subscriptionToSubmit,
       farmId,
-      endOfSeason: endOfSeason ? endOfSeason.format("MM-DD-YYYY") : undefined,
+      endOfSeason: endOfSeason ? dayjs(endOfSeason).format("MM-DD-YYYY") : null,
       maximumNumberOfDeliveries: parsedMaximum,
       options: subscriptionToSubmit.options
         .filter(
@@ -112,18 +113,6 @@ function SubscriptionEditor({
   }
 
   const submitter = useAsync(onSubmit);
-  // const { options } = watch();
-
-  // const minimumNumberOfDeliveries =
-  //   isOpen === false
-  //     ? 1
-  //     : options.reduce((min, option) => {
-  //         if (option.numberOfDeliveries) {
-  //           const asNumber = parseInt(option.numberOfDeliveries, 10);
-  //           return typeof min === "number" ? Math.min(min, asNumber) : asNumber;
-  //         }
-  //         return min;
-  //       }, undefined);
 
   return (
     <>
@@ -145,23 +134,32 @@ function SubscriptionEditor({
             required
           />
           <TextField
-            sx={{ marginTop: "16px" }}
+            sx={{ my: "16px" }}
             register={register}
-            name="content"
-            label={t("subscriptionsPage.subscriptionContentHeading")}
-            placeholder={t("subscriptionEditor.contentPlaceholder")}
+            name="description"
+            label={t("subscriptionsPage.subscriptionDescriptionHeading")}
+            placeholder={t("subscriptionEditor.descriptionPlaceholder")}
             multiline
             type="text"
             required
           />
+
+          <Pricing
+            displayPlaceholders={Boolean(subscription?.options?.length === 0)}
+            register={register}
+            currency={currency}
+            currencyMultiplier={currencyMultiplier}
+          />
           <TextField
-            sx={{ my: "16px" }}
+            sx={{ mt: "24px", mb: "16px" }}
             register={register}
             name="maximumNumberOfDeliveries"
             placeholder="50"
+            inputProps={{
+              min: "1"
+            }}
             label={t("subscription.maximumNumberOfDeliveries.label")}
             type="number"
-            helperText={t("subscription.maximumNumberOfDeliveries.helperText")}
           />
           <DatePicker
             label={t("subscription.endOfSeason.label")}
@@ -183,30 +181,10 @@ function SubscriptionEditor({
                       mx: "6px"
                     }
                   }}
-                  sx={{
-                    mb: "16px"
-                  }}
                   helperText={t("subscription.endOfSeason.helperText")}
                 />
               );
             }}
-          />
-          {/* <TextField
-                sx={{ my: "16px" }}
-                name="minimumNumberOfDeliveries"
-                label={t("subscription.minimumNumberOfDeliveries.label")}
-                type="number"
-                value={minimumNumberOfDeliveries || 1}
-                helperText={t(
-                  "subscription.minimumNumberOfDeliveries.helperText"
-                )}
-                disabled
-              /> */}
-          <Pricing
-            displayPlaceholders={Boolean(subscription?.options?.length === 0)}
-            register={register}
-            currency={currency}
-            currencyMultiplier={currencyMultiplier}
           />
         </DialogContent>
         <DialogActions>

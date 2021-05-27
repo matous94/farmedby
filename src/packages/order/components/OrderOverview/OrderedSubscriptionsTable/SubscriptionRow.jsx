@@ -6,12 +6,13 @@ import TableCell from "@material-ui/core/TableCell";
 import { OrderedSubscriptionPropTypes } from "src/types";
 
 export default function SubscriptionRow({ subscription, currency }) {
-  const { name, content, numberOfDeliveries, pricePerDelivery } = subscription;
+  const { name, description, numberOfDeliveries, pricePerDelivery } =
+    subscription;
 
   return (
     <TableRow>
       <TableCell>{name}</TableCell>
-      <TableCell>{content}</TableCell>
+      <TableCell>{description}</TableCell>
       <TableCell sx={{ textAlign: "right" }}>{numberOfDeliveries}</TableCell>
       <TableCell sx={{ textAlign: "right" }}>
         {pricePerDelivery} {currency}
