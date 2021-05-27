@@ -5,9 +5,10 @@ import WcIcon from "@material-ui/icons/Wc";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 import PhotoIcon from "@material-ui/icons/Photo";
 import HotelIcon from "@material-ui/icons/Hotel";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+// import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CreateIcon from "@material-ui/icons/Create";
 import PaymentIcon from "@material-ui/icons/Payment";
+import FaqIcon from "@material-ui/icons/Help";
 
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
@@ -67,22 +68,22 @@ export default {
     selectable: false,
     PageContent: OrderOverview
   },
-  eshop: {
-    name: "eshop",
-    translationKey: "eshop.heading",
-    renderHeading: true,
-    Icon: ShoppingCartIcon,
-    disabled: true,
-    private: true,
-    selectable: true,
-    PageContent: ({ farm }) => {
-      return (
-        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
-          {JSON.stringify(farm, null, 2)}
-        </pre>
-      );
-    }
-  },
+  // eshop: {
+  //   name: "eshop",
+  //   translationKey: "eshop.heading",
+  //   renderHeading: true,
+  //   Icon: ShoppingCartIcon,
+  //   disabled: true,
+  //   private: true,
+  //   selectable: true,
+  //   PageContent: ({ farm }) => {
+  //     return (
+  //       <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+  //         {JSON.stringify(farm, null, 2)}
+  //       </pre>
+  //     );
+  //   }
+  // },
   blog: {
     name: "blog",
     translationKey: "blog.heading",
@@ -152,6 +153,22 @@ export default {
     translationKey: "accommodation.heading",
     renderHeading: true,
     Icon: HotelIcon,
+    disabled: true,
+    private: true,
+    selectable: true,
+    PageContent: ({ farm }) => {
+      return (
+        <pre style={{ maxWidth: "800px", whiteSpace: "pre-line" }}>
+          {JSON.stringify(farm, null, 2)}
+        </pre>
+      );
+    }
+  },
+  faq: {
+    name: "faq",
+    translationKey: "faq.heading",
+    renderHeading: true,
+    Icon: FaqIcon,
     disabled: true,
     private: true,
     selectable: true,
