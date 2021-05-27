@@ -31,6 +31,8 @@ export default function SubscriptionRow({
     selectors.orderDraft.createGetSubscription(subscription.objectId)
   );
 
+  if (isExpired && isAdminMode === false) return null;
+
   return (
     <TableRow
       sx={{

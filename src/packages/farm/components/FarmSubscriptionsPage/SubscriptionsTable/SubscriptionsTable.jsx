@@ -19,6 +19,31 @@ function SubscriptionsTable({ farm, onDelete, isAdminMode, openEditor }) {
   const { subscriptions } = farm;
   const currency = getCurrency(farm.countryCode);
 
+  const sortedSubscriptions = React.useMemo(
+    () =>
+      [...subscriptions].sort((a, b) => {
+        if (a.name === b.name) return 0;
+        if (a.name < b.name) return -1;
+        return 1;
+      }),
+    [subscriptions]
+  );
+  const subscriptionRows = React.useMemo(
+    () =>
+      sortedSubscriptions.map((subscription) => (
+        <SubscriptionRow
+          isAdminMode={isAdminMode}
+          isExpired={isSubscriptionExpired(subscription.endOfSeason)}
+          key={subscription.objectId}
+          subscription={subscription}
+          onEdit={() => openEditor(subscription)}
+          onDelete={() => onDelete(subscription.objectId)}
+          currency={currency}
+        />
+      )),
+    [currency, isAdminMode, onDelete, openEditor, sortedSubscriptions]
+  );
+
   return (
     <TableContainer
       sx={{
@@ -32,28 +57,7 @@ function SubscriptionsTable({ farm, onDelete, isAdminMode, openEditor }) {
         </TableHead>
         <TableBody>
           {isAdminMode && <AddPointRow onAdd={() => openEditor()} />}
-
-          {[...subscriptions]
-            .filter(
-              (subscription) =>
-                isAdminMode || !isSubscriptionExpired(subscription.endOfSeason)
-            )
-            .sort((a, b) => {
-              if (a.name === b.name) return 0;
-              if (a.name < b.name) return -1;
-              return 1;
-            })
-            .map((subscription) => (
-              <SubscriptionRow
-                isAdminMode={isAdminMode}
-                isExpired={isSubscriptionExpired(subscription.endOfSeason)}
-                key={subscription.objectId}
-                subscription={subscription}
-                onEdit={() => openEditor(subscription)}
-                onDelete={() => onDelete(subscription.objectId)}
-                currency={currency}
-              />
-            ))}
+          {subscriptionRows}
           <PriceSumRow currency={currency} isAdminMode={isAdminMode} />
         </TableBody>
       </Table>
