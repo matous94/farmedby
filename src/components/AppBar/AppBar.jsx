@@ -8,6 +8,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Alert from "@material-ui/core/Alert";
 
 import { selectors } from "src/store";
 import Logo from "src/components/Logo";
@@ -24,6 +25,7 @@ export default function AppBar({ onMenuClick, onlyLogo, noOffset }) {
   const setAppBarHeight = useStoreActions(
     (actions) => actions.app.setAppBarHeight
   );
+  const appBarHeight = useAppBarHeight();
   const appBarRef = React.useRef();
 
   React.useEffect(() => {
@@ -34,17 +36,16 @@ export default function AppBar({ onMenuClick, onlyLogo, noOffset }) {
       clearTimeout(delayTimeoutId);
       delayTimeoutId = setTimeout(() => {
         setAppBarHeight(appBar.clientHeight);
-      }, 200);
+      }, 120);
     }
 
     if (appBar) {
-      window.appBar = appBar;
       setAppBarHeight(appBar.clientHeight);
       window.addEventListener("resize", onResize);
     }
 
     return () => {
-      appBar.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", onResize);
       clearTimeout(delayTimeoutId);
       setAppBarHeight(0);
     };
@@ -125,8 +126,13 @@ export default function AppBar({ onMenuClick, onlyLogo, noOffset }) {
             </Box>
           )}
         </Toolbar>
+        {window.location.hostname === "farmedby.matousvencl.com" && (
+          <Alert variant="filled" severity="info">
+            {t("developmentSiteAlert")}
+          </Alert>
+        )}
       </MuiAppBar>
-      {noOffset ? null : <Toolbar />}
+      {noOffset ? null : <Box sx={{ pt: `${appBarHeight}px` }} />}
     </>
   );
 }

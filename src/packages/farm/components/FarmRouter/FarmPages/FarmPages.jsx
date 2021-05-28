@@ -22,7 +22,7 @@ const drawerWidth = "240px";
 export default function FarmPages() {
   const { pageName, farmId } = useParams();
   const { t } = useTranslation();
-  const appBarMinHeight = useAppBarHeight();
+  const appBarHeight = useAppBarHeight();
 
   const drawer = useSwitch(false);
   const { status, farm, isFarmOwner } = useGetFarm();
@@ -74,7 +74,7 @@ export default function FarmPages() {
           position="relative"
           sx={{
             flexGrow: 1,
-            minHeight: `calc(100vh - ${appBarMinHeight}px)`,
+            minHeight: `calc(100vh - ${appBarHeight}px)`,
             overflowX: "auto"
           }}
         >

@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useHistory, useParams } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
-import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Drawer from "@material-ui/core/Drawer";
@@ -13,16 +12,24 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { useAppBarHeight } from "src/components/AppBar";
 
 import ApiClient from "src/packages/api-client";
 import Logo from "src/components/Logo";
 
 import pages, { landingPage } from "../../pages";
 
-function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
+export default function ResponsiveDrawer({
+  isOpen,
+  onClose,
+  width,
+  farmName,
+  isAdminMode
+}) {
   const history = useHistory();
   const { t } = useTranslation();
   const { farmId, pageName } = useParams();
+  const appBarHeight = useAppBarHeight();
 
   const isUpMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const isDownMd = !isUpMd;
@@ -36,7 +43,18 @@ function ResponsiveDrawer({ isOpen, onClose, width, farmName, isAdminMode }) {
   const LandingPageIcon = landingPage.Icon;
   const drawerContent = (
     <div>
-      <Toolbar>{isDownMd && <Logo />}</Toolbar>
+      <Box
+        sx={{
+          minHeight: `${appBarHeight}px`,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          px: "16px"
+        }}
+      >
+        {isDownMd && <Logo />}
+      </Box>
       {isDownMd && <Divider />}
       <Box sx={{ px: "8px", py: "12px" }}>
         <Typography variant="h5" align="center">
@@ -127,5 +145,3 @@ ResponsiveDrawer.propTypes = {
 ResponsiveDrawer.defaultProps = {
   farmName: undefined
 };
-
-export default ResponsiveDrawer;
