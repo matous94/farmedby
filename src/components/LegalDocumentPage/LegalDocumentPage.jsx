@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Markdown from "markdown-to-jsx";
-
+import dayjs from "dayjs";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -64,7 +64,17 @@ export default function LegalDocumentPage({ documentId }) {
             <CircularProgress sx={{ display: "block", mx: "auto" }} />
           )}
           {documentGetter.isResolved && (
-            <Markdown>{documentGetter.result.content}</Markdown>
+            <>
+              <Typography>
+                {t("legalDocument.releaseDate")}:{" "}
+                {dayjs(documentGetter.result.releaseDate).format("L")}
+              </Typography>
+              <Typography>
+                {t("legalDocument.lastUpdateDate")}:{" "}
+                {dayjs(documentGetter.result.lastUpdateDate).format("L")}
+              </Typography>
+              <Markdown>{documentGetter.result.content}</Markdown>
+            </>
           )}
         </Paper>
       </Box>

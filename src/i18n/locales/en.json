@@ -1,5 +1,7 @@
 {
   "developmentSiteAlert": "This is development version of the site, it is not meant to be used by the public.",
+  "legalDocument.releaseDate": "Release date",
+  "legalDocument.lastUpdateDate": "Update date",
   "aboutFarm": "About Farm",
   "accommodation.heading": "Accommodation",
   "address": "Address",

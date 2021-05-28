@@ -1,5 +1,7 @@
 {
   "developmentSiteAlert": "Toto je testovací verze aplikace a není určena pro využívání veřejností.",
+  "legalDocument.releaseDate": "Datum vydání",
+  "legalDocument.lastUpdateDate": "Datum aktualizace",
   "aboutFarm": "O Farmě",
   "accommodation.heading": "Ubytování",
   "address": "Adresa",
@@ -133,7 +135,7 @@
   "subscriptionsPage.howItWorks3": "Zaplať objednávku",
   "subscriptionsPage.howItWorks4": "Vyčkej na email s prvním datem závozu",
   "subscriptionsPage.howItWorks5": "Pravidelně vyzvedávej",
-  "subscriptionsPage.note.placeholder": "Například dej farmáři vědět jaká je tvoje oblíbená zelenina, aby věděl, čeho pěstovat více a čeho méně.\n\n\nOblíbená zelenina: paprika, rajče, mrkev, salát, okurka\n\nNeoblíbená zelenina: řapíkatý celer, kopr", 
+  "subscriptionsPage.note.placeholder": "Například dej farmáři vědět jaká je tvoje oblíbená zelenina, aby věděl, čeho pěstovat více a čeho méně.\n\nOblíbená zelenina: paprika, rajče, mrkev, salát, okurka", 
   "subscriptionsPage.noteHeading": "Poznámka (zpětná vazba)",
   "subscriptionsPage.selectPickupPointHeading": "Vyber odběrové místo",
   "subscriptionsPage.selectSubscriptionHeading": "Vyber předplatné",
