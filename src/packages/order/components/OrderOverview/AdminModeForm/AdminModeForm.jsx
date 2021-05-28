@@ -57,7 +57,7 @@ export default function AdminModeForm({ order }) {
       <TextareaAutosize
         ref={register}
         name="journal"
-        minRows={10}
+        minRows={16}
         style={{ maxWidth: "700px", width: "100%", padding: "8px" }}
         placeholder={t("subscription.journal.placeholder")}
       />

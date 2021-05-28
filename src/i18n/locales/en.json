@@ -120,7 +120,7 @@
   "subscription.enableOrderForm.alert": "Add pickup point or set farm as pickup point to enable subscription order form",
   "subscription.endOfSeason.helperText": "If provided, once \"End of season\" is reached, the subscription won't be visible to customers anymore. Also if \"Maximum deliveries\" is not provided, end of season date will be used to determine the maximum possible order, considering current date and frequency of selected pickup point.",
   "subscription.endOfSeason.label": "End of season / orders",
-  "subscription.journal.placeholder": "The journal serves you as a farmer to document the progress of the order. The point is to have all necessary information in one place when preparing the delivery. The customer cannot see the journal\n\nUsage example:\n6/22/2021: First delivery\n6/29/2021: Second delivery\n7/6/2021: Third delivery\n7/13/2021: Customer requested to postpone one delivery because of a vacation\n7/20/2021: Fourth delivery\n...\n9/14/2021: Last delivery - order completed",
+  "subscription.journal.placeholder": "The journal serves you as a farmer to document the progress of the order. The point is to have all necessary information in one place when preparing the delivery.\n\nUsage example:\n6/19/2021: Payment received\n6/22/2021: First delivery\n6/29/2021: Second delivery\n7/06/2021: Customer requested to postpone one delivery because of a vacation\n7/13/2021: Third delivery\n...\n9/14/2021: Last delivery",
   "subscription.maximumNumberOfDeliveries.label": "Maximum deliveries",
   "subscription.minimumNumberOfDeliveries.label": "Minimum deliveries",
   "subscription.subscriptions.heading": "Subscriptions",
