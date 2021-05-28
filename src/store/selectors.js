@@ -29,6 +29,10 @@ export function createIsAdminMode(farmId) {
   };
 }
 
+export function getAdminMode(state) {
+  return state.farmPages.adminMode;
+}
+
 export function getFarms(state) {
   return state.farms;
 }
