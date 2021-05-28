@@ -16,7 +16,7 @@ export function getPricePerDelivery({ subscription, numberOfDeliveries }) {
 export function numberOfDaysUntilEndOfSeason(endOfSeason) {
   if (endOfSeason == null) throw new Error("endOfSeason is required argument");
   const endOfSeasonDate = dayjs(endOfSeason);
-  const now = dayjs(dayjs().format("MM-DD-YYYY"));
+  const now = dayjs(dayjs().format("YYYY-MM-DD"));
   return endOfSeasonDate.diff(now, "day");
 }
 

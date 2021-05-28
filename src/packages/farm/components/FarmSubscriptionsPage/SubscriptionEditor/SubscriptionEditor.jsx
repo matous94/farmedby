@@ -95,7 +95,7 @@ function SubscriptionEditor({
     const savedSubscription = await ApiClient.Farm.saveSubscription({
       ...subscriptionToSubmit,
       farmId,
-      endOfSeason: endOfSeason ? dayjs(endOfSeason).format("MM-DD-YYYY") : null,
+      endOfSeason: endOfSeason ? dayjs(endOfSeason).format("YYYY-MM-DD") : null,
       maximumNumberOfDeliveries: parsedMaximum,
       options: subscriptionToSubmit.options
         .filter(
