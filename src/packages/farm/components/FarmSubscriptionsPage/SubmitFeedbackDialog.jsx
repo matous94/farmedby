@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useStoreActions } from "easy-peasy";
@@ -25,8 +26,8 @@ export default function SubmitFeedbackDialog({ submitter }) {
   //     deliveryPeriod: "week"
   //   }
   // };
-  // eslint-disable-next-line no-param-reassign
   // submitter.result = testResult;
+  // submitter.isResolved = true;
 
   const text = submitter.result && (
     <NumberedList

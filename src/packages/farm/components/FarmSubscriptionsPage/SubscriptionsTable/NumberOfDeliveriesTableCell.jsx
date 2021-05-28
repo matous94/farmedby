@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import TableCell from "@material-ui/core/TableCell";
 import TextField from "@material-ui/core/TextField";
 import { useStoreState } from "easy-peasy";
@@ -14,6 +15,7 @@ export default function NumberOfDeliveriesTableCell({
   onChange,
   value
 }) {
+  const { t } = useTranslation();
   const selectedPoint = useStoreState(selectors.orderDraft.getPickupPoint);
 
   const minimum = useGetMinimumDeliveries(subscription.options);
@@ -24,10 +26,10 @@ export default function NumberOfDeliveriesTableCell({
     }
   }, [minimum, maximum, onChange, value, selectedPoint]);
 
-  let helperText = `${minimum} - ${maximum}`;
+  let helperText = `${minimum} - ${maximum} ${t("pc")}`;
   if (minimum > maximum) helperText = "";
   if (minimum === maximum) {
-    helperText = `Min/Max = ${minimum}`;
+    helperText = `Min/Max = ${minimum} ${t("pc")}`;
   }
 
   return (

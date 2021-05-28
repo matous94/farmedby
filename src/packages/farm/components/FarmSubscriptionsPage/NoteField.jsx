@@ -11,7 +11,7 @@ function NoteField() {
   return (
     <TextareaAutosize
       name="note"
-      minRows={6}
+      minRows={7}
       style={{ maxWidth: "500px", width: "100%", padding: "8px" }}
       value={note}
       onChange={(e) => setNote(e.target.value)}
