@@ -143,7 +143,7 @@ export default function FarmPages() {
                   }}
                 >
                   <Fab
-                    onClick={toggleAdminMode}
+                    onClick={() => toggleAdminMode()}
                     sx={{ minWidth: "80px" }}
                     size="medium"
                     variant="extended"

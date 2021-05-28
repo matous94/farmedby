@@ -31,11 +31,10 @@ export default function SubscriptionRow({
   const subscriptionDraft = useStoreState(
     selectors.orderDraft.createGetSubscription(subscription.objectId)
   );
+  const pickupPointDraft = useStoreState(selectors.orderDraft.getPickupPoint);
 
   const maximumNumberOfDeliveries = useGetMaximumDeliveries({
-    deliveryPeriod: isAdminMode
-      ? undefined
-      : subscriptionDraft?.selectedPoint?.deliveryPeriod,
+    deliveryPeriod: isAdminMode ? undefined : pickupPointDraft?.deliveryPeriod,
     endOfSeason: subscription.endOfSeason,
     maximumNumberOfDeliveries: subscription.maximumNumberOfDeliveries
   });
