@@ -11,7 +11,6 @@ import Paper from "@material-ui/core/Paper";
 
 import Link from "src/components/Link";
 import { ProductTypesPropTypes } from "src/types";
-import { createAddress } from "src/packages/utils";
 
 // eslint-disable-next-line react/prop-types
 const TableCell = ({ sx, ...rest }) => (
@@ -37,17 +36,16 @@ function Farm({ farm, productTypesFilter }) {
   const { objectId, name, productTypes, deliversTo } = farm;
   const { t } = useTranslation();
 
-  const sortedByAddress = React.useMemo(
-    () =>
-      deliversTo
-        .map((location) => createAddress(location).districtRelativeReverse)
-        .sort((a, b) => {
-          if (a === b) return 0;
-          if (a < b) return -1;
-          return 1;
-        }),
-    [deliversTo]
-  );
+  const uniqueAndSorted = React.useMemo(() => {
+    const sortedByAddress = deliversTo
+      .map((location) => `${location.city} ${location.postcode}`)
+      .sort((a, b) => {
+        if (a === b) return 0;
+        if (a < b) return -1;
+        return 1;
+      });
+    return [...new Set(sortedByAddress)];
+  }, [deliversTo]);
   const filterTranslations = productTypesFilter.map((type) =>
     t(`productTypes.${type}`)
   );
@@ -57,7 +55,7 @@ function Farm({ farm, productTypesFilter }) {
         <Link to={`/farm/${objectId}/subscriptions`}>{name}</Link>
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap" }}>
-        {sortedByAddress.map((address, index) => (
+        {uniqueAndSorted.map((address, index) => (
           <React.Fragment key={index}>
             {address}
             {index === deliversTo.length - 1 ? null : <br />}

@@ -117,7 +117,7 @@
   "subscription.calculator.heading": "Kalkulátor cen",
   "subscription.calculator.text": "Kontaktuj farmáře, pro vytvoření objednávky",
   "subscription.empty.text": "Tato farma zatím nemá žádné předplatné",
-  "subscription.enableOrderForm.alert": "Přidej odběrové místo nebo povol odběry z farmy, pro zobrazení objednávkového formuláře předplatných",
+  "subscription.enableOrderForm.alert": "Pro zobrazení objednávkového formuláře předplatných, přidej odběrové místo, nebo povol odběry z farmy.",
   "subscription.endOfSeason.helperText": "Pokud zadáte datum \"Konec sezóny / objednávek\", tak se po jeho uplynutí, předplatné přestane zobrazovat zákazníkům. Zároveň pokud nebude zadán \"Maximální počet závozů\" bude datum použito k dopočítání maximální objednávky, s ohledem na současné datum a frekvenci zvoleného odběrového místa.",
   "subscription.endOfSeason.label": "Konec sezóny / objednávek",
   "subscription.journal.placeholder": "Deník slouží tobě jako farmáři, pro zaznamenávání vývoje objednávky a měl jsi tak všechny informace při přípravě odběrů na jednom místě. Zákazník deník nevidí.\n\nPříklad použití:\n22.6.2021: První závoz\n29.6.2021: Druhý závoz\n6.7.2021: Třetí závoz\n13.7.2021: Zákazník požádal o odložení závozu kvůli dovolené\n20.7.2021: Čtvrtý závoz\n...\n14.9.2021: Poslední závoz - objednávka dokončena",
