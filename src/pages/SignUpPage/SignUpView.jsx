@@ -153,8 +153,10 @@ export default function SignUpView({ onSubmit, isLoading }) {
             <Trans
               i18nKey="signUpPage.userConsent.text"
               components={{
-                TermsOfUseLink: <Link to="/terms-of-use" />,
-                PrivacyPolicyLink: <Link to="/privacy-policy" />
+                TermsOfUseLink: <Link href="/terms-of-use" target="_blank" />,
+                PrivacyPolicyLink: (
+                  <Link href="/privacy-policy" target="_blank" />
+                )
               }}
             />
           </Typography>

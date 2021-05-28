@@ -216,8 +216,12 @@ export default function FarmSubscriptionsPage({ farm, isAdminMode }) {
                   <Trans
                     i18nKey="order.userConsent.text"
                     components={{
-                      TermsOfUseLink: <Link to="/terms-of-use" />,
-                      PrivacyPolicyLink: <Link to="/privacy-policy" />
+                      TermsOfUseLink: (
+                        <Link href="/terms-of-use" target="_blank" />
+                      ),
+                      PrivacyPolicyLink: (
+                        <Link href="/privacy-policy" target="_blank" />
+                      )
                     }}
                   />
                 </Typography>
