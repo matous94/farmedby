@@ -1,7 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { useStoreActions, useStoreState } from "easy-peasy";
+
+import Textarea from "src/components/Textarea";
 import { selectors } from "src/store";
 
 function NoteField() {
@@ -9,7 +10,7 @@ function NoteField() {
   const note = useStoreState(selectors.orderDraft.getNote);
   const setNote = useStoreActions((actions) => actions.orderDraft.setNote);
   return (
-    <TextareaAutosize
+    <Textarea
       name="note"
       minRows={7}
       style={{ maxWidth: "500px", width: "100%", padding: "8px" }}

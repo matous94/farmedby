@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { useForm } from "react-hook-form";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -14,6 +13,7 @@ import GenericFailureDialog from "src/components/GenericFailureDialog";
 import { useAsync } from "src/packages/hooks";
 import ApiClient from "src/packages/api-client";
 import { OrderPropTypes } from "src/types";
+import Textarea from "src/components/Textarea";
 
 export default function AdminModeForm({ order }) {
   const { t } = useTranslation();
@@ -40,7 +40,6 @@ export default function AdminModeForm({ order }) {
     await ApiClient.Order.updateOrder(update);
     orderUpdated(update);
   });
-
   return (
     <form onSubmit={handleSubmit(orderUpdater.execute)}>
       <Dialog isLoading={orderUpdater.isLoading} />
@@ -54,8 +53,8 @@ export default function AdminModeForm({ order }) {
       >
         {t("order.journal.heading")}
       </Typography>
-      <TextareaAutosize
-        ref={register}
+      <Textarea
+        register={register}
         name="journal"
         minRows={16}
         style={{ maxWidth: "700px", width: "100%", padding: "8px" }}

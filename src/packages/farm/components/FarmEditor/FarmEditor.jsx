@@ -9,8 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
+import Textarea from "src/components/Textarea";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import Dialog from "src/components/Dialog";
 import { FarmPropTypes } from "src/types";
@@ -217,7 +217,7 @@ export default function FarmEditor({
           {mode === "edit" && (
             <Box sx={{ mt: "16px" }}>
               <Typography variant="h5">{t("aboutFarm")}</Typography>
-              <TextareaAutosize
+              <Textarea
                 name="about"
                 minRows={10}
                 style={{ width: "100%" }}
