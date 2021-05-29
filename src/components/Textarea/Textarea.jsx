@@ -111,7 +111,7 @@ function CrossPlatformTextarea({ register, placeholder, ...rest }) {
   }, [placeholder]);
 
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box sx={{ position: "relative", width: "100%" }}>
       <TextareaAutosize
         ref={(current) => {
           textAreaReference.current = current;
