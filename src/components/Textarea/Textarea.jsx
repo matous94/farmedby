@@ -14,10 +14,14 @@ const placeholderColor = "#777777";
 export default function Textarea(props) {
   // textarea on some browsers (Safari) do not respects newlines
 
+  // MutationObserver has better support
+  // but for some reason, textarea style change
+  // doesn't fire the callback on Safari
+
   if (
     props.placeholder == null ||
     props.placeholder === "" ||
-    window.MutationObserver == null
+    (window.MutationObserver == null && window.ResizeObserver == null)
   ) {
     return <TextareaAutosize {...props} />;
   }
@@ -74,7 +78,7 @@ function CrossPlatformTextarea({ register, placeholder, ...rest }) {
       height: textArea.offsetHeight
     });
 
-    const mutationObserver = new MutationObserver(() => {
+    function onResize() {
       cancelAnimationFrame(frameId);
       frameId = requestAnimationFrame(() => {
         setAreaSize({
@@ -82,16 +86,25 @@ function CrossPlatformTextarea({ register, placeholder, ...rest }) {
           height: textArea.offsetHeight
         });
       });
-    });
+    }
 
-    mutationObserver.observe(textArea, {
-      attributes: true,
-      childList: false,
-      subtree: false
-    });
+    let observer;
+
+    if (window.ResizeObserver) {
+      console.log("creating observer");
+      observer = new ResizeObserver(onResize);
+      observer.observe(textArea);
+    } else {
+      observer = new MutationObserver(onResize);
+      observer.observe(textArea, {
+        attributes: true,
+        childList: false,
+        subtree: false
+      });
+    }
 
     return () => {
-      mutationObserver.disconnect();
+      observer.disconnect();
       cancelAnimationFrame(frameId);
     };
   }, []);
