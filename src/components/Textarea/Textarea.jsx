@@ -91,7 +91,6 @@ function CrossPlatformTextarea({ register, placeholder, ...rest }) {
     let observer;
 
     if (window.ResizeObserver) {
-      console.log("creating observer");
       observer = new ResizeObserver(onResize);
       observer.observe(textArea);
     } else {

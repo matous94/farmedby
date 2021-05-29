@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useStoreActions } from "easy-peasy";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
@@ -17,6 +18,7 @@ import Textarea from "src/components/Textarea";
 
 export default function AdminModeForm({ order }) {
   const { t } = useTranslation();
+  const isDownSm = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const orderUpdated = useStoreActions((actions) => actions.order.orderUpdated);
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -56,7 +58,7 @@ export default function AdminModeForm({ order }) {
       <Textarea
         register={register}
         name="journal"
-        minRows={16}
+        minRows={isDownSm ? 19 : 16}
         style={{ maxWidth: "700px", width: "100%", padding: "8px" }}
         placeholder={t("subscription.journal.placeholder")}
       />
