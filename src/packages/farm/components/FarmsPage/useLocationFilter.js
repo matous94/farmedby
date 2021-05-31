@@ -27,8 +27,9 @@ export default function useLocationFilter(farms) {
         const { deliversTo } = farm;
         const filterResult = deliversTo.filter(
           (point) =>
-            normalizeText(point.city).startsWith(normalizedFilter) ||
-            normalizeText(point.postcode).startsWith(normalizedFilter)
+            normalizeText(`${point.city} ${point.postcode}`).startsWith(
+              normalizedFilter
+            ) || normalizeText(point.postcode).startsWith(normalizedFilter)
         );
         if (filterResult.length) {
           result.push({ ...farm, deliversTo: filterResult });

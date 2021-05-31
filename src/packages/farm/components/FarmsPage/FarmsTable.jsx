@@ -52,7 +52,7 @@ function Farm({ farm, productTypesFilter }) {
   return (
     <TableRow>
       <TableCell>
-        <Link to={`/farm/${objectId}/subscriptions`}>{name}</Link>
+        <Link to={`/farm/${objectId}`}>{name}</Link>
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap" }}>
         {uniqueAndSorted.map((address, index) => (
