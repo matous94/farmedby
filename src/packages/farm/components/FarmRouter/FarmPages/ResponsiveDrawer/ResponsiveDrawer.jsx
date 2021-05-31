@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
@@ -12,8 +12,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { useAppBarHeight } from "src/components/AppBar";
 
+import { useAppBarHeight } from "src/components/AppBar";
+import Link from "src/components/Link";
 import ApiClient from "src/packages/api-client";
 import Logo from "src/components/Logo";
 
@@ -26,14 +27,17 @@ export default function ResponsiveDrawer({
   farmName,
   isAdminMode
 }) {
-  const history = useHistory();
   const { t } = useTranslation();
   const { farmId, pageName } = useParams();
   const appBarHeight = useAppBarHeight();
 
   const isUpMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const isDownMd = !isUpMd;
-  if (isUpMd && isOpen) onClose();
+
+  React.useEffect(() => {
+    if (isUpMd && isOpen) onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isUpMd, isOpen]);
 
   function signOutHandler() {
     ApiClient.User.signOut();
@@ -64,9 +68,10 @@ export default function ResponsiveDrawer({
       <Divider />
       <List>
         <ListItem
+          component={Link}
+          to={`/farm/${farmId}`}
           key={landingPage.name}
           onClick={() => {
-            history.push(`/farm/${farmId}`);
             if (isOpen) onClose();
           }}
           button
@@ -81,8 +86,9 @@ export default function ResponsiveDrawer({
           .filter((page) => page.selectable && (!page.private || isAdminMode))
           .map(({ name, translationKey, Icon, disabled }) => (
             <ListItem
+              component={Link}
+              to={`/farm/${farmId}/${name}`}
               onClick={() => {
-                history.push(`/farm/${farmId}/${name}`);
                 if (isOpen) onClose();
               }}
               button
