@@ -18,6 +18,7 @@ import Link from "@material-ui/core/Link";
 
 import { FarmPropTypes, PickupPointPropTypes } from "src/types";
 import { DeliveryPeriodEnum } from "src/packages/pickup-point/delivery-period";
+import { createAddress } from "src/packages/utils";
 
 function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
   const {
@@ -52,9 +53,9 @@ function PickupPoint({ point, onEdit, onDelete, isAdminMode }) {
           : name}
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap" }}>
-        {street}
+        {city} {postcode},
         <br />
-        {postcode} {city}
+        {street}
       </TableCell>
       <TableCell>
         {pickupDay}
@@ -133,15 +134,22 @@ export default function PickupPointsTable({
 }) {
   const { t } = useTranslation();
   const history = useHistory();
-  const sortedPoints = React.useMemo(
-    () =>
-      [...farm.pickupPoints].sort((a, b) => {
-        if (a.name === b.name) return 0;
-        if (a.name < b.name) return -1;
-        return 1;
-      }),
-    [farm.pickupPoints]
-  );
+
+  const sortedPoints = React.useMemo(() => {
+    return [...farm.pickupPoints].sort((a, b) => {
+      if (
+        createAddress(a).countryRelativeReverse ===
+        createAddress(b).countryRelativeReverse
+      )
+        return 0;
+      if (
+        createAddress(a).countryRelativeReverse <
+        createAddress(b).countryRelativeReverse
+      )
+        return -1;
+      return 1;
+    });
+  }, [farm]);
 
   return (
     <TableContainer
@@ -177,7 +185,8 @@ export default function PickupPointsTable({
                 isFarmPickupPoint: farm.isFarmPickupPoint,
                 name: farm.name,
                 phoneNumber: farm.phoneNumber,
-                pickupDay: farm.pickupDay || t("farmPickupDayDefaultValue"),
+                pickupDay:
+                  farm.pickupDay || t("pickupPoint.pickupDayDefaultValue"),
                 postcode: farm.postcode,
                 street: farm.street,
                 webUrl: farm.webUrl

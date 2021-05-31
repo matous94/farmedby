@@ -35,10 +35,18 @@ function createOption(point) {
         {` ${pickupPointName}`}
         <br />
         <b>{i18next.t("pickupDayLabel")}:</b>
-        {` ${point.pickupDay}`}
-        <br />
-        <b>{i18next.t("pickupPoint.deliveryPeriod.label")}:</b>
-        {` ${i18next.t(`pickupPoint.deliveryPeriod.${point.deliveryPeriod}`)}`}
+        {` ${
+          point.pickupDay || i18next.t("pickupPoint.pickupDayDefaultValue")
+        }`}
+        {point.isFarmPickupPoint ? null : (
+          <>
+            <br />
+            <b>{i18next.t("pickupPoint.deliveryPeriod.label")}:</b>
+            {` ${i18next.t(
+              `pickupPoint.deliveryPeriod.${point.deliveryPeriod}`
+            )}`}
+          </>
+        )}
       </span>
     )
   };

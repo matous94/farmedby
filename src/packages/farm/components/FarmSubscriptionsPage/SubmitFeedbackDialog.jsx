@@ -25,9 +25,13 @@ function NextSteps({ farm, pickupPoint }) {
         t(`${translationKey}4`),
         <>
           {t(`${translationKey}5`)}
-          <br />
-          <b>{t("pickupDayLabel")}:</b>
-          {` ${pickupPoint.pickupDay}`}
+          {pickupPoint.pickupDay && (
+            <>
+              <br />
+              <b>{t("pickupDayLabel")}:</b>
+              {` ${pickupPoint.pickupDay}`}
+            </>
+          )}
           {pickupPoint.deliveryPeriod && (
             <>
               <br />

@@ -46,7 +46,7 @@ export default function FarmEditor({
     isFarmPickupPoint: farm.isFarmPickupPoint ?? true,
     name: farm.name ?? "",
     phoneNumber: farm.phoneNumber ?? "",
-    pickupDay: farm.pickupDay ?? t("farmPickupDayDefaultValue"),
+    pickupDay: farm.pickupDay,
     postcode: farm.postcode ?? "",
     published: farm.published ?? true,
     street: farm.street ?? "",
@@ -205,6 +205,10 @@ export default function FarmEditor({
                     multiline
                     disabled={!formData.isFarmPickupPoint}
                     onChange={onChange}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    placeholder={t("pickupDayPlaceholder")}
                     value={formData.pickupDay}
                     name="pickupDay"
                     label={t("pickupDayLabel")}
