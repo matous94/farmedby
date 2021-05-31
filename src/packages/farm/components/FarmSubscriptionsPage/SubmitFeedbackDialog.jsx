@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import React from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useStoreActions } from "easy-peasy";
 import { useHistory } from "react-router-dom";
@@ -9,13 +10,55 @@ import Dialog from "src/components/Dialog";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import NumberedList from "src/components/NumberedList/NumberedList";
 
+const translationKey = "subscriptionsPage.howItWorks";
+
+function NextSteps({ farm, pickupPoint }) {
+  const { t } = useTranslation();
+
+  return (
+    <NumberedList
+      translations={[
+        <>
+          {t(`${translationKey}2`)} <b>({farm.email})</b>
+        </>,
+        t(`${translationKey}3`),
+        t(`${translationKey}4`),
+        <>
+          {t(`${translationKey}5`)}
+          <br />
+          <b>{t("pickupDayLabel")}:</b>
+          {` ${pickupPoint.pickupDay}`}
+          {pickupPoint.deliveryPeriod && (
+            <>
+              <br />
+              <b>{t("pickupPoint.deliveryPeriod.label")}:</b>
+              &nbsp;
+              {t(`pickupPoint.deliveryPeriod.${pickupPoint.deliveryPeriod}`)}
+            </>
+          )}
+        </>
+      ]}
+      variant="body1"
+      component="div"
+    />
+  );
+}
+NextSteps.propTypes = {
+  farm: PropTypes.shape({
+    email: PropTypes.string
+  }).isRequired,
+  pickupPoint: PropTypes.shape({
+    pickupDay: PropTypes.string,
+    deliveryPeriod: PropTypes.string
+  }).isRequired
+};
+
 export default function SubmitFeedbackDialog({ submitter }) {
   const { t } = useTranslation();
   const history = useHistory();
   const resetOrderDraft = useStoreActions(
     (actions) => actions.orderDraft.reset
   );
-  const translationKey = "subscriptionsPage.howItWorks";
 
   // const testResult = {
   //   farm: {
@@ -29,31 +72,13 @@ export default function SubmitFeedbackDialog({ submitter }) {
   // submitter.result = testResult;
   // submitter.isResolved = true;
 
-  const text = submitter.result && (
-    <NumberedList
-      translations={[
-        <>
-          {t(`${translationKey}2`)} <b>({submitter.result.farm.email})</b>
-        </>,
-        t(`${translationKey}3`),
-        t(`${translationKey}4`),
-        <>
-          {t(`${translationKey}5`)}
-          <br />
-          <b>{t("pickupDayLabel")}:</b>
-          {` ${submitter.result.pickupPoint.pickupDay}`}
-          <br />
-          <b>{t("pickupPoint.deliveryPeriod.label")}:</b>
-          &nbsp;
-          {t(
-            `pickupPoint.deliveryPeriod.${submitter.result.pickupPoint.deliveryPeriod}`
-          )}
-        </>
-      ]}
-      variant="body1"
-      component="div"
+  const text = submitter.result ? (
+    <NextSteps
+      farm={submitter.result.farm}
+      pickupPoint={submitter.result.pickupPoint}
     />
-  );
+  ) : null;
+
   return (
     <>
       <GenericFailureDialog

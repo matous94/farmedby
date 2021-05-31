@@ -96,6 +96,7 @@ export default function PickupPointEditor({
               name="addressLevel1"
               label={t("addressLevel1Label")}
               type="text"
+              required={true}
             />
           )}
           <TextField
