@@ -75,7 +75,7 @@ export default function UserCredentials() {
             label={t("credentialsChange.newPassword.label")}
             type="text"
             inputProps={{
-              minLength: 3
+              minLength: "7"
             }}
             id="password"
             autoComplete="current-password"
