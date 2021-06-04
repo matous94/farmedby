@@ -40,3 +40,11 @@ export function signOut() {
   localStorage.removeItem(localStorageKeys.sessionToken);
   logger.user("Removed session token from local storage.");
 }
+
+export function requestPasswordReset(email) {
+  return sendParseRequest("/requestPasswordReset", {
+    body: {
+      email
+    }
+  });
+}

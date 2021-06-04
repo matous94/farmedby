@@ -1,5 +1,9 @@
 {
+  "send": "Odeslat",
   "developmentSiteAlert": "Toto je testovací verze aplikace a není určena pro využívání veřejností.",
+  "resetPasswordDialog.heading": "Resetování hesla",
+  "resetPasswordDialog.text": "Zadej email, kterým ses registroval, a pošleme ti link na resetování hesla",
+  "signInPage.forgotPassword": "Zapomněl jsem heslo",
   "legalDocument.releaseDate": "Datum vydání",
   "legalDocument.lastUpdateDate": "Datum aktualizace",
   "aboutFarm": "O Farmě",

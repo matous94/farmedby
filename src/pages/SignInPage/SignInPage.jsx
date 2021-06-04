@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { useStoreActions } from "easy-peasy";
 import { useHistory } from "react-router-dom";
@@ -16,6 +17,7 @@ import ApiClient from "src/packages/api-client";
 import logger from "src/packages/logger";
 import AppBar from "src/components/AppBar";
 import Dialog from "src/components/Dialog";
+import ResetPasswordDialog from "./ResetPasswordDialog";
 
 export default function SignInPage() {
   const { t } = useTranslation();
@@ -26,6 +28,8 @@ export default function SignInPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isOpenResetPasswordDialog, setIsOpenResetPasswordDialog] =
+    useState(false);
 
   function closeDialog() {
     setErrorMessage("");
@@ -76,6 +80,10 @@ export default function SignInPage() {
         primaryButton={{ children: t("continue"), onClick: closeDialog }}
       />
       <Dialog isLoading={isLoading} />
+      <ResetPasswordDialog
+        isOpen={isOpenResetPasswordDialog}
+        onClose={() => setIsOpenResetPasswordDialog(false)}
+      />
       <AppBar />
       <Container component="main" maxWidth="xs">
         <Box
@@ -97,6 +105,19 @@ export default function SignInPage() {
           <Typography component="h1" variant="h5">
             {t("signInPage.heading")}
           </Typography>
+          <Link
+            to="/sign-up"
+            variant="body1"
+            sx={{
+              fontWeight: "500",
+              mt: "12px",
+              mb: "8px",
+              width: "100%",
+              textAlign: "center"
+            }}
+          >
+            {t("signInPage.noAccount")}
+          </Link>
           <Box
             component="form"
             sx={{
@@ -147,8 +168,13 @@ export default function SignInPage() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/sign-up" variant="body2">
-                  {t("signInPage.noAccount")}
+                <Link
+                  component="button"
+                  type="button"
+                  onClick={() => setIsOpenResetPasswordDialog(true)}
+                  variant="body2"
+                >
+                  {t("signInPage.forgotPassword")}
                 </Link>
               </Grid>
             </Grid>

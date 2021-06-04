@@ -1,5 +1,9 @@
 {
   "developmentSiteAlert": "This is development version of the site, it is not meant to be used by the public.",
+  "send": "Send",
+  "resetPasswordDialog.heading": "Password reset",
+  "resetPasswordDialog.text": "Enter your registration email and we'll send you link to reset your password",
+  "signInPage.forgotPassword": "Forgot password",
   "legalDocument.releaseDate": "Release date",
   "legalDocument.lastUpdateDate": "Update date",
   "aboutFarm": "About Farm",
