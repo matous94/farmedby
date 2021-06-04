@@ -39,7 +39,11 @@ function App() {
       try {
         const user = await ApiClient.User.getBySessionToken(getSessionToken());
         const farm = await ApiClient.Farm.getMyFarm();
-        signIn({ user, farm });
+        if (farm == null || user == null) {
+          localStorage.removeItem(localStorageKeys.sessionToken);
+        } else {
+          signIn({ user, farm });
+        }
         setIsLoading(false);
       } catch (error) {
         logger.user("Authentication failed");
