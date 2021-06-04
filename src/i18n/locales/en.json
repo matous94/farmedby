@@ -1,6 +1,10 @@
 {
   "developmentSiteAlert": "This is development version of the site, it is not meant to be used by the public.",
   "send": "Send",
+  "credentialsChange.heading": "Login credentials",
+  "credentialsChange.newPassword.label": "New password",
+  "credentialsChange.newEmail.label": "New email",
+  "credentialsChange.currentEmail.label": "Current email",
   "resetPasswordDialog.heading": "Password reset",
   "resetPasswordDialog.text": "Enter your registration email and we'll send you link to reset your password",
   "signInPage.forgotPassword": "Forgot password",

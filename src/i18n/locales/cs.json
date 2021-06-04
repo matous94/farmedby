@@ -1,5 +1,9 @@
 {
   "send": "Odeslat",
+  "credentialsChange.heading": "Přihlašovací údaje",
+  "credentialsChange.newPassword.label": "Nové heslo",
+  "credentialsChange.newEmail.label": "Nový email",
+  "credentialsChange.currentEmail.label": "Současný email",
   "developmentSiteAlert": "Toto je testovací verze aplikace a není určena pro využívání veřejností.",
   "resetPasswordDialog.heading": "Resetování hesla",
   "resetPasswordDialog.text": "Zadej email, kterým ses registroval, a pošleme ti link na resetování hesla",

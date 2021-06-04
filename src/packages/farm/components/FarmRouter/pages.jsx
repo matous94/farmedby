@@ -9,6 +9,7 @@ import HotelIcon from "@material-ui/icons/Hotel";
 import CreateIcon from "@material-ui/icons/Create";
 import PaymentIcon from "@material-ui/icons/Payment";
 import FaqIcon from "@material-ui/icons/Help";
+import UserIcon from "@material-ui/icons/AccountCircle";
 
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";
@@ -18,6 +19,7 @@ import FarmPickupPointsPage from "src/packages/farm/components/FarmPickupPointsP
 import FarmSubscriptionsPage from "src/packages/farm/components/FarmSubscriptionsPage";
 import OrdersPage from "src/packages/order/components/OrdersPage";
 import OrderOverview from "src/packages/order/components/OrderOverview/OrderOverview";
+import UserCredentials from "src/packages/user/UserCredentials";
 
 export const landingPage = {
   name: "landing",
@@ -179,5 +181,15 @@ export default {
         </pre>
       );
     }
+  },
+  user: {
+    name: "user",
+    translationKey: "credentialsChange.heading",
+    renderHeading: true,
+    Icon: UserIcon,
+    disabled: false,
+    private: true,
+    selectable: true,
+    PageContent: UserCredentials
   }
 };

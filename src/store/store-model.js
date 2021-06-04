@@ -174,6 +174,9 @@ const storeModel = {
   signUp: action((state, user) => {
     state.user = user;
   }),
+  updateUser: action((state, update) => {
+    state.user = { ...state.user, ...update };
+  }),
   toggleAdminMode: action((state) => {
     const newValue = !state.farmPages.adminMode;
     state.farmPages.adminMode = newValue;

@@ -48,3 +48,7 @@ export function requestPasswordReset(email) {
     }
   });
 }
+
+export function updateCredentials({ email, password }) {
+  return callCloudFunction("updateCredentials", { email, password });
+}
