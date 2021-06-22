@@ -3,7 +3,7 @@ import { normalizeText } from "normalize-text";
 
 import { localStorageKeys } from "src/packages/local-storage";
 
-const TIMEOUT_DURATION = 150;
+const TIMEOUT_DURATION = 300;
 
 export default function useLocationFilter(farms) {
   const timeoutIdRef = React.useRef();
