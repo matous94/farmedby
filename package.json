@@ -2,6 +2,9 @@
   "name": "farmedby",
   "version": "1.0.0-beta.1",
   "private": true,
+  "engines": {
+    "node": "^16"
+  },
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
