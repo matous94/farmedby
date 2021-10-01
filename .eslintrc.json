@@ -1,15 +1,12 @@
 {
   "root": true,
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-    "airbnb/hooks",
-    "prettier",
-    "prettier/react"
-  ],
+  "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
+  "plugins": ["react", "react-hooks", "jest"],
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "parserOptions": {
     "ecmaVersion": 2020
@@ -17,18 +14,65 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["./"]
+        "paths": ["./"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   },
   "rules": {
+    "linebreak-style": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "no-unused-vars": "warn",
     "import/prefer-default-export": "off",
     "no-unreachable": "warn",
     "arrow-body-style": "off",
     "react/jsx-boolean-value": "off",
     "react/no-array-index-key": "off",
-    "react/prop-types": "warn",
-    "prefer-arrow-callback": "off"
-  }
+    "prefer-arrow-callback": "off",
+    "react/prop-types": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true,
+          "useJSXTextNode": true
+        },
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "prettier/react",
+        "prettier/@typescript-eslint"
+      ],
+      "plugins": ["react", "react-hooks", "@typescript-eslint", "jest"],
+      "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+      },
+      "rules": {
+        "react/prop-types": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    }
+  ]
 }

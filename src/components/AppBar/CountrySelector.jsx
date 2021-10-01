@@ -6,7 +6,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import { supportedCountries, getCountryCode, changeCountry } from "src/i18n";
+import { countries, getCountryCode, changeCountry } from "src/i18n";
 
 export default function CountrySelector() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -54,8 +54,8 @@ export default function CountrySelector() {
             borderRadius: "50%"
           }}
           component="img"
-          alt={supportedCountries[selectedCountry].countryName}
-          src={supportedCountries[selectedCountry].flagSrc}
+          alt={countries[selectedCountry].countryName}
+          src={countries[selectedCountry].flagSrc}
         />
       </Box>
       <Menu
@@ -74,7 +74,7 @@ export default function CountrySelector() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {Object.values(supportedCountries).map(
+        {Object.values(countries).map(
           ({ countryCode, countryName, flagSrc }) => (
             <MenuItem
               key={countryCode}
