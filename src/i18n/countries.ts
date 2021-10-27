@@ -6,11 +6,19 @@ import czFlagSrc from "./flags/cz.svg";
 import skFlagSrc from "./flags/sk.svg";
 import gbFlagSrc from "./flags/gb.svg";
 
+const countryCodes = ["CZ", "GB", "SK"] as const;
+export type CountryCode = typeof countryCodes[number];
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+export function isCountryCode(code: any): code is CountryCode {
+  return countryCodes.includes(code);
+}
+
 export interface Country {
   translation: { [key: string]: string };
   flagSrc: string;
   countryName: string;
-  countryCode: string;
+  countryCode: CountryCode;
   languageCode: string;
   currency: string;
   illustrativeFarmId: string;
@@ -18,9 +26,11 @@ export interface Country {
   currencyMultiplier: number;
   dateMask: string;
 }
+
 export type Countries = {
-  [countryCode: string]: Country;
+  [countryCode in CountryCode]: Country;
 };
+// type Countries = Record<CountryCode, Country>
 
 export const countries: Countries = {
   CZ: {

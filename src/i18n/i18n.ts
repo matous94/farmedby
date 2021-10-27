@@ -1,45 +1,48 @@
-import i18n from "i18next";
+import i18n, { Resource } from "i18next";
 import { initReactI18next } from "react-i18next";
 import dayjs from "dayjs";
 import "dayjs/locale/cs";
 import "dayjs/locale/en";
 
 import { localStorageKeys } from "src/packages/local-storage";
-import { countries, Country } from "./countries";
+import { countries, Country, CountryCode, isCountryCode } from "./countries";
 
-let countryCode: string | null;
+let currentCountryCode: CountryCode = "GB";
+let isInitialized = false;
 
-function languageToCountryCode(lng: string) {
-  const byLanguage: { [languageCode: string]: string } = {
-    cs: "CZ",
-    sk: "SK",
-    en: "GB"
+function languageToCountryCode(lng: string): CountryCode {
+  const byLanguage: { [languageCode: string]: CountryCode } = {
+    cs: countries.CZ.countryCode,
+    sk: countries.SK.countryCode,
+    en: countries.GB.countryCode
   };
   return byLanguage[lng] || byLanguage.en;
 }
 
-export function getCountry(code: string = countryCode!): Country {
-  return countries[code] || countries[countryCode!];
+export function getCountry(code: CountryCode = currentCountryCode): Country {
+  return countries[code] || countries[currentCountryCode];
 }
 
-export function getLanguageCode(code: string = countryCode!): string {
+export function getLanguageCode(
+  code: CountryCode = currentCountryCode
+): string {
   return getCountry(code).languageCode;
 }
 
-export function getCountryCode(): string {
-  return countryCode!;
+export function getCountryCode(): CountryCode {
+  return currentCountryCode;
 }
 
-export function getDateMask(code: string = countryCode!): string {
+export function getDateMask(code: CountryCode = currentCountryCode): string {
   return getCountry(code).dateMask;
 }
 
-export function getCurrency(code: string = countryCode!): string {
+export function getCurrency(code: CountryCode = currentCountryCode): string {
   return getCountry(code).currency;
 }
 
-export function changeCountry(code: string): void {
-  countryCode = code;
+export function changeCountry(code: CountryCode): void {
+  currentCountryCode = code;
   localStorage.setItem(localStorageKeys.countryCode, code);
   window.location.reload();
 }
@@ -50,22 +53,19 @@ interface SetupI18nOptions {
 export async function setupI18n({
   onCountryChange
 }: SetupI18nOptions): Promise<void> {
-  if (countryCode) return;
+  if (isInitialized) return;
+  isInitialized = true;
 
   const usersLanguage = window.navigator?.language?.split("-")[0];
-  countryCode =
-    localStorage.getItem(localStorageKeys.countryCode) ||
-    languageToCountryCode(usersLanguage);
+
+  const storedCountryCode = localStorage.getItem(localStorageKeys.countryCode);
+
+  currentCountryCode = isCountryCode(storedCountryCode)
+    ? storedCountryCode
+    : languageToCountryCode(usersLanguage);
 
   const resources = Object.values(countries).reduce(
-    (
-      accu: {
-        [languageCode: Country["languageCode"]]: {
-          translation: Country["translation"];
-        };
-      },
-      country
-    ) => {
+    (accu: Resource, country) => {
       // eslint-disable-next-line no-param-reassign
       accu[country.languageCode] = { translation: country.translation };
       return accu;

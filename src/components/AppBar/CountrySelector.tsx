@@ -6,15 +6,20 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import { countries, getCountryCode, changeCountry } from "src/i18n";
+import {
+  countries,
+  getCountryCode,
+  changeCountry,
+  CountryCode
+} from "src/i18n";
 
-export default function CountrySelector() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function CountrySelector(): JSX.Element {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLDivElement>(null);
   const [selectedCountry, setSelectedCountry] = React.useState(
     getCountryCode()
   );
 
-  const handleOpen = (event) => {
+  const handleOpen: React.MouseEventHandler<HTMLDivElement> = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -22,7 +27,7 @@ export default function CountrySelector() {
     setAnchorEl(null);
   };
 
-  const handleChange = (countryCode) => {
+  const handleChange = (countryCode: CountryCode): void => {
     setSelectedCountry(countryCode);
     changeCountry(countryCode);
     handleClose();
