@@ -1,12 +1,13 @@
 {
-  "include": ["src"],
+  "include": ["**/*.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es5",
+    // be explicit about types included
+    // to avoid clashing with Jest types
+    "types": ["cypress"],
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["jest"],
-    "allowJs": true,
-    "skipLibCheck": true,
+    // "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -15,7 +16,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "jsx": "react-jsx"
   }

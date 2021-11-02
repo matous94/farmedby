@@ -1,7 +1,13 @@
 {
   "root": true,
   "parser": "babel-eslint",
-  "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "prettier",
+    "prettier/react",
+    "./eslint-common.js"
+  ],
   "plugins": ["react", "react-hooks", "jest"],
   "env": {
     "browser": true,
@@ -20,26 +26,6 @@
     }
   },
   "rules": {
-    "linebreak-style": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-    "no-unused-vars": "warn",
-    "import/prefer-default-export": "off",
-    "no-unreachable": "warn",
-    "arrow-body-style": "off",
-    "react/jsx-boolean-value": "off",
-    "react/no-array-index-key": "off",
-    "prefer-arrow-callback": "off",
     "react/prop-types": "warn"
   },
   "overrides": [
@@ -62,7 +48,8 @@
         "plugin:@typescript-eslint/recommended",
         "prettier",
         "prettier/react",
-        "prettier/@typescript-eslint"
+        "prettier/@typescript-eslint",
+        "./eslint-common.js"
       ],
       "plugins": ["react", "react-hooks", "@typescript-eslint", "jest"],
       "globals": {
@@ -70,6 +57,7 @@
         "SharedArrayBuffer": "readonly"
       },
       "rules": {
+        // typescript specific
         "react/prop-types": "off",
         "@typescript-eslint/no-non-null-assertion": "off"
       }

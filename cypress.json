@@ -1,0 +1,6 @@
+{
+  "baseUrl": "http://localhost:3210",
+  "supportFile": "cypress/support/index.ts",
+  "pluginsFile": false,
+  "ignoreTestFiles": ["**/*.md"]
+}
