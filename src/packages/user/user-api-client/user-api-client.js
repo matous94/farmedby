@@ -33,7 +33,7 @@ export async function getBySessionToken(sessionToken) {
 
 export function signOut() {
   try {
-    sendParseRequest("/logout", { method: "POST" });
+    sendParseRequest("logout", { method: "POST" });
   } catch (error) {
     logger.user("SignOut failure silently ignored.", error);
   }
@@ -42,7 +42,7 @@ export function signOut() {
 }
 
 export function requestPasswordReset(email) {
-  return sendParseRequest("/requestPasswordReset", {
+  return sendParseRequest("requestPasswordReset", {
     body: {
       email
     }
