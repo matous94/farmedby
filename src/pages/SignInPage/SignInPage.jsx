@@ -108,6 +108,7 @@ export default function SignInPage() {
           <Link
             to="/sign-up"
             variant="body1"
+            data-testid="no-account-yet"
             sx={{
               fontWeight: "500",
               mt: "12px",
@@ -173,6 +174,7 @@ export default function SignInPage() {
                   type="button"
                   onClick={() => setIsOpenResetPasswordDialog(true)}
                   variant="body2"
+                  data-testid="open-reset-password"
                 >
                   {t("signInPage.forgotPassword")}
                 </Link>

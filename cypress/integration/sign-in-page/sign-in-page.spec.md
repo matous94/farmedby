@@ -4,11 +4,10 @@ Sign in page functionality
 
 # Test cases
 
-- [ ] Fields should be required and validated
-- [ ] Sign in with valid credentials should pass
-  - [ ] Redirect to farm page, if farm exist
-  - [ ] Redirect to create farm page, if farm does not exist
-- [ ] Sign in with invalid credentials should fail
-- [ ] User can navigate to sign up page
-- [ ] User can request password reset
-- [ ] Page is not accessible for logged in users
+- [x] Sign in with valid credentials should pass
+  - [x] Redirect to farm page, if farm exist
+  - [x] Redirect to create farm page, if farm does not exist
+- [x] User can navigate to sign up page
+- [x] User can request password reset
+- [x] Page is not accessible for logged in users
+

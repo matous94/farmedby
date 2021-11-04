@@ -56,6 +56,7 @@ export default function ResetPasswordDialog({ isOpen, onClose }) {
               label={t("email")}
               type="email"
               required={true}
+              data-testid="reset-password-email"
             />
           </DialogContent>
           <DialogActions>
