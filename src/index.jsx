@@ -10,7 +10,7 @@ import AdapterDayjs from "@material-ui/lab/AdapterDayjs";
 import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 
 import { setupI18n, getCountryCode } from "src/i18n";
-import { createStore } from "src/store";
+import { store } from "src/store";
 
 import theme from "./theme";
 import App from "./App";
@@ -28,8 +28,6 @@ if (process.env.NODE_ENV === "development") {
   window.theme = theme;
   window.dayjs = dayjs;
 }
-
-const store = createStore();
 
 async function renderReactApp() {
   await setupI18n({ onCountryChange: () => renderReactApp() });

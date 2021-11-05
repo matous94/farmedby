@@ -1,41 +1,55 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import MuiAppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
+import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Alert from "@material-ui/core/Alert";
 
-import { selectors } from "src/store";
+import { selectors, useStoreActions } from "src/store";
 import Logo from "src/components/Logo";
 import Link from "src/components/Link";
 
 import CountrySelector from "./CountrySelector";
 
-export function useAppBarHeight() {
+export function useAppBarHeight(): number {
   return useStoreState(selectors.app.getAppBarHeight);
 }
 
-export default function AppBar({ onMenuClick, onlyLogo, noOffset }) {
+interface AppBarProps {
+  onMenuClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onlyLogo?: boolean;
+  noOffset?: boolean;
+}
+
+export default function AppBar({
+  onMenuClick,
+  onlyLogo,
+  noOffset
+}: AppBarProps): JSX.Element {
   const { t } = useTranslation();
+  const theme = useTheme();
   const setAppBarHeight = useStoreActions(
     (actions) => actions.app.setAppBarHeight
   );
   const appBarHeight = useAppBarHeight();
-  const appBarRef = React.useRef();
+  const appBarRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const appBar = appBarRef.current;
-    let delayTimeoutId = null;
+    let delayTimeoutId: number;
 
     function onResize() {
       clearTimeout(delayTimeoutId);
-      delayTimeoutId = setTimeout(() => {
-        setAppBarHeight(appBar.clientHeight);
+      delayTimeoutId = window.setTimeout(() => {
+        if (appBar) {
+          setAppBarHeight(appBar.clientHeight);
+        }
       }, 120);
     }
 
@@ -52,7 +66,7 @@ export default function AppBar({ onMenuClick, onlyLogo, noOffset }) {
   }, [setAppBarHeight]);
 
   const myFarm = useStoreState(selectors.getMyFarm);
-  const isDownMd = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const isDownMd = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>

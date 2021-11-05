@@ -17,13 +17,7 @@ const initialOrderDraftData = {
   subscriptionsById: {}
 };
 
-const storeModel = {
-  app: {
-    appBarHeight: 0,
-    setAppBarHeight: action((appState, height) => {
-      appState.appBarHeight = height;
-    })
-  },
+export const storeModel = {
   user: null,
   myFarm: null,
   farms: null,
