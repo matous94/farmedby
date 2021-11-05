@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import MuiTextField from "@material-ui/core/TextField";
+import MuiTextField from "@mui/material/TextField";
 
 export default function TextField({ register, ...rest }) {
   /* eslint-disable*/

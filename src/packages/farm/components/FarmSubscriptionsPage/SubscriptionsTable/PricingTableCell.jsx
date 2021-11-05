@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Box from "@material-ui/core/Box";
-import TableCell from "@material-ui/core/TableCell";
+import Box from "@mui/material/Box";
+import TableCell from "@mui/material/TableCell";
 import PropTypes from "prop-types";
 
 import { SubscriptionOptionPropTypes } from "src/types";

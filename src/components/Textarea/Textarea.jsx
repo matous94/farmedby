@@ -6,8 +6,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-else-return */
 import * as React from "react";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Box from "@material-ui/core/Box";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import Box from "@mui/material/Box";
 
 const placeholderColor = "#777777";
 

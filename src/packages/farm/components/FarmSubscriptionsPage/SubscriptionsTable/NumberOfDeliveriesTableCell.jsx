@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import TableCell from "@material-ui/core/TableCell";
-import TextField from "@material-ui/core/TextField";
+import TableCell from "@mui/material/TableCell";
+import TextField from "@mui/material/TextField";
 import { useStoreState } from "easy-peasy";
 
 import { selectors } from "src/store";

@@ -1,12 +1,12 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import TableRow from "@material-ui/core/TableRow";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Button from "@material-ui/core/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import TableCell from "@material-ui/core/TableCell";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import TableRow from "@mui/material/TableRow";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
+import EditIcon from "@mui/icons-material/Edit";
+import TableCell from "@mui/material/TableCell";
 
 import { SubscriptionPropTypes } from "src/types";
 import { selectors } from "src/store";

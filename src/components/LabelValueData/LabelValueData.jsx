@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import PropTypes from "prop-types";
-import MuiLink from "@material-ui/core/Link";
+import MuiLink from "@mui/material/Link";
 import NavigationLink from "src/components/Link";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 export default function LabelValueData({
   label,

@@ -2,15 +2,15 @@
 import React, { useState } from "react";
 import { useStoreActions } from "easy-peasy";
 import { useHistory } from "react-router-dom";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import Link from "src/components/Link";
-import Grid from "@material-ui/core/Grid";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 import { useTranslation } from "react-i18next";
 
 import ApiClient from "src/packages/api-client";

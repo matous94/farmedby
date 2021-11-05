@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Markdown from "markdown-to-jsx";
 import dayjs from "dayjs";
-import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import AppBar from "src/components/AppBar";
 import { useAsync } from "src/packages/hooks";

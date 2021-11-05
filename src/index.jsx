@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { StoreProvider } from "easy-peasy";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import GlobalStyles from "@material-ui/core/GlobalStyles";
-import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import GlobalStyles from "@mui/material/GlobalStyles";
+import { ThemeProvider } from "@mui/material/styles";
 import dayjs from "dayjs";
-import AdapterDayjs from "@material-ui/lab/AdapterDayjs";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import AdapterDayjs from "@mui/lab/AdapterDayjs";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import { setupI18n, getCountryCode } from "src/i18n";
 import { store } from "src/store";

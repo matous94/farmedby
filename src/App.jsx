@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useStoreActions } from "easy-peasy";
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 
 import ApiClient from "src/packages/api-client";
 import logger from "src/packages/logger";

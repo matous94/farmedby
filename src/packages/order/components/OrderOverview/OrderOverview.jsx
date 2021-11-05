@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import { useParams, useHistory, Redirect } from "react-router-dom";
-import Paper from "@material-ui/core/Paper";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
+import Paper from "@mui/material/Paper";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
 import { selectors } from "src/store";
 import { useAsync } from "src/packages/hooks";

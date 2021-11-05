@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useTranslation } from "react-i18next";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
 
 import Select from "src/components/Select";
 import LoadingOverlay from "src/components/LoadingOverlay";

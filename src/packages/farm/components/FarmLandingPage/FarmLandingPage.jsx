@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStoreActions } from "easy-peasy";
 import { useTranslation } from "react-i18next";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 import ApiClient from "src/packages/api-client";
 import { FarmPropTypes } from "src/types";

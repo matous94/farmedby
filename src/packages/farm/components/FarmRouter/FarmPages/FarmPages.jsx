@@ -2,11 +2,11 @@ import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import Box from "@material-ui/core/Box";
-import Fab from "@material-ui/core/Fab";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Alert from "@material-ui/core/Alert";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
 
 import { useSwitch } from "src/packages/hooks";
 import { selectors } from "src/store";

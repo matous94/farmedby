@@ -2,8 +2,8 @@ import React from "react";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import MyLocationIcon from "@material-ui/icons/MyLocation";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import InputAdornment from "@mui/material/InputAdornment";
 
 import { FarmPropTypes } from "src/types";
 import Select from "src/components/Select";

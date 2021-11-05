@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
 import { useTranslation } from "react-i18next";
 
 import GenericFailureDialog from "src/components/GenericFailureDialog";

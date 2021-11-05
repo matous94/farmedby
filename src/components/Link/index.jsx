@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import MUILink from "@material-ui/core/Link";
+import MUILink from "@mui/material/Link";
 
 function Link(props, ref) {
   if (props.to) {

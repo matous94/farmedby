@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useStoreState } from "easy-peasy";
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 import { getLanguageCode } from "src/i18n";
 
 import { selectors } from "src/store";

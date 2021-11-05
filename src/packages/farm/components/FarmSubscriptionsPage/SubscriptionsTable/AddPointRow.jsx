@@ -1,11 +1,11 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import TableRow from "@material-ui/core/TableRow";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Button from "@material-ui/core/Button";
-import TableCell from "@material-ui/core/TableCell";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import TableRow from "@mui/material/TableRow";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
+import TableCell from "@mui/material/TableCell";
 
 export default function AddPointRow({ onAdd }) {
   return (

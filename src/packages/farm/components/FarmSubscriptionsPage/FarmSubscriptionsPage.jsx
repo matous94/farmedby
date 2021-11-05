@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import PropTypes from "prop-types";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
 import { useSwitch, useAsync } from "src/packages/hooks";

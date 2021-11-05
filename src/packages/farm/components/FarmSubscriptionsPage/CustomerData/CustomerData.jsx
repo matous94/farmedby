@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import MuiTextField from "@material-ui/core/TextField";
+import MuiTextField from "@mui/material/TextField";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { selectors } from "src/store";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 
 function TextField({ value, onChange, label, name, ...rest }) {
   return (

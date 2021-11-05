@@ -2,11 +2,11 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 import { SortByOrdersEnum } from "src/types";
 import { selectors } from "src/store";

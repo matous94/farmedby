@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
-import MyLocationIcon from "@material-ui/icons/MyLocation";
-import WcIcon from "@material-ui/icons/Wc";
-import RateReviewIcon from "@material-ui/icons/RateReview";
-import PhotoIcon from "@material-ui/icons/Photo";
-import HotelIcon from "@material-ui/icons/Hotel";
-// import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import CreateIcon from "@material-ui/icons/Create";
-import PaymentIcon from "@material-ui/icons/Payment";
-import FaqIcon from "@material-ui/icons/Help";
-import UserIcon from "@material-ui/icons/AccountCircle";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import WcIcon from "@mui/icons-material/Wc";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import PhotoIcon from "@mui/icons-material/Photo";
+import HotelIcon from "@mui/icons-material/Hotel";
+// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CreateIcon from "@mui/icons-material/Create";
+import PaymentIcon from "@mui/icons-material/Payment";
+import FaqIcon from "@mui/icons-material/Help";
+import UserIcon from "@mui/icons-material/AccountCircle";
 
 import ProductsIcon from "src/icons/ProductsIcon";
 import FarmIcon from "src/icons/FarmIcon";

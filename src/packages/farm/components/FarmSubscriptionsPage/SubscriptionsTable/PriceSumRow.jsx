@@ -1,8 +1,8 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { useStoreState } from "easy-peasy";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
 
 import { selectors } from "src/store";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
+import Box from "@mui/material/Box";
 
 import AppBar from "src/components/AppBar";
 import OrderOverview from "src/packages/order/components/OrderOverview";

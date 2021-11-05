@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TableCell from "@material-ui/core/TableCell";
-import Box from "@material-ui/core/Box";
+import TableCell from "@mui/material/TableCell";
+import Box from "@mui/material/Box";
 
 export default function PriceTableCell({
   currency,
