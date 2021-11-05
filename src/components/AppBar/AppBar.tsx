@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useStoreState } from "easy-peasy";
 import { useTranslation } from "react-i18next";
 import MuiAppBar from "@mui/material/AppBar";
@@ -29,8 +28,8 @@ interface AppBarProps {
 
 export default function AppBar({
   onMenuClick,
-  onlyLogo,
-  noOffset
+  onlyLogo = false,
+  noOffset = false
 }: AppBarProps): JSX.Element {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -150,14 +149,3 @@ export default function AppBar({
     </>
   );
 }
-
-AppBar.propTypes = {
-  onMenuClick: PropTypes.func,
-  onlyLogo: PropTypes.bool,
-  noOffset: PropTypes.bool
-};
-AppBar.defaultProps = {
-  onMenuClick: undefined,
-  onlyLogo: false,
-  noOffset: false
-};

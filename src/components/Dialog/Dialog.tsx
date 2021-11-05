@@ -1,30 +1,48 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+import DialogContentText, {
+  DialogContentTextProps as ContentTextProps
+} from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import MUiDialog from "@mui/material/Dialog";
+import MUiDialog, { DialogProps } from "@mui/material/Dialog";
+
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  children: JSX.Element;
+}
+
+interface Props {
+  onClose?: DialogProps["onClose"];
+  isOpen?: boolean | null;
+  isLoading?: boolean | null;
+  status?: "isOpen" | "close" | "isLoading" | null;
+  primaryButton?: ButtonProps;
+  secondaryButton?: ButtonProps;
+  title?: string;
+  text?: string | JSX.Element;
+  loadingText?: string;
+  DialogContentTextProps?: ContentTextProps;
+}
 
 export default function Dialog({
   onClose,
-  isOpen,
+  isOpen = null,
+  isLoading = null,
+  status = null,
   primaryButton,
-  isLoading,
-  loadingText,
   secondaryButton,
-  status, // isOpen, isLoading, close
   title,
   text,
+  loadingText,
   DialogContentTextProps
-}) {
-  if (isOpen == null && status == null && isLoading == null) {
+}: Props): JSX.Element {
+  if (isOpen === null && status === null && isLoading === null) {
     throw new Error("One of [isOpen, status, isLoading] props is required.");
   }
-  if (typeof isOpen === "boolean" && status == null) {
+  if (typeof isOpen === "boolean" && status === null) {
     // eslint-disable-next-line no-param-reassign
     status = isOpen ? "isOpen" : "close";
   }
@@ -54,7 +72,7 @@ export default function Dialog({
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            flexGrow: "1"
+            flexGrow: 1
           }}
         >
           <CircularProgress />
@@ -95,49 +113,19 @@ export default function Dialog({
                 {secondaryButton.children}
               </Button>
             )}
-            <Button
-              onClick={primaryButton.onClick}
-              disabled={primaryButton.disabled ?? false}
-              color="primary"
-              autoFocus
-            >
-              {primaryButton.children}
-            </Button>
+            {primaryButton && (
+              <Button
+                onClick={primaryButton.onClick}
+                disabled={primaryButton.disabled ?? false}
+                color="primary"
+                autoFocus
+              >
+                {primaryButton.children}
+              </Button>
+            )}
           </DialogActions>
         </>
       )}
     </MUiDialog>
   );
 }
-Dialog.propTypes = {
-  onClose: PropTypes.func,
-  isOpen: PropTypes.bool,
-  primaryButton: PropTypes.shape({
-    children: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool
-  }),
-  isLoading: PropTypes.bool,
-  loadingText: PropTypes.string,
-  secondaryButton: PropTypes.shape({
-    children: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool
-  }),
-  status: PropTypes.oneOf(["isOpen", "close", "isLoading"]),
-  title: PropTypes.string,
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  DialogContentTextProps: PropTypes.shape({ component: PropTypes.string })
-};
-Dialog.defaultProps = {
-  onClose: undefined,
-  isOpen: undefined,
-  primaryButton: undefined,
-  isLoading: undefined,
-  loadingText: undefined,
-  secondaryButton: undefined,
-  status: undefined,
-  title: undefined,
-  text: undefined,
-  DialogContentTextProps: undefined
-};

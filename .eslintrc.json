@@ -59,6 +59,7 @@
       "rules": {
         // typescript specific
         "react/prop-types": "off",
+        "react/require-default-props": "off",
         "@typescript-eslint/no-non-null-assertion": "off"
       }
     }

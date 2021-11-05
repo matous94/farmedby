@@ -1,15 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 
 import Dialog from "src/components/Dialog";
 
+interface Props {
+  isOpen: boolean;
+  isLoading?: boolean;
+  onDelete: React.MouseEventHandler<HTMLButtonElement>;
+  onDismiss: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 export default function DeleteDialog({
   isOpen,
-  isLoading,
+  isLoading = false,
   onDelete,
   onDismiss
-}) {
+}: Props): JSX.Element {
   const { t } = useTranslation();
   return (
     <Dialog
@@ -27,12 +33,3 @@ export default function DeleteDialog({
     />
   );
 }
-DeleteDialog.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool,
-  onDelete: PropTypes.func.isRequired,
-  onDismiss: PropTypes.func.isRequired
-};
-DeleteDialog.defaultProps = {
-  isLoading: false
-};
