@@ -1,12 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
+import { SxProps } from "@mui/system";
 import Typography from "@mui/material/Typography";
-import LabelValueData, {
-  LabelValueDataPropTypes
-} from "src/components/LabelValueData";
+import LabelValueData, { ILabelValueData } from "src/components/LabelValueData";
 
-export default function LabelValueDataList({ items, heading, sx }) {
+interface Props {
+  items: ILabelValueData[];
+  heading?: string;
+  sx?: SxProps;
+}
+
+export default function LabelValueDataList({
+  items,
+  heading,
+  sx
+}: Props): JSX.Element {
   return (
     <Box sx={{ width: "100%", ...sx }}>
       {heading && <Typography variant="h5">{heading}</Typography>}
@@ -29,13 +37,3 @@ export default function LabelValueDataList({ items, heading, sx }) {
     </Box>
   );
 }
-
-LabelValueDataList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape(LabelValueDataPropTypes)).isRequired,
-  sx: PropTypes.shape({}),
-  heading: PropTypes.string
-};
-LabelValueDataList.defaultProps = {
-  sx: undefined,
-  heading: undefined
-};

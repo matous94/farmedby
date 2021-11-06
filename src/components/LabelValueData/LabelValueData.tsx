@@ -1,26 +1,36 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
-import PropTypes from "prop-types";
 import MuiLink from "@mui/material/Link";
-import NavigationLink from "src/components/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { SxProps } from "@mui/system";
+
+import NavigationLink from "src/components/Link";
+
+export interface ILabelValueData {
+  label: string;
+  multiline?: boolean;
+  value?: string | JSX.Element;
+  href?: string;
+  to?: string;
+  sx?: SxProps;
+}
 
 export default function LabelValueData({
   label,
   value,
   href,
   to,
-  multiline,
+  multiline = false,
   sx
-}) {
+}: ILabelValueData): JSX.Element | null {
   if (!value && !href && !to) return null;
   const useHrefEllipsis = href && !value;
   let content;
   let boxSx = sx;
 
   if (href) {
-    let sxProps = {
+    let sxProps: SxProps = {
       fontSize: "0.875rem",
       lineHeight: "1.45",
       wordBreak: "break-word"
@@ -101,21 +111,3 @@ export default function LabelValueData({
     </Box>
   );
 }
-
-export const LabelValueDataPropTypes = {
-  label: PropTypes.string.isRequired,
-  multiline: PropTypes.bool,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  href: PropTypes.string,
-  to: PropTypes.string,
-  sx: PropTypes.shape({})
-};
-
-LabelValueData.propTypes = LabelValueDataPropTypes;
-LabelValueData.defaultProps = {
-  value: undefined,
-  multiline: false,
-  href: undefined,
-  to: undefined,
-  sx: undefined
-};

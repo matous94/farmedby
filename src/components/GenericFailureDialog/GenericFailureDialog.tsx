@@ -1,10 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 import Dialog from "src/components/Dialog";
 
-export default function GenericFailureDialog({ onClose, isOpen, isLoading }) {
+interface Props {
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+  isOpen: boolean;
+  isLoading?: boolean;
+}
+
+export default function GenericFailureDialog({
+  onClose,
+  isOpen,
+  isLoading = false
+}: Props): JSX.Element {
   const { t } = useTranslation();
   return (
     <Dialog
@@ -20,11 +29,3 @@ export default function GenericFailureDialog({ onClose, isOpen, isLoading }) {
     />
   );
 }
-GenericFailureDialog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool
-};
-GenericFailureDialog.defaultProps = {
-  isLoading: false
-};
