@@ -56,7 +56,7 @@ describe("Sign in page", () => {
   });
 
   describe("Sign up page is public only", () => {
-    it.only("should redirect logged in user to farm page", () => {
+    it("should redirect logged in user to farm page", () => {
       cy.get("#email")
         .type("matousvencl@gmail.com")
         .get("#password")

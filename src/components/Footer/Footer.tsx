@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "src/components/Link";
 
-export default function Footer() {
+export default function Footer(): JSX.Element {
   const { t } = useTranslation();
   return (
     <Box

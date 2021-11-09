@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Markdown from "markdown-to-jsx";
 import dayjs from "dayjs";
@@ -14,7 +13,11 @@ import ApiClient from "src/packages/api-client";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import { getLanguageCode } from "src/i18n";
 
-export default function LegalDocumentPage({ documentId }) {
+interface Props {
+  documentId: string;
+}
+
+export default function LegalDocumentPage({ documentId }: Props): JSX.Element {
   const { t } = useTranslation();
   const documentGetter = useAsync(
     () =>
@@ -57,13 +60,13 @@ export default function LegalDocumentPage({ documentId }) {
           <GenericFailureDialog
             isOpen={documentGetter.hasError}
             onClose={() => {
-              window.location = "/";
+              window.location.href = "/";
             }}
           />
           {documentGetter.isLoading && (
             <CircularProgress sx={{ display: "block", mx: "auto" }} />
           )}
-          {documentGetter.isResolved && (
+          {documentGetter.isResolved && documentGetter.result && (
             <>
               <Typography>
                 {t("legalDocument.releaseDate")}:{" "}
@@ -81,6 +84,3 @@ export default function LegalDocumentPage({ documentId }) {
     </>
   );
 }
-LegalDocumentPage.propTypes = {
-  documentId: PropTypes.string.isRequired
-};

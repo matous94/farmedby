@@ -2,21 +2,54 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import logger from "../logger";
 
-const StatusEnum = Object.freeze({
-  initial: "initial",
-  loading: "loading",
-  resolved: "resolved",
-  error: "error"
-});
-function getInitialStatus({ runOnMount, hasCache }) {
+enum StatusEnum {
+  initial = "initial",
+  loading = "loading",
+  resolved = "resolved",
+  error = "error"
+}
+
+function getInitialStatus({
+  runOnMount,
+  hasCache
+}: {
+  runOnMount: boolean;
+  hasCache: boolean;
+}): StatusEnum {
   let status = StatusEnum.initial;
   if (hasCache) status = StatusEnum.resolved;
   if (runOnMount && !hasCache) status = StatusEnum.loading;
   return status;
 }
 
-export default function useAsync(
-  asyncFunction,
+interface UseAsyncResponse<TResult> {
+  status: StatusEnum;
+  isLoading: boolean;
+  hasError: boolean;
+  isResolved: boolean;
+  isRefreshing: boolean;
+  result: TResult | undefined;
+  StatusEnum: typeof StatusEnum;
+  execute: () => Promise<{ result?: TResult | undefined; error: boolean }>;
+  refresh: () => Promise<{ result?: TResult | undefined; error: boolean }>;
+  reset: () => void;
+}
+
+interface UseAsyncOptions<TResult> {
+  cache?: TResult | undefined;
+  hasCache?: boolean;
+  runOnMount?: boolean;
+  failOnRefresh?: boolean;
+  ignoreMultipleCalls?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  errorLogger?: (...data: any[]) => void;
+  errorMessage?: string;
+  functionName?: string;
+}
+
+export default function useAsync<TResult>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  asyncFunction: (...args: any[]) => Promise<TResult>,
   {
     cache,
     hasCache = false,
@@ -26,20 +59,22 @@ export default function useAsync(
     errorLogger = logger.error,
     errorMessage,
     functionName = asyncFunction.name
-  } = {}
-) {
+  }: UseAsyncOptions<TResult> = {}
+): UseAsyncResponse<TResult> {
   const isExecuting = React.useRef(false);
-  // initial, loading, resolved, error
   const [status, setStatus] = React.useState(
     getInitialStatus({ runOnMount, hasCache })
   );
   const [isRefreshing, setIsRefreshing] = React.useState(
     hasCache && runOnMount
   );
-  const [result, setResult] = React.useState(hasCache ? cache : undefined);
+  const [result, setResult] = React.useState<TResult | undefined>(
+    hasCache ? cache : undefined
+  );
 
-  const execute = React.useCallback(
-    async (...args) => {
+  const execute: UseAsyncResponse<TResult>["execute"] = React.useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async (...args: any[]) => {
       if (ignoreMultipleCalls && isExecuting.current) {
         logger.info("useAsync is executing, ignoring this call");
         return { result, error: false };
@@ -71,7 +106,7 @@ export default function useAsync(
       result
     ]
   );
-  const refresh = React.useCallback(
+  const refresh: UseAsyncResponse<TResult>["refresh"] = React.useCallback(
     async (...args) => {
       if (ignoreMultipleCalls && isExecuting.current) {
         logger.info("useAsync is executing, ignoring this call");
@@ -118,7 +153,7 @@ export default function useAsync(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return React.useMemo(
+  return React.useMemo<UseAsyncResponse<TResult>>(
     () => ({
       status,
       isLoading: status === StatusEnum.loading,
