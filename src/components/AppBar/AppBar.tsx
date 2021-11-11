@@ -12,7 +12,7 @@ import Alert from "@mui/material/Alert";
 
 import { selectors, useStoreActions } from "src/store";
 import Logo from "src/components/Logo";
-import Link from "src/components/Link";
+import { NavigationLink } from "src/components/Link";
 
 import CountrySelector from "./CountrySelector";
 
@@ -105,7 +105,7 @@ export default function AppBar({
             >
               <>
                 {myFarm ? (
-                  <Link
+                  <NavigationLink
                     underline="none"
                     variant="h6"
                     to={`/farm/${myFarm.objectId}`}
@@ -113,9 +113,9 @@ export default function AppBar({
                     fontSize="16px"
                   >
                     {t("myFarm")}
-                  </Link>
+                  </NavigationLink>
                 ) : (
-                  <Link
+                  <NavigationLink
                     variant="h6"
                     underline="none"
                     to="/sign-up"
@@ -123,9 +123,9 @@ export default function AppBar({
                     fontSize="16px"
                   >
                     {t("createFarm")}
-                  </Link>
+                  </NavigationLink>
                 )}
-                <Link
+                <NavigationLink
                   underline="none"
                   variant="h6"
                   to="/farms"
@@ -134,7 +134,7 @@ export default function AppBar({
                   ml={[0, 3]}
                 >
                   {t("farmsPage.heading")}
-                </Link>
+                </NavigationLink>
               </>
             </Box>
           )}

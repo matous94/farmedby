@@ -12,7 +12,7 @@ import { getCountry } from "src/i18n";
 import NumberedList from "src/components/NumberedList";
 import ApiClient from "src/packages/api-client";
 import { selectors } from "src/store";
-import Link from "src/components/Link";
+import { Link } from "src/components/Link";
 
 import SubscriptionEditor from "./SubscriptionEditor";
 import SubscriptionsTable from "./SubscriptionsTable";

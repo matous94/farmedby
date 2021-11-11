@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-import Link from "src/components/Link";
+import { NavigationLink } from "src/components/Link";
 import { ProductTypesPropTypes } from "src/types";
 
 // eslint-disable-next-line react/prop-types
@@ -52,7 +52,7 @@ function Farm({ farm, productTypesFilter }) {
   return (
     <TableRow>
       <TableCell>
-        <Link to={`/farm/${objectId}`}>{name}</Link>
+        <NavigationLink to={`/farm/${objectId}`}>{name}</NavigationLink>
       </TableCell>
       <TableCell sx={{ whiteSpace: "nowrap" }}>
         {uniqueAndSorted.map((address, index) => (

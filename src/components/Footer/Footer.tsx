@@ -1,8 +1,7 @@
-import * as React from "react";
 import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Link from "src/components/Link";
+import { NavigationLink } from "src/components/Link";
 
 export default function Footer(): JSX.Element {
   const { t } = useTranslation();
@@ -41,7 +40,7 @@ export default function Footer(): JSX.Element {
               mr: [null, "22px", "24px"]
             }}
           >
-            <Link
+            <NavigationLink
               sx={{
                 // mr: [null, null, "32px"]
                 minWidth: [null, "180px"],
@@ -50,10 +49,10 @@ export default function Footer(): JSX.Element {
               to="/terms-of-use"
             >
               {t("legalDocument.termsOfUse.link")}
-            </Link>
-            {/* <Link to="/seller-terms-of-use">
+            </NavigationLink>
+            {/* <NavigationLink to="/seller-terms-of-use">
               {t("legalDocument.sellerTermsOfUse.link")}
-            </Link> */}
+            </NavigationLink> */}
           </Box>
           <Box
             sx={{
@@ -62,7 +61,7 @@ export default function Footer(): JSX.Element {
               ml: [null, "22px", 0]
             }}
           >
-            <Link
+            <NavigationLink
               sx={{
                 minWidth: [null, "180px"],
                 textAlign: [null, "left"]
@@ -71,8 +70,8 @@ export default function Footer(): JSX.Element {
               to="/privacy-policy"
             >
               {t("legalDocument.privacyPolicy.link")}
-            </Link>
-            {/* <Link to="/claims">{t("legalDocument.claims.link")}</Link> */}
+            </NavigationLink>
+            {/* <NavigationLink to="/claims">{t("legalDocument.claims.link")}</NavigationLink> */}
           </Box>
         </Box>
         <Box

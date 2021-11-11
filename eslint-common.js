@@ -5,6 +5,7 @@ module.exports = {
     "linebreak-style": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import Link from "src/components/Link";
+import { NavigationLink, Link } from "src/components/Link";
 import logger from "src/packages/logger";
 
 export default function SignUpView({ onSubmit, isLoading }) {
@@ -60,7 +60,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
         <Typography component="h1" variant="h5">
           {t("signUpPage.heading")}
         </Typography>
-        <Link
+        <NavigationLink
           to="/sign-in"
           variant="body1"
           sx={{
@@ -72,7 +72,7 @@ export default function SignUpView({ onSubmit, isLoading }) {
           }}
         >
           {t("signUpPage.existingAccount")}
-        </Link>
+        </NavigationLink>
         <Box
           component="form"
           sx={{

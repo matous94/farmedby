@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import { useAppBarHeight } from "src/components/AppBar";
-import Link from "src/components/Link";
+import { NavigationLink } from "src/components/Link";
 import ApiClient from "src/packages/api-client";
 import Logo from "src/components/Logo";
 
@@ -68,7 +68,7 @@ export default function ResponsiveDrawer({
       <Divider />
       <List>
         <ListItem
-          component={Link}
+          component={NavigationLink}
           to={`/farm/${farmId}`}
           key={landingPage.name}
           onClick={() => {
@@ -86,7 +86,7 @@ export default function ResponsiveDrawer({
           .filter((page) => page.selectable && (!page.private || isAdminMode))
           .map(({ name, translationKey, Icon, disabled }) => (
             <ListItem
-              component={Link}
+              component={NavigationLink}
               to={`/farm/${farmId}/${name}`}
               onClick={() => {
                 if (isOpen) onClose();

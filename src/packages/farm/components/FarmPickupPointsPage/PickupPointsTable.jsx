@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Link from "@mui/material/Link";
+import { Link } from "src/components/Link";
 
 import { FarmPropTypes, PickupPointPropTypes } from "src/types";
 import { DeliveryPeriodEnum } from "src/packages/pickup-point/delivery-period";

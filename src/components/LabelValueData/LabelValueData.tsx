@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
-import MuiLink from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { SxProps } from "@mui/system";
 
-import NavigationLink from "src/components/Link";
+import { NavigationLink, Link } from "src/components/Link";
 
 export interface ILabelValueData {
   label: string;
@@ -48,9 +46,9 @@ export default function LabelValueData({
     }
 
     content = (
-      <MuiLink sx={sxProps} target="_blank" href={href}>
+      <Link sx={sxProps} target="_blank" href={href}>
         {value || href}
-      </MuiLink>
+      </Link>
     );
     if (useHrefEllipsis) {
       boxSx = {

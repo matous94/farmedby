@@ -6,7 +6,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Link from "src/components/Link";
+import { NavigationLink, Link } from "src/components/Link";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -105,7 +105,7 @@ export default function SignInPage() {
           <Typography component="h1" variant="h5">
             {t("signInPage.heading")}
           </Typography>
-          <Link
+          <NavigationLink
             to="/sign-up"
             variant="body1"
             data-testid="no-account-yet"
@@ -118,7 +118,7 @@ export default function SignInPage() {
             }}
           >
             {t("signInPage.noAccount")}
-          </Link>
+          </NavigationLink>
           <Box
             component="form"
             sx={{
