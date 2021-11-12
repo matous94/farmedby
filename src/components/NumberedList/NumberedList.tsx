@@ -1,10 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
+import Box from "@mui/material/Box";
+import Typography, { TypographyProps } from "@mui/material/Typography";
+import { SxProps } from "@mui/system";
 
-function ListItem({ number, content }) {
+interface ListItemProps {
+  number: number;
+  content: JSX.Element | string;
+}
+function ListItem({ number, content }: ListItemProps): JSX.Element {
   return (
     <Box display="flex">
       <Box
@@ -19,21 +22,28 @@ function ListItem({ number, content }) {
     </Box>
   );
 }
-ListItem.propTypes = {
-  number: PropTypes.number.isRequired,
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired
-};
+
+interface NumberedListProps {
+  color: string;
+  component: React.ElementType;
+  length: number;
+  stepOffset: number;
+  sx: SxProps;
+  translationKey: string;
+  translations: (string | JSX.Element)[];
+  variant: TypographyProps["variant"];
+}
 
 export default function NumberedList({
-  stepOffset,
-  variant,
+  color,
   component,
   length,
+  stepOffset = 0,
+  sx,
   translationKey,
   translations,
-  color,
-  sx
-}) {
+  variant = "h6"
+}: NumberedListProps): JSX.Element {
   const { t } = useTranslation();
   const list = [];
 
@@ -68,25 +78,3 @@ export default function NumberedList({
     </Typography>
   );
 }
-NumberedList.propTypes = {
-  length: PropTypes.number,
-  stepOffset: PropTypes.number,
-  translationKey: PropTypes.string,
-  translations: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-  ),
-  color: PropTypes.string,
-  component: PropTypes.string,
-  variant: PropTypes.string,
-  sx: PropTypes.shape({})
-};
-NumberedList.defaultProps = {
-  color: undefined,
-  sx: undefined,
-  variant: "h6",
-  length: undefined,
-  translationKey: undefined,
-  component: undefined,
-  stepOffset: 0,
-  translations: undefined
-};

@@ -1,8 +1,7 @@
-import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-export default function LoadingOverlay() {
+export default function LoadingOverlay(): JSX.Element {
   return (
     <Box
       sx={{
