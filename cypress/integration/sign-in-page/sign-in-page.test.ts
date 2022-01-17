@@ -1,73 +1,102 @@
-describe("Sign in page", () => {
+import { Routes } from "../../routes";
+import { Endpoints } from "../../endpoints";
+
+describe("Sign in page functionality", () => {
   beforeEach(() => {
-    cy.visit("/sign-in");
+    cy.visit(Routes.signIn().relative);
   });
 
   describe("Sign in with valid credentials", () => {
-    context("Farm created", () => {
-      it("should sign in and navigate to farm page", () => {
+    context("User with farm", () => {
+      it("should sign in and redirect to farm page", () => {
+        const { email, password } = Cypress.env("userWithFarm");
+
+        expect(email, "email value").to.be.a("string").and.not.be.empty;
+
+        // password should not be shown in the Command log
+        if (typeof password !== "string" || !password) {
+          throw new Error(
+            "Missing password value. Set it in cypress.env.json file."
+          );
+        }
+
+        cy.intercept(Endpoints.getMyFarm().absolute).as("getMyFarm");
+
         cy.get("#email")
-          .type("matousvencl@gmail.com")
+          .type(email)
           .get("#password")
-          .type("kokos")
+          .type(password, { log: false })
           .get("[type=submit]")
-          .click()
-          .url()
-          .should("include", `${Cypress.config().baseUrl}/farm/`);
+          .click();
+
+        cy.wait("@getMyFarm").then(({ response }) => {
+          if (!response) {
+            throw new Error(
+              "getMyFarm endpoint should be called after sign-in subit"
+            );
+          }
+          const { objectId } = response.body.result;
+          cy.url().should("eq", Routes.farmLandingPage(objectId).absolute);
+        });
       });
     });
 
-    context("Farm not created", () => {
-      it("should sign in and navigate to create farm page", () => {
+    context("User without farm", () => {
+      it("should sign in and redirect to create farm page", () => {
+        const { email, password } = Cypress.env("userWithoutFarm");
+
+        expect(email, "email value").to.be.a("string").not.to.be.empty;
+
+        // password should not be shown in the Command log
+        if (typeof password !== "string" || !password) {
+          throw new Error(
+            "Missing password value. Set it in cypress.env.json file."
+          );
+        }
+
         cy.get("#email")
-          .type("nofarmtest@farmedby.com")
+          .type(email)
           .get("#password")
-          .type("kolobezka")
+          .type(password, { log: false })
           .get("[type=submit]")
           .click()
           .url()
-          .should("eq", `${Cypress.config().baseUrl}/create-farm`);
+          .should("eq", Routes.createFarm().absolute);
       });
     });
   });
 
-  describe("No account yet", () => {
-    it("can navigate to /sign-up page", () => {
-      cy.getByTestId("no-account-yet")
-        .click()
-        .url()
-        .should("eq", `${Cypress.config().baseUrl}/sign-up`);
-    });
+  it("Can navigate to sign-up page", () => {
+    cy.getByTestId("no-account-yet")
+      .click()
+      .url()
+      .should("eq", Routes.signUp().absolute);
   });
 
-  describe("Password reset", () => {
-    it("can request password reset", () => {
-      cy.intercept("**/requestPasswordReset").as("requestPasswordReset");
+  it("Can request password reset", () => {
+    cy.intercept(Endpoints.requestPasswordReset().absolute).as(
+      "requestPasswordReset"
+    );
 
-      cy.getByTestId("open-reset-password")
-        .click()
-        .getByTestId("reset-password-email")
-        .type("matousvencl@gmail.com{enter}");
+    cy.getByTestId("open-reset-password")
+      .click()
+      .getByTestId("reset-password-email")
+      .type("matousvencl@gmail.com{enter}");
 
-      cy.wait("@requestPasswordReset")
-        .its("response.statusCode")
-        .should("eq", 200);
-    });
+    cy.wait("@requestPasswordReset")
+      .its("response.statusCode")
+      .should("eq", 200);
+  });
+});
+
+describe("Sign up page is public only", () => {
+  before(() => {
+    cy.signIn();
   });
 
-  describe("Sign up page is public only", () => {
-    it("should redirect logged in user to farm page", () => {
-      cy.get("#email")
-        .type("matousvencl@gmail.com")
-        .get("#password")
-        .type("kokos")
-        .get("[type=submit]")
-        .click()
-        .url()
-        .should("include", `${Cypress.config().baseUrl}/farm/`)
-        .go(-1)
-        .url()
-        .should("include", `${Cypress.config().baseUrl}/farm/`);
-    });
+  it("should redirect user to other page", () => {
+    cy.visit(Routes.signIn().relative)
+      .url()
+      .should("not.eq", Routes.signIn().absolute);
   });
 });

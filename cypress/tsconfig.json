@@ -1,7 +1,7 @@
 {
-  "include": ["**/*.ts"],
+  "include": ["../cypress", "../src"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "..",
     "target": "es5",
     // be explicit about types included
     // to avoid clashing with Jest types
@@ -16,8 +16,9 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "allowJs": true
   }
 }
