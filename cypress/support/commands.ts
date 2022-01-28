@@ -40,7 +40,7 @@ declare global {
        */
       getByTestId(value: string): Chainable<Subject>;
       getByTestIdContains(value: string): Chainable<Subject>;
-      signIn(userType: string): Chainable<Subject>;
+      signIn(userType?: string): Chainable<Subject>;
     }
   }
 }

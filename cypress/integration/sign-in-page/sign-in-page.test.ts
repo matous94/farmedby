@@ -1,6 +1,8 @@
 import { Routes } from "../../routes";
 import { Endpoints } from "../../endpoints";
 
+// https://docs.google.com/spreadsheets/d/1p4CdmXBDm7IKBASVU6g1b7cIV9Xx_3AgX927tcINI7Y/edit?usp=sharing
+
 describe("Sign in page functionality", () => {
   beforeEach(() => {
     cy.visit(Routes.signIn().relative);
