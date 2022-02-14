@@ -109,6 +109,7 @@ export default function Dialog({
                 onClick={secondaryButton.onClick}
                 disabled={secondaryButton.disabled ?? false}
                 color="primary"
+                data-testid="dialog-secondary-button"
               >
                 {secondaryButton.children}
               </Button>
@@ -119,6 +120,7 @@ export default function Dialog({
                 disabled={primaryButton.disabled ?? false}
                 color="primary"
                 autoFocus
+                data-testid="dialog-primary-button"
               >
                 {primaryButton.children}
               </Button>

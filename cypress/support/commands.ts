@@ -26,6 +26,7 @@
 
 /// <reference types="cypress" />
 
+import { Routes } from "../routes";
 import { Endpoints } from "../endpoints";
 import { localStorageKeys } from "../../src/packages/local-storage";
 
@@ -41,6 +42,8 @@ declare global {
       getByTestId(value: string): Chainable<Subject>;
       getByTestIdContains(value: string): Chainable<Subject>;
       signIn(userType?: string): Chainable<Subject>;
+      signUp(userType?: string): Chainable<Response<Record<string, unknown>>>;
+      createFarm(): Chainable<Response<Record<string, unknown>>>;
     }
   }
 }
@@ -84,4 +87,66 @@ Cypress.Commands.add("signIn", (userType?: string) => {
       response.body.result.sessionToken
     );
   });
+});
+
+Cypress.Commands.add("signUp", (userType?: string) => {
+  const { email, password, firstName, lastName } = Cypress.env(
+    userType || "temporaryUser"
+  );
+
+  Cypress.log({
+    name: "signUp through API",
+    message: `user email ${email}`
+  });
+
+  expect(email).to.be.a("string").and.not.to.be.empty;
+
+  if (typeof password !== "string" || !password) {
+    throw new Error("Missing password value. Set it in cypress.env.json file.");
+  }
+
+  return cy
+    .request({
+      method: "POST",
+      url: Endpoints.signUp().absolute,
+      headers: {
+        "content-type": "application/json",
+        "X-Parse-Application-Id": Cypress.env("appId")
+      },
+      body: {
+        email,
+        password,
+        firstName,
+        lastName
+      }
+    })
+    .then((response) => {
+      expect(response.status).to.eq(200);
+      const user = response.body.result;
+      expect(user.sessionToken).to.be.a("string").and.not.to.be.empty;
+      localStorage.setItem(localStorageKeys.sessionToken, user.sessionToken);
+    });
+});
+
+Cypress.Commands.add("createFarm", () => {
+  const farmData = Cypress.env("temporaryFarm");
+
+  return cy
+    .request({
+      method: "POST",
+      url: Endpoints.createFarm().absolute,
+      headers: {
+        "content-type": "application/json",
+        "X-Parse-Application-Id": Cypress.env("appId"),
+        "X-Parse-Session-Token": localStorage.getItem(
+          localStorageKeys.sessionToken
+        )
+      },
+      body: farmData
+    })
+    .then((response) => {
+      expect(response.status).to.eq(200);
+      const farm = response.body.result;
+      expect(farm.objectId).to.be.a("string").and.not.to.be.empty;
+    });
 });

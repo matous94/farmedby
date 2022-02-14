@@ -28,10 +28,16 @@ export const Routes = {
   farmLandingPage(farmId: string) {
     return createRoute(`farm/${farmId}`);
   },
+  userAccountPage(farmId: string) {
+    return createRoute(`farm/${farmId}/user`);
+  },
   signIn() {
     return createRoute("sign-in");
   },
   signUp() {
     return createRoute("sign-up");
+  },
+  homePage() {
+    return createRoute("");
   }
 } as const;

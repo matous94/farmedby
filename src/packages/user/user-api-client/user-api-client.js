@@ -52,3 +52,9 @@ export function requestPasswordReset(email) {
 export function updateCredentials({ email, password }) {
   return callCloudFunction("updateCredentials", { email, password });
 }
+
+export async function destroyUserAndFarm() {
+  await callCloudFunction("destroyUserAndFarm");
+  localStorage.removeItem(localStorageKeys.sessionToken);
+  logger.user("Removed session token from local storage.");
+}

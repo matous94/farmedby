@@ -8,20 +8,22 @@ interface Props {
   isLoading?: boolean;
   onDelete: React.MouseEventHandler<HTMLButtonElement>;
   onDismiss: React.MouseEventHandler<HTMLButtonElement>;
+  text?: string;
 }
 
 export default function DeleteDialog({
   isOpen,
   isLoading = false,
   onDelete,
-  onDismiss
+  onDismiss,
+  text
 }: Props): JSX.Element {
   const { t } = useTranslation();
   return (
     <Dialog
       isOpen={isOpen}
       isLoading={isLoading}
-      text={t("deleteDialog.text")}
+      text={text || t("deleteDialog.text")}
       primaryButton={{
         onClick: onDelete,
         children: t("yes")

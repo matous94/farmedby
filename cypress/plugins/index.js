@@ -20,3 +20,28 @@
 // `on` is used to hook into various events Cypress emits
 // `config` is the resolved Cypress config
 // }
+
+module.exports = (on, config) => {
+  on("before:browser:launch", (browser = {}, launchOptions) => {
+    // `args` is an array of all the arguments that will
+    // be passed to browsers when it launches
+
+    if (browser.family === "chromium" && browser.name !== "electron") {
+      // auto open devtools
+      launchOptions.args.push("--auto-open-devtools-for-tabs");
+    }
+
+    if (browser.family === "firefox") {
+      // auto open devtools
+      launchOptions.args.push("-devtools");
+    }
+
+    if (browser.name === "electron") {
+      // auto open devtools
+      launchOptions.preferences.devTools = true;
+    }
+
+    // whatever you return here becomes the launchOptions
+    return launchOptions;
+  });
+};

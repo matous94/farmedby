@@ -19,7 +19,7 @@ import FarmPickupPointsPage from "src/packages/farm/components/FarmPickupPointsP
 import FarmSubscriptionsPage from "src/packages/farm/components/FarmSubscriptionsPage";
 import OrdersPage from "src/packages/order/components/OrdersPage";
 import OrderOverview from "src/packages/order/components/OrderOverview/OrderOverview";
-import UserCredentials from "src/packages/user/UserCredentials";
+import UserAccount from "src/packages/user/UserAccount";
 
 export const landingPage = {
   name: "landing",
@@ -184,12 +184,12 @@ export default {
   },
   user: {
     name: "user",
-    translationKey: "credentialsChange.heading",
+    translationKey: "userAccount.heading",
     renderHeading: true,
     Icon: UserIcon,
     disabled: false,
     private: true,
     selectable: true,
-    PageContent: UserCredentials
+    PageContent: UserAccount
   }
 };

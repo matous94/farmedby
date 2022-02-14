@@ -22,7 +22,7 @@ function getInitialStatus({
   return status;
 }
 
-interface UseAsyncResponse<TResult> {
+interface IUseAsync<TResult> {
   status: StatusEnum;
   isLoading: boolean;
   hasError: boolean;
@@ -45,11 +45,12 @@ interface UseAsyncOptions<TResult> {
   errorLogger?: (...data: any[]) => void;
   errorMessage?: string;
   functionName?: string;
+  useInitialFunction?: boolean;
 }
 
 export default function useAsync<TResult>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  asyncFunction: (...args: any[]) => Promise<TResult>,
+  currentAsyncFunction: (...args: any[]) => Promise<TResult>,
   {
     cache,
     hasCache = false,
@@ -58,9 +59,15 @@ export default function useAsync<TResult>(
     ignoreMultipleCalls = true,
     errorLogger = logger.error,
     errorMessage,
-    functionName = asyncFunction.name
+    functionName = currentAsyncFunction.name,
+    useInitialFunction = false
   }: UseAsyncOptions<TResult> = {}
-): UseAsyncResponse<TResult> {
+): IUseAsync<TResult> {
+  const initialAsyncFunction = React.useRef(currentAsyncFunction).current;
+  const asyncFunction = useInitialFunction
+    ? initialAsyncFunction
+    : currentAsyncFunction;
+
   const isExecuting = React.useRef(false);
   const [status, setStatus] = React.useState(
     getInitialStatus({ runOnMount, hasCache })
@@ -72,7 +79,7 @@ export default function useAsync<TResult>(
     hasCache ? cache : undefined
   );
 
-  const execute: UseAsyncResponse<TResult>["execute"] = React.useCallback(
+  const execute: IUseAsync<TResult>["execute"] = React.useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async (...args: any[]) => {
       if (ignoreMultipleCalls && isExecuting.current) {
@@ -106,7 +113,7 @@ export default function useAsync<TResult>(
       result
     ]
   );
-  const refresh: UseAsyncResponse<TResult>["refresh"] = React.useCallback(
+  const refresh: IUseAsync<TResult>["refresh"] = React.useCallback(
     async (...args) => {
       if (ignoreMultipleCalls && isExecuting.current) {
         logger.info("useAsync is executing, ignoring this call");
@@ -153,7 +160,7 @@ export default function useAsync<TResult>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return React.useMemo<UseAsyncResponse<TResult>>(
+  return React.useMemo<IUseAsync<TResult>>(
     () => ({
       status,
       isLoading: status === StatusEnum.loading,

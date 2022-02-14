@@ -28,5 +28,14 @@ export const Endpoints = {
   },
   signIn() {
     return createEndpoint("parse/functions/signIn");
+  },
+  signUp() {
+    return createEndpoint("parse/functions/signUp");
+  },
+  createFarm() {
+    return createEndpoint("parse/functions/createFarm");
+  },
+  destroyUserAndFarm() {
+    return createEndpoint("parse/functions/destroyUserAndFarm");
   }
 } as const;
