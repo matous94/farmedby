@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import FarmApiClient from "src/packages/farm/farm-api-client";
 import OrderApiClient from "src/packages/order/order-api-client";
 import UserApiClient from "src/packages/user/user-api-client";
@@ -12,4 +13,12 @@ const ApiClient = {
   LegalDocument: LegalDocumentApiClient
 } as const;
 
+// @ts-ignore
+if (window.Cypress) {
+  // @ts-ignore
+  window.ApiClient = ApiClient;
+}
+
 export default ApiClient;
+
+export type ApiClientType = typeof ApiClient;

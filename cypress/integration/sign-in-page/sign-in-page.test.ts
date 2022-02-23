@@ -93,10 +93,13 @@ describe("Sign in page functionality", () => {
 
 describe("Sign up page is public only", () => {
   before(() => {
-    cy.signIn();
+    // it's not possible to use cy.signInByApiClient()
+    // without calling cy.visit() beforehand
+    // to load window object with ApiClient
+    cy.signInByRequest();
   });
 
-  it("should redirect user to other page", () => {
+  it.only("should redirect signed in user to another page", () => {
     cy.visit(Routes.signIn().relative)
       .url()
       .should("not.eq", Routes.signIn().absolute);
