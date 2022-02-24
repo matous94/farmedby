@@ -15,6 +15,7 @@ import AppBar from "src/components/AppBar";
 import { selectors } from "src/store";
 import GenericFailureDialog from "src/components/GenericFailureDialog";
 import useProductTypesOptions from "src/packages/farm/hooks/useProductTypesOptions";
+import { getCountryCode } from "src/i18n";
 
 import FarmsTable from "./FarmsTable";
 import useLocationFilter from "./useLocationFilter";
@@ -27,7 +28,7 @@ export default function FarmsPage() {
   const farmsResolved = useStoreActions((actions) => actions.farmsResolved);
   const farmGetter = useAsync(
     async () => {
-      const refreshedFarms = await ApiClient.Farm.getFarms();
+      const refreshedFarms = await ApiClient.Farm.getFarms(getCountryCode());
       farmsResolved(refreshedFarms);
     },
     {

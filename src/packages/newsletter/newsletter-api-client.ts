@@ -1,6 +1,8 @@
 import { callCloudFunction } from "src/packages/api-client/requester";
 
-function subscribeToNewsletter(email) {
+function subscribeToNewsletter(
+  email: string
+): Promise<Record<string, unknown>> {
   return callCloudFunction("subscribeToNewsletter", {
     email
   });

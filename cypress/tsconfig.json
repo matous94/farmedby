@@ -1,24 +1,22 @@
 {
   "include": ["../cypress", "../src"],
   "compilerOptions": {
-    "baseUrl": "..",
-    "target": "es5",
-    // be explicit about types included
-    // to avoid clashing with Jest types
-    "types": ["cypress"],
-    "lib": ["dom", "dom.iterable", "esnext"],
-    // "skipLibCheck": true,
-    "esModuleInterop": true,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "baseUrl": "..",
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "allowJs": true
+    "noErrorTruncation": false,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "es5",
+    "types": ["cypress"]
   }
 }

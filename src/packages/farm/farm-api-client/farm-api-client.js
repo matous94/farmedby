@@ -1,5 +1,4 @@
 import { callCloudFunction } from "src/packages/api-client/requester";
-import { getCountryCode } from "src/i18n";
 
 export async function getFarmById(objectId) {
   return callCloudFunction(`getFarmById`, { objectId });
@@ -17,8 +16,8 @@ export async function updateFarm(farmData) {
   return callCloudFunction("updateFarm", farmData);
 }
 
-export async function getFarms() {
-  return callCloudFunction("getFarms", { countryCode: getCountryCode() });
+export async function getFarms(countryCode) {
+  return callCloudFunction("getFarms", { countryCode });
 }
 
 export async function savePickupPoint(pickupPointData) {
