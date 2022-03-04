@@ -33,10 +33,13 @@ describe("Sign in page functionality", () => {
 
         cy.wait("@getMyFarm").then(({ response }) => {
           if (!response) {
-            throw new Error(
-              "getMyFarm endpoint should be called after sign-in subit"
-            );
+            throw new Error("Missing getMyFarm response");
           }
+
+          expect(response.statusCode).to.eq(200);
+          expect(response.body.result.objectId).to.be.a("string").and.not.to.be
+            .empty;
+
           const { objectId } = response.body.result;
           cy.url().should("eq", Routes.farmLandingPage(objectId).absolute);
         });
@@ -93,13 +96,10 @@ describe("Sign in page functionality", () => {
 
 describe("Sign up page is public only", () => {
   before(() => {
-    // it's not possible to use cy.signInByApiClient()
-    // without calling cy.visit() beforehand
-    // to load window object with ApiClient
-    cy.signInByRequest();
+    cy.signInByApiClient();
   });
 
-  it.only("should redirect signed in user to another page", () => {
+  it("should redirect signed in user to another page", () => {
     cy.visit(Routes.signIn().relative)
       .url()
       .should("not.eq", Routes.signIn().absolute);

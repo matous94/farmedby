@@ -28,6 +28,12 @@
   "rules": {
     "react/prop-types": "warn"
   },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "Cypress": false,
+    "cy": false
+  },
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
@@ -52,10 +58,6 @@
         "./eslint-common.js"
       ],
       "plugins": ["react", "react-hooks", "@typescript-eslint", "jest"],
-      "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-      },
       "rules": {
         // typescript specific
         "react/prop-types": "off",

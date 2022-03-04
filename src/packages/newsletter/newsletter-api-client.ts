@@ -1,4 +1,5 @@
-import { callCloudFunction } from "src/packages/api-client/requester";
+// eslint-disable-next-line import/extensions
+import { callCloudFunction } from "src/packages/api-client/requester.js";
 
 function subscribeToNewsletter(
   email: string

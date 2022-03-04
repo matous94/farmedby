@@ -26,9 +26,9 @@
 
 /// <reference types="cypress" />
 
-import { ApiClientType } from "../../src/packages/api-client/api-client";
+import ApiClient, { ApiClientType } from "src/packages/api-client";
+import { localStorageKeys } from "src/packages/local-storage";
 import { Endpoints } from "../endpoints";
-import { localStorageKeys } from "../../src/packages/local-storage";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -84,54 +84,13 @@ Cypress.Commands.add("signInByApiClient", (userType?: string) => {
     throw new Error("Missing password value. Set it in cypress.env.json file.");
   }
 
-  cy.intercept(Endpoints.signIn().absolute).as("signIn");
-
-  cy.window().then(({ ApiClient }) => {
-    ApiClient.User.signIn({ email, password });
+  cy.wrap(ApiClient.User.signIn({ email, password })).then((result) => {
+    const user = result as { sessionToken: string };
+    expect(user.sessionToken).to.be.a("string").and.not.to.be.empty;
+    expect(localStorage.getItem(localStorageKeys.sessionToken)).to.equal(
+      user.sessionToken
+    );
   });
-
-  let response;
-
-  cy.wait("@signIn").then((interception) => {
-    response = interception.response;
-  });
-
-  return response;
-});
-
-Cypress.Commands.add("signInByRequest", (userType?: string) => {
-  const { email, password } = Cypress.env(userType || "userWithFarm");
-
-  Cypress.log({
-    name: "signIn by API request",
-    message: `user email ${email}`
-  });
-
-  expect(email).to.be.a("string").and.not.to.be.empty;
-
-  if (typeof password !== "string" || !password) {
-    throw new Error("Missing password value. Set it in cypress.env.json file.");
-  }
-
-  return cy
-    .request({
-      method: "POST",
-      url: Endpoints.signIn().absolute,
-      headers: {
-        "content-type": "application/json",
-        "X-Parse-Application-Id": Cypress.env("appId")
-      },
-      body: {
-        email,
-        password
-      }
-    })
-    .then((response) => {
-      localStorage.setItem(
-        localStorageKeys.sessionToken,
-        response.body.result.sessionToken
-      );
-    });
 });
 
 Cypress.Commands.add("signUp", (userType?: string) => {

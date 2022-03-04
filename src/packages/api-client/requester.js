@@ -1,6 +1,15 @@
 import logger from "src/packages/logger";
 import { localStorageKeys } from "src/packages/local-storage";
 
+const isCypress = Boolean(window.Cypress);
+
+const SERVER_URL = isCypress
+  ? window.Cypress?.env("serverUrl")
+  : process.env.REACT_APP_SERVER_URL;
+const APP_ID = isCypress
+  ? window.Cypress?.env("appId")
+  : process.env.REACT_APP_APP_ID;
+
 function parseQuery(query) {
   if (!query) return "";
   const queryString = Object.entries(query)
@@ -29,7 +38,7 @@ export function sendParseRequest(
 
   const headers = {
     "content-type": "application/json",
-    "X-Parse-Application-Id": process.env.REACT_APP_APP_ID
+    "X-Parse-Application-Id": APP_ID
   };
   if (token) {
     headers["X-Parse-Session-Token"] = token;
@@ -45,23 +54,27 @@ export function sendParseRequest(
   if (body) {
     config.body = JSON.stringify(body);
   }
-  return fetch(
-    `${process.env.REACT_APP_SERVER_URL}/parse/${endpoint}${queryString}`,
-    config
-  ).then(async (response) => {
-    const data = await response.json();
+  return fetch(`${SERVER_URL}/parse/${endpoint}${queryString}`, config).then(
+    async (response) => {
+      const data = await response.json();
 
-    // invalid session token
-    if (!response.ok && data.code === 209) {
-      localStorage.removeItem(localStorageKeys.sessionToken);
-      window.location = "/sign-in";
-    }
+      if (response.ok) {
+        return data;
+      }
 
-    if (response.ok) {
-      return data;
+      // invalid session token
+      if (!response.ok && data.code === 209) {
+        localStorage.removeItem(localStorageKeys.sessionToken);
+        if (isCypress) {
+          window.cy?.visit("/sign-in");
+        } else {
+          window.location = "/sign-in";
+        }
+      }
+
+      return Promise.reject(data);
     }
-    return Promise.reject(data);
-  });
+  );
 }
 
 export async function callCloudFunction(functionName, params) {

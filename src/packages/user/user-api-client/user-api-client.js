@@ -1,7 +1,8 @@
 import {
   sendParseRequest,
   callCloudFunction
-} from "src/packages/api-client/requester";
+  // eslint-disable-next-line import/extensions
+} from "src/packages/api-client/requester.js";
 import logger from "src/packages/logger";
 import { localStorageKeys } from "src/packages/local-storage";
 
