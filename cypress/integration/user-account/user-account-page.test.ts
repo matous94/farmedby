@@ -13,7 +13,7 @@ describe("User account", () => {
     });
   });
 
-  it("is possible to destroy user and farm account", () => {
+  it("should destroy user and farm account", () => {
     cy.url().should("eq", Routes.userAccountPage(farm.objectId).absolute);
     cy.intercept(Endpoints.destroyUserAndFarm().absolute).as(
       "destroyUserAndFarm"
