@@ -50,9 +50,6 @@ declare global {
       signInByApiClient(
         userType?: string
       ): Chainable<Response<Record<string, unknown>>>;
-      signInByRequest(
-        userType?: string
-      ): Chainable<Response<Record<string, unknown>>>;
       signUp(userType?: string): Chainable<Response<Record<string, unknown>>>;
       createFarm(): Chainable<Response<Record<string, unknown>>>;
     }
